@@ -34,8 +34,9 @@ class Mustache extends \Zaphpa\BaseMiddleware {
     ]);
 
     $res->mustache = $mustache;
+    
     if( is_file( __LUNA__.'/views/'.implode( "/" , self::$context["callback"] ).".mustache" ) ){
-      $res->m = $mustache->loadTemplate( implode( "/" , self::$context["callback"] ) ) ;    
+      $res->m = $res->mustache->loadTemplate( implode( "/" , self::$context["callback"] ) ) ;
     }
 
   }

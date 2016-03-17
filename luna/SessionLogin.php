@@ -2,7 +2,7 @@
 
 namespace Luna;
 
-include_once 'Enums.php';
+
 
 /**
  * Class Para manupular el login de usuarios
@@ -17,14 +17,7 @@ include_once 'Enums.php';
 class SessionLogin extends \Zaphpa\BaseMiddleware {
 
     private $urlPermitidas = ['/login',
-        '/logout',
-        '/puntosventa/nuevo',
-        '/usuario/front',
-        '/datospersonales/nuevopsv',
-        '/datospersonales/nuevopsv/{id}',
-        '/puntosventa/buscar/{codigo_postal}/{id_colonia}/{nombre}',
-        '/puntosventa/buscar',
-        '/usuario/loged'];
+        '/'];
 
     function preprocess(&$router) {
 
@@ -42,7 +35,7 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
 
     public function preroute(&$req, &$res) {
 
-        $redirect_after_login = "/centronotificaciones/notificaciones";
+        $redirect_after_login = "/welcome";
 
         global $spot;
         $usersMapper = $spot->mapper("Entity\Usuario");

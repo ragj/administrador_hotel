@@ -7,7 +7,7 @@
  */
 //use CentroNotificaciones;
 
-require_once __LUNA__ . '/luna/Enums.php';
+
 //require_once __LUNA__ . '/luna/Helpers/Mail/Mail.php';
 
 class Usuario extends Luna\Controller {

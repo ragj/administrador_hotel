@@ -1,0 +1,36 @@
+<header>
+	<section class="logo"></section>
+	<section class="lang">
+		<a href="">Sapnish</a>
+		<a href="" class="active">English</a>
+	</section>
+	<section class="weather"> 
+		{{current_time}} {{weather.temp}}ºC 
+	</section>
+	<nav>
+		<ul>
+			<li>
+				<a href="/" {{#home}}class="active"{{/home}} >Home</a>
+			</li>
+			<li>
+				<a href="/about-us" {{#about}}class="active"{{/about}}>About us</a>
+			</li>
+			<li>
+				<a href="">Hotel collection</a>
+			</li>
+			<li>
+				<a href="">Experiences</a>
+			</li>
+			<li>
+				<a href="">Transfer</a>
+			</li>
+			<li>
+				<a href="">Contact us</a>
+			</li>
+			<li>
+				<a href="" class="alt">Logout</a>
+			</li>
+		</ul>
+	</nav>
+	<div class="clear"></div>
+</header>

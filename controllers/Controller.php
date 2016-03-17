@@ -58,14 +58,10 @@ class Controller {
      */
     public function renderWiew($data, $res) {
         $session = $this->session_handle->getSegment('Luna\Session');
-        $data = array_merge(["user" => $session->get("user")], $data);
+        // $data = array_merge(["user" => $session->get("user")], $data);
         $alert = $this->session->getFlash("alert");
-        $showmodal = $this->session->getFlash("showmodal");
         if ($alert) {
             $data = array_merge(["alert" => $alert], $data);
-        }
-        if ($showmodal) {
-            $data = array_merge(["showmodal" => $showmodal], $data);
         }
         return $res->m->render($data);
     }
