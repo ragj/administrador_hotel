@@ -244,6 +244,37 @@ footer{
 	.filter a:last-child{
 		border-right: 0px;
 	}
+
+.fit{
+	background-image: url("/assets/img/login/Background_login.jpg");
+	background-size: cover;
+	background-position: center;
+	height: 500px;
+}
+	.fit .intro{
+		margin-top: 200px;
+		color: #FFF;
+	}
+		.fit .intro b{
+			color: #FFF;
+		}
+		
+.element{
+	background-color: #FFF;
+	border-radius: 5px;
+	margin-top: 50px;
+	padding: 20px;
+	text-align: center;
+}
+	.element label{
+		text-align: center;
+	}
+		.element img{
+			width: 120px
+		}
+		.element button[type=primary]{
+			background-color: #C39323;
+		}
 /* MEDIA */
 @media (max-width: 768px){
 	.slider{
