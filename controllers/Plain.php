@@ -41,6 +41,25 @@ class Plain extends Luna\Controller {
     	echo $this->renderWiew( $this->header("about"), $res);
     }
 
+    public function hotel($req , $res){
+    	echo $this->renderWiew( $this->header("hotel"), $res);
+    }
+
+    public function experience($req , $res){
+    	echo $this->renderWiew( $this->header("experience"), $res);
+    }
+
+    public function transfer($req , $res){
+    	echo $this->renderWiew( $this->header("transfer"), $res);
+    }
+
+    public function contact($req , $res){
+    	echo $this->renderWiew( $this->header("contact"), $res);
+    }
+
+
+    
+
 
 
     
