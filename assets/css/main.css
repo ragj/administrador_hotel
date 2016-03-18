@@ -9,6 +9,27 @@ body{
   font-family: 'Open Sans', sans-serif;
 }
 
+h1{
+	color: #C39323;
+	text-align: center;
+	font-weight: normal;
+}
+	h1{
+		margin-top: 50px;
+	}
+	h1 span{
+		display: block;
+		color: #AFAFAF;
+		font-size: 12px;
+	}
+	h2{
+		font-size: 15px;
+		margin-bottom: 0px;
+		color: #C39323;
+	}
+	.transfer{
+		font-size: 12px;
+	}
 header{
 	display: block;
 	width: 100%;
@@ -249,7 +270,8 @@ footer{
 	background-image: url("/assets/img/login/Background_login.jpg");
 	background-size: cover;
 	background-position: center;
-	height: 500px;
+	min-height: 500px;
+	margin-bottom: -24px;
 }
 	.fit .intro{
 		margin-top: 200px;
@@ -262,8 +284,9 @@ footer{
 .element{
 	background-color: #FFF;
 	border-radius: 5px;
-	margin-top: 50px;
 	padding: 20px;
+	margin: 20px;
+	margin-top: 50px;
 	text-align: center;
 }
 	.element label{
@@ -275,6 +298,43 @@ footer{
 		.element button[type=primary]{
 			background-color: #C39323;
 		}
+
+
+table tr:nth-child(odd){
+	background-color: #F5E4BF;
+	padding: 0px;
+}		
+
+table tr td {
+	font-size: 12px;
+	padding: 5px 5px;
+}
+table tr td.data {
+	text-align: center;
+	color: #C39323;
+	border-right: 1px solid #C39323;
+}
+	table tr td.data:last-child {
+		border-right: 0px;
+	}
+	table tr td:first-child {
+		border-right: 1px solid #C39323;
+		padding-left: 5px;
+	}
+
+table tr.main{
+	background-color: #C39323;
+}
+	table tr.main td{
+		color: #FFF;
+		border-right-color: #FFF;
+	}
+
+.transfer img{
+	float: left;
+	width: 25%;
+}
+
 /* MEDIA */
 @media (max-width: 768px){
 	.slider{
