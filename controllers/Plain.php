@@ -46,7 +46,19 @@ class Plain extends Luna\Controller {
     }
 
     public function experience($req , $res){
-    	echo $this->renderWiew( $this->header("experience"), $res);
+        if(isset($req->params["exper"] ) ){
+
+            $tourMapper = $this->spot->mapper("Entity\Tour");
+            $tour = $tourMapper->select()->with("images")->where(["id" => $req->params["exper"]])->first();
+            $res->m = $res->mustache->loadTemplate("Plain/experience-inner.mustache");
+
+            echo $this->renderWiew( array_merge(["tour" => $tour] , $this->header("experience") ), $res);
+        }else{
+            $tourMapper = $this->spot->mapper("Entity\Tour");
+            $tours = $tourMapper->select()->with("images");
+            echo $this->renderWiew( array_merge(["tours" => $tours] , $this->header("experience") ), $res);
+        }
+    	
     }
 
     public function transfer($req , $res){

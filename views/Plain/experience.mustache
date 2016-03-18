@@ -10,96 +10,19 @@
 			<a href="">FULL DAY</a>
 		</div>
 		<blocks cols="3">
-			<div class="tour">
-				<h1>
-					RECOMMENDED TOURS
-				</h1>
-				<img src="/assets/img/home/img_recommended_-tours.jpg">
-				<h2>Bali as you pleace</h2>
-				<h3>Half day / 5 hours or Full day / 10 hours</h3>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				</p>
-				<a href="/">More [+]</a>
-			</div>
-			<div class="tour">
-				<h1>
-					RECOMMENDED TOURS
-				</h1>
-				<img src="/assets/img/home/img_recommended_-tours.jpg">
-				<h2>Bali as you pleace</h2>
-				<h3>Half day / 5 hours or Full day / 10 hours</h3>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				</p>
-				<a href="/">More [+]</a>
-
-			</div>
-			<div class="tour">
-				<h1>
-					RECOMMENDED TOURS
-				</h1>
-				<img src="/assets/img/home/img_recommended_-tours.jpg">
-				<h2>Bali as you pleace</h2>
-				<h3>Half day / 5 hours or Full day / 10 hours</h3>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				</p>
-				<a href="/">More [+]</a>
-
-			</div>
-			<div class="tour">
-				<h1>
-					RECOMMENDED TOURS
-				</h1>
-				<img src="/assets/img/home/img_recommended_-tours.jpg">
-				<h2>Bali as you pleace</h2>
-				<h3>Half day / 5 hours or Full day / 10 hours</h3>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				</p>
-				<a href="/">More [+]</a>
-
-			</div>
-			<div class="tour">
-				<h1>
-					RECOMMENDED TOURS
-				</h1>
-				<img src="/assets/img/home/img_recommended_-tours.jpg">
-				<h2>Bali as you pleace</h2>
-				<h3>Half day / 5 hours or Full day / 10 hours</h3>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				</p>
-				<a href="/">More [+]</a>
-
-			</div>
-			<div class="tour">
-				<h1>
-					RECOMMENDED TOURS
-				</h1>
-				<img src="/assets/img/home/img_recommended_-tours.jpg">
-				<h2>Bali as you pleace</h2>
-				<h3>Half day / 5 hours or Full day / 10 hours</h3>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				</p>
-				<a href="/">More [+]</a>
-
-			</div>
-
+			{{#tours}}
+				<div class="tour inner">
+					<h1>
+						{{title}}
+					</h1>
+					<img src="/assets/img/experience/indo/{{thumbnail}}">
+					<h2>{{duration}}</h2>
+					<p>
+						{{description}}
+					</p>
+					<a href="/experience/{{id}}">More [+]</a>
+				</div>
+			{{/tours}}
 			
 		</blocks>
 	</div>

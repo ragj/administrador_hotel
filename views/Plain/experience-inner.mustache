@@ -1,0 +1,65 @@
+{{% BLOCKS }}
+{{< panel}}
+	{{$content}}
+	
+	
+	<div class="holder">
+		{{#tour}}
+		<row>
+			<colums col="4">
+				<div class="pad">
+					<h1>{{title}}</h1>
+					<h2>{{duration}}</h2>
+					<p>
+						{{description}}
+					</p>	
+					<h2>TRANSFER PRICES PER PERSON IN USD</h2>
+					{{&transfer}}
+					<br>
+					<row>
+						<columns cols="4">
+							<img src="/assets/img/transfers/galeria_trasnfers/automovil_02.jpg">
+						</columns>
+						<columns cols="8">
+							<img src="/assets/img/transfers/galeria_trasnfers/automovil_01.jpg">
+						</columns>
+					</row>
+					<row>
+						<columns cols="4">
+							<img src="/assets/img/transfers/galeria_trasnfers/camioneta_01.jpg">
+						</columns>
+						<columns cols="8">
+							<img src="/assets/img/transfers/galeria_trasnfers/camioneta_02.jpg">
+						</columns>
+					</row>
+					<h2>Tour rates includes :</h2>
+					<p class="smaller">
+						Driver, Gasoline, Parking.
+						<br>Spanish / English speaking guide
+						<br>Insurance
+						<br>Refreshing towel
+						<br>Mineral water ( 2 btl ) and soft drink ( 6 cans ) each person
+						<br>Wi-fi connection in the car
+						<br>Donations, Entrance fee based on itinerary except Bali as You Pleased
+					</p>
+				</div>
+			</colums>
+			<colums col="4">
+				<div class="pad">
+					<h2>Gallery</h2>
+					<blocks cols="2">
+						
+						{{#images}}
+							<div>
+								<img src="/assets/img/experience/{{url}}">
+							</div>
+						{{/images}}
+					</blocks>
+					<h2>Route Map</h2>
+				</div>
+			</colums>
+		</row>
+		{{/tour}}
+	</div>
+	{{/content}}
+{{/ panel}}
