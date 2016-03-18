@@ -304,6 +304,9 @@ footer{
 			color: #FFF;
 		}
 		
+.fit.contact{
+	background-image: url("/assets/img/bg-contacto-us.jpg");
+}		
 .element{
 	background-color: #FFF;
 	border-radius: 5px;
@@ -312,6 +315,17 @@ footer{
 	margin-top: 50px;
 	text-align: center;
 }
+	.element.contact label{
+		text-align: left;
+	}
+	.element.contact h1{
+		margin-top: 10px;
+	}
+
+	.contact{
+		padding-bottom: 50px;
+	}
+
 	.element label{
 		text-align: center;
 	}
