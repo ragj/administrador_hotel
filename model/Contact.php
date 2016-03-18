@@ -9,7 +9,7 @@ use Spot\MapperInterface as Mapper;
 
 /**
  *  Model for Viaje
- *  
+ *  TODO: Make it work
  */
 class Contact extends \Spot\Entity {
 

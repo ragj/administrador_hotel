@@ -387,6 +387,19 @@ table tr.main{
 .pad p.small{
 
 }
+.hotel-inner h1{
+	text-align: left;
+	margin-top: 0px;
+}
+.hotel-inner p{
+	font-size: 12px;
+}
+.hotel-inner h3{
+	color: #C39323;
+	font-weight: normal;
+	font-size: 12px;
+}
+
 /* MEDIA */
 @media (max-width: 768px){
 	.slider{

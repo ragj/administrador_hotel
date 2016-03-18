@@ -1,0 +1,57 @@
+{{% BLOCKS }}
+{{< panel}}
+	{{$content}}
+	<div class="holder hotel-inner ">
+		<row>
+			<columns cols="8">
+				<div class="pad">
+					{{#hotel-data}}
+						<h1>
+							{{name}}
+						</h1>
+
+						<h2 style="width:510px">
+							Description
+						</h2>
+						<p>
+							{{&description}}
+						</p>	
+
+						<h2>
+							Address
+						</h2>
+						<p>
+							{{address}}
+						</p>
+						{{#website}}	
+							<h3>{{.}}</h3>
+						{{/website}}
+						{{#tel}}	
+							<h3>{{.}}</h3>
+						{{/tel}}
+						{{#email}}	
+							<h3>{{.}}</h3>
+						{{/email}}
+					{{/hotel-data}}
+				</div>		
+			</columns>
+			<columns cols="4" clas >
+				<div class="pad">
+					<blocks cols="3">
+						{{#hotel-data.images}}
+							<div>
+								<img src="/assets/img/hotel/{{id_hotel}}/{{url}}">
+							</div>
+						{{/hotel-data.images}}
+					</blocks>
+					{{&hotel-data.map}}
+				</div>
+			</columns>
+		</row>
+
+	</div>
+	
+	
+	
+	{{/content}}
+{{/ panel}}

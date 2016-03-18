@@ -42,7 +42,20 @@ class Plain extends Luna\Controller {
     }
 
     public function hotel($req , $res){
-    	echo $this->renderWiew( $this->header("hotel"), $res);
+        if(isset($req->params["hotel"] ) ){
+
+            $tourMapper = $this->spot->mapper("Entity\Hotel");
+            $hotel = $tourMapper->select()->with("images")->where(["id" => $req->params["hotel"]])->first();
+
+            
+
+            $res->m = $res->mustache->loadTemplate("Plain/hotel-inner.mustache");
+            echo $this->renderWiew( array_merge(["hotel-data" => $hotel] , $this->header("hotel") ), $res);
+        }else{
+            
+            echo $this->renderWiew(  $this->header("hotel"), $res);
+        }
+        
     }
 
     public function experience($req , $res){

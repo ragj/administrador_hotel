@@ -18,12 +18,14 @@ class Hotel extends \Spot\Entity {
     public static function fields() {
         return [
             'id' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
-            'title' => ['type' => 'string', 'required' => true],
+            'name' => ['type' => 'string', 'required' => true],
             'thumbnail' => ['type' => 'string'],
-            'type' => ['type' => 'string' ],
-            'duration' => ['type' => 'string' ],
-            'description' => ['type' => 'text' ],
-            'transfer' => ['type' => 'text' ],
+            'description' => ['type' => 'text'],
+            'address' => ['type' => 'string' ],
+            'website' => ['type' => 'string' ],
+            'map' => ['type' => 'text' ],
+            'tel' => ['type' => 'string' ],
+            'email' => ['type' => 'string' ],
             'created' => ['type' => 'datetime', 'required' => true , "value" => new \DateTime() ]
         ];
     }
@@ -31,8 +33,7 @@ class Hotel extends \Spot\Entity {
     public static function relations(Mapper $mapper, Entity $entity)
     {
         return [
-            'images' => $mapper->hasMany($entity, 'Entity\TourImage', 'id_tour'),
-
+            'images' => $mapper->hasMany($entity, 'Entity\HotelImage', 'id_hotel'),
         ];
     
     }
