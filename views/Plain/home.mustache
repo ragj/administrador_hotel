@@ -3,8 +3,9 @@
 	{{$content}}
 		
 	<section class="slider">
-		<a href="" class="nav "> <span></span></a>
-		<a href="" class="nav next"><span></span></a>
+		<div class="slide">
+			<img src="/assets/img/slide/bali_02.jpg">
+		</div>
 		<div class="slide">
 			<img src="/assets/img/slide/bali_04.jpg">
 		</div>
@@ -14,9 +15,9 @@
 		<div class="slide">
 			<img src="/assets/img/slide/bali_01.jpg">
 		</div>
-		<div class="slide">
-			<img src="/assets/img/slide/bali_02.jpg">
-		</div>
+		
+		<a href="javascript:void(0)" onclick="prev(true)" class="nav "> <span></span></a>
+		<a href="javascript:void(0)" onclick="next(true)" class="nav next"><span></span></a>
 	</section>
 	
 	<div class="holder">
@@ -64,6 +65,37 @@
 			</div>
 		</blocks>
 	</div>
-	
+	{{$ scripts}}
+        <script type="text/javascript">
+        	var sliderTimer = setInterval( next , 3000);
+        	function next( clear ){
+        		if( $(".slider .slide:visible").next().is(".slide") ){
+        			$(".slider .slide:visible").fadeOut()	
+        			$(".slider .slide:visible").next().fadeIn();
+        		}else{
+        			$(".slider .slide:visible").fadeOut()	
+        			$(".slider .slide").first().fadeIn();
+        		}
+        		if( clear ){
+        			clearInterval(sliderTimer);
+        			sliderTimer = setInterval( next , 3000);
+        		}
+        	}
+
+        	function prev( clear ){
+        		if( $(".slider .slide:visible").prev().is(".slide") ){
+        			$(".slider .slide:visible").fadeOut()	
+        			$(".slider .slide:visible").prev().fadeIn();
+        		}else{
+        			$(".slider .slide:visible").fadeOut()	
+        			$(".slider .slide").last().fadeIn();
+        		}
+        		if( clear ){
+        			clearInterval(sliderTimer);
+        			sliderTimer = setInterval( next , 3000);
+        		}
+        	}
+        </script>
+    {{/ scripts}}
 	{{/content}}
 {{/ panel}}

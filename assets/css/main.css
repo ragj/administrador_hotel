@@ -137,8 +137,12 @@ footer{
 }
 	.slider .slide{
 		position: absolute;
+		display: none;
 		top: 0px;
 	}
+		.slider .slide:not(a):first-child{
+			display: inline-block;
+		}
 		.slider a{
 			position: absolute;
 			left: 5px;
@@ -399,7 +403,19 @@ table tr.main{
 	font-weight: normal;
 	font-size: 12px;
 }
-
+.expose{
+	position: fixed;
+	top: 0px;
+	display: none;
+	bottom: 0px;
+	width: 100%;
+	text-align: center;
+	background-color: rgba(0,0,0,0.8);
+}
+	.expose img{
+		height: 80%;
+		max-width: 80%;
+	}
 /* MEDIA */
 @media (max-width: 768px){
 	.slider{
