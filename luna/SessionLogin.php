@@ -22,6 +22,7 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
     function preprocess(&$router) {
 
         $router->addRoute(array(
+            
             'path' => '/login',
             'get' => array('Usuario', 'login'),
             'post' => array('Usuario', 'login')

@@ -1,3 +1,7 @@
 /vendor
 /tmp
 /luna/config.php
+
+
+#ignorando intel Sublime
+.phpintel/

@@ -19,7 +19,7 @@ $router->addRoute(array(
 
 $router->addRoute(array(
     'path' => '/hotel-collection',
-    'get' => array('Plain', 'hotel')
+    'post' => array('Plain', 'hotel')
 ));
 
 $router->addRoute(array(
@@ -46,6 +46,13 @@ $router->addRoute(array(
     'path' => '/contact-us',
     'get' => array('Plain', 'contact')
 ));
+
+$router->addRoute(array(
+    'path' => '/panel/hotel/add',
+    'get' => array('Hotel', 'add')
+));
+
+
 
 
 
