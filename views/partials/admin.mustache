@@ -8,6 +8,8 @@
             {{/ title}}
         </title>
         <meta charset="UTF-8">
+            {{$ meta}}
+            {{/ meta}}
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,400italic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="/assets/css/kube.min.css">
         <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
@@ -38,6 +40,10 @@
                                 {{user.nombre}} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li id="logout"><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Logout</a></li>
+                                <li id="addTour"><a href="/panel/tour/add">Agregar Experiencia</a></li>
+                                <li id="showTour"><a href="/panel/tour/show">Mostrar Experiencias</a></li>
+                                <li id="addTourImage"><a href="/panel/tour/addImages">Agregar Imagen Experiencias</a></li>
+                                <li id="showTourImages"><a href="/panel/tour/showImages">Mostrar Imagenes Experiencias</a></li>
                             </ul>
                         </li>                        
                     </ul>
