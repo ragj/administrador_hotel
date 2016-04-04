@@ -65,7 +65,29 @@ body {
   color: #fff;
   background-color: #428bca;
 }
-
+/*Mensajes de error y exito*/
+.exito{
+  position: fixed;
+  width: 100%;
+  background-color: #04B45F;
+  margin: 0 auto;
+}
+  .exito p{
+    text-align: center;
+    color: #e9edf0;
+    height: 31px;
+  }
+.error{
+  margin: 0 auto;
+    position: fixed;
+    width: 100%;
+    background-color: #FA5882;
+}
+  .error p{
+    text-align: center;
+    color: #e9edf0;
+    font-size: 25px;
+  }
 
 /*
  * Main content
@@ -103,3 +125,4 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+

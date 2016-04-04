@@ -52,6 +52,58 @@ $router->addRoute(array(
     'get' => array('Hotel', 'add')
 ));
 
+$router->addRoute(array(
+    'path' => '/panel/tour/add',
+    'get' => array('Tour', 'add'),
+    'post'=>array('Tour','add')
+));
+
+$router->addRoute(array(
+    'path' => '/panel/tour/show',
+    'get' => array('Tour', 'show')
+));
+
+$router->addRoute(array(
+    'path' => '/panel/tour/edit/{exper}',
+    'get' => array('Tour', 'edit'),
+    'post' => array('Tour', 'edit')
+));
+
+$router->addRoute(array(
+    'path' => '/panel/tour/delete/{exper}',
+    'get' => array('Tour', 'delete')
+));
+
+$router->addRoute(array(
+    'path' => '/panel/tour/delete',
+    'get' => array('Tour', 'show')
+));
+
+$router->addRoute(array(
+    'path' => '/panel/tour/addImages',
+    'get' => array('Tour', 'addImages'),
+    'post' => array('Tour', 'addImages')
+));
+
+$router->addRoute(array(
+    'path' => '/panel/tour/showImages',
+    'get' => array('Tour', 'showImages')
+));
+
+$router->addRoute(array(
+    'path' => '/panel/tour/editImages/{exper}',
+    'get' => array('Tour', 'editImages'),
+    'post' => array('Tour', 'editImages')
+));
+
+$router->addRoute(array(
+    'path' => '/panel/tour/deleteImages/{exper}',
+    'get' => array('Tour', 'deleteImages')
+));
+
+
+
+
 
 
 
