@@ -2,6 +2,18 @@
 {{< panel}}
 	{{$content}}
 	<div class="holder">
+		<script>
+			var path = "";
+			var href = document.location.href;
+			var s = href.split("/");
+			for (var i=2;i<(s.length-1);i++) {
+				path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+			}
+			i=s.length-1;
+			path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+			var url = "<p id=bread>"+path+"</p>";
+			document.writeln(url);
+	 	</script>
 		<p class="intro"><b>Lozano Travel Bali</b> is the Destination Management Company of Lozano Travel – <br> A Virtuoso Travel Agency based in Mexico City with headquarters in Laredo, Texas <br> that has been operating for the past 33 years.</p>
 		<img src="/assets/img/imagenes_pleca.jpg">
 		<p class="detail">Our specialties are Honeymoons, Celebration and Around the World Experiences. Important to know that we sell, Asia, Africa, Middle East, Europe, South Pacific and South America as our main destinations. The principal Destination is Asia and within Asia its Bali. This is why we have decided to open our office in Bali so that we can duly focus and take care of our clients going to the desination. Our main clientele is from Mexico, we produce around 400 honeymoons per year and will be expanding to the Latin American Market – Brazil, Chile, Argentina, Colombia and Peru together with the International Market.
@@ -14,4 +26,7 @@
 
 	
 	{{/content}}
+	{{$ scripts}}
+		
+    {{/ scripts}}
 {{/ panel}}

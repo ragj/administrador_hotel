@@ -34,7 +34,9 @@ class Tour extends Luna\Controller {
                 $dir="./assets/img/experience/";
                 //creamos el directorio que lleva el nombre del id
                 if(!file_exists("./assets/img/experience/".$req->data["exper"]))
-                mkdir("./assets/img/experience/".$req->data["exper"]);
+                {
+                    mkdir("./assets/img/experience/".$req->data["exper"]);
+                }
                 //definimos un array de tipos de datos permitidos
                 $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
                 //Obtenemos y sanitizamos los parametros obtenidos por el metodo  post.
@@ -150,15 +152,17 @@ class Tour extends Luna\Controller {
         $var=$req->params["exper"];
         //Establecemos a spot con que entity class vamos a trabajar
         $tourMapper=$this->spot->mapper("Entity\TourImage");
+        $tMapper=$this->spot->mapper("Entity\Tour");
         //Seleccionamos la experiencia que este registrado para ese ide
         $tour = $tourMapper->select()->where(["id" => $req->params["exper"]])->first();
+        $tou=$tMapper->select()->where(["id"=>$tour->id_tour])->first();
         $ruta="./assets/img/experience/".$tour->url;
         //Eliminamos el registro del id seleccionado
         $tour=null;
         $tour = $tourMapper->delete(['id ='=>(integer)$var]);
         //Establecemos a spot con que entity class vamos a trabajar
         unlink($ruta);
-        echo $this->renderWiew([], $res);
+        echo $this->renderWiew(array_merge(["tour" => $tou]),$res);
     }
     /**
     *   Funcion que registra un objeto de las clase tour.
@@ -200,6 +204,8 @@ class Tour extends Luna\Controller {
                                     'transfer' => $Transfer,
                                 ]);
                                 $result = $tourMapper->insert($entity);
+                               // header("Location: /panel/hotel/edit/".$entity->id);
+                               // exit;
                                 echo "<div class=exito><p>Experiencia Registrada</p></div>";
                             }
                             else{ echo "<div class=error><p>Hubo un problema al subir la imagen</p></div>";}

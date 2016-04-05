@@ -6,6 +6,7 @@ namespace Entity;
 
 use Spot\EntityInterface as Entity;
 use Spot\MapperInterface as Mapper;
+use Spot\EventEmitter as EventEmitter;
 
 /**
  *  Model for Viaje
@@ -23,9 +24,21 @@ class Tour extends \Spot\Entity {
             'type' => ['type' => 'string' ],
             'duration' => ['type' => 'string' ],
             'description' => ['type' => 'text' ],
+            'uri' => ['type' => 'text' ],
             'transfer' => ['type' => 'text' ],
+            'home' => ['type' => 'boolean' ],
             'created' => ['type' => 'datetime', 'required' => true , "value" => new \DateTime() ]
         ];
+    }
+
+     public static function events(EventEmitter $eventEmitter)
+    {
+        $eventEmitter->on('beforeInsert', function (Entity $entity, Mapper $mapper) {
+            $entity->uri = self::normalize( str_replace( " " , "-" , $entity->title ) );
+        });
+        $eventEmitter->on('beforeUpdate', function (Entity $entity, Mapper $mapper) {
+            $entity->uri = self::normalize( str_replace( " " , "-" , $entity->title ) );
+        });
     }
 
     public static function relations(Mapper $mapper, Entity $entity)
@@ -35,6 +48,12 @@ class Tour extends \Spot\Entity {
 
         ];
     
+    }
+
+    static function normalize ($string){
+        $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
+        $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
+        return utf8_encode(strtolower(strtr(utf8_decode($string), utf8_decode($a), $b) ));
     }
 
     

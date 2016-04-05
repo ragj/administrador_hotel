@@ -10,8 +10,10 @@
 class Plain extends Luna\Controller {
 
     public function home($req , $res){
-    	
-        echo $this->renderWiew( $this->header("home"), $res);
+
+        $tourMapper=$this->spot->mapper("Entity\Tour");
+        $tour=$tourMapper->select()->where(["home"=>true])->order(['type' => 'DESC']);;
+        echo $this->renderWiew(array_merge(["tour"=>$tour],$this->header("home")), $res);
     }
 
     public function header( $menu ){
@@ -45,15 +47,16 @@ class Plain extends Luna\Controller {
         if(isset($req->params["hotel"] ) ){
 
             $tourMapper = $this->spot->mapper("Entity\Hotel");
-            $hotel = $tourMapper->select()->with("images")->where(["id" => $req->params["hotel"]])->first();
+            $hotel = $tourMapper->select()->with("images")->where(["uri" => $req->params["hotel"]])->first();
 
             
 
             $res->m = $res->mustache->loadTemplate("Plain/hotel-inner.mustache");
             echo $this->renderWiew( array_merge(["hotel-data" => $hotel] , $this->header("hotel") ), $res);
         }else{
-            
-            echo $this->renderWiew(  $this->header("hotel"), $res);
+            $hotelMapper=$this->spot->mapper("Entity\Hotel");
+            $hotel=$hotelMapper->select()->with("images");
+            echo $this->renderWiew( array_merge(["hotel"=>$hotel]), $res);
         }
         
     }
@@ -62,7 +65,7 @@ class Plain extends Luna\Controller {
         if(isset($req->params["exper"] ) ){
 
             $tourMapper = $this->spot->mapper("Entity\Tour");
-            $tour = $tourMapper->select()->with("images")->where(["id" => $req->params["exper"]])->first();
+            $tour = $tourMapper->select()->with("images")->where(["uri" => $req->params["exper"]])->first();
             $res->m = $res->mustache->loadTemplate("Plain/experience-inner.mustache");
 
             echo $this->renderWiew( array_merge(["tour" => $tour] , $this->header("experience") ), $res);

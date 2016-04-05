@@ -4,43 +4,28 @@
 	<img src="/assets/img/img_hotel_colection.jpg">
 	
 	<div class="holder">
+		<script>
+					var path = "";
+					var href = document.location.href;
+					var s = href.split("/");
+					for (var i=2;i<(s.length-1);i++) {
+						path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+					}
+					i=s.length-1;
+					path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+					var url = "<p id=bread>" + path+"</p>";
+					document.writeln(url);
+	 			</script>
 		<blocks cols="3">
-			<div class="tour hotel">
-				<a href="/hotel-collection/1">
-					<h1>FOUR SEASONS JIMBARAN</h1>
-					<img src="/assets/img/hotel-thumb/Four_Seasons_Jimbaran.jpg">
-				</a>
-			</div>
-			<div class="tour hotel">
-				<a href="/hotel-collection/2">
-					<h1>FOUR SEASONS SAYAN</h1>
-					<img src="/assets/img/hotel-thumb/Four_Seasons_Sayan.jpg">
-				</a>
-			</div>
-			<div class="tour hotel">
-				<a href="/hotel-collection/3">
-					<h1>MANDAPA RESERVE BY RITZ CARLTON</h1>
-					<img src="/assets/img/hotel-thumb/Mandapa_Reserve_by_Ritz_Carlton.jpg">
-				</a>
-			</div>
-			<div class="tour hotel">
-				<a href="/hotel-collection/4">
-					<h1>BULGARI</h1>
-					<img src="/assets/img/hotel-thumb/Bulgari.jpg">
-				</a>
-			</div>
-			<div class="tour hotel">
-				<a href="/hotel-collection/5">
-					<h1>COMO SHAMBAHLA ESTATE</h1>
-					<img src="/assets/img/hotel-thumb/COMO-Shambahla-Estate.jpg">
-				</a>
-			</div>
-			<div class="tour hotel">
-				<a href="/hotel-collection/6">
-					<h1>UMA BY COMO</h1>
-					<img src="/assets/img/hotel-thumb/Uma-by-COMO.jpg">
-				</a>
-			</div>
+
+			{{# hotel }}
+				<div class="tour hotel">
+					<a href="/hotel-collection/{{uri}}" style="text-decoration: none;">
+						<h1>{{ name }}</h1>
+						<img src="/assets/img/hotel-thumb/{{thumbnail}}">
+					</a>	
+				</div>
+			{{/hotel}}
 		</blocks>
 	</div>
 	{{/content}}

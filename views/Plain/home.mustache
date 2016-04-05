@@ -21,48 +21,31 @@
 	</section>
 	
 	<div class="holder">
+	<script>
+					var path = "";
+					var href = document.location.href;
+					var s = href.split("/");
+					for (var i=2;i<(s.length-1);i++) {
+						path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+					}
+					i=s.length-1;
+					path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+					var url = "<p id=bread>" + path+"</p>";
+					document.writeln(url);
+	 			</script>
 		<blocks cols="3" > 
-			<div class="tour">
-				<h1>
-					RECOMMENDED TOURS
-				</h1>
-				<img src="/assets/img/home/img_recommended_-tours.jpg">
-				<h2>Bali as you pleace</h2>
-				<h3>HALF DAY / 5 HOURS OR FULL DAY / 10 HOURS</h3>
-				<p>
-					In order to maximize your time and give you a full range of sightseeing option, we have created " Bali As You Please" option, that will cater your desires for the day.
-				</p>
-				<a href="/experience/1">More [+]</a>
-
-			</div>
-			<div class="tour">
-				<h1>
-					HALF DAY TOUR
-				</h1>
-				<img src="/assets/img/experience/indo/thumb_01.jpg">
-				<h2>DENPASAR MUNICIPALITY</h2>
-				<h3>HALF DAY / 5 HOURS</h3>
-				<p>
-					Orientation tour of Denpasar. You will visit Bajra Sandi Monument which is dedicated to the spirit of Balinese struggle, Kumbasari traditional market, also includes a visit to Bali Museum and proceed to the neighbor of Jagadnatha Temple, the biggest Temple in Denpasar.
-				</p>
-				<a href="/experience/2">More [+]</a>
-
-			</div>
-			<div class="tour">
-				<h1>
-					FULL DAY TOUR
-				</h1>
-				<img src="/assets/img/home/img_full_days_tours.jpg">
-				<h2>BATUR VOLCANO HIGHLIGHT</h2>
-				<h3>FULL DAY / 10 HOURS</h3>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				</p>
-				<a href="/experience/9">More [+]</a>
-
-			</div>
+			{{# tour}}
+				<a href="/experience/{{uri}}" style="text-decoration: none;">
+					<div class="tour">
+						<h1>{{type}}</h1>
+						<img src="/assets/img/experience/indo/{{thumbnail}}">
+						<h2>{{title}}</h2>
+						<h3>{{duration}}</h3>
+						<p>{{description}}</p>
+						<a href="/experience/{{uri}}">More [+]</a>
+					</div>
+				</a>
+			{{/ tour}}
 		</blocks>
 	</div>
 	{{$ scripts}}

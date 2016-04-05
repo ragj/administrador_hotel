@@ -4,78 +4,132 @@
 			Editar Experiencia - Bali
 		{{/ title}}
 		{{$ content }}
-			{{#tour}}
-			<div class="row">
-		        <div class="col-lg-12">
-		            <h1 class="page-header">Editar una Experiencia</h1>
-		        </div>
-		    </div>
-			<div class="row">
-		    	<div class="col-lg-12">
-		        	<div class="panel panel-default">
-		            	<div class="panel-heading">
-		                	Editar Experiencia
-		            	</div>
-		            	<div class="panel-body">
-		                	<div class="row">
-		                    	<div class="col-lg-12">
-		                        	<form role="form" action="/panel/tour/edit/{{id}}" method="post" name="editTour" enctype="multipart/form-data">
-		                            	<div class="form-group"> 
-		                                	<input class="form-control" name="titulo" value="{{title}}">
-		                            	</div>
-		                            	<div class="form-group"> 
-		                                	<input type="file"name="thumbnail">
-									        <span class="help-block">Imagen en tamaño THUMBNAIL (000px*000px)</span>
-									        <img src="/assets/img/experience/indo/{{thumbnail}}" height="250px" width="250px"/>
-		                            	</div>
-		                            	<div class="form-group">
-		                            		<label>Tipo Actual:</label>
-		                            		{{type}}
-		                            		<br>
-		                            		<label>Tipo:</label>
-		                            		<select class="form-control" name="tipo">
-		                            			<option value=""></option>
-		                            			<option value="RECOMMENDED TOURS">RECOMMENDED TOURS</option>
-		                            			<option value="HALF DAY TOURS">HALF DAY TOURS</option>
-		                            			<option value="FULL DAY TOURS">FULL DAY TOURS</option>
-		                            		</select>
-		                            	</div>
-		                            	<div class="form-group">
-		                            		<label>Duración Actual:</label>
-		                            		{{duration}}
-		                            		<br>
-		                            		<label>Duración:</label>
-		                            		<select class="form-control" name="duracion">
-		                            			<option value=""></option>
-		                            			<option value="HALF DAY ">HALF DAY</option>
-		                            			<option value="FULL DAY ">FULL DAY</option>
-		                            		</select>
-		                            	</div>
-		                            	<div class="form-group">
-		                            		<label>Horas:</label>
-		                            		<input type="number" class="form-control" placeholder="Horas" name="horas">
-		                            	</div>
-		                            	<div class="form-group">
-											<label>Descripción:</label>
-											<textarea class="form-control" name="descripcion" style="height: auto;">{{description}}</textarea>
-		                            	</div>
-		                            	<div class="form-group"> 
-		                            		<label>Transfer:</label>
-											<textarea class="form-control" name="Transfer">{{transfer}}</textarea>
-		                            	</div>
-		                            	<input type="submit" class="btn btn-primary" value="Guardar">
-		                        	</form>
-		                    	</div>
-		                	</div>
-		                	<!-- /.row (nested) -->
-		            	</div>
-		            	<!-- /.panel-body -->
-		        	</div>
-		        	<!-- /.panel -->
-		    	</div>
-		    <!-- /.col-lg-12 -->
+			<div id="page-content-wrapper">
+            	<div class="container-fluid">
+					{{# tour }}
+						<div class="row">
+					        <div class="col-lg-12">
+					            <h1 class="page-header">Editar una Experiencia</h1>
+					        </div>
+					    </div>
+						<div class="row">
+					    	<div class="col-lg-12">
+					        	<div class="panel panel-default">
+					            	<div class="panel-heading">
+					                	Editar Experiencia
+					            	</div>
+					            	<div class="panel-body">
+					                	<div class="row">
+					                    	<div class="col-lg-12">
+					                        	<form role="form" action="/panel/tour/edit/{{id}}" method="post" name="editTour" enctype="multipart/form-data" class="form-horizontal">
+					                            	<div class="form-group">
+    													<label class="control-label col-sm-3" for="titulo">Titulo:</label>
+    													<div class="col-sm-8">
+      														<input class="form-control" name="titulo" value="{{title}}">
+    													</div>
+  													</div>
+  													<div class="form-group">
+    													<label class="control-label col-sm-3" for="titulo">Thumbnail:</label>
+    													<div class="col-sm-8">
+      														<input type="file"name="thumbnail">
+												        	<span class="help-block">Imagen en tamaño THUMBNAIL (000px*000px)</span>
+												        	<img src="/assets/img/experience/indo/{{thumbnail}}" height="250px" width="250px"/>
+    													</div>
+  													</div>
+  													<div class="form-group">
+    													<label class="control-label col-sm-3" for="titulo">Tipo Actual:</label>
+    													<div class="col-sm-8">
+      														{{type}}
+    													</div>
+  													</div>
+  													<div class="form-group">
+    													<label class="control-label col-sm-3" for="titulo">Tipo : </label>
+    													<div class="col-sm-8">
+      														<select class="form-control" name="tipo">
+					                            				<option value=""></option>
+					                            				<option value="RECOMMENDED TOURS">RECOMMENDED TOURS</option>
+					                            				<option value="HALF DAY TOURS">HALF DAY TOURS</option>
+					                            				<option value="FULL DAY TOURS">FULL DAY TOURS</option>
+					                            			</select>
+    													</div>
+  													</div>
+  													<div class="form-group">
+    													<label class="control-label col-sm-3" for="titulo">Duración Actual:</label>
+    													<div class="col-sm-8">
+      														{{duration}}
+    													</div>
+  													</div>
+  													<div class="form-group">
+    													<label class="control-label col-sm-3" for="titulo">Duración:</label>
+    													<div class="col-sm-8">
+      														<select class="form-control" name="duracion">
+					                            				<option value=""></option>
+					                            				<option value="HALF DAY ">HALF DAY</option>
+					                            				<option value="FULL DAY ">FULL DAY</option>
+					                            			</select>
+    													</div>
+  													</div>
+					                            	<div class="form-group">
+    													<label class="control-label col-sm-3" for="titulo">Horas:</label>
+    													<div class="col-sm-8">
+      														<input type="number" class="form-control" placeholder="Horas" name="horas">
+    													</div>
+  													</div>
+  													<div class="form-group">
+    													<label class="control-label col-sm-3" for="titulo">Descripción:</label>
+    													<div class="col-sm-8">
+      														<textarea class="form-control" name="descripcion" style="height: auto;">{{description}}</textarea>
+    													</div>
+  													</div>
+  													<div class="form-group">
+    													<label class="control-label col-sm-3" for="titulo">Transfer:</label>
+    													<div class="col-sm-8">
+      														<textarea class="form-control" name="Transfer">{{transfer}}</textarea>
+    													</div>
+  													</div>
+  													<div class="form-group"> 
+    													<div class="col-sm-offset-8 col-sm-8">
+      														<input type="submit" class="btn btn-primary enviar" value="Guardar">   	
+											    		</div>
+													</div>
+					                        	</form>
+					                        	<hr>
+					                        		<div class="form-group">
+    													<label class="control-label col-sm-3" for="image">Nueva Imagen:</label>
+    													<div class="col-sm-8">
+					                                		<a href="/panel/tour/addImages" target="_blank"><button type="button" class="btn btn-primary">Nueva Imagen</button></a>	
+    													</div>
+  													</div>
+					                        	<hr>
+					                        	{{# images }}
+					                        		<div class="galImg">
+						                        		<img src="/assets/img/experience/{{url}}" class="img-rounded img-responsive" alt="Cinque Terre" width="150" height="50">
+						                        		<a href="/panel/tour/editImages/{{id}}"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i></button></a>
+						                        		<a onclick=myFunction({{id}})><button type="button" class="btn btn-danger"><i class="fa fa-times"></i></button></a>	
+						                        	</div>
+					                        	{{/ images}}
+					                        	<script>
+                                                    function myFunction(id) {
+                                                        if (confirm("Estas Seguro de Eliminar?") == true) 
+                                                        {
+                                                            self.location = "/panel/tour/deleteImages/"+id; 
+
+                                                        } 
+                                                    }
+                                               	</script>
+					                    	</div>
+					                	</div>
+					                	<!-- /.row (nested) -->
+					            	</div>
+					            	<!-- /.panel-body -->
+					        	</div>
+					        	<!-- /.panel -->
+					    	</div>
+					    <!-- /.col-lg-12 -->
+						</div>
+					{{/tour}}
+				</div>
 			</div>
-			{{/tour}}
 		{{/ content}}
 		{{$ footerscripts }}
 		{{/ footerscripts }}

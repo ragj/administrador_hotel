@@ -416,6 +416,19 @@ table tr.main{
 		height: 80%;
 		max-width: 80%;
 	}
+#back {
+	text-decoration: none;
+	padding: 5px;
+	color: #C39323;
+}
+#bread{
+	text-decoration: none;
+	color: #C39323;
+}
+#bread a{
+	text-decoration: none;
+	color: #C39323;
+}
 /* MEDIA */
 @media (max-width: 768px){
 	.slider{
