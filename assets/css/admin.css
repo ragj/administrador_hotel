@@ -1,0 +1,26 @@
+.centrado .col-lg-8{
+	margin: 0 20%;
+}
+
+footer{
+	padding: 20px 0px;
+	background-color: #262626;
+}
+	footer p{
+		color: #fff;
+		font-size: 11px;
+		padding: 5px;
+		margin-left: 20px;
+	}
+	footer div.contact{
+		float: right;
+		font-size: 12px;
+		line-height: 15px;
+		text-align: right;
+		margin-right: 5px;
+		color: #FFF;
+	}
+		footer div.contact span{
+			color: #666;
+			font-weight: bold;
+		}
