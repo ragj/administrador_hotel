@@ -44,7 +44,8 @@ $router->addRoute(array(
 
 $router->addRoute(array(
     'path' => '/contact-us',
-    'get' => array('Plain', 'contact')
+    'get' => array('Plain', 'contact'),
+    'post' => array('Plain', 'contact')
 ));
 
 ///Hotel Routes

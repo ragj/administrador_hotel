@@ -48,15 +48,12 @@ class Plain extends Luna\Controller {
 
             $tourMapper = $this->spot->mapper("Entity\Hotel");
             $hotel = $tourMapper->select()->with("images")->where(["uri" => $req->params["hotel"]])->first();
-
-            
-
             $res->m = $res->mustache->loadTemplate("Plain/hotel-inner.mustache");
             echo $this->renderWiew( array_merge(["hotel-data" => $hotel] , $this->header("hotel") ), $res);
         }else{
             $hotelMapper=$this->spot->mapper("Entity\Hotel");
             $hotel=$hotelMapper->select()->with("images");
-            echo $this->renderWiew( array_merge(["hotel"=>$hotel]), $res);
+            echo $this->renderWiew( array_merge(["hotel-data"=>$hotel], $this->header("hotel")), $res);
         }
         
     }
@@ -82,6 +79,15 @@ class Plain extends Luna\Controller {
     }
 
     public function contact($req , $res){
+        if(isset($req->data["name"],$req->data["email"],$req->data["message"])){
+            $to      = 'bali@lozano.com';
+            $subject = 'contacto desde pagina';
+            $message = "Nombre: ".$req->data["name"]."\r\n Mensaje:".$req->data["message"];
+            $headers = 'From: webmaster@bali.com' . "\r\n" .
+                'Reply-To:'.$req->data["email"]. "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+            mail($to, $subject, $message, $headers);
+        }
     	echo $this->renderWiew( $this->header("contact"), $res);
     }
 
