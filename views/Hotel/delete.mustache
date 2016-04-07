@@ -1,31 +1,35 @@
 {{% BLOCKS }}
-	{{< admin }}
+	{{< quirk }}
 		{{$ title}}
-			Hotel Eliminado- Bali
-		{{/ title}}
-		{{$ meta}}
-			<META HTTP-EQUIV=Refresh CONTENT="0.5; /panel/hotel/show">
+            Delete Hotel
+        {{/ title}}
+        {{$ meta}}
+        	{{# hotel }}
+			<META HTTP-EQUIV=Refresh CONTENT="0.5;/panel/hotel/show">
+        	{{/ hotel }}
         {{/ meta}}
-		{{$ content }}
-			<div id="page-content-wrapper">
-            	<div class="container-fluid">			
-					<div class="row">
-				        <div class="col-lg-12">
-				            <h1 class="page-header">Hotel Eliminado</h1>
-				        </div>
-				    </div>
-					<div class="row">
-				    	<div class="col-lg-12">
-				        	<div class="panel panel-default">
-				            	<div class="panel-heading">
-				                	Hotel Eliminado
-				            	</div>
-				            </div>
-				        </div>
-				    </div>
-				</div>
-			</div>
-		{{/ content}}
-		{{$ footerscripts }}
-		{{/ footerscripts }}
-	{{/ admin }}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Hotel</a></li>
+			        <li class="active">Hotel Eliminado</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-6 col-md-offset-3">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Hotel Eliminado</h4>
+	        				</div>
+		        			<div class="panel-body">
+		        				<hr>
+		        				<p>Hotel Eliminado.</p>			
+		        				<hr>
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+		{{/ scripts }}
+	{{/ quirk }}

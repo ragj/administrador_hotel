@@ -1,120 +1,120 @@
 {{% BLOCKS }}
-	{{< admin }}
+	{{< quirk }}
 		{{$ title}}
-			Editar Hotel - Bali
-		{{/ title}}
-		{{$ content }}
-			<div id="page-content-wrapper">
-            	<div class="container-fluid">
-            		{{# hotel }}
-						<div class="row">
-					        <div class="col-lg-12">
-					            <h1 class="page-header">Editar un Hotel</h1>
-					        </div>
-					    </div>
-						<div class="row">
-				    		<div class="col-lg-12">
-				        		<div class="panel panel-default">
-					            	<div class="panel-heading">
-					                	Editar Hotel
-					            	</div>
-					            	<div class="panel-body">
-					                	<div class="row">
-					                    	<div class="col-lg-12">
-					                        	<form role="form" action="/panel/hotel/edit/{{id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
-					                        		<div class="form-group">
-    													<label class="control-label col-sm-3" for="name">Nombre:</label>
-    													<div class="col-sm-8">
-      														<input class="form-control" placeholder="Nombre" name="name" value="{{name}}">
-    													</div>
-  													</div>
-  													<div class="form-group">
-    													<label class="control-label col-sm-3" for="address">Dirección:</label>
-    													<div class="col-sm-8">
-      														<input class="form-control" placeholder="Dirección" name="address" value="{{address}}">
-    													</div>
-  													</div>
-  													<div class="form-group">
-    													<label class="control-label col-sm-3" for="website">Web Site:</label>
-    													<div class="col-sm-8">
-      														<input class="form-control" placeholder="Web Site" name="website" value="{{website}}">
-    													</div>
-  													</div>
-  													<div class="form-group">
-    													<label class="control-label col-sm-3" for="map">Mapa:</label>
-    													<div class="col-sm-8">
-      														<input class="form-control" placeholder="URL Mapa" name="map" value="{{map}}">
-    													</div>
-  													</div>
-  													<div class="form-group">
-    													<label class="control-label col-sm-3" for="tel">Teléfono:</label>
-    													<div class="col-sm-8">
-      														<input class="form-control" placeholder="Teléfono" name="tel" value="{{tel}}">
-    													</div>
-  													</div>
-  													<div class="form-group">
-    													<label class="control-label col-sm-3" for="email">Correo:</label>
-    													<div class="col-sm-8">
-      														<input class="form-control" placeholder="Correo" name="email" value={{email}}>
-    													</div>
-  													</div>
-  													<div class="form-group">
-    													<label class="control-label col-sm-3" for="descripcion">Descripción:</label>
-    													<div class="col-sm-8">
-      														<textarea class="form-control" name="descripcion">{{description}}</textarea>
-    													</div>
-  													</div>
-  													<div class="form-group">
-    													<label class="control-label col-sm-3" for="thumbnail">Thumbnail:</label>
-    													<div class="col-sm-8">
-      														<img src="/assets/img/hotel-thumb/{{thumbnail}}" height="250px" width="250px"/>
-					                                		<input type="file"name="thumbnail">
-												        	<span class="help-block">Imagen en tamaño THUMBNAIL (000px*000px)</span>
-    													</div>
-  													</div>
-  													<div class="form-group"> 
-    													<div class="col-sm-offset-8 col-sm-8">
-      														<input type="submit" class="btn btn-primary enviar" value="Guardar">   	
-											    		</div>
-													</div>
-  												</form>
-  												<hr>
-					                        		<div class="form-group">
-    													<label class="control-label col-sm-3" for="image">Nueva Imagen:</label>
-    													<div class="col-sm-8">
-					                                		<a href="/panel/hotel/addImages" target="_blank"><button type="button" class="btn btn-primary">Nueva Imagen</button></a>	
-    													</div>
-  													</div>
-					                        	<hr>
-					                        	
-					        					{{# images }}
-						                        	<div class="galImg">
-						                        		<img src="/assets/img/hotel/{{id_hotel}}/{{url}}" class="img-rounded img-responsive" alt="Cinque Terre" width="150" height="50">
-						                        		<a href="/panel/hotel/editImages/{{id}}"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i></button></a>
-						                        		<a onclick=myFunction({{id}})><button type="button" class="btn btn-danger"><i class="fa fa-times"></i></button></a>
-						                        		
-						                        	</div>
-					                        	{{/ images }}
-					                        	<script>
-                                                    function myFunction(id) {
-                                                        if (confirm("Estas Seguro de Eliminar?") == true) 
-                                                        {
-                                                            self.location = "/panel/hotel/deleteImages/"+id; 
-
-                                                        } 
-                                                    }
-                                               	</script>
-					                        	
-					                    	</div>
-					                	</div>
-				            		</div>
-				        		</div>
-				    		</div>
-						</div>
-					{{/ hotel }}
-				</div>
-			</div>
-		{{/ content}}
-		{{$ footerscripts }}
-		{{/ footerscripts }}
-	{{/ admin }}
+            Edit Hotel
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Hotel</a></li>
+			        <li class="active">Editar Hotel</li>
+      			</ol>
+      			{{# hotel }}
+	    			<div class="row">
+	    				<div class="col-md-6 col-md-offset-3">
+		        			<div class="panel">
+		        				<div class="panel-heading">
+		        					<h4 class="panel-title">Editar Hotel</h4>
+		        				</div>
+			        			<div class="panel-body">
+			        				<hr>			
+			        				<form class="form-horizontal" action="/panel/hotel/edit/{{id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+			        					<div class="form-group">
+			                    			<label class="col-sm-3 control-label">Nombre: <span class="text-danger">*</span></label>
+			                    			<div class="col-sm-6">
+			                      				<input type="text" name="name" class="form-control" placeholder="Escribe un nombre de hotel." value="{{name}}" required />
+			                    			</div>
+			                  			</div>
+			                  			<div class="form-group">
+			                    			<label class="col-sm-3 control-label">Dirección:</label>
+			                    			<div class="col-sm-6">
+			                     				<input type="text" name="address" class="form-control" placeholder="Escribe una dirección del hotel."  value="{{address}}"/>
+			                    			</div>
+			                  			</div>
+			                  			<div class="form-group">
+			                    			<label class="col-sm-3 control-label">Website:</label>
+			                    			<div class="col-sm-6">
+			                      				<input type="text" name="website" class="form-control" placeholder="Escribe un sitio web." value="{{website}}"/>
+			                   				</div>
+			                  			</div>
+			                  			<div class="form-group">
+			                    			<label class="col-sm-3 control-label">Mapa:</label>
+			                    			<div class="col-sm-6">
+			                      				<input type="text" name="map" class="form-control" placeholder="Escribe una url del mapa" value="{{map}}"/>
+			                   				</div>
+			                  			</div>
+			                  			<div class="form-group">
+			                    			<label class="col-sm-3 control-label">Teléfono:</label>
+			                    			<div class="col-sm-6">
+			                      				<input type="text" name="tel" class="form-control" placeholder="Escribe un teléfono." value="{{tel}}"/>
+			                   				</div>
+			                  			</div>
+			                  			<div class="form-group">
+			                    			<label class="col-sm-3 control-label">Email:</label>
+			                    			<div class="col-sm-6">
+			                      				<input type="text" name="email" class="form-control" placeholder="Escribe un email." value="{{email}}" />
+			                   				</div>
+			                  			</div>
+			                  			<div class="form-group">
+			                    			<label class="col-sm-3 control-label">Descripción:</label>
+			                    			<div class="col-sm-6">
+			                    				<textarea class="form-control" name="descripcion" placeholder="Escribe una descripción.">{{description}}</textarea>
+			                   				</div>
+			                  			</div>
+			                  			<div class="form-group">
+			                    			<label class="col-sm-3 control-label">Thumbnail:</label>
+			                    			<div class="col-sm-6">
+			                    				<img src="/assets/img/hotel-thumb/{{thumbnail}}" height="250px" width="250px"/>
+			                    				<input type="file"name="thumbnail">
+												 <span class="help-block">Imagen en tamaño THUMBNAIL (000px*000px)</span>
+			                   				</div>
+			                  			</div>
+			                  			<div class="row">
+		                    				<div class="col-sm-9 col-sm-offset-8">
+						                      <button class="btn btn-success btn-quirk btn-wide mr5">Guardar</button>
+		                    				</div>
+		                  				</div>
+		                  				<hr>
+			                  			<div class="form-group">
+			                    			<label class="col-sm-3 control-label">Nueva Imagén:</label>
+			                    			<div class="col-sm-6">
+			                    				<a href="/panel/hotel/addImages" target="_blank"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">Nueva Imagen</button></a>	
+			                   				</div>
+			                  			</div>
+			                  			<hr>
+			        				</form>
+			        			</div>
+		        			</div>
+	        			</div>
+	    			</div>
+	    			<div class="row">
+        				<div class="col-md-8 col-md-offset-2">
+        					{{# images }}
+        						<div class="col-md-4">
+		          					<div class="panel">
+		            					<div class="panel-heading">
+		              						<h4 class="panel-title">Imagen {{url}}</h4>
+		            					</div>
+		            					<div class="panel-body">
+		              						<img src="/assets/img/hotel/{{id_hotel}}/{{url}}" class="img-rounded " width="200" height="150" >
+							                 <a href="/panel/hotel/editImages/{{id}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
+							                 <a onclick=myFunction({{id}})><button type="button" class="btn btn-danger btn-quirk"><i class="fa fa-times"></i></button></a>
+		            					</div>
+		          					</div>
+          						</div>
+        					{{/ images }}
+        					<script>
+                                function myFunction(id) {
+                                    if (confirm("Estas Seguro de Eliminar?") == true) {
+                                        self.location = "/panel/hotel/deleteImages/"+id; 
+                                    } 
+                                }
+                            </script>
+          				</div>
+        			</div>
+	    		{{/ hotel }}	
+	    	</div>
+        {{/ content }}
+		{{$ scripts }}
+		{{/ scripts }}
+	{{/ quirk }}

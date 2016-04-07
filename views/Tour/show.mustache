@@ -1,81 +1,140 @@
 {{% BLOCKS }}
-{{< admin }}
-{{$ title}}
-Mostrar Experiencias
-{{/ title}}
-{{$ content }}
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Mostrar Experiencias</h1>
-                </div>
-            </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Experiencias
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                                <table class="table table-striped isdatatable table-responsive" style="overflow: scroll;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Título</th>
-                                                            <th>Descripción</th>
-                                                            <th>Editar</th>
-                                                            <th>Eliminar</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {{# tour }}
-                                                            <tr>
-                                                                <td>{{title}}</td>
-                                                                <td>{{description}}</td>
-                                                                <td>
-                                                                    <a href="/panel/tour/edit/{{id}}">
-                                                                        <button type="button" class="btn btn-primary">
-                                                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
-                                                                        </button>
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-                                                                    <a onclick="myFunction({{id}})">
-                                                                        <button type="button" class="btn btn-danger">
-                                                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar
-                                                                        </button>
-                                                                    </a>
-                                                                     <script>
-                                                                        function myFunction(id) {
-                                                                            if (confirm("Estas Seguro de Eliminar?") == true) 
-                                                                            {
-                                                                                self.location = "/panel/tour/delete/{{id}}";                            
-                                                                            } 
-                                                                        }
-                                                                    </script>
-                                                                </td>
-                                                            </tr>
-                                                        {{/ tour }}
-                                                    </tbody>
-                                                </table>
-                                        </div>
-                                    </div>
-                                    <!-- /.row (nested) -->
-                                </div>
-                                <!-- /.panel-body -->
+    {{< quirk }}
+        {{$ title}}
+            Show Experiences
+        {{/ title}}
+        {{$ content }}
+            <div class="contentpanel">
+                <ol class="breadcrumb breadcrumb-quirk">
+                    <li><a href=""><i class="fa fa-home mr5"></i>Experiencias</a></li>
+                    <li class="active">Mostrar Experiencias</li>
+                </ol>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Mostrar Experiencias</h4>
+                                <p>Listado de todos los experiencias registrados</p>
                             </div>
-                            <!-- /.panel -->
+                            <div class="panel-body">
+                                <hr>
+                                <div class="table-responsive">
+                                     <table id="dataTable1" class="table table-bordered table-striped-col">
+                                        <thead>
+                                            <tr>
+                                              <th>Experiencias</th>
+                                              <th>Descripción</th>
+                                              <th>Editar</th>
+                                              <th>Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                              <th>Experiencias</th>
+                                              <th>Descripción</th>
+                                              <th>Editar</th>
+                                              <th>Eliminar</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            {{# tour }}
+                                                <tr>
+                                                    <td>
+                                                        {{title}}
+                                                    </td>
+                                                    <td>
+                                                        {{description}}
+                                                    </td>
+                                                    <td>
+                                                        <a href="/panel/tour/edit/{{id}}">
+                                                            <button type="button" class="btn btn-primary">
+                                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a onclick="myFunction({{id}})">
+                                                            <button type="button" class="btn btn-danger">
+                                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            {{/ tour }}
+                                        </tbody>
+                                     </table>
+                                </div>
+                                <script>
+                                    function myFunction(id) {
+                                        if (confirm("Estas Seguro de Eliminar?") == true) {
+                                            self.location = "/panel/tour/delete/{{id}}";                          
+                                        } 
+                                    }
+                                </script>       
+                            </div>
                         </div>
-                    <!-- /.col-lg-12 -->
                     </div>
-                </div>
+                </div>  
             </div>
+        {{/ content }}
+        {{$ scripts }}
+            <script src="/assets/quirk/lib/jquery/jquery.js"></script>
+            <script src="/assets/quirk/lib/jquery-ui/jquery-ui.js"></script>
+            <script src="/assets/quirk/lib/bootstrap/js/bootstrap.js"></script>
+            <script src="/assets/quirk/lib/jquery-toggles/toggles.js"></script>
+            <script src="/assets/quirk/lib/datatables/jquery.dataTables.js"></script>
+            <script src="/assets/quirk/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+            <script src="/assets/quirk/lib/select2/select2.js"></script>
+            <script src="/assets/quirk/js/quirk.js"></script>
+            <script>
+                $(document).ready(function() {
+                    'use strict';
+                    $('#dataTable1').DataTable();
+                    var exRowTable = $('#exRowTable').DataTable({
+                        responsive: true,
+                        'fnDrawCallback': function(oSettings) {
+                        $('#exRowTable_paginate ul').addClass('pagination-active-success');
+                        },
+                        'ajax': 'ajax/objects.txt',
+                        'columns': [{
+                            'class': 'details-control',
+                            'orderable': false,
+                            'data': null,
+                            'defaultContent': ''
+                            },
+                            { 'data': 'name' },
+                            { 'data': 'position' },
+                            { 'data': 'office' },
+                            { 'data': 'start_date'},
+                            { 'data': 'salary' }
+                        ],
+                        'order': [[1, 'asc']]
+                    });
+                    // Add event listener for opening and closing details
+                    $('#exRowTable tbody').on('click', 'td.details-control', function () {
+                        var tr = $(this).closest('tr');
+                        var row = exRowTable.row( tr );
+                        if ( row.child.isShown() ) {
+                          // This row is already open - close it
+                          row.child.hide();
+                          tr.removeClass('shown');
+                        } else {
+                          // Open this row
+                          row.child( format(row.data()) ).show();
+                          tr.addClass('shown');
+                        }
+                    });
 
+                    function format (d) {
+                        // `d` is the original data object for the row
+                        return '<h4>'+d.name+'<small>'+d.position+'</small></h4>'+
+                        '<p class="nomargin">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>';
+                    }
 
+                    // Select2
+                    $('select').select2({ minimumResultsForSearch: Infinity });
 
-{{/ content}}
-{{$ footerscripts }}
-{{/ footerscripts }}
-{{/ admin }}
+                });
+            </script>
+        {{/ scripts }}
+    {{/ quirk }}

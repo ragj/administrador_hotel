@@ -1,0 +1,117 @@
+{{% BLOCKS }}
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>
+            {{$ title}}
+            Lozano Bali
+            {{/ title}}
+        </title>
+        <!-- Metas -->
+        <meta charset="utf-8">
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  		<meta name="author" content="Denumeris Interactive">
+  		{{$ meta}}
+        {{/ meta}}
+        <!-- Estilos requeridos -->
+        <link rel="stylesheet" href="/assets/quirk/lib/Hover/hover.css">
+  		<link rel="stylesheet" href="/assets/quirk/lib/fontawesome/css/font-awesome.css">
+  		<link rel="stylesheet" href="/assets/quirk/lib/weather-icons/css/weather-icons.css">
+  		<link rel="stylesheet" href="/assets/quirk/lib/ionicons/css/ionicons.css">
+  		<link rel="stylesheet" href="/assets/quirk/lib/jquery-toggles/toggles-full.css">
+  		<link rel="stylesheet" href="/assets/quirk/lib/morrisjs/morris.css">
+      <link rel="stylesheet" href="/assets/quirk/lib/jquery-toggles/toggles-full.css">
+      <link rel="stylesheet" href="/assets/quirk/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css">
+      <link rel="stylesheet" href="/assets/quirk/lib/select2/select2.css">
+  		<!-- Estilos personalizados -->
+  		<link rel="stylesheet" href="/assets/quirk/css/quirk.css">
+  		<!-- Api Modernizr -->
+  		<script src="/assets/quirk/lib/modernizr/modernizr.js"></script>
+  		 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  		<!--[if lt IE 9]>
+  			<script src="/assets/quirk/lib/html5shiv/html5shiv.js"></script>
+  			<script src="/assets/quirk/lib/respond/respond.src.js"></script>
+  		<![endif]-->
+    </head>
+    <body>
+    	<header>
+    		<div class="headerpanel">
+			    <div class="logopanel">
+			      <h2><a href="index.html">Balí Admin</a></h2>
+			    </div><!-- logopanel -->
+    			<div class="headerbar">
+      				<a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+					<div class="header-right">
+        				<ul class="headermenu">
+          					<li>
+					            <div class="btn-group">
+					              <button type="button" class="btn btn-logged" data-toggle="dropdown">
+					                <img src="/assets/quirk/images/photos/loggeduser.png" alt="" />
+					                
+					                <span class="caret">{{user.nombre}}</span>
+					              </button>
+					              <ul class="dropdown-menu pull-right">
+					              	<li>{{user.nombre}}</li>
+					                <li><a href="/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+					              </ul>
+					            </div>
+          					</li>
+        				</ul><!-- headermenu -->
+      				</div><!-- header-right -->
+    			</div><!-- headerbar -->
+  			</div><!-- headerpanel-->
+    	</header>
+    	<section>
+    		<!-- ################# BARRA LATERAL ################### -->
+    		<div class="leftpanel">
+    			<div class="leftpanelinner">
+      				<div class="tab-content">
+      					<!-- ################# MENU ################### -->
+        				<div class="tab-pane active" id="mainmenu">
+          					<h5 class="sidebar-title">Main Menu</h5>
+          					<ul class="nav nav-pills nav-stacked nav-quirk">
+          						<!-- Item Menu -->
+            					<li class="nav-parent active">
+              						<a href=""><i class="fa fa-check-square"></i> <span>Experiences</span></a>
+              						<ul class="children">
+                						<li><a href="/panel/tour/add">Add Expierence</a></li>
+                						<li><a href="/panel/tour/show">List Experiences</a></li>
+              						</ul>
+            					</li>
+            					<!-- Item Menu -->
+            					<li class="nav-parent active"><a href=""><i class="fa fa-suitcase"></i> <span>Hotels</span></a>
+              						<ul class="children">
+                						<li><a href="/panel/hotel/add">Add Hotel</a></li>
+                						<li><a href="/panel/hotel/show">List Hotels</a></li>
+              						</ul>
+            					</li>
+          					</ul>
+        				</div><!-- tab-pane -->
+      				</div><!-- tab-content -->
+    			</div><!-- leftpanelinner -->
+  			</div><!-- leftpanel -->
+  			<!-- ################# CONTENIDO ################### -->
+  			<div class="mainpanel">
+			    {{$ content}}
+            	{{/ content}}
+  			</div><!-- mainpanel -->
+    	</section>
+    	<!-- ################# SCRIPTS ################### -->
+    	<script src="/assets/quirk/lib/jquery/jquery.js"></script>
+		<script src="/assets/quirk/lib/jquery-ui/jquery-ui.js"></script>
+		<script src="/assets/quirk/lib/bootstrap/js/bootstrap.js"></script>
+		<script src="/assets/quirk/lib/jquery-toggles/toggles.js"></script>
+
+		<script src="/assets/quirk/lib/morrisjs/morris.js"></script>
+		<script src="/assets/quirk/lib/raphael/raphael.js"></script>
+
+		<script src="/assets/quirk/lib/flot/jquery.flot.js"></script>
+		<script src="/assets/quirk/lib/flot/jquery.flot.resize.js"></script>
+		<script src="/assets/quirk/lib/flot-spline/jquery.flot.spline.js"></script>
+		
+		<script src="/assets/quirk/lib/jquery-knob/jquery.knob.js"></script>
+		<script src="/assets/quirk/js/quirk.js"></script>
+		<script src="/assets/quirk/js/dashboard.js"></script>
+		{{$ scripts }}{{/ scripts }}
+    </body>
+</html>

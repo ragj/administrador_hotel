@@ -1,31 +1,33 @@
 {{% BLOCKS }}
-	{{< admin }}
+		{{< quirk }}
 		{{$ title}}
-			Registro Eliminado- Bali
-		{{/ title}}
-		{{$ meta}}
+            Delete Experience
+        {{/ title}}
+        {{$ meta}}
 			<META HTTP-EQUIV=Refresh CONTENT="0.5; /panel/tour/show">
         {{/ meta}}
-		{{$ content }}
-			<div id="page-content-wrapper">
-            	<div class="container-fluid">			
-					<div class="row">
-				        <div class="col-lg-12">
-				            <h1 class="page-header">Registro Eliminado</h1>
-				        </div>
-				    </div>
-					<div class="row">
-				    	<div class="col-lg-12">
-				        	<div class="panel panel-default">
-				            	<div class="panel-heading">
-				                	Registro Eliminado
-				            	</div>
-				            </div>
-				        </div>
-				    </div>
-				</div>
-			</div>
-		{{/ content}}
-		{{$ footerscripts }}
-		{{/ footerscripts }}
-	{{/ admin }}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Experiencia</a></li>
+			        <li class="active">Experiencia Eliminado</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-6 col-md-offset-3">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Experiencia Eliminado</h4>
+	        				</div>
+		        			<div class="panel-body">
+		        				<hr>
+		        				<p>Experiencia Eliminado.</p>			
+		        				<hr>
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+		{{/ scripts }}
+	{{/ quirk }}

@@ -1,87 +1,86 @@
 {{% BLOCKS }}
-	{{< admin }}
+	{{< quirk }}
 		{{$ title}}
-			Agregar Hotel - Bali
-		{{/ title}}
-		{{$ content }}
-			<div id="page-content-wrapper">
-            	<div class="container-fluid">
-					<div class="row">
-				        <div class="col-lg-12">
-				            <h1 class="page-header">Hotel</h1>
-				        </div>
-				    </div>
-					<div class="row">
-				    	<div class="col-lg-12">
-				        	<div class="panel panel-default">
-				            	<div class="panel-heading">
-				                	Agregar Hotel
-				            	</div>
-				            	<div class="panel-body">
-				                	<div class="row">
-				                        <form role="form" action="/panel/hotel/add" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
-				                        	<div class="form-group">
-    											<label class="control-label col-sm-3" for="name">Nombre:</label>
-    											<div class="col-sm-8">
-      												<input class="form-control" placeholder="Nombre" name="name">
-    											</div>
-  											</div>
-  											<div class="form-group">
-    											<label class="control-label col-sm-3" for="address">Dirección:</label>
-    											<div class="col-sm-8">
-      												<input class="form-control" placeholder="Dirección" name="address">
-    											</div>
-  											</div>
-  											<div class="form-group">
-    											<label class="control-label col-sm-3" for="website">Website:</label>
-    											<div class="col-sm-8">
-      												<input class="form-control" placeholder="Web Site" name="website">
-    											</div>
-  											</div>
-  											<div class="form-group">
-    											<label class="control-label col-sm-3" for="map">Mapa:</label>
-    											<div class="col-sm-8">
-      												<input class="form-control" placeholder="URL Mapa" name="map">
-    											</div>
-  											</div>
-  											<div class="form-group">
-    											<label class="control-label col-sm-3" for="tel">Teléfono:</label>
-    											<div class="col-sm-8">
-      												<input class="form-control" placeholder="Teléfono" name="tel">
-    											</div>
-  											</div>
-  											<div class="form-group">
-    											<label class="control-label col-sm-3" for="email">Email:</label>
-    											<div class="col-sm-8">
-      												<input class="form-control" placeholder="Correo" name="email">
-    											</div>
-  											</div>
-  											<div class="form-group">
-    											<label class="control-label col-sm-3" for="map">Descripción:</label>
-    											<div class="col-sm-8">
-      												<textarea class="form-control" name="descripcion"></textarea>
-    											</div>
-  											</div>
-  											<div class="form-group">
-    											<label class="control-label col-sm-3" for="map">Thumbnail:</label>
-    											<div class="col-sm-8">
-      												<input type="file"name="thumbnail">
-										        	<span class="help-block">Imagen en tamaño THUMBNAIL (000px*000px)</span>
-    											</div>
-  											</div>
-  											<div class="form-group"> 
-    											<div class="col-sm-offset-8 col-sm-8">
-      												<input type="submit" class="btn btn-primary enviar" value="Guardar">   	
-											    </div>
-											</div>
-				                        </form>
-				                	</div>
-				            	</div>
-				        	</div>
-				    	</div>
-					</div>
-				</div>
-		{{/ content}}
-		{{$ footerscripts }}
-		{{/ footerscripts }}
-	{{/ admin }}
+            Add Hotel
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Hotel</a></li>
+			        <li class="active">Agregar Hotel</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-6 col-md-offset-3">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Formulario Hotel</h4>
+	          					<p>Por favor, llene el siguiente formulario. Gracias.</p>
+	        				</div>
+		        			<div class="panel-body">
+		        				<hr>			
+		        				<form class="form-horizontal" action="/panel/hotel/add" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+		        					<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Nombre: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="name" class="form-control" placeholder="Escribe un nombre de hotel." required />
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Dirección:</label>
+		                    			<div class="col-sm-6">
+		                     				<input type="text" name="address" class="form-control" placeholder="Escribe una dirección del hotel."  />
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Website:</label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="website" class="form-control" placeholder="Escribe un sitio web."/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Mapa:</label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="map" class="form-control" placeholder="Escribe una url del mapa"/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Teléfono:</label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="name" class="form-control" placeholder="Escribe un teléfono."/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Email:</label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="email" class="form-control" placeholder="Escribe un email" />
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Descripción:</label>
+		                    			<div class="col-sm-6">
+		                    				<textarea class="form-control" name="descripcion" placeholder="Escribe una descripción."></textarea>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Thumbnail:</label>
+		                    			<div class="col-sm-6">
+		                    				<input type="file"name="thumbnail">
+											 <span class="help-block">Imagen en tamaño THUMBNAIL (000px*000px)</span>
+		                   				</div>
+		                  			</div>
+		                  			<hr>
+		                  			<div class="row">
+	                    				<div class="col-sm-9 col-sm-offset-8">
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Guardar</button>
+	                    				</div>
+	                  				</div>
+		        				</form>
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+		{{/ scripts }}
+	{{/ quirk }}
