@@ -1,30 +1,60 @@
 {{% BLOCKS }}
 {{< panel}}
 	{{$content}}
-	<img src="/assets/img/img_experiencies.jpg">
+	<img src="/assets/img/img_experiences.jpg">
 	
 	<div class="holder">
+		<script>
+					var path = "";
+					var href = document.location.href;
+					var s = href.split("/");
+					for (var i=2;i<(s.length-1);i++) {
+						path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+					}
+					i=s.length-1;
+					path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+					var url = "<p id=bread>" + path+"</p>";
+					document.writeln(url);
+	 			</script>
 		<div class="filter">
-			<a href="">ALL</a>
-			<a href="">HALF DAY</a>
-			<a href="">FULL DAY</a>
+			<a href="#" data-filter="*" class="actual"> ALL</a>
+        	<a href="#" data-filter=".HALF">HALF DAY TOURS</a> 
+        	<a href="#" data-filter=".RECOMMENDED">RECOMMENDED TOURS</a> 
+        	<a href="#" data-filter=".FULL">FULL DAY TOURS</a> 
 		</div>
-		<blocks cols="3">
+		<blocks cols="3" class="portfolioContenedor">
 			{{#tours}}
-				<div class="tour inner">
-					<h1>
-						{{title}}
-					</h1>
-					<img src="/assets/img/experience/indo/{{thumbnail}}">
-					<h2>{{duration}}</h2>
-					<p>
-						{{description}}
-					</p>
-					<a href="/experience/{{id}}">More [+]</a>
+				<div class="{{type}} tour inner ">
+					<a href="/experience/{{uri}}" style="text-decoration: none;">
+						<h1>
+							{{title}}
+						</h1>
+						<img src="/assets/img/experience/indo/{{thumbnail}}">
+						<h2>{{duration}}</h2>
+						<p>
+							{{description}}
+						</p>
+						<a href="/experience/{{uri}}">More [+]</a>
+					</a>
 				</div>
 			{{/tours}}
-			
 		</blocks>
 	</div>
 	{{/content}}
+	{{$ scripts}}
+		<script>
+			jQuery.noConflict();
+			jQuery(window).load(function(){
+				jQuery('.filter a').click(function(){
+				jQuery('.filter .actual').removeClass('actual');
+				jQuery(this).addClass('actual');
+				
+				var selector = jQuery(this).attr('data-filter');
+				jQuery('.portfolioContenedor > div').fadeIn();
+				jQuery('.portfolioContenedor > div').not(selector).hide('slow');
+			});
+		});
+	 	</script>
+    {{/ scripts}}
+	
 {{/ panel}}

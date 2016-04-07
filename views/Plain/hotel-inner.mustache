@@ -4,6 +4,23 @@
 	{{$content}}
 	<div class="holder hotel-inner ">
 		<row>
+			<script>
+					var path = "";
+					var href = document.location.href;
+					var s = href.split("/");
+					for (var i=2;i<(s.length-1);i++) {
+						path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+					}
+					i=s.length-1;
+					path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+					var url = "<p id=bread>" + path+"</p>";
+					document.writeln(url);
+	 			</script>
+		</row>
+		<row>
+			<a href="/hotel-collection"  id="back" ><i class="fa fa-reply"></i> Back</a>
+		</row>
+		<row>
 			<column cols="8">
 				<div class="pad">
 					{{#hotel-data}}
