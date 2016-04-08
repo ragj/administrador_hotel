@@ -16,7 +16,7 @@ namespace Luna;
  */
 class SessionLogin extends \Zaphpa\BaseMiddleware {
 
-    private $urlPermitidas = ['/login','/','/about-us','/hotel-collection','/hotel-collection/{hotel}','/experience','/experience/{exper}','/contact-us','/home',''];
+    private $urlPermitidas = ['/login', '/logout', '/','/about-us','/hotel-collection','/hotel-collection/{hotel}','/experience','/experience/{exper}','/contact-us','/home',''];
 
     function preprocess(&$router) {
 
@@ -35,7 +35,7 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
 
     public function preroute(&$req, &$res) {
 
-        $redirect_after_login = "/";
+        $redirect_after_login = "/bali/";
 
         global $spot;
         $usersMapper = $spot->mapper("Entity\Usuario");
@@ -47,7 +47,7 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
         if (!in_array(self::$context["pattern"], $this->urlPermitidas)) {
 
             if (!$session->get("user", false)) {
-                header("Location: http://" . $_SERVER["SERVER_NAME"] . "/login?redirect=" . self::$context["request_uri"]);
+                header("Location: http://" . $_SERVER["SERVER_NAME"] . "/bali/login?redirect=" . self::$context["request_uri"]);
                 die();
             } else {
                 //  IF USUER IS LOGGED IN
@@ -94,6 +94,8 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
 
         if (self::$context["request_uri"] == '/logout') {
             $session_handle->destroy();
+            header("Location: /bali/login");
+            exit;
         }
     }
 

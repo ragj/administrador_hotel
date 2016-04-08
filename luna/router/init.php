@@ -31,7 +31,11 @@
 	//  ROUTES
 	require_once( __LUNA__.'/luna/router/routes.php' );
 	try {
-	  $router->route();
+	  $tokens = parse_url('http://lozano.travel' . str_replace("/bali" , "" , $_SERVER['REQUEST_URI']));
+      $uri = rawurldecode( isset($tokens['path'])?$tokens['path']:"/");
+      
+      
+	  $router->route( $uri );
 	} catch ( \Zaphpa\Exceptions\InvalidPathException $ex) {
 	  header("Content-Type: application/json;", TRUE, 404);
 	  $out = array("error" => "not found");
