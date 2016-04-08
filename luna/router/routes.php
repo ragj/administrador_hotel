@@ -78,11 +78,6 @@ $router->addRoute(array(
 ));
 
 $router->addRoute(array(
-    'path' => '/panel/hotel/showImages',
-    'get' => array('Hotel', 'showImages')
-));
-
-$router->addRoute(array(
     'path' => '/panel/hotel/editImages/{hotel}',
     'get' => array('Hotel', 'editImages'),
     'post' => array('Hotel', 'editImages')
@@ -130,11 +125,6 @@ $router->addRoute(array(
 ));
 
 $router->addRoute(array(
-    'path' => '/panel/tour/showImages',
-    'get' => array('Tour', 'showImages')
-));
-
-$router->addRoute(array(
     'path' => '/panel/tour/editImages/{exper}',
     'get' => array('Tour', 'editImages'),
     'post' => array('Tour', 'editImages')
@@ -143,6 +133,29 @@ $router->addRoute(array(
 $router->addRoute(array(
     'path' => '/panel/tour/deleteImages/{exper}',
     'get' => array('Tour', 'deleteImages')
+));
+
+///User Routes
+$router->addRoute(array(
+    'path' => '/panel/user/add',
+    'get' => array('Usuario', 'add'),
+    'post'=>array('Usuario','add')
+));
+
+$router->addRoute(array(
+    'path' => '/panel/user/show',
+    'get' => array('Usuario', 'show')
+));
+
+$router->addRoute(array(
+    'path' => '/panel/user/edit/{exper}',
+    'get' => array('Usuario', 'edit'),
+    'post' => array('Usuario', 'edit')
+));
+
+$router->addRoute(array(
+    'path' => '/panel/user/delete/{exper}',
+    'get' => array('Usuario', 'delete')
 ));
 
 

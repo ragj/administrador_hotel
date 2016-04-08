@@ -1,0 +1,109 @@
+{{% BLOCKS }}
+	{{< quirk }}
+		{{$ title}}
+            Edit User
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Usuario</a></li>
+			        <li class="active">Editar Usuario</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-6 col-md-offset-3">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Formulario Usuario</h4>
+	          					<p>Por favor, llene el siguiente formulario. Gracias.</p>
+	        				</div>
+		        			<div class="panel-body">
+		        				<hr>			
+		        				<form class="form-horizontal" action="/panel/user/edit/{{#user}}{{id}}{{/user}}" method="post" name="newUser" class="form-horizontal">
+		        					<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Nombre: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="name" class="form-control" placeholder="Escribe un nombre." required value="{{#user}}{{nombre}}{{/user}}"/>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Apellido Paterno:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                     				<input type="text" name="app" class="form-control" placeholder="Escribe un apellido paterno." required value="{{#user}}{{papellido}}{{/user}}"/>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Usuario:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="user" class="form-control" placeholder="Escribe un usuario." required  value="{{#user}}{{usuario}}{{/user}}"/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Password:</label>
+		                    			<div class="col-sm-6">
+		                      				<input type="password" name="pass" class="form-control" placeholder="Escribe un password" />
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Confirmación Password:</label>
+		                    			<div class="col-sm-6">
+		                      				<input type="password" name="pass2" class="form-control" placeholder="Escribe un password." />
+		                   				</div>
+		                  			</div>
+		                  			<hr>
+		                  			<div class="row">
+	                    				<div class="col-sm-9 col-sm-offset-8">
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Guardar</button>
+	                    				</div>
+	                  				</div>
+		        				</form>
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+			<script>
+				window.onload = function () {
+					document.newUser.name.focus();
+					document.newUser.addEventListener('submit', validarFormulario);
+				}
+ 
+				function validarFormulario(evObject) {
+					evObject.preventDefault();
+					var todoCorrecto = true;
+					var formulario = document.newUser;
+    				re_user = /^\w+$/;
+    				re_pass1 = /[0-9]/;
+    				if(!re_user.test(formulario.user.value)) {
+      					alert("Error: El usuario unicamente debe contener letras, números y guion bajo.");
+      					form.user.focus();
+      					todoCorrecto=false;
+    				}
+    				else if(re_pass1.test(formulario.name.value)){
+    					alert("Error: El nombre unicamente debe contener letras.");
+      					form.name.focus();
+      					todoCorrecto=false;
+    				}
+    				else if(re_pass1.test(formulario.app.value)){
+    					alert("Error: El apellido unicamente debe contener letras.");
+      					form.app.focus();
+      					todoCorrecto=false;
+    				}
+    				else if(formulario.pass.value!=""){
+    					if(formulario.pass.value!=formulario.pass2.value){
+							alert("Las contraseñas no coinciden.");
+							form.pass.focus();
+							todoCorrecto=false;
+						}
+						else if(formulario.pass.value.length<6){
+							alert("Las contraseña debe contener al menos 6 caracteres.");
+							form.pass.focus();
+							todoCorrecto=false;
+						}
+    				}
+					if (todoCorrecto ==true) {formulario.submit();}
+				}
+			</script>
+		{{/ scripts }}
+	{{/ quirk }}

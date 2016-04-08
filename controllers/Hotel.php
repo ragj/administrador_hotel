@@ -216,8 +216,6 @@ class Hotel extends Luna\Controller {
             if($error==0){
             	$result=$hotelMapper->insert($entity);
             	echo "<div class=exito><p>Hotel Registrado.</p></div>";
-                //$res->m = $res->mustache->loadTemplate("Hotel/edit.mustache");
-                //echo $this->renderWiew($this->header("edit"), $res);
             }
     	}
        
