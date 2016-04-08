@@ -15,7 +15,7 @@
 		<div class="slide">
 			<img src="/bali/assets/img/slide/bali_01.jpg">
 		</div>
-		
+		window.location.pathname
 		<a href="javascript:void(0)" onclick="prev(true)" class="nav "> <span></span></a>
 		<a href="javascript:void(0)" onclick="next(true)" class="nav next"><span></span></a>
 	</section>
@@ -23,7 +23,7 @@
 	<div class="holder">
 	<script>
 					var path = "";
-					var href = document.location.href;
+					var href = window.location.pathname
 					var s = href.split("/");
 					for (var i=2;i<(s.length-1);i++) {
 						path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";

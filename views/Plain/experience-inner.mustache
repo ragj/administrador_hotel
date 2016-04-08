@@ -7,7 +7,7 @@
 		<row>
 			<script>
 					var path = "";
-					var href = document.location.href;
+					var href = window.location.pathname
 					var s = href.split("/");
 					for (var i=2;i<(s.length-1);i++) {
 						path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
