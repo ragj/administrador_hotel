@@ -80,10 +80,10 @@ class Plain extends Luna\Controller {
 
     public function contact($req , $res){
         if(isset($req->data["name"],$req->data["email"],$req->data["message"])){
-            $to      = 'bali@lozano.com';
+            $to      = 'pruebasti@denumeris.com ';
             $subject = 'contacto desde pagina';
             $message = "Nombre: ".$req->data["name"]."\r\n Mensaje:".$req->data["message"];
-            $headers = 'From: webmaster@bali.com' . "\r\n" .
+            $headers = 'From: pruebasti@denumeris.com ' . "\r\n" .
                 'Reply-To:'.$req->data["email"]. "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
             mail($to, $subject, $message, $headers);
