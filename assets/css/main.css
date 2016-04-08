@@ -303,6 +303,11 @@ footer{
 	min-height: 500px;
 	margin-bottom: -24px;
 }
+	.fit a.lbl{
+		color: #C39323;
+		font-size: 12px;
+		margin-bottom: 10px;
+	}
 	.fit .intro{
 		margin-top: 200px;
 		color: #FFF;
