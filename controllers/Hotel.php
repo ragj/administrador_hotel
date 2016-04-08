@@ -107,7 +107,7 @@ class Hotel extends Luna\Controller {
                             $resultado=@move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
                             if($resultado){
                                 //eliminamos fichero anterior
-                                unlink($dir.$hotelImage->id_hotel."/".$hotelImage->url);
+                                @unlink($dir.$hotelImage->id_hotel."/".$hotelImage->url);
                                 //obtenemos la ruta del archivo
                                 $imagen=$_FILES['imagen']['name'];                  
                             }
@@ -148,7 +148,7 @@ class Hotel extends Luna\Controller {
         $hotelImage = $hotelImageMapper->delete(['id ='=>(integer)$var]);
 
         //Establecemos a spot con que entity class vamos a trabajar
-        unlink($ruta);
+        @unlink($ruta);
         echo $this->renderWiew(array_merge(["hotel" => $hotel]),$res);
     }
     /**
@@ -266,7 +266,7 @@ class Hotel extends Luna\Controller {
                             //si la imagen se sube exitosamente asignamos a thumb el nombre del archivo
                             if($resultado){
                                 if($hotel->thumbnail!=null){
-                                    unlink($dir."/".$hotel->thumbnail);
+                                    @unlink($dir."/".$hotel->thumbnail);
                                 }
                                 $thumb=$_FILES['thumbnail']['name'];
                             }
@@ -329,7 +329,7 @@ class Hotel extends Luna\Controller {
 			//eliminamos el directorio donde se encontraban las imagenes
 			//Obtenemos la ruta del thumbnail
 		    
-			unlink($ruta);
+			@unlink($ruta);
 			$this->eliminarFiles("./assets/img/hotel/".$var);
 			$this->deleteDirectory("./assets/img/hotel/".$var);
 			//obtenemos la ruta de cada imagen asociada y eliminamos el ficher
@@ -351,7 +351,7 @@ class Hotel extends Luna\Controller {
             }
             else
             {
-                unlink($archivos_carpeta);
+                @unlink($archivos_carpeta);
             }
         }
     }
