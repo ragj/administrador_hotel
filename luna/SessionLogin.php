@@ -47,7 +47,7 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
         if (!in_array(self::$context["pattern"], $this->urlPermitidas)) {
 
             if (!$session->get("user", false)) {
-                header("Location: http://" . $_SERVER["SERVER_NAME"] . "/bali/login?redirect=" . self::$context["request_uri"]);
+                header("Location: http://" . $_SERVER["SERVER_NAME"] . "/bali/login?redirect=/bali" . self::$context["request_uri"]);
                 die();
             } else {
                 //  IF USUER IS LOGGED IN
