@@ -38,7 +38,7 @@ header{
 	background-color: #FFF;
 }
 	header .logo{
-		background-image: url("/assets/img/logo-bali-lozano.png");
+		background-image: url("/bali/assets/img/logo-bali-lozano.png");
 		background-size: 100%;
 		margin-top: 20px;
 		margin-left: 20px;
@@ -297,7 +297,7 @@ footer{
 	}
 
 .fit{
-	background-image: url("/assets/img/login/Background_login.jpg");
+	background-image: url("/bali/assets/img/login/Background_login.jpg");
 	background-size: cover;
 	background-position: center;
 	min-height: 500px;
@@ -312,7 +312,7 @@ footer{
 		}
 		
 .fit.contact{
-	background-image: url("/assets/img/bg-contacto-us.jpg");
+	background-image: url("/bali/assets/img/bg-contacto-us.jpg");
 }		
 .element{
 	background-color: #FFF;
