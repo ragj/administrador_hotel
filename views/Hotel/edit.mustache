@@ -18,7 +18,7 @@
 		        				</div>
 			        			<div class="panel-body">
 			        				<hr>			
-			        				<form class="form-horizontal" action="/panel/hotel/edit/{{id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+			        				<form class="form-horizontal" action="/bali/panel/hotel/edit/{{id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 			        					<div class="form-group">
 			                    			<label class="col-sm-3 control-label">Nombre: <span class="text-danger">*</span></label>
 			                    			<div class="col-sm-6">
@@ -78,7 +78,7 @@
 			                  			<div class="form-group">
 			                    			<label class="col-sm-3 control-label">Nueva Imagén:</label>
 			                    			<div class="col-sm-6">
-			                    				<a href="/panel/hotel/addImages" target="_blank"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">Nueva Imagen</button></a>	
+			                    				<a href="/bali/panel/hotel/addImages" target="_blank"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">Nueva Imagen</button></a>	
 			                   				</div>
 			                  			</div>
 			                  			<hr>
@@ -96,8 +96,8 @@
 		              						<h4 class="panel-title">Imagen {{url}}</h4>
 		            					</div>
 		            					<div class="panel-body">
-		              						<img src="/assets/img/hotel/{{id_hotel}}/{{url}}" class="img-rounded " width="200" height="150" >
-							                 <a href="/panel/hotel/editImages/{{id}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
+		              						<img src="/bali/assets/img/hotel/{{id_hotel}}/{{url}}" class="img-rounded " width="200" height="150" >
+							                 <a href="/bali/panel/hotel/editImages/{{id}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
 							                 <a onclick=myFunction({{id}})><button type="button" class="btn btn-danger btn-quirk"><i class="fa fa-times"></i></button></a>
 		            					</div>
 		          					</div>
@@ -106,7 +106,7 @@
         					<script>
                                 function myFunction(id) {
                                     if (confirm("Estas Seguro de Eliminar?") == true) {
-                                        self.location = "/panel/hotel/deleteImages/"+id; 
+                                        self.location = "/bali/panel/hotel/deleteImages/"+id; 
                                     } 
                                 }
                             </script>

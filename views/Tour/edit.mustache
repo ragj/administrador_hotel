@@ -18,7 +18,7 @@
 		        				</div>
 			        			<div class="panel-body">
 			        				<hr>			
-			        				<form class="form-horizontal" action="/panel/tour/edit/{{id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+			        				<form class="form-horizontal" action="/bali/panel/tour/edit/{{id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 			        					<div class="form-group">
 			                    			<label class="col-sm-3 control-label">Titulo: <span class="text-danger">*</span></label>
 			                    			<div class="col-sm-6">
@@ -30,7 +30,7 @@
 			                    			<div class="col-sm-6">
 			                     				<input type="file"name="thumbnail">
 												<span class="help-block">Imagen en tamaño THUMBNAIL (000px*000px)</span>
-												<img src="/assets/img/experience/indo/{{thumbnail}}" height="250px" width="250px"/>
+												<img src="/bali/assets/img/experience/indo/{{thumbnail}}" height="250px" width="250px"/>
 			                    			</div>
 			                  			</div>
 			                  			<div class="form-group">
@@ -93,7 +93,7 @@
 			                  			<div class="form-group">
 			                    			<label class="col-sm-3 control-label">Nueva Imagén:</label>
 			                    			<div class="col-sm-6">
-			                    				<a href="/panel/tour/addImages" target="_blank"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">Nueva Imagen</button></a>	
+			                    				<a href="/bali/panel/tour/addImages" target="_blank"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">Nueva Imagen</button></a>	
 			                   				</div>
 			                  			</div>
 			                  			<hr>
@@ -111,8 +111,8 @@
 		              						<h4 class="panel-title">Imagen {{url}}</h4>
 		            					</div>
 		            					<div class="panel-body">
-		              						<img src="/assets/img/experience/{{url}}" class="img-rounded img-responsive" alt="Cinque Terre" width="150" height="50">
-						                    <a href="/panel/tour/editImages/{{id}}"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i></button></a>
+		              						<img src="/bali/assets/img/experience/{{url}}" class="img-rounded img-responsive" alt="Cinque Terre" width="150" height="50">
+						                    <a href="/bali/panel/tour/editImages/{{id}}"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i></button></a>
 						                    <a onclick=myFunction({{id}})><button type="button" class="btn btn-danger"><i class="fa fa-times"></i></button></a>	
 		            					</div>
 		          					</div>
@@ -121,7 +121,7 @@
         					<script>
                                 function myFunction(id) {
                                     if (confirm("Estas Seguro de Eliminar?") == true) {
-                                        self.location = "/panel/tour/deleteImages/"+id; 
+                                        self.location = "/bali/panel/tour/deleteImages/"+id; 
                                     } 
                                 }
                             </script>
