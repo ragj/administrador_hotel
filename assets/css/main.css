@@ -347,6 +347,26 @@ footer{
 		.element button[type=primary]{
 			background-color: #C39323;
 		}
+		.element button[type=submit]{
+			background-color: #C39323;
+			color: white;
+		}
+		.element .primary{
+			padding: 0 32px;			
+			height: 40px;
+			border: 2px black #DBE1EB !important;
+ 			background-color: #C39323;
+			color: white;
+
+		}
+		.element .primary:hover{
+			padding: 0 32px;			
+			height: 40px;
+			border: 2px black #DBE1EB !important;
+ 			background-color: #C39323;
+			color: #F6E3CE;
+
+		}
 
 
 table tr:nth-child(odd){

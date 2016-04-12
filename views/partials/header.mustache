@@ -1,9 +1,9 @@
 <header>
 	<section class="logo"></section>
-	{{! <section class="lang">
+	<section class="lang">
 		<a href="">Spanish</a>
 		<a href="" class="active">English</a>
-	</section> }}
+	</section>
 	<section class="weather"> 
 		{{current_time}} {{weather.temp}}ºC 
 	</section>
@@ -27,6 +27,14 @@
 
 			<li>
 				<a href="/bali/transfer" {{#transfer}}class="active"{{/transfer}}>Travel Agent</a>
+			</li>
+			<li>
+				{{#user.nombre}}
+					<a href="/bali/logout">Logout</a>
+				{{/user.nombre}}
+				{{^user.nombre}}
+					<a href="/bali/login">Login</a>
+				{{/user.nombre}}
 			</li>
 		</ul>
 	</nav>

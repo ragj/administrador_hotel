@@ -1,0 +1,84 @@
+{{% BLOCKS }}
+{{< panel_esp}}
+	{{$content}}
+		
+	<section class="slider">
+		<div class="slide">
+			<img src="/bali/assets/img/slide/bali_02.jpg">
+		</div>
+		<div class="slide">
+			<img src="/bali/assets/img/slide/bali_04.jpg">
+		</div>
+		<div class="slide">
+			<img src="/bali/assets/img/slide/bali_03.jpg">
+		</div>
+		<div class="slide">
+			<img src="/bali/assets/img/slide/bali_01.jpg">
+		</div>
+		window.location.pathname
+		<a href="javascript:void(0)" onclick="prev(true)" class="nav "> <span></span></a>
+		<a href="javascript:void(0)" onclick="next(true)" class="nav next"><span></span></a>
+	</section>
+	
+	<div class="holder">
+	<script>
+					var path = "";
+					var href = window.location.pathname
+					var s = href.split("/");
+					for (var i=2;i<(s.length-1);i++) {
+						path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+					}
+					i=s.length-1;
+					path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+					var url = "<p id=bread>" + path+"</p>";
+					document.writeln(url);
+	 			</script>
+		<blocks cols="3" > 
+			{{# tour}}
+				<a href="/bali/experience/{{uri}}" style="text-decoration: none;">
+					<div class="tour">
+						<h1>{{type}}</h1>
+						<img src="/bali/assets/img/experience/indo/{{thumbnail}}">
+						<h2>{{title}}</h2>
+						<h3>{{duration_esp}}</h3>
+						<p>{{description_esp}}</p>
+						<a href="/bali/experience/{{uri}}">More [+]</a>
+					</div>
+				</a>
+			{{/ tour}}
+		</blocks>
+	</div>
+	{{$ scripts}}
+        <script type="text/javascript">
+        	var sliderTimer = setInterval( next , 3000);
+        	function next( clear ){
+        		if( $(".slider .slide:visible").next().is(".slide") ){
+        			$(".slider .slide:visible").fadeOut()	
+        			$(".slider .slide:visible").next().fadeIn();
+        		}else{
+        			$(".slider .slide:visible").fadeOut()	
+        			$(".slider .slide").first().fadeIn();
+        		}
+        		if( clear ){
+        			clearInterval(sliderTimer);
+        			sliderTimer = setInterval( next , 3000);
+        		}
+        	}
+
+        	function prev( clear ){
+        		if( $(".slider .slide:visible").prev().is(".slide") ){
+        			$(".slider .slide:visible").fadeOut()	
+        			$(".slider .slide:visible").prev().fadeIn();
+        		}else{
+        			$(".slider .slide:visible").fadeOut()	
+        			$(".slider .slide").last().fadeIn();
+        		}
+        		if( clear ){
+        			clearInterval(sliderTimer);
+        			sliderTimer = setInterval( next , 3000);
+        		}
+        	}
+        </script>
+    {{/ scripts}}
+	{{/content}}
+{{/ panel_esp}}

@@ -7,71 +7,77 @@
     		<div class="contentpanel">
     			<ol class="breadcrumb breadcrumb-quirk">
 			        <li><a href=""><i class="fa fa-home mr5"></i>Hotel</a></li>
-			        <li class="active">Agregar Hotel</li>
+			        <li class="active">Add Hotel</li>
       			</ol>
     			<div class="row">
     				<div class="col-md-6 col-md-offset-3">
 	        			<div class="panel">
 	        				<div class="panel-heading">
-	        					<h4 class="panel-title">Formulario Hotel</h4>
-	          					<p>Por favor, llene el siguiente formulario. Gracias.</p>
+	        					<h4 class="panel-title">Hotel Form</h4>
+	          					<p>Please fill the next form, thanks.</p>
 	        				</div>
 		        			<div class="panel-body">
 		        				<hr>			
 		        				<form class="form-horizontal" action="/bali/panel/hotel/add" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 		        					<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Nombre: <span class="text-danger">*</span></label>
+		                    			<label class="col-sm-3 control-label">Name: <span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="name" class="form-control" placeholder="Escribe un nombre de hotel." required />
+		                      				<input type="text" name="name" class="form-control" placeholder="Write the hotel's name." required />
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Dirección:</label>
+		                    			<label class="col-sm-3 control-label">Address:</label>
 		                    			<div class="col-sm-6">
-		                     				<input type="text" name="address" class="form-control" placeholder="Escribe una dirección del hotel."  />
+		                     				<input type="text" name="address" class="form-control" placeholder="Write the hotel's address."  />
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Website:</label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="website" class="form-control" placeholder="Escribe un sitio web."/>
+		                      				<input type="text" name="website" class="form-control" placeholder="Write the hotel's website."/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Mapa:</label>
+		                    			<label class="col-sm-3 control-label">Map:</label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="map" class="form-control" placeholder="Escribe una url del mapa"/>
+		                      				<input type="text" name="map" class="form-control" placeholder="Write the hotel's map(frame of google maps)."/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Teléfono:</label>
+		                    			<label class="col-sm-3 control-label">Phone Number:</label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="tel" class="form-control" placeholder="Escribe un teléfono."/>
+		                      				<input type="text" name="tel" class="form-control" placeholder="Write the hotel's phone."/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Email:</label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="email" class="form-control" placeholder="Escribe un email" />
+		                      				<input type="text" name="email" class="form-control" placeholder="Write the hotel's email." />
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Descripción:</label>
+		                    			<label class="col-sm-3 control-label">Description:</label>
 		                    			<div class="col-sm-6">
-		                    				<textarea class="form-control" name="descripcion" placeholder="Escribe una descripción."></textarea>
+		                    				<textarea class="form-control" name="descripcion" placeholder="Write the hotel's description."></textarea>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Spanish Description:</label>
+		                    			<div class="col-sm-6">
+		                    				<textarea class="form-control" name="descripcion_spa" placeholder="Write the hotel's spanish description."></textarea>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Thumbnail:</label>
 		                    			<div class="col-sm-6">
 		                    				<input type="file"name="thumbnail">
-											 <span class="help-block">Imagen en tamaño THUMBNAIL (000px*000px)</span>
+											 <span class="help-block">THUMBNAIL size image(000px*000px)</span>
 		                   				</div>
 		                  			</div>
 		                  			<hr>
 		                  			<div class="row">
 	                    				<div class="col-sm-9 col-sm-offset-8">
-					                      <button class="btn btn-success btn-quirk btn-wide mr5">Guardar</button>
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
 	                    				</div>
 	                  				</div>
 		        				</form>

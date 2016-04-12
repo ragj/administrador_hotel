@@ -1,0 +1,44 @@
+{{% BLOCKS }}
+{{< panel_esp}}
+	{{$header}}
+	{{/header}}
+	{{$content}}
+		<div class="fit contact">
+			<row>
+				<column	cols="1">
+				</column>
+				<column	cols="4">
+					<div class="element contact">
+						<form action="/bali/contact-us" method="post" class="forms">
+							<h1>Contáctanos</h1>
+							<section>
+								<label>
+									Nombre
+								</label>
+								<input name="name" type="text" />
+							</section>
+							<section>
+								<label>
+									Email
+								</label>
+								<input name="email" type="text" />
+							</section>
+							<section>
+								<label>
+									Mensaje
+								</label>
+								<textarea name="message"></textarea>
+							</section>
+							<section>
+								<button type="primary">Enviar</button> 
+							</section>
+						</form>
+					</div>
+				</column>
+				<column	cols="6">
+					<p class="intro"><b>Lozano Travel Bali</b> es la empresa de gestión de destinos de Lozano Travel – <br> Una virtuosa agencia de viajes  con sede en la Ciudad de México y con la casa matriz en Laredo , Texas <br> que ha estado operando desde hace 33 años.</p>
+				</column>
+			</row>
+		</div>
+	{{/content}}
+{{/ panel_esp}}

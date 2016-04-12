@@ -6,53 +6,53 @@
         {{$ content }}
     		<div class="contentpanel">
     			<ol class="breadcrumb breadcrumb-quirk">
-			        <li><a href=""><i class="fa fa-home mr5"></i>Usuario</a></li>
-			        <li class="active">Agregar Usuario</li>
+			        <li><a href=""><i class="fa fa-home mr5"></i>User</a></li>
+			        <li class="active">Add User</li>
       			</ol>
     			<div class="row">
     				<div class="col-md-6 col-md-offset-3">
 	        			<div class="panel">
 	        				<div class="panel-heading">
-	        					<h4 class="panel-title">Formulario Usuario</h4>
-	          					<p>Por favor, llene el siguiente formulario. Gracias.</p>
+	        					<h4 class="panel-title">User Form</h4>
+	          					<p>Please fill the next form. Thanks.</p>
 	        				</div>
 		        			<div class="panel-body">
 		        				<hr>			
 		        				<form class="form-horizontal" action="/bali/panel/user/add" method="post" name="newUser" class="form-horizontal">
 		        					<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Nombre: <span class="text-danger">*</span></label>
+		                    			<label class="col-sm-3 control-label">First Name: <span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="name" class="form-control" placeholder="Escribe un nombre." required value="{{#user}}{{nombre}}{{/user}}"/>
+		                      				<input type="text" name="name" class="form-control" placeholder="Write a first name." required />
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Apellido Paterno:<span class="text-danger">*</span></label>
+		                    			<label class="col-sm-3 control-label">Last Name:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                     				<input type="text" name="app" class="form-control" placeholder="Escribe un apellido paterno." required value="{{#user}}{{app}}{{/user}}"/>
+		                     				<input type="text" name="app" class="form-control" placeholder="Write a last name." required/>
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Usuario:<span class="text-danger">*</span></label>
+		                    			<label class="col-sm-3 control-label">User:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="user" class="form-control" placeholder="Escribe un usuario." required  value="{{#user}}{{user}}{{/user}}"/>
+		                      				<input type="text" name="user" class="form-control" placeholder="Write a user." required />
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Password:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="password" name="pass" class="form-control" placeholder="Escribe un password" required/>
+		                      				<input type="password" name="pass" class="form-control" placeholder="Write a password" required/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Confirmación Password:<span class="text-danger">*</span></label>
+		                    			<label class="col-sm-3 control-label">Confirm Password:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="password" name="pass2" class="form-control" placeholder="Escribe un password." required/>
+		                      				<input type="password" name="pass2" class="form-control" placeholder="Write a password." required/>
 		                   				</div>
 		                  			</div>
 		                  			<hr>
 		                  			<div class="row">
 	                    				<div class="col-sm-9 col-sm-offset-8">
-					                      <button class="btn btn-success btn-quirk btn-wide mr5">Guardar</button>
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
 	                    				</div>
 	                  				</div>
 		        				</form>
@@ -76,27 +76,27 @@
     				re_user = /^\w+$/;
     				re_pass1 = /[0-9]/;
     				if(!re_user.test(formulario.user.value)) {
-      					alert("Error: El usuario unicamente debe contener letras, números y guion bajo.");
+      					alert("Error:The user only contain letters , numbers and underscore.");
       					form.user.focus();
       					todoCorrecto=false;
     				}
     				else if(re_pass1.test(formulario.name.value)){
-    					alert("Error: El nombre unicamente debe contener letras.");
+    					alert("Error: The first name only contain letters.");
       					form.name.focus();
       					todoCorrecto=false;
     				}
     				else if(re_pass1.test(formulario.app.value)){
-    					alert("Error: El apellido unicamente debe contener letras.");
+    					alert("Error: The last name only contain letters.");
       					form.app.focus();
       					todoCorrecto=false;
     				}
     				else if(formulario.pass.value!=formulario.pass2.value && formulario.pass.value!=""){
-						alert("Las contraseñas no coinciden.");
+						alert("Error: The passwords do not match.");
 						form.pass.focus();
 						todoCorrecto=false;
 					}
 					else if(formulario.pass.value.length<6){
-						alert("Las contraseña debe contener al menos 6 caracteres.");
+						alert("The password must contain at least 6 characters.");
 						form.pass.focus();
 						todoCorrecto=false;
 					}

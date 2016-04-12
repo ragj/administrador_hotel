@@ -1,20 +1,20 @@
 {{% BLOCKS }}
 	{{< quirk }}
 		{{$ title}}
-            Show Hotels
+            Show Contacts
         {{/ title}}
         {{$ content }}
     		<div class="contentpanel">
     			<ol class="breadcrumb breadcrumb-quirk">
-			        <li><a href=""><i class="fa fa-home mr5"></i>Hotel</a></li>
-			        <li class="active">Show Hotels</li>
+			        <li><a href=""><i class="fa fa-home mr5"></i>Contact</a></li>
+			        <li class="active">Show Contact</li>
       			</ol>
     			<div class="row">
     				<div class="col-md-6 col-md-offset-3">
 	        			<div class="panel">
 	        				<div class="panel-heading">
-	        					<h4 class="panel-title">Show Hotels</h4>
-	          					<p>List of all registered hotels</p>
+	        					<h4 class="panel-title">Show Contacts</h4>
+	          					<p>List of all register messages.</p>
 	        				</div>
 		        			<div class="panel-body">
 		        				<hr>
@@ -22,60 +22,41 @@
 		        					 <table id="dataTable1" class="table table-bordered table-striped-col">
 		        					 	<thead>
 							                <tr>
-							                  <th>Hotel</th>
-							                  <th>Description</th>
-							                  <th>Spanish Description</th>
-							                  <th>Edit</th>
-							                  <th>Delete</th>
+							                  <th>Name</th>
+							                  <th>Email</th>
+							                  <th>Message</th>
+							                  <th>Date</th>
 							                </tr>
               							</thead>
 							            <tfoot>
 											<tr>
-							                  <th>Hotel</th>
-							                  <th>Description</th>
-							                  <th>Spanish Description</th>
-							                  <th>Edit</th>
-							                  <th>Delete</th>							                
+							                  <th>Name</th>
+							                  <th>Email</th>
+							                  <th>Message</th>
+							                  <th>Date</th>
 							                </tr>
 							            </tfoot>
 							            <tbody>
-							            	{{# hotel }}
+							            	{{# contact }}
 							            		<tr>
 							            			<td>
-							            				{{name}}
+							            				{{nombre}}
 							            			</td>
 							            			<td>
-							            				{{description}}
+							            				{{email}}
 							            			</td>
 							            			<td>
-							            				{{description_esp}}
-							            			</td>
-							            			<td>
-							            				<a href="/bali/panel/hotel/edit/{{id}}">
-                                                            <button type="button" class="btn btn-primary">
-                                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
-                                                            </button>
-                                                        </a>
+							            				{{mensaje}}
                                                     </td>
-							            			<td>
-							            				<a onclick="myFunction({{id}})">
-                                                            <button type="button" class="btn btn-danger">
-                                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
-                                                            </button>
-                                                        </a>
-							            			</td>
+                                                    <td>
+   														{{created.getTimeStamp | date.myformato}}
+                                                    </td>
+							            		
 							            		</tr>
-							            	{{/ hotel }}
+							            	{{/ contact }}
 							            </tbody>
 		        					 </table>
-		        				</div>
-		        				<script>
-                                    function myFunction(id) {
-                                    	if (confirm("Estas Seguro de Eliminar?") == true) {
-											self.location = "/bali/panel/hotel/delete/{{id}}";                            
-										} 
-									}
-                                </script>		
+		        				</div>		
 		        			</div>
 	        			</div>
         			</div>

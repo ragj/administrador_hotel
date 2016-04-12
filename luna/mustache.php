@@ -28,8 +28,10 @@ class Mustache extends \Zaphpa\BaseMiddleware {
         'pragmas' => [\Mustache_Engine::PRAGMA_FILTERS ,\Mustache_Engine::PRAGMA_BLOCKS],
     ));
 
+    //  Requires value to be a time stamp string ( .getTimeStamp )
     $mustache->addHelper('date', [
         'format' => function($value) { return strtolower((string) date("d - F - Y" , $value )); },
+        'myformato' => function($value) { return strtolower((string) date("d - F - Y, H:i:s" , $value )); },
         'fecha_hora' => function($value) { return ucfirst((string) date("F j, Y, g:i a" , $value )); }
     ]);
 

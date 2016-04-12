@@ -47,6 +47,22 @@ $router->addRoute(array(
     'get' => array('Plain', 'contact'),
     'post' => array('Plain', 'contact')
 ));
+$router->addRoute(array(
+    'path' => '/forgot',
+    'get' => array('Plain', 'forgot'),
+    'post' => array('Plain', 'forgot')
+));
+$router->addRoute(array(
+    'path' => '/forgot/{uid}',
+    'get' => array('Plain', 'change'),
+    'post' => array('Plain', 'change')
+));
+
+$router->addRoute(array(
+    'path' => '/aviso',
+    'get' => array('Plain', 'aviso')
+));
+
 
 ///Hotel Routes
 $router->addRoute(array(
@@ -157,12 +173,9 @@ $router->addRoute(array(
     'path' => '/panel/user/delete/{exper}',
     'get' => array('Usuario', 'delete')
 ));
-
-
-
-
-
-
-
-
+//contact routes
+$router->addRoute(array(
+    'path' => '/panel/contact/show',
+    'get' => array('Contact', 'show')
+));
 ?>

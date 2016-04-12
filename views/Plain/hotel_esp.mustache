@@ -1,0 +1,32 @@
+{{% BLOCKS }}
+{{< panel_esp}}
+	{{$content}}
+	<img src="/bali/assets/img/img_hotel_colection.jpg">
+	
+	<div class="holder">
+		<script>
+					var path = "";
+					var href = window.location.pathname
+					var s = href.split("/");
+					for (var i=2;i<(s.length-1);i++) {
+						path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+					}
+					i=s.length-1;
+					path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+					var url = "<p id=bread>" + path+"</p>";
+					document.writeln(url);
+	 			</script>
+		<blocks cols="3">
+
+			{{#hotel-data}}
+				<div class="tour hotel">
+					<a href="/bali/hotel-collection/{{uri}}" style="text-decoration: none;">
+						<h1>{{ name }}</h1>
+						<img src="/bali/assets/img/hotel-thumb/{{thumbnail}}">
+					</a>	
+				</div>
+			{{/hotel-data}}
+		</blocks>
+	</div>
+	{{/content}}
+{{/ panel_esp}}

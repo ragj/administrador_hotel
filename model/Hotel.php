@@ -22,6 +22,7 @@ class Hotel extends \Spot\Entity {
             'name' => ['type' => 'string', 'required' => true],
             'thumbnail' => ['type' => 'string'],
             'description' => ['type' => 'text'],
+            'description_esp' => ['type' => 'text'],
             'address' => ['type' => 'string' ],
             'website' => ['type' => 'string' ],
             'map' => ['type' => 'text' ],

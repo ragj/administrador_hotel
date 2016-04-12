@@ -62,7 +62,7 @@ class Usuario extends Luna\Controller {
             if ($user->first()) {
                 echo "
                         <script>
-                            alert('Usuario no disponible, intente con otro usuario');
+                            alert('User not available, please try another.');
                         </script>
                     ";
                 $exito=false;
@@ -71,7 +71,7 @@ class Usuario extends Luna\Controller {
             else if($pass!=$pass2){
                 echo "
                         <script>
-                            alert('Las contraseñas no coinciden');
+                            alert('Password do not match');
                         </script>
                     ";
                 $exito=false;
@@ -80,7 +80,7 @@ class Usuario extends Luna\Controller {
             else if(strlen($pass)<6){
                 echo "
                         <script>
-                            alert('La contraseña debe de tener al menos 6 caracter');
+                            alert('The password must contain at least 6 characters.');
                         </script>
                     ";
                 $exito=false;
@@ -98,7 +98,7 @@ class Usuario extends Luna\Controller {
                 $result=$usersMapper->insert($entity);
                echo "
                         <script>
-                            alert('Usuario Registrado');
+                            alert('user registered');
                         </script>
                     ";
             }
@@ -144,7 +144,7 @@ class Usuario extends Luna\Controller {
                     $user->usuario=$usr;
                 }
                 else{
-                    $mensaje+="No se actualizo el usuario./nEl usuario no esta disponible./n";
+                    $mensaje+="User was not uoloaded./nThe user is not available./n";
                 }
             }
             if($req->data["pass"]!=null && $req->data["pass2"]!=null){
@@ -152,14 +152,14 @@ class Usuario extends Luna\Controller {
                     $user->password=$req->data["pass"];
                 }
                 else{
-                    $mensaje+="No se actualizo la contraseña./n Las contraseñas no coinciden ó tiene menos de 6 caracteres./n";
+                    $mensaje+="The password was not updated./n The passwords do not match or is less than 6 characters./n";
                 }
             }
             if($mensaje!=""){
                 echo "<script>alert(".$mensaje.");</script>";
             }
             else{
-                echo "<script>alert(Registro Actualizado!);</script>";
+                echo "<script>alert(User Updated!);</script>";
             }
             $user->nombre=$name;
             $user->papellido=$app;

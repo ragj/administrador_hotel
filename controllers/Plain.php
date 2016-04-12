@@ -43,6 +43,9 @@ class Plain extends Luna\Controller {
     	echo $this->renderWiew( $this->header("about"), $res);
     }
 
+    public function aviso($req , $res){
+        echo $this->renderWiew( $this->header("aviso"), $res);
+    }
     public function hotel($req , $res){
         if(isset($req->params["hotel"] ) ){
 
@@ -87,10 +90,103 @@ class Plain extends Luna\Controller {
                 'Reply-To:'.$req->data["email"]. "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
             mail($to, $subject, $message, $headers);
+            $contactMapper=$this->spot->mapper("Entity\Contact");
+            //construimos la entidad
+            $entity = $contactMapper->build([
+                'nombre' => $req->data["name"],
+                'email' => $req->data["email"],
+                'mensaje' =>$req->data["message"]
+            ]);
+            $result=$contactMapper->insert($entity);
         }
     	echo $this->renderWiew( $this->header("contact"), $res);
     }
+    public function forgot($req , $res){
+        if(isset($req->data["usuario"],$req->data["email"])){
+            $usersMapper = $this->spot->mapper("Entity\Usuario");
+            //buscamos el usuario
+            $user = $usersMapper->where(["usuario" => $req->data["usuario"]]);
+            if ($user->first()) {
+                //Generamos el forgot password
+                $forgotMapper=$this->spot->mapper("Entity\Forgot");
+                $entity = $forgotMapper->build([
+                    'userid'=>$user->first()->id,
+                    'email' =>$req->data["email"]
+                ]);
+                //insertamos la entidad
+                $result=$forgotMapper->insert($entity);
+                $to      = $req->data["email"];
+                $subject = 'forgotten password';
+                $message = "Please click on the following link to change your password.\r\n \r\n http://bali/bali/forgot/".$entity->uid;
+                $headers = 'From: pruebasti@denumeris.com ' . "\r\n" .
+                'Reply-To:'.$req->data["email"]. "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+                 mail($to, $subject, $message, $headers);
+            }
+            else{
+                echo "
+                        <script>
+                            alert('The user does not exist.');
+                        </script>
+                    ";
+            }
+        }
+        echo $this->renderWiew($this->header("forgot"), $res);
+    }
+    public function change($req , $res){
+        $id=$req->params["uid"];
+        $forgotMapper=$this->spot->mapper("Entity\Forgot");
+        $forgot=$forgotMapper->where(["uid"=>$id]);
+        $userMapper=$this->spot->mapper("Entity\Usuario");
+        $user=$userMapper->where(["id"=>$forgot->first()->userid]);
+        //si existe un registro con ese uid
+        if($forgot->first()){
+            //si no ha sido cambiada esa password con esa peticion
+            if($forgot->first()->usado==false){
+                //si las contraseñas son iguales, actualizamos la contraseña y actualizamos el estado del forgot password
+                if(isset($req->data["pass1"],$req->data["pass2"])){
+                    if($req->data["pass1"]==$req->data["pass2"]){ 
+                        ///seteamos entidades
+                        $forgotMapper=$this->spot->mapper("Entity\Forgot");
+                        $userMapper=$this->spot->mapper("Entity\Usuario");
+                        //seleccionamos elementos
+                        $forgot=$forgotMapper->where(["uid"=>$id])->first();
+                        $user=$userMapper->where(["id"=>$forgot->userid])->first();
+                        //cambiamos valores
+                        $forgot->usado=true;
+                        $user->password=$req->data["pass1"];
+                        //actualizamos entidades
+                        $forgotMapper->update($forgot);
+                        $userMapper->update($user);
+                        //logueamos
+                        header('Location: http://bali/login?usuario='.$user->usuario.'&password='.$req->data["pass1"]);
+                        exit;
 
+                    }
+                    else{
+                        echo "<script>alert('The passwords do not match.');</script>";
+                        echo $this->renderWiew( array_merge(["user" => $user,"forgot"=>$forgot] , $this->header("change") ), $res);
+                    }
+
+                }
+                else{
+                    $userMapper=$this->spot->mapper("Entity\Usuario");
+                    $user=$userMapper->where(["id"=>$forgot->first()->userid]);
+                    echo $this->renderWiew( array_merge(["user" => $user,"forgot"=>$forgot] , $this->header("change") ), $res);
+                }
+            }
+            else{
+                echo "<script>
+                    alert('The password has previously been updated');
+                    function Redirect() {
+                        window.location='/bali/login';
+                    }
+                    setTimeout('Redirect()', 0);
+                </script>";
+            }
+        }
+        
+    }
 
     
 

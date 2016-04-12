@@ -1,0 +1,97 @@
+{{% BLOCKS }}
+{{< panel_esp}}
+
+	{{$content}}
+	<div class="holder hotel-inner ">
+		<row>
+			<script>
+					var path = "";
+					var href = window.location.pathname
+					var s = href.split("/");
+					for (var i=2;i<(s.length-1);i++) {
+						path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+					}
+					i=s.length-1;
+					path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+					var url = "<p id=bread>" + path+"</p>";
+					document.writeln(url);
+	 			</script>
+		</row>
+		<row>
+			<a href="/bali/hotel-collection"  id="back" ><i class="fa fa-reply"></i> Back</a>
+		</row>
+		<row>
+			<column cols="8">
+				<div class="pad">
+					{{#hotel-data}}
+						<h1>
+							{{name}}
+						</h1>
+
+						<h2 style="width:510px">
+							Descripción
+						</h2>
+						<p>
+							{{description_esp}}
+						</p>	
+
+						<h2>
+							Dirección
+						</h2>
+						<p>
+							{{address}}
+						</p>
+						{{#website}}	
+							<h3>{{.}}</h3>
+						{{/website}}
+						{{#tel}}	
+							<h3>{{.}}</h3>
+						{{/tel}}
+						{{#email}}	
+							<h3>{{.}}</h3>
+						{{/email}}
+					{{/hotel-data}}
+				</div>		
+			</column>
+			<column cols="4"  >
+				<div class="pad">
+					<blocks cols="3">
+						{{#hotel-data.images}}
+							<div>
+								<img onclick=" showImage(this) " src="/bali/assets/img/hotel/{{id_hotel}}/{{url}}">
+							</div>
+						{{/hotel-data.images}}
+					</blocks>
+					{{&hotel-data.map}}
+				</div>
+			</column>
+		</row>
+
+	</div>
+	<div class="expose" onclick="$(this).fadeOut()">
+		<div class="bg" ></div>
+		<img src="">
+	</div>
+	
+	{{/content}}
+	{{$ scripts}}
+        <script type="text/javascript">
+        	
+			$(function(){
+				jQuery.fn.center = function () {
+					this.css("position","absolute");
+				this.css("top", Math.max(0, ((jQuery(jQuery(this).parent()).height() - jQuery(this).outerHeight()) / 2) ) + "px");
+			this.css("left", Math.max(0, ((jQuery(jQuery(this).parent()).width() - jQuery(this).outerWidth()) / 2) ) + "px");
+			return this; };
+			});
+
+			function showImage( e ){
+				var img = $(e);
+				$(".expose").find("img").attr("src" , $(e).attr("src") );
+				$(".expose").fadeIn();
+				$(".expose img").center();
+			}
+
+        </script>
+    {{/ scripts}}
+{{/ panel_esp}}

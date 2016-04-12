@@ -23,9 +23,12 @@ class Tour extends \Spot\Entity {
             'thumbnail' => ['type' => 'string'],
             'type' => ['type' => 'string' ],
             'duration' => ['type' => 'string' ],
+            'duration_esp' => ['type' => 'string' ],
             'description' => ['type' => 'text' ],
+            'description_esp' => ['type' => 'text' ],
             'uri' => ['type' => 'text' ],
             'transfer' => ['type' => 'text' ],
+            'transfer_esp' => ['type' => 'text' ],
             'home' => ['type' => 'boolean' ],
             'created' => ['type' => 'datetime', 'required' => true , "value" => new \DateTime() ]
         ];

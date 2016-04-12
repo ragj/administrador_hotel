@@ -1,0 +1,27 @@
+{{% BLOCKS }}
+{{< panel}}
+	{{$content}}
+	<div class="holder">
+		<script>
+			var path = "";
+			var href = window.location.pathname
+			var s = href.split("/");
+			for (var i=2;i<(s.length-1);i++) {
+				path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+			}
+			i=s.length-1;
+			path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+			var url = "<p id=bread>"+path+"</p>";
+			document.writeln(url);
+	 	</script>
+		<p class="intro"><b>Aviso de privacidad</b> </p>	
+
+	</div>
+		
+
+	
+	{{/content}}
+	{{$ scripts}}
+		
+    {{/ scripts}}
+{{/ panel}}

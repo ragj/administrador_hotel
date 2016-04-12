@@ -1,25 +1,6 @@
 <?php
 
 class Hotel extends Luna\Controller {
-	 public function header( $menu ){
-        $wmpr = $this->spot->mapper("Entity\Weather");
-        $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
-        $duration = null;
-        if( is_object($current_data) ){
-            $duration = $current_data->updated->diff( new DateTime() );
-        }
-        if( (is_object($duration) && $duration->h > 0) || !is_object($current_data)){
-            $data = file_get_contents("http://api.openweathermap.org/data/2.5/weather?id=1277539&APPID=6e387a73833fca13ccd287b1e7e2aa50&units=metric");
-            $wmpr->create([ "data" => $data , "updated" => new DateTime()]);
-            $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
-        }
-        $date_bali = new DateTime("now" ,new DateTimeZone( "Asia/Makassar" ) );
-        $weather = json_decode( $current_data->data );
-
-        return ["weather" => $weather->main , 
-            "current_time" => $date_bali->format("l d F h:i a") ,
-            $menu => true] ;
-    }
     /**
     *   Funcion que registra un objeto de la clase hotel_images
     **/
@@ -50,15 +31,15 @@ class Hotel extends Luna\Controller {
                                     'url' =>$file
                                 ]);
                                 $result = $hotelImageMapper->insert($entity);
-                                echo "<div class=exito><p>Imagen Insertada</p></div>";
+                                echo "<div class=exito><p>Image Uploaded.</p></div>";
                             }
-                            else{ echo "<div class=error><p>Hubo un problema al subir la imagen</p></div>";}
+                            else{ echo "<div class=error><p>There was a problem uploading the image</p></div>";}
                         }
-                        else{ echo "<div class=error><p>Ya existe una imagen con ese nombre</p></div>";}
+                        else{ echo "<div class=error><p>An image already exists with that name.</p></div>";}
                     }
-                    else{ echo "<div class=error><p>El archivo es de un formato no permitido</p></div>";}
+                    else{ echo "<div class=error><p>The file type is not allowed.</p></div>";}
                 }
-                else{ echo "<div class=error><p>No se cargo bien la imagen</p></div>";}
+                else{ echo "<div class=error><p>The image was not uploaded.</p></div>";}
         }
         $hotelMapper=$this->spot->mapper("Entity\Hotel");
         $hotel=$hotelMapper->select();
@@ -111,13 +92,13 @@ class Hotel extends Luna\Controller {
                                 //obtenemos la ruta del archivo
                                 $imagen=$_FILES['imagen']['name'];                  
                             }
-                            else{ echo "<div class=error><p>Hubo un problema al subir la imagen</p></div>";}
+                            else{ echo "<div class=error><p>There was a problem uploading the image.</p></div>";}
                         }
-                        else{ echo "<div class=error><p>Ya existe una imagen con ese nombre</p></div>";}
+                        else{ echo "<div class=error><p>An image already exists with that name.</p></div>";}
                     }
-                    else{ echo "<div class=error><p>El archivo es de un formato no permitido</p></div>";}
+                    else{ echo "<div class=error><p>The file type is not allowed.</p></div>";}
                 }
-                else{ echo "<div class=error><p>No se cargo bien la imagen</p></div>";}
+                else{ echo "<div class=error><p>The image was not uploaded.</p></div>";}
             }
             else{
                 $imagen=$hotelImage->url;
@@ -168,6 +149,8 @@ class Hotel extends Luna\Controller {
     		$web=filter_var($req->data["website"], FILTER_SANITIZE_STRING);
     		$tel=filter_var($req->data["tel"], FILTER_SANITIZE_STRING);
     		$descripcion=filter_var($req->data["descripcion"], FILTER_SANITIZE_STRING);
+            $descripcion_spa=filter_var($req->data["descripcion_spa"], FILTER_SANITIZE_STRING);
+
     		$thumb="";
     		$error=0;
     		//vemos si hubo imagen
@@ -186,17 +169,17 @@ class Hotel extends Luna\Controller {
     					}
     					else{
     						$error=1;
-    						echo "<div class=error><p>Ya existe una imagen con ese nombre.</p></div>";
+    						echo "<div class=error><p>An image already exists with that name.</p></div>";
     					}
     				}
     				else{
     					$error=1;
-    					echo "<div class=error><p>Tipo de archivo no permitido.</p></div>";
+    					echo "<div class=error><p>File type not allowed.</p></div>";
     				}
     			}
     			else{
     				$error=1;
-    				echo "<div class=error><p>No se cargo bien la imagen.</p></div>";
+    				echo "<div class=error><p>The image was not uploaded.</p></div>";
     			}
     		}
     		//seleccionamos entidad a maperar
@@ -206,6 +189,7 @@ class Hotel extends Luna\Controller {
                 'name' => $name,
                 'thumbnail' => $thumb,
                 'description' =>$descripcion,
+                'description_esp'=>$descripcion_spa,
                 'address' =>$address,
                 'website' => $web,
                 'map' => $map,
@@ -215,7 +199,7 @@ class Hotel extends Luna\Controller {
             //insertamos la entidad si no hubo ningun error
             if($error==0){
             	$result=$hotelMapper->insert($entity);
-            	echo "<div class=exito><p>Hotel Registrado.</p></div>";
+            	echo "<div class=exito><p>Hotel Registered.</p></div>";
             }
     	}
        
@@ -252,6 +236,7 @@ class Hotel extends Luna\Controller {
             $web=$req->data["website"]!=null?filter_var($req->data["website"],FILTER_SANITIZE_STRING):$hotel->website;
             $tel=$req->data["tel"]!=null?filter_var($req->data["tel"],FILTER_SANITIZE_STRING):$hotel->tel;
             $descripcion=$req->data["descripcion"]!=null?filter_var($req->data["descripcion"],FILTER_SANITIZE_STRING):$hotel->description;
+            $description_es=$req->data["descripcion_spa"]!=null?filter_var($req->data["descripcion_spa"],FILTER_SANITIZE_STRING):$hotel->description_esp;
             $thumb="";
             $img="";
             $error=0;
@@ -273,17 +258,17 @@ class Hotel extends Luna\Controller {
                         }
                         else{
                             $error=1;
-                            echo "<div class=error><p>Ya existe una imagen con ese nombre.</p></div>";
+                            echo "<div class=error><p>An image already exits with that name.</p></div>";
                         }
                     }
                     else{
                         $error=1;
-                        echo "<div class=error><p>Tipo de archivo no permitido.</p></div>";
+                        echo "<div class=error><p>File type not allowed.</p></div>";
                     }
                 }
                 else{
                     $error=1;
-                    echo "<div class=error><p>No se cargo bien la imagen.</p></div>";
+                    echo "<div class=error><p>Image was not uploaded.</p></div>";
                 }
             }
             else{
@@ -294,13 +279,14 @@ class Hotel extends Luna\Controller {
                 $hotel->name=$name;
                 $hotel->thumbnail=$thumb;
                 $hotel->description=$descripcion;
+                $hotel->description_esp=$description_es;
                 $hotel->address=$address;
                 $hotel->website=$web;
                 $hotel->map=$map;
                 $hotel->tel=$tel;
                 $hotel->email=$email;
                 $hotelMapper->update($hotel);
-                echo "<div class=exito><p>Registro Actualizado</p></div>";
+                echo "<div class=exito><p>Hotel updated</p></div>";
 
             }
         }

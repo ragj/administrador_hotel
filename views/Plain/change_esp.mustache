@@ -1,0 +1,45 @@
+{{% BLOCKS }}
+{{< panel_esp}}
+	{{$content}}
+
+	<div class="holder">
+	 	<row>
+				<column	cols="3">
+					<p class="intro"><b>Cambiar Contraseña</b></p><br>
+					<p class="detail"><b>Por favor llena el siguiente formulario.</b></p>
+				</column>
+				<column	cols="8">
+					<div class="element">
+						<form action="/bali/forgot/{{#forgot}}{{uid}}{{/forgot}}" method="post" class="forms">
+							<section>
+								<label>
+									Usuario: {{#user}}{{usuario}}{{/user}}
+								</label>
+							</section>
+							<section>
+								<label>
+									Contraseña
+								</label>
+								<input name="pass1" type="password" required/>
+							</section>
+							<section>
+								<label>
+									Confirmar Contraseña
+								</label>
+								<input name="pass2" type="password" required/>
+							</section>
+							<section>
+								<input type="submit" class="primary"/>
+							</section>
+						</form>
+					</div>
+				</column>
+			</row>
+	</div>	
+
+	
+	{{/content}}
+	{{$ scripts}}
+		
+    {{/ scripts}}
+{{/ panel_esp}}

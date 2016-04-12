@@ -6,34 +6,34 @@
 		{{$ content }}
 			<div class="contentpanel">
     			<ol class="breadcrumb breadcrumb-quirk">
-			        <li><a href=""><i class="fa fa-home mr5"></i>Experiencia</a></li>
-			        <li class="active">Agregar Experiencia</li>
+			        <li><a href=""><i class="fa fa-home mr5"></i>Tour</a></li>
+			        <li class="active">Add Tour</li>
       			</ol>
     			<div class="row">
     				<div class="col-md-6 col-md-offset-3">
 	        			<div class="panel">
 	        				<div class="panel-heading">
-	        					<h4 class="panel-title">Formulario Experiencia</h4>
-	          					<p>Por favor, llene el siguiente formulario. Gracias.</p>
+	        					<h4 class="panel-title">Tour Form</h4>
+	          					<p>Please, fill the next form. Thanks.</p>
 	        				</div>
 		        			<div class="panel-body">
 		        				<hr>			
 		        				<form class="form-horizontal" action="/bali/panel/hotel/add" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 		        					<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Título: <span class="text-danger">*</span></label>
+		                    			<label class="col-sm-3 control-label">Title: <span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="titulo" class="form-control" placeholder="Escribe un titulo de experiencia." required />
+		                      				<input type="text" name="titulo" class="form-control" placeholder="Write the tour's title." required />
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Thumbnail:</label>
 		                    			<div class="col-sm-6">
 		                     				<input type="file"name="thumbnail">
-										    <span class="help-block">Imagen en tamaño THUMBNAIL (000px*000px)</span>
+										    <span class="help-block">THUMBNAIL image size (000px*000px)</span>
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Tipo:</label>
+		                    			<label class="col-sm-3 control-label">Type:</label>
 		                    			<div class="col-sm-6">
 		                      				<select class="form-control" name="tipo">
 			                            		<option value="RECOMMENDED TOURS">RECOMMENDED TOURS</option>
@@ -43,7 +43,7 @@
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Duración:</label>
+		                    			<label class="col-sm-3 control-label">Duration:</label>
 		                    			<div class="col-sm-6">
 		                      				<select class="form-control" name="duracion">
 			                            		<option value="HALF DAY">HALF DAY</option>
@@ -52,27 +52,45 @@
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Horas:</label>
+		                    			<label class="col-sm-3 control-label">Hours:</label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="horas" class="form-control" placeholder="Escribe un número de horas."/>
+		                      				<input type="text" name="horas" class="form-control" placeholder="Write a number of hours."/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Descripción:</label>
+		                    			<label class="col-sm-3 control-label">Description:</label>
 		                    			<div class="col-sm-6">
-		                    				<textarea class="form-control" name="descripcion" placeholder="Escribe una descripción."></textarea>
+		                    				<textarea class="form-control" name="descripcion" placeholder="Write the tour's description."></textarea>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Spanish Description:</label>
+		                    			<div class="col-sm-6">
+		                    				<textarea class="form-control" name="descripcion_spa" placeholder="Write the tour's spanish description."></textarea>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Transfer:</label>
 		                    			<div class="col-sm-6">
-		                    				<textarea class="form-control" name="transfer" ></textarea>
+		                    				<textarea class="form-control" name="transfer"  placeholder="Write the tour's transfer."></textarea>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Spanish Transfer:</label>
+		                    			<div class="col-sm-6">
+		                    				<textarea class="form-control" name="transfer_spa"  placeholder="Write the tour's spanish transfer."></textarea>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Home:</label>
+		                    			<div class="col-sm-6">
+		                    				<input type="checkbox" class="form-control" name="esPrincipal" value="true"/>
 		                   				</div>
 		                  			</div>
 		                  			<hr>
 		                  			<div class="row">
 	                    				<div class="col-sm-9 col-sm-offset-8">
-					                      <button class="btn btn-success btn-quirk btn-wide mr5">Guardar</button>
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
 	                    				</div>
 	                  				</div>
 		        				</form>

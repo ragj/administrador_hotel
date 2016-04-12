@@ -1,28 +1,7 @@
 <?php
 
 class Tour extends Luna\Controller {
-    public function header( $menu ){
 
-        $wmpr = $this->spot->mapper("Entity\Weather");
-        $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
-        $duration = null;
-        if( is_object($current_data) ){
-            $duration = $current_data->updated->diff( new DateTime() );
-        }
-        if( (is_object($duration) && $duration->h > 0) || !is_object($current_data)){
-            $data = file_get_contents("http://api.openweathermap.org/data/2.5/weather?id=1277539&APPID=6e387a73833fca13ccd287b1e7e2aa50&units=metric");
-            $wmpr->create([ "data" => $data , "updated" => new DateTime()]);
-            $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
-        }
-
-        $date_bali = new DateTime("now" ,new DateTimeZone( "Asia/Makassar" ) );
-        $weather = json_decode( $current_data->data );
-
-        return ["weather" => $weather->main , 
-            "current_time" => $date_bali->format("l d F h:i a") ,
-            $menu => true] ;
-
-    }
     /**
     *	Funcion que registra un objeto de las clase tour_images.
     **/
@@ -60,15 +39,15 @@ class Tour extends Luna\Controller {
                                     'url' =>$img
                                 ]);
                                 $result = $tourMapper->insert($entity);
-                                echo "<div class=exito><p>Imagen Insertada</p></div>";
+                                echo "<div class=exito><p>The image was uploaded</p></div>";
                             }
-                            else{ echo "<div class=error><p>Hubo un problema al subir la imagen</p></div>";}
+                            else{ echo "<div class=error><p>There was a problem uploading de image.</p></div>";}
                         }
-                        else{ echo "<div class=error><p>Ya existe una imagen con ese nombre</p></div>";}
+                        else{ echo "<div class=error><p>An image already exists with that name.</p></div>";}
                     }
-                    else{ echo "<div class=error><p>El archivo es de un formato no permitido</p></div>";}
+                    else{ echo "<div class=error><p>File type not allowed.</p></div>";}
                 }
-                else{ echo "<div class=error><p>No se cargo bien la imagen</p></div>";}
+                else{ echo "<div class=error><p>The image was not uploaded.</p></div>";}
         }
         $tourMapper=$this->spot->mapper("Entity\Tour");
         $tour=$tourMapper->select();
@@ -123,13 +102,13 @@ class Tour extends Luna\Controller {
                                 //obtenemos la ruta del archivo
                                 $imagen=$aux;                  
                             }
-                            else{ echo "<div class=error><p>Hubo un problema al subir la imagen</p></div>";}
+                            else{ echo "<div class=error><p>There was a problem uploading the image.</p></div>";}
                         }
-                        else{ echo "<div class=error><p>Ya existe una imagen con ese nombre</p></div>";}
+                        else{ echo "<div class=error><p>An image already exits with that name.</p></div>";}
                     }
-                    else{ echo "<div class=error><p>El archivo es de un formato no permitido</p></div>";}
+                    else{ echo "<div class=error><p>File type not allowed.</p></div>";}
                 }
-                else{ echo "<div class=error><p>No se cargo bien la imagen</p></div>";}
+                else{ echo "<div class=error><p>The image was not uploaded.</p></div>";}
             }
             else{
                 $imagen=$tourImage->url;
@@ -178,9 +157,28 @@ class Tour extends Luna\Controller {
                 $titulo =filter_var($req->data["titulo"], FILTER_SANITIZE_STRING);
                 $tipo = filter_var($req->data["tipo"], FILTER_SANITIZE_STRING);
                 $duracion = filter_var($req->data["duracion"] , FILTER_SANITIZE_STRING);
+                $duracion_spa="";
+                switch($duracion){
+                    case "HALF DAY":
+                        $duracion_spa="MEDIO DIA";
+                    break;
+                    case "FULL DAY";
+                        $duracion_spa="DIA COMPLETO";
+                    break;
+                    default:
+                        $duracion_spa="Falta Traduccion";
+                    break;
+                }
                 $horas = filter_var($req->data["horas"], FILTER_SANITIZE_NUMBER_INT);
                 $descripcion = filter_var($req->data["descripcion"], FILTER_SANITIZE_STRING);
+                $descripcion_spa=filter_var($req->data["descripcion_spa"], FILTER_SANITIZE_STRING);
                 $Transfer = filter_var($req->data["Transfer"], FILTER_SANITIZE_STRING);
+                $Transfer_spa = filter_var($req->data["transfer_spa"], FILTER_SANITIZE_STRING);
+                if(isset($req->data["esPrincipal"])){
+                    $home = true;
+                }else{
+                    $home = false;#default value
+                }
                 //validamos si se subio la imagen
                 if(!($_FILES['thumbnail']['error']>0))
                 {
@@ -200,21 +198,25 @@ class Tour extends Luna\Controller {
                                     'thumbnail' => $file,
                                     'type' =>$tipo,
                                     'duration' => $duracion."/".(String)$horas,
+                                    'duration_esp' => $duracion_spa."/".(String)$horas,
                                     'description' => $descripcion,
+                                    'description_esp' => $descripcion_spa,
                                     'transfer' => $Transfer,
+                                    'transfer_esp' => $Transfer_spa,
+                                    'home'=>$home,
                                 ]);
                                 $result = $tourMapper->insert($entity);
                                // header("Location: /panel/hotel/edit/".$entity->id);
                                // exit;
-                                echo "<div class=exito><p>Experiencia Registrada</p></div>";
+                                echo "<div class=exito><p>Tour Registered.</p></div>";
                             }
-                            else{ echo "<div class=error><p>Hubo un problema al subir la imagen</p></div>";}
+                            else{ echo "<div class=error><p>There was a problem uploading the image.</p></div>";}
                         }
-                        else{ echo "<div class=error><p> existe una imagen con ese nombre</p></div>";}
+                        else{ echo "<div class=error><p>An image already exists with that name.</p></div>";}
                     }
-                    else{ echo "<p class=error>El archivo es de un formato no permitido</p></div>";}
+                    else{ echo "<p class=error>File type not allowed.</p></div>";}
                 }
-                else{ echo "<p class=error>No se cargo bien la imagen</p></div>";}
+                else{ echo "<p class=error>The image was not uploaded.</p></div>";}
             }
         echo $this->renderWiew([], $res);
     }
@@ -232,18 +234,38 @@ class Tour extends Luna\Controller {
     public function edit($req,$res){
         if($req->params["exper"]!=null){
             $tourMapper=$this->spot->mapper("Entity\Tour");
-            $tour = $tourMapper->select()->where(["id" => $req->params["exper"]])->first();    
+            $tour = $tourMapper->select()->where(["id" => $req->params["exper"]])->first(); 
+            $home="nada";   
         }
-        if(isset($req->data["titulo"])){
+        if(isset($req->data["name"])){
             //obtenemos el id de la experiencia
-            $id=$req->params["exper"];
+            $id=$req->params["exper"]; 
             //obtenemos los elementos del formulario, verificamos que no sean nulos, en caso de ser nulo asignamos el valor que esta almacenado en dicho atributo en la base de datos.
-            $titulo = $req->data["titulo"]!=null? filter_var($req->data["titulo"], FILTER_SANITIZE_STRING) : $tour->title;
+            $titulo = $req->data["name"]!=null? filter_var($req->data["name"], FILTER_SANITIZE_STRING) : $tour->title;
             $tipo = $req->data["tipo"]!=null? filter_var($req->data["tipo"], FILTER_SANITIZE_STRING) : $tour->type;
             $duracion = ($req->data["duracion"]!=null)&&($req->data["horas"]!=null)? filter_var($req->data["duracion"],FILTER_SANITIZE_STRING)."/".filter_var($req->data["horas"],FILTER_SANITIZE_NUMBER_INT): $tour->duration;
+            $duracion_spa="";
+                switch($req->data["duracion"]){
+                    case "HALF DAY":
+                        $duracion_spa="MEDIO DIA"."/".filter_var($req->data["horas"]);
+                    break;
+                    case "FULL DAY":
+                        $duracion_spa="DIA COMPLETO"."/".filter_var($req->data["horas"]);
+                    break;
+                    default:
+                        $duracion_spa="Falta Traduccion";
+                    break;
+                }
             $descripcion = $req->data["descripcion"]!=null? filter_var($req->data["descripcion"], FILTER_SANITIZE_STRING) : $tour->description;
+            $descripcion_spa = $req->data["descripcion_esp"]!=null? filter_var($req->data["descripcion_esp"], FILTER_SANITIZE_STRING) : $tour->description_esp;
             $transfer = $req->data["Transfer"]!=null? filter_var($req->data["Transfer"], FILTER_SANITIZE_STRING) : $tour->transfer;
+            $transfer_spa = $req->data["Transfer_esp"]!=null? filter_var($req->data["Transfer_esp"], FILTER_SANITIZE_STRING) : $tour->transfer_esp;
             $thumbnail="";
+            if(isset($req->data["esPrincipal"])){
+                $home = true;
+            }else{
+                $home = false;#default value
+            }
             //comparamos el nombre de la imagen a subir y la imagen en la base de datos, en caso de ser diferentes subimos el archivo y borramos el archivo anterior
             if(strcmp($_FILES['thumbnail']['name'], $tour->thumbnail)!==0 && $_FILES['thumbnail']['name']!=null)
             {
@@ -267,13 +289,13 @@ class Tour extends Luna\Controller {
                                 $thumbnail=$_FILES['thumbnail']['name'];
                                 
                             }
-                            else{ echo "<div class=error><p>Hubo un problema al subir la imagen</p></div>";}
+                            else{ echo "<div class=error><p>There was a problem uploading the image.</p></div>";}
                         }
-                        else{ echo "<div class=error><p>Ya existe una imagen con ese nombre</p></div>";}
+                        else{ echo "<div class=error><p>An image already exists with that name.</p></div>";}
                     }
-                    else{ echo "<p class=error>El archivo es de un formato no permitido</p></div>";}
+                    else{ echo "<p class=error>File type not allowed.</p></div>";}
                 }
-                else{ echo "<p class=error>No se cargo bien la imagen</p></div>";}
+                else{ echo "<p class=error>The image was not uploaded.</p></div>";}
             }
             else{
                 $thumbnail=$tour->thumbnail;
@@ -283,10 +305,15 @@ class Tour extends Luna\Controller {
             $tour->thumbnail = $thumbnail;
             $tour->type =  $tipo;
             $tour->duration = $duracion;
+            $tour->duration_esp = $duracion_spa;
             $tour->description = $descripcion;
+            $tour->description_esp = $descripcion_spa;
             $tour->transfer = $transfer;
+            $tour->transfer_esp = $transfer_spa;
+            $tour->home=$home;
             //actualizamos la entidad
             $tourMapper->update($tour);
+            $tour = $tourMapper->select()->where(["id" => $req->params["exper"]])->first();
         }
         
     	echo $this->renderWiew( array_merge(["tour" => $tour]), $res);

@@ -1,27 +1,27 @@
 {{% BLOCKS }}
 	{{< quirk }}
 		{{$ title}}
-			 Edit Hotel Image
+			 Edit Tour Image
 		{{/ title}}
 		{{$ content }}
 			<div class="contentpanel">
     			<ol class="breadcrumb breadcrumb-quirk">
-			        <li><a href=""><i class="fa fa-home mr5"></i>Experiecia</a></li>
-			        <li class="active">Editar Imagen de Experiencia</li>
+			        <li><a href=""><i class="fa fa-home mr5"></i>Tour</a></li>
+			        <li class="active">Edit Tour Image</li>
       			</ol>
       			{{# tour }}
 	    			<div class="row">
 	    				<div class="col-md-8 col-md-offset-2">
 		        			<div class="panel">
 		        				<div class="panel-heading">
-		        					<h4 class="panel-title">Editar Imagen de Hotel</h4>
+		        					<h4 class="panel-title">Edit Tour Image</h4>
 		        				</div>
 			        			<div class="panel-body">
 			        				<hr>
 			        				{{# image}}			
 				        				<form class="form-horizontal" action="/bali/panel/tour/editImages/{{id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 				        					<div class="form-group">
-				                    			<label class="col-sm-3 control-label">Imagen Actual:</label>
+				                    			<label class="col-sm-3 control-label">Actual Image:</label>
 				                    			<div class="col-sm-6">
 				                    				{{# tour }}
 					                            		<p>{{title}}</p>
@@ -30,15 +30,15 @@
 				                    			</div>
 				                  			</div>
 				                  			<div class="form-group">
-				                    			<label class="col-sm-3 control-label">Imagen:</label>
+				                    			<label class="col-sm-3 control-label">Image:</label>
 				                    			<div class="col-sm-6">
 				                     				<input type="file"name="imagen">
-												    <span class="help-block">Imagen</span>
+												    <span class="help-block">Image</span>
 				                    			</div>
 				                  			</div>
 				                  			<div class="row">
 			                    				<div class="col-sm-9 col-sm-offset-8">
-							                      <button class="btn btn-success btn-quirk btn-wide mr5">Guardar</button>
+							                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
 			                    				</div>
 		                  					</div>
 			                  				

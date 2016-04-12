@@ -1,0 +1,42 @@
+<header>
+	<section class="logo"></section>
+	<section class="lang">
+		<a href="" class="active">Español</a>
+		<a href="" >Ingles</a>
+	</section> 
+	<section class="weather"> 
+		{{current_time}} {{weather.temp}}ºC 
+	</section>
+	<nav>
+		<ul>
+			<li>
+				<a href="/bali" {{#home}}class="active"{{/home}} >Inicio</a>
+			</li>
+			<li>
+				<a href="/bali/about-us" {{#about}}class="active"{{/about}}>Nosotros</a>
+			</li>
+			<li>
+				<a href="/bali/hotel-collection"{{#hotel}}class="active"{{/hotel}}>Hoteles</a>
+			</li>
+			<li>
+				<a href="/bali/experience" {{#experience}}class="active"{{/experience}}>Experiencias</a>
+			</li>
+			<li>
+				<a href="/bali/contact-us" {{#contact}}class="active"{{/contact}}>Contáctanos</a>
+			</li>
+
+			<li>
+				<a href="/bali/transfer" {{#transfer}}class="active"{{/transfer}}>Agente de Viajes</a>
+			</li>
+			<li>
+				{{#user.nombre}}
+					<a href="/bali/logout">Cerrar Sesión</a>
+				{{/user.nombre}}
+				{{^user.nombre}}
+					<a href="/bali/login">Iniciar Sesión</a>
+				{{/user.nombre}}
+			</li>
+		</ul>
+	</nav>
+	<div class="clear"></div>
+</header>
