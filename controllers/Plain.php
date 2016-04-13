@@ -45,7 +45,7 @@ class Plain extends Luna\Controller {
         echo $this->renderWiew(array_merge(["tour"=>$tour],$this->header("home")), $res);
     }
     public function about($req , $res){
-        $lang="es";
+        $lang=$req->lang;
         switch($lang){
             case "es":
                 $res->m = $res->mustache->loadTemplate("Plain/about_esp.mustache");
@@ -61,7 +61,7 @@ class Plain extends Luna\Controller {
     }
 
     public function aviso($req , $res){
-        $lang="es";
+        $lang=$req->lang;
         switch($lang){
             case "es":
                 $res->m = $res->mustache->loadTemplate("Plain/aviso.mustache");
@@ -76,7 +76,7 @@ class Plain extends Luna\Controller {
         echo $this->renderWiew( $this->header("aviso"), $res);
     }
     public function hotel($req , $res){
-        $lang="es";
+        $lang=$req->lang;
         if(isset($req->params["hotel"] ) ){
             switch($lang){
                 case "es":
@@ -112,7 +112,7 @@ class Plain extends Luna\Controller {
     }
 
     public function experience($req , $res){
-        $lang="es";
+        $lang=$req->lang;
         if(isset($req->params["exper"] ) ){
             switch($lang){
                 case "es":
@@ -148,7 +148,7 @@ class Plain extends Luna\Controller {
     }
 
     public function transfer($req , $res){
-        $lang="es";
+        $lang=$req->lang;
         $transferBlockMapper=$this->spot->mapper("Entity\TransferBlock");
         $transfer=$transferBlockMapper->select()->with("detail");
         switch($lang){
@@ -166,7 +166,7 @@ class Plain extends Luna\Controller {
     }
 
     public function contact($req , $res){
-        $lang="es";
+        $lang=$req->lang;
         switch($lang){
             case "es":
                 $res->m = $res->mustache->loadTemplate("Plain/contact_esp.mustache");
@@ -198,7 +198,7 @@ class Plain extends Luna\Controller {
     	echo $this->renderWiew( $this->header("contact"), $res);
     }
     public function forgot($req , $res){
-        $lang="es";
+        $lang=$req->lang;
         if(isset($req->data["usuario"])){
             $usersMapper = $this->spot->mapper("Entity\Usuario");
             //buscamos el usuario
@@ -263,7 +263,7 @@ class Plain extends Luna\Controller {
         echo $this->renderWiew($this->header("forgot"), $res);
     }
     public function change($req , $res){
-        $lang="es";
+        $lang=$req->lang;
 
         $id=$req->params["uid"];
         $forgotMapper=$this->spot->mapper("Entity\Forgot");
@@ -347,7 +347,7 @@ class Plain extends Luna\Controller {
         
     }
     public function register($req,$res){
-        $lang="es";
+        $lang=$req->lang;
         switch($lang){
             case "es":
                 $res->m = $res->mustache->loadTemplate("Plain/register_esp.mustache");

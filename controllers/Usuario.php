@@ -6,10 +6,6 @@
  *
  */
 //use CentroNotificaciones;
-
-
-
-
 class Usuario extends Luna\Controller {
 
     public function login($req, $res) {
@@ -42,7 +38,7 @@ class Usuario extends Luna\Controller {
 
     }
     /**
-    *   Función que sirve para añadir un usuario
+    *   Metodo que sirve para añadir un usuario
     **/
     public function add($req,$res){
         if(isset($req->data["name"],$req->data["app"],$req->data["user"],$req->data["pass"],$req->data["pass2"],$req->data["apm"],$req->data["tel"],$req->data["iata"],$req->data["member"],$req->data["years"])){
@@ -135,7 +131,7 @@ class Usuario extends Luna\Controller {
 
     }
     /**
-    *   Función que sirve para listar todos los usarios
+    *   Metodo que sirve para listar todos los usarios
     **/
     public function show($req,$res){
         $usersMapper=$this->spot->mapper("Entity\Usuario");
@@ -143,7 +139,7 @@ class Usuario extends Luna\Controller {
         echo $this->renderWiew(array_merge(["user"=>$users]),$res);        
     }
     /**
-    *   Función que sirve para editar un usuario
+    *   Metodo que sirve para editar un usuario
     **/
     public function edit($req,$res){
         if($req->params["exper"]!=null){
@@ -192,22 +188,47 @@ class Usuario extends Luna\Controller {
             }
             $user->nombre=$name;
             $user->papellido=$app;
+            $user->lapellido=$apm;
+            $user->telefono=$tel;
+            $user->iata=$iata;
+            $user->miembros=$member;
+            $user->años=$years;
+            $user->activo=$active;
             $userMapper->update($user);
         }
         echo $this->renderWiew(array_merge(["user"=>$user]),$res);        
     }
     /**
-    *   Función que sirve para eliminar un usuario
+    *   Metodo que sirve para eliminar un usuario
     **/
      public function delete($req,$res){
-            //Obtenemos el id, de la experiencia a eleminar
-            $var=$req->params["exper"];
-            //Establecemos a spot con que entity class vamos a trabajar
-            $userMapper=$this->spot->mapper("Entity\Usuario");
-            //Seleccionamos la experiencia que este registrado para ese id
-            $user = $userMapper->delete(['id ='=>(integer)$var]);  
-            echo $this->renderWiew( array_merge([] , $this->header("/panel/user/show") ), $res);
+        //Obtenemos el id, de la experiencia a eleminar
+        $var=$req->params["exper"];
+        //Establecemos a spot con que entity class vamos a trabajar
+        $userMapper=$this->spot->mapper("Entity\Usuario");
+        //Seleccionamos la experiencia que este registrado para ese id
+        $user = $userMapper->delete(['id ='=>(integer)$var]);  
+        echo $this->renderWiew( array_merge([] , $this->header("/panel/user/show") ), $res);
             
+    }
+    /**
+    *   Metodo que sirve para activar o desactivar un usuario
+    **/
+    public function active($req,$res){
+        $userMapper=$this->spot->mapper("Entity\Usuario");
+        if(isset($req->params["exper"])){
+            $user=$userMapper->select()->where(["id"=>$req->params["exper"]])->first();
+            if($user->activo==true){
+                $user->activo=false;
+            }
+            else{
+                $user->activo=true;
+            }
+            $userMapper->update($user);
+        }
+        $users=$userMapper->select();
+        $res->m = $res->mustache->loadTemplate("Usuario/show.mustache");
+        echo $this->renderWiew(array_merge(["user"=>$users]),$res);  
     }
 }
 

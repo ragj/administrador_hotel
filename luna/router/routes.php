@@ -178,6 +178,10 @@ $router->addRoute(array(
 ));
 
 $router->addRoute(array(
+    'path' => '/panel/user/active/{exper}',
+    'get' => array('Usuario', 'active'),
+));
+$router->addRoute(array(
     'path' => '/panel/user/delete/{exper}',
     'get' => array('Usuario', 'delete')
 ));
