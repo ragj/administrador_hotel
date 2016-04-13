@@ -22,31 +22,72 @@
 		        					<div class="form-group">
 		                    			<label class="col-sm-3 control-label">First Name: <span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="name" class="form-control" placeholder="Escribe un nombre." required value="{{#user}}{{nombre}}{{/user}}"/>
+		                      				<input type="text" name="name" class="form-control" placeholder="Write a name." required value="{{#user}}{{nombre}}{{/user}}"/>
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Last Name:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                     				<input type="text" name="app" class="form-control" placeholder="Escribe un apellido paterno." required value="{{#user}}{{papellido}}{{/user}}"/>
+		                     				<input type="text" name="app" class="form-control" placeholder="Write a last name." required value="{{#user}}{{papellido}}{{/user}}"/>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Mother's Last Name:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                     				<input type="text" name="apm" class="form-control" placeholder="Write a Mother's Last Name." required value="{{#user}}{{lapellido}}{{/user}}"/>
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">User:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="user" class="form-control" placeholder="Escribe un usuario." required  value="{{#user}}{{usuario}}{{/user}}"/>
+		                      				<input type="text" name="user" class="form-control" placeholder="Write a user." required  readonly value="{{#user}}{{usuario}}{{/user}}"/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Password:</label>
 		                    			<div class="col-sm-6">
-		                      				<input type="password" name="pass" class="form-control" placeholder="Escribe un password" />
+		                      				<input type="password" name="pass" class="form-control" placeholder="Write a password" />
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Confirm Password:</label>
 		                    			<div class="col-sm-6">
-		                      				<input type="password" name="pass2" class="form-control" placeholder="Escribe un password." />
+		                      				<input type="password" name="pass2" class="form-control" placeholder="Write a password." />
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Phone Number:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="tel" class="form-control" placeholder="Write a phone number." required value="{{#user}}{{telefono}}{{/user}}"/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">IATA:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="iata" class="form-control" placeholder="Write a IATA." required required value="{{#user}}{{iata}}{{/user}}"/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Member to an Affiliation or Program:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="member" class="form-control" placeholder="Write Yes or No, if Yes also write the name of the program." required required value="{{#user}}{{miembros}}{{/user}}"/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Years in Business:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="number" name="years" class="form-control" placeholder="Write a number of years." required value="{{#user}}{{años}}{{/user}}"/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Active:</label>
+		                    			<div class="col-sm-6">
+		                    					{{#activo}}
+       												<input type="checkbox" class="form-control" name="esActivo" value="true" checked/>
+       											{{/activo}}
+       											{{^activo}}
+       												<input type="checkbox" class="form-control" name="esActivo" value="true" />
+       											{{/activo}}
 		                   				</div>
 		                  			</div>
 		                  			<hr>

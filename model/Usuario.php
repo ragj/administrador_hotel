@@ -21,8 +21,14 @@ class Usuario extends \Spot\Entity {
             'id' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
             'nombre' => ['type' => 'string', 'required' => true],
             'papellido' => ['type' => 'string', 'required' => true],
+            'mapellido' => ['type' => 'string', 'required' => true],
             'usuario' => ['type' => 'string', 'required' => true],
             'password' => ['type' => 'string', 'required' => true],
+            'telefono' => ['type' => 'string', 'required' => true],
+            'iata' => ['type' => 'string', 'required' => false],
+            'miembros' => ['type' => 'string', 'required' => false],
+            'años' => ['type' => 'string', 'required' => false],
+            'activo' => ['type' => 'boolean', 'required' => true],
             'create_at' => ['type' => 'datetime', 'required' => false],
         ];
     }

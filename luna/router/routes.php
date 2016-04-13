@@ -57,6 +57,12 @@ $router->addRoute(array(
     'get' => array('Plain', 'change'),
     'post' => array('Plain', 'change')
 ));
+$router->addRoute(array(
+    'path' => '/register',
+    'get' => array('Plain', 'register'),
+    'post' => array('Plain', 'register')
+));
+
 
 $router->addRoute(array(
     'path' => '/aviso',
@@ -86,6 +92,8 @@ $router->addRoute(array(
     'path' => '/panel/hotel/delete/{hotel}',
     'get' => array('Hotel', 'delete')
 ));
+
+
 ///HotelImages Routes
 $router->addRoute(array(
     'path' => '/panel/hotel/addImages',
@@ -173,11 +181,13 @@ $router->addRoute(array(
     'path' => '/panel/user/delete/{exper}',
     'get' => array('Usuario', 'delete')
 ));
+
 //contact routes
 $router->addRoute(array(
     'path' => '/panel/contact/show',
     'get' => array('Contact', 'show')
 ));
+
 //transfer Blocks routes
 $router->addRoute(array(
     'path' => '/panel/transfer/addBlock',

@@ -162,7 +162,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/transfer.mustache");
             break;
         }
-    	echo $this->renderWiew( $this->header("transfer"), $res);
+    	echo $this->renderWiew( array_merge(["transferBlock" => $transfer] , $this->header("transfer") ), $res);
     }
 
     public function contact($req , $res){
@@ -199,7 +199,7 @@ class Plain extends Luna\Controller {
     }
     public function forgot($req , $res){
         $lang="es";
-        if(isset($req->data["usuario"],$req->data["email"])){
+        if(isset($req->data["usuario"])){
             $usersMapper = $this->spot->mapper("Entity\Usuario");
             //buscamos el usuario
             $user = $usersMapper->where(["usuario" => $req->data["usuario"]]);
@@ -208,7 +208,7 @@ class Plain extends Luna\Controller {
                 $forgotMapper=$this->spot->mapper("Entity\Forgot");
                 $entity = $forgotMapper->build([
                     'userid'=>$user->first()->id,
-                    'email' =>$req->data["email"]
+                    'email' =>$req->data["usuario"]
                 ]);
                 //insertamos la entidad
                 $result=$forgotMapper->insert($entity);
@@ -227,9 +227,9 @@ class Plain extends Luna\Controller {
                         $message = "Please click on the following link to change your password.\r\n \r\n http://bali/bali/en/forgot/".$entity->uid;
                     break;
                 }
-                $to      = $req->data["email"];
+                $to      = $req->data["usuario"];
                 $headers = 'From: pruebasti@denumeris.com ' . "\r\n" .
-                'Reply-To:'.$req->data["email"]. "\r\n" .
+                'Reply-To:'.$req->data["usuario"]. "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
                 //mandamos mensaje
                 mail($to, $subject, $message, $headers);
@@ -345,6 +345,104 @@ class Plain extends Luna\Controller {
             }
         }
         
+    }
+    public function register($req,$res){
+        $lang="es";
+        switch($lang){
+            case "es":
+                $res->m = $res->mustache->loadTemplate("Plain/register_esp.mustache");
+            break;
+            case "en":
+                $res->m = $res->mustache->loadTemplate("Plain/register.mustache");
+            break;
+            default:
+                $res->m = $res->mustache->loadTemplate("Plain/register.mustache");
+            break;
+        }
+        if(isset($req->data["name"],$req->data["lname"],$req->data["mlname"],$req->data["user"],$req->data["pass"],$req->data["pass1"],$req->data["phone"],$req->data["iata"],$req->data["member"],$req->data["years"])){
+            //verificacion de que el usuario no exista
+            $userMapper=$this->spot->mapper("Entity\Usuario");
+            $user=$userMapper->select()->where(["usuario"=>$req->data["user"]]);
+            $exito=true;
+            if($user->first()){
+                switch($lang){
+                    case "es":
+                        echo "<script>alert('Usuario no disponible, por favor intente con otro.');</script>";
+                    break;
+                    case "en":
+                        echo "<script>alert('User not available, please try another.');</script>";
+                    break;
+                    default:
+                        echo "<script>alert('User not available, please try another.');</script>";
+                    break;
+                }
+                $exito=false;
+            }
+            //verificamos que las contraseñas sean iguales
+            else if($req->data["pass"]!=$req->data["pass1"]){
+                switch($lang){
+                    case "es":
+                        echo "<script>alert('Las contraseñas no coinciden.');</script>";
+                    break;
+                    case "en":
+                        echo "<script>alert('Passwords do not match.');</script>";
+                    break;
+                    default:
+                        echo "<script>alert('Passwords do not match.');</script>";
+                    break;
+                }
+                $exito=false;
+            }
+            //verificamos que la contraseña tenga al menos 6 caracteres
+            else if(strlen($req->data["pass"])<6){
+                switch($lang){
+                    case "es":
+                        echo "<script>alert('La contraseña debe tener al menos 6 caracteres.');</script>";
+                    break;
+                    case "en":
+                        echo "<script>alert('The password must contain at least 6 characters.');</script>";
+                    break;
+                    default:
+                        echo "<script>alert('The password must contain at least 6 characters.');</script>";
+                    break;
+                }
+                $exito=false;
+            }
+            //si todo lo anterior quedo bien, entonces creamos la entidad e insertamos
+            else{
+                $entity = $usersMapper->build([
+                    'nombre' => $req->data["name"],
+                    'papellido' => $req->data["lname"],
+                    'mapellido' => $req->data["mlname"],
+                    'usuario' => $req->data["user"],
+                    'password' => $req->data["pass"],
+                    'telefono' => $req->data["phone"],
+                    'iata' => $req->data["iata"],
+                    'miembros' => $req->data["member"],
+                    'años' => $req->data["years"]
+                ]);
+                $result=$usersMapper->insert($entity);
+                switch($lang){
+                    case "es":
+                        echo "<script>alert('Te has registrado correctamente. Tendras que esperar a que validen tu cuenta.');</script>";
+                    break;
+                    case "en":
+                        echo "<script>alert('You have successfully signed up. You'll have to wait until we validate your account.');</script>";
+                    break;
+                    default:
+                        echo "<script>alert('You have successfully signed up. You'll have to wait until we validate your account.');</script>";
+                    break;
+                }
+            }
+            if($exito){
+                echo $this->renderWiew($this->header("register"), $res);
+            }
+            else{
+                $auser=array("nombre"=>$req->data["name"],"app"=>$req->data["lname"],"apm"=>$req->data["mlname"],"usr"=>$req->data["user"],"tel"=>$req->data["phone"],"iata"=>$req->data["iata"],"miembro"=>$req->data["member"],"anios"=>$req->data["years"]);
+                echo $this->renderWiew(array_merge(["user" => $auser]),$res);
+            }
+        }
+        echo $this->renderWiew($this->header("register"), $res);
     }    
 }
 

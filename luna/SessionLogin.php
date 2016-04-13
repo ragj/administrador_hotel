@@ -16,7 +16,7 @@ namespace Luna;
  */
 class SessionLogin extends \Zaphpa\BaseMiddleware {
 
-    private $urlPermitidas = ['/login', '/logout', '/','/about-us','/hotel-collection','/hotel-collection/{hotel}','/experience','/experience/{exper}','/contact-us','/home','/forgot','/forgot/{uid}',''];
+    private $urlPermitidas = ['/login', '/logout', '/','/about-us','/hotel-collection','/hotel-collection/{hotel}','/experience','/experience/{exper}','/contact-us','/home','/forgot','/forgot/{uid}','/register',''];
 
     function preprocess(&$router) {
 

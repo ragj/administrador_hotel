@@ -1,0 +1,100 @@
+{{% BLOCKS }}
+{{< panel}}
+	{{$content}}
+
+	<div class="holder">
+		<script>
+			var path = "";
+			var href = window.location.pathname
+			var s = href.split("/");
+			for (var i=2;i<(s.length-1);i++) {
+				path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+			}
+			i=s.length-1;
+			path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+			var url = "<p id=bread>"+path+"</p>";
+			document.writeln(url);
+	 	</script>
+	 	<row>
+				<column	cols="3">
+					<p class="intro"><b>Registro</b></p><br>
+					<p class="detail"><b>Por favor llene el siguiente formulario. Gracias</b></p>
+				</column>
+				<column	cols="8">
+					<div class="element">
+						<form action="/bali/register" method="post" class="forms">
+							<section>
+								<label>
+									Nombre
+								</label>
+								<input name="name" type="text" required value="{{#user}}{{nombre}}{{/user}}"/>
+							</section>
+							<section>
+								<label>
+									Apellido Paterno
+								</label>
+								<input name="lname" type="text" required value="{{#user}}{{app}}{{/user}}"/>
+							</section>
+							<section>
+								<label>
+									Apellido Materno
+								</label>
+								<input name="mlname" type="text" required value="{{#user}}{{apm}}{{/user}}"/>
+							</section>
+							<section>
+								<label>
+									Email (username)
+								</label>
+								<input name="user" type="text" required value="{{#user}}{{usr}}{{/user}}"/>
+							</section>
+							<section>
+								<label>
+									Password
+								</label>
+								<input name="pass" type="password" required/ >
+							</section>
+							<section>
+								<label>
+									Confirmación Password
+								</label>
+								<input name="pass1" type="password" required/>
+							</section>
+							<section>
+								<label>
+									Telefóno
+								</label>
+								<input name="phone" type="text" required value="{{#user}}{{tel}}{{/user}}"/>
+							</section>
+							<section>
+								<label>
+									IATA
+								</label>
+								<input name="iata" type="text" required value="{{#user}}{{iata}}{{/user}}"/>
+							</section>
+							<section>
+								<label>
+									Miembro de alguna Afiliación o Programa
+								</label>
+								<input name="member" type="text" required value="{{#user}}{{miembro}}{{/user}}"/>
+							</section>
+							<section>
+								<label>
+									Años en el negocio
+								</label>
+								<input name="years" type="number" required value="{{#user}}{{anios}}{{/user}}"/>
+							</section>
+							<section>
+								<input type="submit" class="primary" value="Registrar"/>
+							</section>
+						</form>
+					</div>
+				</column>
+			</row>
+	</div>	
+
+	
+	{{/content}}
+	{{$ scripts}}
+		
+    {{/ scripts}}
+{{/ panel}}

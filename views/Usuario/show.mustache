@@ -25,6 +25,7 @@
 							                  <th>User</th>
 							                  <th>First Name</th>
 							                  <th>Last Name</th>
+							                  <th>Active</th>
 							                  <th>Edit</th>
 							                  <th>Delete</th>
 							                </tr>
@@ -34,6 +35,7 @@
 							                  <th>User</th>
 							                  <th>First Name</th>
 							                  <th>Last Name</th>
+							                  <th>Active</th>
 							                  <th>Edit</th>
 							                  <th>Delete</th>
 							                </tr>
@@ -49,6 +51,14 @@
 							            			</td>
 							            			<td>
 							            				{{papellido}}
+							            			</td>
+							            			<td>
+							            				{{#activo}}
+  															Active
+														{{/activo}}
+														{{^activo}}
+															Inactive
+														{{/activo}}
 							            			</td>
 							            			<td>
 							            				<a href="/bali/panel/user/edit/{{id}}">

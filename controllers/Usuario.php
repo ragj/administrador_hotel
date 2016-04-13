@@ -45,15 +45,19 @@ class Usuario extends Luna\Controller {
     *   Función que sirve para añadir un usuario
     **/
     public function add($req,$res){
-        if(isset($req->data["name"],$req->data["app"],$req->data["user"],$req->data["pass"],$req->data["pass2"])){
+        if(isset($req->data["name"],$req->data["app"],$req->data["user"],$req->data["pass"],$req->data["pass2"],$req->data["apm"],$req->data["tel"],$req->data["iata"],$req->data["member"],$req->data["years"])){
             $exito=true;
             //obtencion y sanitizacion de los datos
             $name=filter_var($req->data["name"], FILTER_SANITIZE_STRING);
             $app=filter_var($req->data["app"], FILTER_SANITIZE_STRING);
+            $apm=filter_var($req->data["apm"], FILTER_SANITIZE_STRING);
             $user1=filter_var($req->data["user"], FILTER_SANITIZE_STRING);
             $pass=filter_var($req->data["pass"], FILTER_SANITIZE_STRING);
             $pass2=filter_var($req->data["pass2"], FILTER_SANITIZE_STRING);
-            $auser=array("nombre"=>$name,"app"=>$app,"user"=>$user1);
+            $tel=filter_var($req->data["tel"], FILTER_SANITIZE_STRING);
+            $iata=filter_var($req->data["iata"], FILTER_SANITIZE_STRING);
+            $member=filter_var($req->data["member"], FILTER_SANITIZE_STRING);
+            $years=filter_var($req->data["years"], FILTER_SANITIZE_NUMBER_INT);
             //varificación de disponibilidad del usuario
             $usersMapper = $this->spot->mapper("Entity\Usuario");
             //buscamos el usuario
@@ -91,8 +95,14 @@ class Usuario extends Luna\Controller {
                 $entity = $usersMapper->build([
                     'nombre' => $name,
                     'papellido' => $app,
-                    'usuario' =>$user1,
-                    'password' =>$pass
+                    'mapellido' => $apm,
+                    'usuario' => $user1,
+                    'password' => $pass,
+                    'telefono' => $tel,
+                    'iata' => $iata,
+                    'miembros' => $member,
+                    'años' => $years,
+                    'activo'=>true
                 ]);
                 //insertamos la entidad
                 $result=$usersMapper->insert($entity);
@@ -106,6 +116,15 @@ class Usuario extends Luna\Controller {
                 echo $this->renderWiew([],$res);    
             }
             else{
+                $auser=array(
+                    "nombres"=>$name,
+                    "app"=>$app,
+                    "apm"=>$apm,
+                    "usr"=>$usr,
+                    "tel"=>$tel,
+                    "iata"=>$iata,
+                    "miembro"=>$member,
+                    "anios"=>$years);
                 echo $this->renderWiew(array_merge(["user" => $auser]),$res);
             }
             
@@ -136,7 +155,17 @@ class Usuario extends Luna\Controller {
             //obtencion y sanitizacion de datos
             $name = $req->data["name"]!=null? filter_var($req->data["name"], FILTER_SANITIZE_STRING) : $user->nombre;
             $app = $req->data["app"]!=null? filter_var($req->data["app"], FILTER_SANITIZE_STRING) : $user->papellido;
+            $apm = $req->data["apm"]!=null? filter_var($req->data["apm"], FILTER_SANITIZE_STRING) : $user->lapellido;
             $usr = $req->data["user"]!=null? filter_var($req->data["user"], FILTER_SANITIZE_STRING) : $user->usuario;
+            $tel = $req->data["tel"]!=null? filter_var($req->data["tel"], FILTER_SANITIZE_STRING) : $user->telefono;
+            $iata = $req->data["iata"]!=null? filter_var($req->data["iata"], FILTER_SANITIZE_STRING) : $user->iata;
+            $member = $req->data["member"]!=null? filter_var($req->data["member"], FILTER_SANITIZE_STRING) : $user->miembros;
+            $years = $req->data["years"]!=null? filter_var($req->data["years"], FILTER_SANITIZE_STRING) : $user->años;
+            if(isset($req->data["esActivo"])){
+                $active = true;
+            }else{
+                $active = false;#default value
+            }
             //validacion de datos
             if($usr!=$user->usuario){
                 $user2 = $userMapper->where(["usuario" => $usr]);
@@ -144,7 +173,7 @@ class Usuario extends Luna\Controller {
                     $user->usuario=$usr;
                 }
                 else{
-                    $mensaje+="User was not uoloaded./nThe user is not available./n";
+                    $mensaje+="User was not uploaded./nThe user is not available./n";
                 }
             }
             if($req->data["pass"]!=null && $req->data["pass2"]!=null){

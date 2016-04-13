@@ -22,19 +22,25 @@
 		        					<div class="form-group">
 		                    			<label class="col-sm-3 control-label">First Name: <span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="name" class="form-control" placeholder="Write a first name." required />
+		                      				<input type="text" name="name" class="form-control" placeholder="Write a first name." required value="{{#user}}{{nombres}}{{/user}}" />
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Last Name:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                     				<input type="text" name="app" class="form-control" placeholder="Write a last name." required/>
+		                     				<input type="text" name="app" class="form-control" placeholder="Write a last name." required value="{{#user}}{{app}}{{/user}}"/>
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">User:<span class="text-danger">*</span></label>
+		                    			<label class="col-sm-3 control-label">Mother's Last Name:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="user" class="form-control" placeholder="Write a user." required />
+		                     				<input type="text" name="apm" class="form-control" placeholder="Write a Mother's Last Name." required value="{{#user}}{{apm}}{{/user}}"/>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Email (username):<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="user" class="form-control" placeholder="Write a user." required value="{{#user}}{{usr}}{{/user}}"/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
@@ -47,6 +53,30 @@
 		                    			<label class="col-sm-3 control-label">Confirm Password:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
 		                      				<input type="password" name="pass2" class="form-control" placeholder="Write a password." required/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Phone Number:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="tel" class="form-control" placeholder="Write a phone number." required value="{{#user}}{{tel}}{{/user}}"/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">IATA:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="iata" class="form-control" placeholder="Write a IATA." required required value="{{#user}}{{iata}}{{/user}}"/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Member to an Affiliation or Program:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="member" class="form-control" placeholder="Write Yes or No, if Yes also write the name of the program." required required value="{{#user}}{{miembro}}{{/user}}"/>
+		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Years in Business:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="number" name="years" class="form-control" placeholder="Write a number of years." required value="{{#user}}{{anios}}{{/user}}"/>
 		                   				</div>
 		                  			</div>
 		                  			<hr>
