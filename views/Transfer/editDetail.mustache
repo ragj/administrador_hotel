@@ -1,0 +1,101 @@
+{{% BLOCKS }}
+	{{< quirk }}
+		{{$ title}}
+            Edit Transfer Detail
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Transfer</a></li>
+			        <li class="active">Edit Transfer Detail</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-6 col-md-offset-3">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Transfer Detail Form</h4>
+	          					<p>Please fill the next form, thanks.</p>
+	        				</div>
+		        			<div class="panel-body">
+		        				<hr>
+		        				{{# transferDetail }}			
+		        				<form class="form-horizontal" action="/bali/panel/transfer/editDetail/{{td_id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+		        					<div class="form-group">
+		        						<label class="col-sm-3 control-label">Transfer Block Actual:  {{#tactual}}{{TransferBlockTitle}}{{/tactual}}</label>
+		        					</div>
+		        					<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Transfer Block:</label>
+		                    			<div class="col-sm-6">
+		                      				<select class="form-control" name="tb">
+			                            		<option value=""></option>
+			                            		{{# transferBlock }}
+			                            			<option value="{{idTransferBlock}}">{{TransferBlockTitle}}</option>
+			                            		{{/ transferBlock }}
+			                            	</select>
+		                   				</div>
+		                  			</div>
+		        					<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Description: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="desc" class="form-control" placeholder="Write the transfer's detail description." value="{{td_description}}" required />
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Spanish Description: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="descesp" class="form-control" placeholder="Write the transfer's spanish detail description." value="{{td_description_esp}}" required />
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">INNOVA SUV 1: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                    				<input type=number name="num1" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_innova_sub_1}}"/>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">INNOVA SUV 2-4: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type=number name="num2" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_innova_sub_2_4}}"/>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">HIACE VAN 5-7: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type=number name="num3" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_hiace_val_5_7}}"/>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">HIACE VAN 8-10: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type=number name="num4" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_hiace_val_8_10}}"/>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">ALPHARD/MERCY E 200 1: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type=number name="num5" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_alphard_mercy_1}}"/>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">ALPHARD/MERCY E 200 2-4: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type=number name="num6" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_alphard_mercy_2_4}}"/>
+		                    			</div>
+		                  			</div>
+		                  			<hr>
+		                  			<div class="row">
+	                    				<div class="col-sm-9 col-sm-offset-8">
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
+	                    				</div>
+	                  				</div>
+		        				</form>
+		        				{{/ transferDetail }}
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+		{{/ scripts }}
+	{{/ quirk }}

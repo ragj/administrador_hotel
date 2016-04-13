@@ -178,4 +178,40 @@ $router->addRoute(array(
     'path' => '/panel/contact/show',
     'get' => array('Contact', 'show')
 ));
+//transfer Blocks routes
+$router->addRoute(array(
+    'path' => '/panel/transfer/addBlock',
+    'get' => array('Transfer', 'addBlock'),
+    'post'=>array('Transfer','addBlock')
+));
+$router->addRoute(array(
+    'path' => '/panel/transfer/addDetail',
+    'get' => array('Transfer','addDetail'),
+    'post'=>array('Transfer','addDetail')
+));
+$router->addRoute(array(
+    'path' => '/panel/transfer/listBlock',
+    'get' => array('Transfer', 'listBlock')
+));
+$router->addRoute(array(
+    'path' => '/panel/transfer/editBlock/{block}',
+    'get' => array('Transfer','editBlock'),
+    'post'=>array('Transfer','editBlock')
+));
+$router->addRoute(array(
+    'path' => '/panel/transfer/delete/{block}',
+    'get' => array('Transfer','deleteBlock')
+));
+$router->addRoute(array(
+    'path' => '/panel/transfer/editDetail/{detail}',
+    'get' => array('Transfer','editDetail'),
+    'post'=>array('Transfer','editDetail')
+));
+$router->addRoute(array(
+    'path' => '/panel/transfer/deleteDetail/{detail}',
+    'get' => array('Transfer','deleteDetail')
+));
+
+
+
 ?>

@@ -1,0 +1,49 @@
+{{% BLOCKS }}
+	{{< quirk }}
+		{{$ title}}
+            Add Transfer Block
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Transfer</a></li>
+			        <li class="active">Add Transfer Block</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-6 col-md-offset-3">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Transfer Block Form</h4>
+	          					<p>Please fill the next form, thanks.</p>
+	        				</div>
+		        			<div class="panel-body">
+		        				<hr>			
+		        				<form class="form-horizontal" action="/bali/panel/transfer/addBlock" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+		        					<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Title: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="name" class="form-control" placeholder="Write the transfer block's title." required />
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Spanish Title: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="name1" class="form-control" placeholder="Write the spanish transfer block's title." required />
+		                    			</div>
+		                  			</div>
+		                  			<hr>
+		                  			<div class="row">
+	                    				<div class="col-sm-9 col-sm-offset-8">
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
+	                    				</div>
+	                  				</div>
+		        				</form>
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+		{{/ scripts }}
+	{{/ quirk }}
