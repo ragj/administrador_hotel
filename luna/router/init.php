@@ -5,6 +5,7 @@
 	require_once (__DIR__."/../documentor.php");
 	require_once (__DIR__."/../SessionLogin.php");
 	require_once (__DIR__."/../migrator.php");
+	require_once (__DIR__ ."/../Translate.php");
 
 	
 	//  REQUIRE MODELS
@@ -21,6 +22,7 @@
 	$router = new \Zaphpa\Router();
 	
 	//  ATTACHS
+	$router->attach('\Luna\Translate');
 	$router->attach('\Luna\OAuth' );
 	$router->attach('\Luna\Migrator');
 	$router->attach('\Luna\Mustache');
@@ -31,10 +33,8 @@
 	//  ROUTES
 	require_once( __LUNA__.'/luna/router/routes.php' );
 	try {
-	  $tokens = parse_url('http://lozano.travel' . str_replace("/bali" , "" , $_SERVER['REQUEST_URI']));
+	  $tokens = parse_url('http://lozano.travel' . str_replace("/bali" , "" , Luna\Translate::uri()));
       $uri = rawurldecode( isset($tokens['path'])?$tokens['path']:"/");
-      
-      
 	  $router->route( $uri );
 	} catch ( \Zaphpa\Exceptions\InvalidPathException $ex) {
 	  header("Content-Type: application/json;", TRUE, 404);

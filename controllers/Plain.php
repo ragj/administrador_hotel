@@ -28,7 +28,7 @@ class Plain extends Luna\Controller {
             $menu => true] ;
     }
     public function home($req , $res){
-        $lang="es";
+        $lang=$req->lang;
         $tourMapper=$this->spot->mapper("Entity\Tour");
         $tour=$tourMapper->select()->where(["home"=>true])->order(['type' => 'DESC']);;
         switch($lang){
