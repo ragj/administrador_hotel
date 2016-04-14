@@ -30,11 +30,9 @@ class Forgot extends \Spot\Entity {
     public static function events(EventEmitter $eventEmitter) {
         $eventEmitter->on('beforeInsert', function (Entity $entity, Mapper $mapper) {
             $entity->creatat = new \DateTime();
-            $entity->uid = md5($entity->email." ".$entity->creatat." ".$entity->userid);
+            $entity->uid = md5($entity->email." ".$entity->creatat->format('Y-m-d H:i:s')." ".$entity->userid);
             $entity->usado = false;
         });
     }
-
 }
-
 ?>

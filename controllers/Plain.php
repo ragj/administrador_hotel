@@ -179,13 +179,15 @@ class Plain extends Luna\Controller {
             break;
         }
         if(isset($req->data["name"],$req->data["email"],$req->data["message"])){
-            $to      = 'pruebasti@denumeris.com ';
-            $subject = 'contacto desde pagina';
-            $message = "Nombre: ".$req->data["name"]."\r\n Mensaje:".$req->data["message"];
-            $headers = 'From: pruebasti@denumeris.com ' . "\r\n" .
-                'Reply-To:'.$req->data["email"]. "\r\n" .
-                'X-Mailer: PHP/' . phpversion();
-            mail($to, $subject, $message, $headers);
+            $template="Mail/contacto.mustache";
+            /*********************************************************************************/
+            /*                                                                               */
+            /*  cambiar este correo por aquel al que llegaran los correos de contacto.       */
+            /*                                                                               */
+            /*********************************************************************************/
+            $req->data["emailto"]="geoshada@gmail.com";
+            $req->data["subject"]="Contacto desde pagina";
+            $this->mailer( $res , $req , $template);
             $contactMapper=$this->spot->mapper("Entity\Contact");
             //construimos la entidad
             $entity = $contactMapper->build([
@@ -215,24 +217,25 @@ class Plain extends Luna\Controller {
                 //generamos mensaje en base al idioma
                 switch($lang){
                     case "es":
-                        $subject = 'Contraseña Olvidada';
-                        $message = "Por favor haga click en el siguiente link para cambiar tu contraseña\r\n \r\n http://bali/bali/es/forgot/".$entity->uid;  
+                        $req->data["subject"] = 'Contraseña Olvidada';
+                        $req->data["message"] = "http://bali/es/bali/forgot/".$entity->uid;
+                        $template="Mail/forgot_esp.mustache";
                     break;
                     case "en":
-                        $subject = 'Forgotten Password';
-                        $message = "Please click on the following link to change your password.\r\n \r\n http://bali/bali/en/forgot/".$entity->uid;
+                        $req->data["subject"] = 'Forgotten Password';
+                        $req->data["message"] = "http://bali/en/bali/forgot/".$entity->uid;
+                        $template="Mail/forgot.mustache";
                     break;
                     default:
-                        $subject = 'Forgotten Password';
-                        $message = "Please click on the following link to change your password.\r\n \r\n http://bali/bali/en/forgot/".$entity->uid;
+                        $req->data["subject"] = 'Forgotten Password';
+                        $req->data["message"] = "http://bali/en/bali/forgot/".$entity->uid; 
+                        $template="Mail/forgot.mustache";               
                     break;
                 }
-                $to      = $req->data["usuario"];
-                $headers = 'From: pruebasti@denumeris.com ' . "\r\n" .
-                'Reply-To:'.$req->data["usuario"]. "\r\n" .
-                'X-Mailer: PHP/' . phpversion();
+                $req->data["emailto"]=$req->data["usuario"];
+                $req->data["nombre"]=$user->first()->nombre." ".$user->first()->papellido;
                 //mandamos mensaje
-                mail($to, $subject, $message, $headers);
+                $this->mailer( $res , $req , $template);
             }
             else{
                  switch($lang){
@@ -424,17 +427,25 @@ class Plain extends Luna\Controller {
                 $result=$usersMapper->insert($entity);
                 switch($lang){
                     case "es":
+                        $template="Mail/welcome_esp.mustache";
+                        $req->data["subject"]="Bienvenido a Lozano Travel";
                         echo "<script>alert('Te has registrado correctamente. Tendras que esperar a que validen tu cuenta.');</script>";
                     break;
                     case "en":
+                        $template="Mail/welcome.mustache";
+                        $req->data["subject"]="Welcome to Lozano Travel";
                         echo "<script>alert('You have successfully signed up. You'll have to wait until we validate your account.');</script>";
                     break;
                     default:
+                        $template="Mail/welcome.mustache";
+                        $req->data["subject"]="Welcome to Lozano Travel";
                         echo "<script>alert('You have successfully signed up. You'll have to wait until we validate your account.');</script>";
                     break;
                 }
             }
             if($exito){
+                $req->data["emailto"]=$req->data["user"];
+                $this->mailer( $res , $req , $template);
                 echo $this->renderWiew($this->header("register"), $res);
             }
             else{

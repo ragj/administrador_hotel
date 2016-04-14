@@ -1,0 +1,21 @@
+{{% BLOCKS }}
+	{{< mail}}
+        {{$ content}}
+        	<tr style="height: 124px;">
+                <td>
+                    <h1 style="color: #af841d;">Hi {{#data}}{{nombre}}{{/data}}</h1>
+                    <p style="padding: 0 0 20px; margin: 0 50px; text-align: left; color: #707070; font-size: 13px; border-bottom: 0px solid #dadada;">
+                        Please click on the following link to change your password:
+                        <br>
+                        <br>
+                        {{#data}}{{message}}{{/data}}
+                        <br>
+                        <br>
+                        If you didn't ask for this, please ignore this message. Thanks.
+                        <br>
+                        <br>
+                    </p>
+                </td>
+            </tr>
+        {{/ content}}
+	{{/ mail}}

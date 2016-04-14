@@ -47,7 +47,7 @@ class Usuario extends Luna\Controller {
             $name=filter_var($req->data["name"], FILTER_SANITIZE_STRING);
             $app=filter_var($req->data["app"], FILTER_SANITIZE_STRING);
             $apm=filter_var($req->data["apm"], FILTER_SANITIZE_STRING);
-            $user1=filter_var($req->data["user"], FILTER_SANITIZE_STRING);
+            $user1=filter_var($req->data["user"], FILTER_SANITIZE_EMAIL);
             $pass=filter_var($req->data["pass"], FILTER_SANITIZE_STRING);
             $pass2=filter_var($req->data["pass2"], FILTER_SANITIZE_STRING);
             $tel=filter_var($req->data["tel"], FILTER_SANITIZE_STRING);
@@ -152,7 +152,7 @@ class Usuario extends Luna\Controller {
             $name = $req->data["name"]!=null? filter_var($req->data["name"], FILTER_SANITIZE_STRING) : $user->nombre;
             $app = $req->data["app"]!=null? filter_var($req->data["app"], FILTER_SANITIZE_STRING) : $user->papellido;
             $apm = $req->data["apm"]!=null? filter_var($req->data["apm"], FILTER_SANITIZE_STRING) : $user->lapellido;
-            $usr = $req->data["user"]!=null? filter_var($req->data["user"], FILTER_SANITIZE_STRING) : $user->usuario;
+            $usr = $req->data["user"]!=null? filter_var($req->data["user"], FILTER_SANITIZE_EMAIL) : $user->usuario;
             $tel = $req->data["tel"]!=null? filter_var($req->data["tel"], FILTER_SANITIZE_STRING) : $user->telefono;
             $iata = $req->data["iata"]!=null? filter_var($req->data["iata"], FILTER_SANITIZE_STRING) : $user->iata;
             $member = $req->data["member"]!=null? filter_var($req->data["member"], FILTER_SANITIZE_STRING) : $user->miembros;
@@ -223,8 +223,15 @@ class Usuario extends Luna\Controller {
             }
             else{
                 $user->activo=true;
+                $req->data["emailto"]=$user->usuario;
+                $req->data["subject"]="Active Accout / Cuenta Activa";
+                $req->data["nombre"]=$user->nombre;
+                $req->data["papellido"]=$user->papellido;
+                $template="Mail/active.mustache";
+                $this->mailer( $res , $req , $template);
             }
             $userMapper->update($user);
+
         }
         $users=$userMapper->select();
         $res->m = $res->mustache->loadTemplate("Usuario/show.mustache");

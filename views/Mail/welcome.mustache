@@ -1,0 +1,20 @@
+{{% BLOCKS }}
+	{{< mail}}
+		{{$ header}}
+			<img style="width: 100%;" src="http://lozanodev.denumeris.com/wp-content/uploads/2016/04/email-banner.jpg">
+        {{/ header}}
+        {{$ content}}
+        	<tr style="height: 124px;">
+                <td>
+                    <h1 style="color: #af841d;">Welcome {{# data }}{{nombre}} {{papellido}} {{/ data}}</h1>
+                    <br>
+                    <p style="padding: 0 0 20px; margin: 0 50px; text-align: left; color: #707070; font-size: 13px; border-bottom: 0px solid #dadada;"> 
+                        Thanks for signing . Within a short time you will get an email giving you notice that your account has been activated.
+                        <br>
+                        <br>
+                        Greetings.
+                    </p>
+                </td>
+            </tr>
+        {{/ content}}
+	{{/ mail}}

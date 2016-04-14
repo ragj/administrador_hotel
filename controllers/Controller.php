@@ -77,15 +77,15 @@ class Controller {
     }
 
     function mailer( $res , $data , $template){
-
         // SEND MADRES
-        
-        $this->mail->AddAddress("jzebadua@denumeris.com");
-        $this->mail->Subject = "Prueab de correo ";
-        $mail = $res->mustache->loadTemplate( $template );
+        $this->mail->AddAddress($data->data["emailto"]);
+        $this->mail->Subject = $data->data["subject"];
+        $mail = $res->mustache->loadTemplate($template);
         $this->mail->Body = $mail->render($data);
-        $this->mail->Send();
-
+        if (!$this->mail->send()) {
+            echo "Mailer Error: " . $this->mail->ErrorInfo;
+        }
+        //$this->mail->Send();
     }
     /**
      * TODO: mover a una clase de fromularios y pasar como una propiedad referenciada a un objeto
