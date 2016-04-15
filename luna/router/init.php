@@ -31,11 +31,18 @@
 
 
 	//  ROUTES
+	global $BASE;
+	$BASE = "/bali";
+
 	require_once( __LUNA__.'/luna/router/routes.php' );
 	try {
-	  $tokens = parse_url('http://lozano.travel' . str_replace("/bali" , "" , Luna\Translate::uri()));
+
+	  $tokens = parse_url('http://lozano.travel' . str_replace($BASE , "" , $_SERVER["REQUEST_URI"] ));
       $uri = rawurldecode( isset($tokens['path'])?$tokens['path']:"/");
-	  $router->route( $uri );
+      
+      $router->route( \Luna\Translate :: uri( $uri ) );
+
+      
 	} catch ( \Zaphpa\Exceptions\InvalidPathException $ex) {
 	  header("Content-Type: application/json;", TRUE, 404);
 	  $out = array("error" => "not found");

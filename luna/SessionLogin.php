@@ -19,13 +19,6 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
     private $urlPermitidas = ['/login', '/logout', '/','/about-us','/hotel-collection','/hotel-collection/{hotel}','/experience','/experience/{exper}','/contact-us','/home','/forgot','/forgot/{uid}','/register',''];
 
     function preprocess(&$router) {
-
-        $router->addRoute(array(
-            'path' => '/login',
-            'get' => array('Usuario', 'login'),
-            'post' => array('Usuario', 'login')
-        ));
-
         $router->addRoute(array(
             'path' => '/logout',
             'get' => array('Usuario', 'logout')
@@ -41,6 +34,22 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
 
         global $session_handle;
         $session = $session_handle->getSegment('Luna\Session');
+         /*Searching for the context pattern in the global ROUTS and adding that route to the router if exists and it has the allow value else do nothing*/
+        global $ROUTES;
+        foreach ($ROUTES as $key => $route) {
+            if(isset($route["es"])){
+                $route["allow"]=isset($route["allow"])?$route["allow"]:false;
+                if(self::$context["pattern"]==$route["es"]&&$route["allow"]==true){
+                    array_push($this->urlPermitidas,self::$context["pattern"]);
+                }
+            }
+            if(isset($route["en"])){
+                $route["allow"]=isset($route["allow"])?$route["allow"]:false;
+                if(self::$context["pattern"]==$route["en"]&&$route["allow"]==true){
+                    array_push($this->urlPermitidas,self::$context["pattern"]);
+                }
+            }
+        }
 
 
         if (!in_array(self::$context["pattern"], $this->urlPermitidas)) {

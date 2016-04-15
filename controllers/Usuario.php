@@ -9,6 +9,18 @@
 class Usuario extends Luna\Controller {
 
     public function login($req, $res) {
+        $lang=$req->lang;
+        switch($lang){
+            case 'es':
+                $res->m = $res->mustache->loadTemplate("Usuario/login_esp.mustache");
+            break;
+            case 'en':
+                $res->m = $res->mustache->loadTemplate("Usuario/login.mustache");
+            break;
+            default:
+                $res->m = $res->mustache->loadTemplate("Usuario/longin.mustache");
+            break;
+        }
         echo $this->renderWiew($this->header("login"), $res);
     }
     public function logout($req, $res) {

@@ -7,76 +7,113 @@
 //   'post'      => array('Place', 'view'),
 // ));
 
-$router->addRoute(array(
-    'path' => '/',
-    'get' => array('Plain', 'home')
-));
+global $ROUTES;
+//Transaleted routes
+$ROUTES = [
+    "/" => [
+        'es' => '/inicio',
+        'en' => '/home',
+        'allow' => true,
+        'path' => '/',
+        'get' => array('Plain', 'home')
+        ],
+    "/about-us" => [
+        'es' => "/nosotros",
+        'en' => "/about-us",
+        'allow' => true,
+        'path' => '/about-us',
+        'get' => array('Plain', 'about')
+    ],
+    "/hotel-collection" => [
+        'es' => "/hoteles",
+        'en' => "/hotel-collection",
+        'allow' => true,
+        'path' => '/hotel-collection',
+        'get' => array('Plain', 'hotel')
+    ],
+    "/hotel-collection/{hotel}"=>[
+        'es' => "/hoteles/{hotel}",
+        'en' => "/hotel-collection/{hotel}",
+        'allow' => true,
+        'path' => '/hotel-collection/{hotel}',
+        'get' => array('Plain', 'hotel')
+    ],
+    "/experience"=>[
+        'es'=>"/experiencia",
+        'en'=>"/experience",
+        'allow' => true,
+        'path' => '/experience',
+        'get' => array('Plain', 'experience')
+    ],
+    "/experience/{exper}"=>[
+        'es'=>"/experiencia/{exper}",
+        'en'=>"/experience/{exper}",
+        'allow' => true,
+        'path' => '/experience/{exper}',
+        'get' => array('Plain', 'experience')
+    ],
+    "/transfer"=>[
+        'es'=>"/transfer",
+        'en'=>"/transfer",
+        'path' => '/transfer',
+        'get' => array('Plain', 'transfer')
+    ],
+    "/contact-us"=>[
+        'es'=>"/contactanos",
+        'en'=>"/contact-us",
+        'allow' => true,
+        'path' => '/contact-us',
+        'get' => array('Plain', 'contact'),
+        'post' => array('Plain', 'contact')
+    ],
+    "/transfer"=>[
+        'es'=>"/olividada",
+        'en'=>"/forgot",
+        'allow' => true,
+        'path' => '/forgot',
+        'get' => array('Plain', 'forgot'),
+        'post' => array('Plain', 'forgot')
+    ],
+    "/forgot/{uid}"=>[
+        'es'=>"/olvidada/{uid}",
+        'en'=>"/forgot/{uid}",
+        'allow' => true,
+        'path' => '/forgot/{uid}',
+        'get' => array('Plain', 'change')
+    ],
+    "/register"=>[
+        'es'=>"/registro",
+        'en'=>"/register",
+        'allow' => true,
+        'path' => '/register',
+        'get' => array('Plain', 'register'),
+        'post' => array('Plain', 'register')
+    ],
+    "/aviso"=>[
+        'path' => '/aviso',
+        'allow' => true,
+        'get' => array('Plain', 'aviso')
+    ],
+    "/panel/hotel/add"=>[
+        'path' => '/panel/hotel/add',
+        'get' => array('Hotel', 'add'),
+        'post' => array('Hotel', 'add')
+    ],
+    "/login"=>[
+        'es' => '/login',
+        'en' => '/login',
+        'path' => '/login',
+        'get' => array('Usuario', 'login'),
+        'post' => array('Usuario', 'login')
+    ]
+];
 
-$router->addRoute(array(
-    'path' => '/about-us',
-    'get' => array('Plain', 'about')
-));
-
-$router->addRoute(array(
-    'path' => '/hotel-collection',
-    'get' => array('Plain', 'hotel')
-));
-
-$router->addRoute(array(
-    'path' => '/hotel-collection/{hotel}',
-    'get' => array('Plain', 'hotel')
-));
-
-$router->addRoute(array(
-    'path' => '/experience',
-    'get' => array('Plain', 'experience')
-));
-
-$router->addRoute(array(
-    'path' => '/experience/{exper}',
-    'get' => array('Plain', 'experience')
-));
-
-$router->addRoute(array(
-    'path' => '/transfer',
-    'get' => array('Plain', 'transfer')
-));
-
-$router->addRoute(array(
-    'path' => '/contact-us',
-    'get' => array('Plain', 'contact'),
-    'post' => array('Plain', 'contact')
-));
-$router->addRoute(array(
-    'path' => '/forgot',
-    'get' => array('Plain', 'forgot'),
-    'post' => array('Plain', 'forgot')
-));
-$router->addRoute(array(
-    'path' => '/forgot/{uid}',
-    'get' => array('Plain', 'change'),
-    'post' => array('Plain', 'change')
-));
-$router->addRoute(array(
-    'path' => '/register',
-    'get' => array('Plain', 'register'),
-    'post' => array('Plain', 'register')
-));
+foreach ($ROUTES as $key => $route) {
+    $router->addRoute( $route );
+}
 
 
-$router->addRoute(array(
-    'path' => '/aviso',
-    'get' => array('Plain', 'aviso')
-));
-
-
-///Hotel Routes
-$router->addRoute(array(
-    'path' => '/panel/hotel/add',
-    'get' => array('Hotel', 'add'),
-    'post' => array('Hotel', 'add')
-));
-
+//admin routes
 $router->addRoute(array(
     'path' => '/panel/hotel/show',
     'get' => array('Hotel', 'show'),

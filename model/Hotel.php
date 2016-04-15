@@ -27,6 +27,7 @@ class Hotel extends \Spot\Entity {
             'website' => ['type' => 'string' ],
             'map' => ['type' => 'text' ],
             'uri' => ['type' => 'text' ],
+            'uri_es' => ['type' => 'text' ],
             'tel' => ['type' => 'string' ],
             'email' => ['type' => 'string' ],
             'created' => ['type' => 'datetime', 'required' => true , "value" => new \DateTime() ]

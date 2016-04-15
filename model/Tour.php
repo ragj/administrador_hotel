@@ -27,6 +27,7 @@ class Tour extends \Spot\Entity {
             'description' => ['type' => 'text' ],
             'description_esp' => ['type' => 'text' ],
             'uri' => ['type' => 'text' ],
+            'uri_es' => ['type' => 'text' ],
             'transfer' => ['type' => 'text' ],
             'transfer_esp' => ['type' => 'text' ],
             'home' => ['type' => 'boolean' ],

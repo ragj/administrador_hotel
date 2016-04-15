@@ -89,9 +89,25 @@ class Plain extends Luna\Controller {
                     $res->m = $res->mustache->loadTemplate("Plain/hotel-inner.mustache");
                 break;
             }
+
             $tourMapper = $this->spot->mapper("Entity\Hotel");
-            $hotel = $tourMapper->select()->with("images")->where(["uri" => $req->params["hotel"]])->first();
-            echo $this->renderWiew( array_merge(["hotel-data" => $hotel] , $this->header("hotel") ), $res);
+            $params = [($req->lang=="es"?"uri_es":"uri") => $req->params["hotel"]];
+            $hotel = $tourMapper->select()->with("images")->where($params)->first();
+            // $uriHandler => array ( uri , mapper => "{param}" )
+            if( $hotel ){
+                $this->hotel = $hotel;
+
+                $translate = new stdClass();
+                $translate->call = function( $lang ){
+                    $uri = $lang=="es"?$this->hotel->uri_es:$this->hotel->uri;
+                    return Luna\Translate::to( $lang , ["uri"=> $uri, "mapper"=>"{hotel}"]);
+                };
+
+                echo $this->renderWiew( array_merge(["translate"=>$translate,"hotel-data" => $hotel] , $this->header("hotel") ), $res);    
+            }
+            else{
+                header('Location:'.Luna\Translate::url("/holtel-collection"));
+            }
         }else{
             switch($lang){
                 case "es":
@@ -126,8 +142,21 @@ class Plain extends Luna\Controller {
                 break;
             }
             $tourMapper = $this->spot->mapper("Entity\Tour");
-            $tour = $tourMapper->select()->with("images")->where(["uri" => $req->params["exper"]])->first();
-            echo $this->renderWiew( array_merge(["tour" => $tour] , $this->header("experience") ), $res);
+            $params = [($req->lang=="es"?"uri_es":"uri") => $req->params["exper"]];
+            $tour = $tourMapper->select()->with("images")->where($params)->first();
+            // $uriHandler => array ( uri , mapper => "{param}" )
+            if( $tour ){
+                $this->tour = $tour;
+                $translate = new stdClass();
+                $translate->call = function( $lang ){
+                    $uri = $lang=="es"?$this->tour->uri_es:$this->tour->uri;
+                    return Luna\Translate::to( $lang , ["uri"=> $uri, "mapper"=>"{exper}"]);
+                };
+                echo $this->renderWiew( array_merge(["translate"=>$translate,"tour" => $tour] , $this->header("experience") ), $res);    
+            }
+            else{
+                header('Location:'.Luna\Translate::url("/experience"));
+            }
         }else{
             switch($lang){
                 case "es":

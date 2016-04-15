@@ -35,6 +35,22 @@ class Mustache extends \Zaphpa\BaseMiddleware {
         'fecha_hora' => function($value) { return ucfirst((string) date("F j, Y, g:i a" , $value )); }
     ]);
 
+    $mustache->addHelper('url' , function($value) {
+
+        return \Luna\Translate::url( $value );
+
+    } );
+
+    $mustache->addHelper('magic' , function($value) {
+        explode("|",$value);
+        return \Luna\Translate::url( $value );
+
+    } );
+    $mustache->addHelper('lan' , function($value) {
+        return \Luna\Translate::to( $value );
+
+    } );
+
     $res->mustache = $mustache;
     
     if( is_file( __LUNA__.'/views/'.implode( "/" , self::$context["callback"] ).".mustache" ) ){

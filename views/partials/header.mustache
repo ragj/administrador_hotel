@@ -1,8 +1,8 @@
 <header>
 	<section class="logo"></section>
 	<section class="lang">
-		<a href="">Spanish</a>
-		<a href="" class="active">English</a>
+		<a href="{{#translate.call}}es{{/translate.call}}{{^translate.call}}{{#lan}}es{{/lan}}{{/translate.call}}" >Spanish</a>
+		<a href="{{#translate.call}}en{{/translate.call}}{{^translate.call}}{{#lan}}en{{/lan}}{{/translate.call}}" class="active" >English</a>
 	</section>
 	<section class="weather"> 
 		{{current_time}} {{weather.temp}}ºC 
@@ -10,23 +10,23 @@
 	<nav>
 		<ul>
 			<li>
-				<a href="/bali" {{#home}}class="active"{{/home}} >Home</a>
+				<a href="{{#url}}/{{/url}}" {{#home }}class="active"{{/home}} >Home</a>
 			</li>
 			<li>
-				<a href="/bali/about-us" {{#about}}class="active"{{/about}}>About us</a>
+				<a href="{{#url}}/about-us{{/url}}" {{#about}}class="active"{{/about}}>About us</a>
 			</li>
 			<li>
-				<a href="/bali/hotel-collection"{{#hotel}}class="active"{{/hotel}}>Hotel collection</a>
+				<a href="{{#url}}/hotel-collection{{/url}}"{{#hotel}}class="active"{{/hotel}}>Hotel collection</a>
 			</li>
 			<li>
-				<a href="/bali/experience" {{#experience}}class="active"{{/experience}}>Experiences</a>
+				<a href="{{#url}}/experience{{/url}}" {{#experience}}class="active"{{/experience}}>Experiences</a>
 			</li>
 			<li>
-				<a href="/bali/contact-us" {{#contact}}class="active"{{/contact}}>Contact us</a>
+				<a href="{{#url}}/contact-us{{/url}}" {{#contact}}class="active"{{/contact}}>Contact us</a>
 			</li>
 
 			<li>
-				<a href="/bali/transfer" {{#transfer}}class="active"{{/transfer}}>Travel Agent</a>
+				<a href="{{#url}}/transfer{{/url}}" {{#transfer}}class="active"{{/transfer}}>Travel Agent</a>
 			</li>
 			<li>
 				{{#user.nombre}}
