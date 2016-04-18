@@ -21,14 +21,13 @@ class Usuario extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Usuario/longin.mustache");
             break;
         }
-        echo $this->renderWiew($this->header("login"), $res);
+        echo $this->renderWiew($this->header("login",$lang), $res);
     }
     public function logout($req, $res) {
         header("Location: http://" . $_SERVER["SERVER_NAME"] . "/login");
     }
 
-    public function header( $menu ){
-
+    public function header( $menu,$lang ){
         $wmpr = $this->spot->mapper("Entity\Weather");
         $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
         $duration = null;
@@ -40,14 +39,44 @@ class Usuario extends Luna\Controller {
             $wmpr->create([ "data" => $data , "updated" => new DateTime()]);
             $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
         }
-
         $date_bali = new DateTime("now" ,new DateTimeZone( "Asia/Makassar" ) );
+        $dat=$date_bali->format("l d F h:i a");
+        switch($lang){
+            case "es":
+                //months
+                $dat = str_replace('January','Enero',$dat);
+                $dat = str_replace('February','Febrero',$dat);
+                $dat = str_replace('March','Marzo',$dat);
+                $dat = str_replace('April','Abril',$dat);
+                $dat = str_replace('May','Mayo',$dat);
+                $dat = str_replace('June','Junio',$dat);
+                $dat = str_replace('July','Julio',$dat);
+                $dat = str_replace('August','Agosto',$dat);
+                $dat = str_replace('September','Septiembre',$dat);
+                $dat = str_replace('October','Octubre',$dat);
+                $dat = str_replace('November','Noviembre',$dat);
+                $dat = str_replace('December','Diciembre',$dat);
+                //days
+                $dat = str_replace('Monday','Lunes',$dat);
+                $dat = str_replace('Tuesday','Martes',$dat);
+                $dat = str_replace('Wednesday','Miércoles',$dat);
+                $dat = str_replace('Thursday','Jueves',$dat);
+                $dat = str_replace('Friday','Viernes',$dat);
+                $dat = str_replace('Saturday','Sábado',$dat);
+                $dat = str_replace('Sunday','Domingo',$dat);
+            break;
+            case "en":
+                $dat=$date_bali->format("l d F h:i a");
+            break;
+            default:
+                $dat=$date_bali->format("l d F h:i a");
+            break;
+        }
         $weather = json_decode( $current_data->data );
 
         return ["weather" => $weather->main , 
-            "current_time" => $date_bali->format("l d F h:i a") ,
+            "current_time" => $dat,
             $menu => true] ;
-
     }
     /**
     *   Metodo que sirve para añadir un usuario
@@ -220,7 +249,7 @@ class Usuario extends Luna\Controller {
         $userMapper=$this->spot->mapper("Entity\Usuario");
         //Seleccionamos la experiencia que este registrado para ese id
         $user = $userMapper->delete(['id ='=>(integer)$var]);  
-        echo $this->renderWiew( array_merge([] , $this->header("/panel/user/show") ), $res);
+        echo $this->renderWiew( array_merge([]), $res);
             
     }
     /**
