@@ -8,7 +8,7 @@
 
 
 class Plain extends Luna\Controller {
-     public function header( $menu ){
+     public function header( $menu,$lang ){
         $wmpr = $this->spot->mapper("Entity\Weather");
         $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
         $duration = null;
@@ -21,10 +21,42 @@ class Plain extends Luna\Controller {
             $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
         }
         $date_bali = new DateTime("now" ,new DateTimeZone( "Asia/Makassar" ) );
+        $dat=$date_bali->format("l d F h:i a");
+        switch($lang){
+            case "es":
+                //months
+                $dat = str_replace('January','Enero',$dat);
+                $dat = str_replace('February','Febrero',$dat);
+                $dat = str_replace('March','Marzo',$dat);
+                $dat = str_replace('April','Abril',$dat);
+                $dat = str_replace('May','Mayo',$dat);
+                $dat = str_replace('June','Junio',$dat);
+                $dat = str_replace('July','Julio',$dat);
+                $dat = str_replace('August','Agosto',$dat);
+                $dat = str_replace('September','Septiembre',$dat);
+                $dat = str_replace('October','Octubre',$dat);
+                $dat = str_replace('November','Noviembre',$dat);
+                $dat = str_replace('December','Diciembre',$dat);
+                //days
+                $dat = str_replace('Monday','Lunes',$dat);
+                $dat = str_replace('Tuesday','Martes',$dat);
+                $dat = str_replace('Wednesday','Miércoles',$dat);
+                $dat = str_replace('Thursday','Jueves',$dat);
+                $dat = str_replace('Friday','Viernes',$dat);
+                $dat = str_replace('Saturday','Sábado',$dat);
+                $dat = str_replace('Sunday','Domingo',$dat);
+            break;
+            case "en":
+                $dat=$date_bali->format("l d F h:i a");
+            break;
+            default:
+                $dat=$date_bali->format("l d F h:i a");
+            break;
+        }
         $weather = json_decode( $current_data->data );
 
         return ["weather" => $weather->main , 
-            "current_time" => $date_bali->format("l d F h:i a") ,
+            "current_time" => $dat,
             $menu => true] ;
     }
     public function home($req , $res){
@@ -42,7 +74,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/home.mustache");
             break;
         }
-        echo $this->renderWiew(array_merge(["tour"=>$tour],$this->header("home")), $res);
+        echo $this->renderWiew(array_merge(["tour"=>$tour],$this->header("home",$lang)), $res);
     }
     public function about($req , $res){
         $lang=$req->lang;
@@ -57,7 +89,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/about.mustache");
             break;
         }
-    	echo $this->renderWiew( $this->header("about"), $res);
+    	echo $this->renderWiew( $this->header("about",$lang), $res);
     }
 
     public function aviso($req , $res){
@@ -73,7 +105,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/aviso.mustache");
             break;
         }
-        echo $this->renderWiew( $this->header("aviso"), $res);
+        echo $this->renderWiew( $this->header("aviso",$lang), $res);
     }
     public function hotel($req , $res){
         $lang=$req->lang;
@@ -103,7 +135,7 @@ class Plain extends Luna\Controller {
                     return Luna\Translate::to( $lang , ["uri"=> $uri, "mapper"=>"{hotel}"]);
                 };
 
-                echo $this->renderWiew( array_merge(["translate"=>$translate,"hotel-data" => $hotel] , $this->header("hotel") ), $res);    
+                echo $this->renderWiew( array_merge(["translate"=>$translate,"hotel-data" => $hotel] , $this->header("hotel",$lang) ), $res);    
             }
             else{
                 header('Location:'.Luna\Translate::url("/holtel-collection"));
@@ -122,7 +154,7 @@ class Plain extends Luna\Controller {
             }
             $hotelMapper=$this->spot->mapper("Entity\Hotel");
             $hotel=$hotelMapper->select()->with("images");
-            echo $this->renderWiew( array_merge(["hotel-data"=>$hotel], $this->header("hotel")), $res);
+            echo $this->renderWiew( array_merge(["hotel-data"=>$hotel], $this->header("hotel",$lang)), $res);
         }
         
     }
@@ -152,7 +184,7 @@ class Plain extends Luna\Controller {
                     $uri = $lang=="es"?$this->tour->uri_es:$this->tour->uri;
                     return Luna\Translate::to( $lang , ["uri"=> $uri, "mapper"=>"{exper}"]);
                 };
-                echo $this->renderWiew( array_merge(["translate"=>$translate,"tour" => $tour] , $this->header("experience") ), $res);    
+                echo $this->renderWiew( array_merge(["translate"=>$translate,"tour" => $tour] , $this->header("experience",$lang) ), $res);    
             }
             else{
                 header('Location:'.Luna\Translate::url("/experience"));
@@ -171,7 +203,7 @@ class Plain extends Luna\Controller {
             }
             $tourMapper = $this->spot->mapper("Entity\Tour");
             $tours = $tourMapper->select()->with("images");
-            echo $this->renderWiew( array_merge(["tours" => $tours] , $this->header("experience") ), $res);
+            echo $this->renderWiew( array_merge(["tours" => $tours] , $this->header("experience",$lang) ), $res);
         }
     	
     }
@@ -191,7 +223,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/transfer.mustache");
             break;
         }
-    	echo $this->renderWiew( array_merge(["transferBlock" => $transfer] , $this->header("transfer") ), $res);
+    	echo $this->renderWiew( array_merge(["transferBlock" => $transfer] , $this->header("transfer",$lang) ), $res);
     }
 
     public function contact($req , $res){
@@ -226,7 +258,7 @@ class Plain extends Luna\Controller {
             ]);
             $result=$contactMapper->insert($entity);
         }
-    	echo $this->renderWiew( $this->header("contact"), $res);
+    	echo $this->renderWiew( $this->header("contact",$lang), $res);
     }
     public function forgot($req , $res){
         $lang=$req->lang;
@@ -292,7 +324,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/forgot.mustache");
             break;
         }
-        echo $this->renderWiew($this->header("forgot"), $res);
+        echo $this->renderWiew($this->header("forgot",$lang), $res);
     }
     public function change($req , $res){
         $lang=$req->lang;
@@ -341,7 +373,7 @@ class Plain extends Luna\Controller {
                                 echo "<script>alert('The passwords do not match.');</script>";
                             break;
                         }
-                        echo $this->renderWiew( array_merge(["user" => $user,"forgot"=>$forgot] , $this->header("change") ), $res);
+                        echo $this->renderWiew( array_merge(["user" => $user,"forgot"=>$forgot] , $this->header("change",$lang) ), $res);
                     }
                 }
                 else{
@@ -358,7 +390,7 @@ class Plain extends Luna\Controller {
                             $res->m = $res->mustache->loadTemplate("Plain/change.mustache");
                         break;
                     }
-                    echo $this->renderWiew( array_merge(["user" => $user,"forgot"=>$forgot] , $this->header("change") ), $res);
+                    echo $this->renderWiew( array_merge(["user" => $user,"forgot"=>$forgot] , $this->header("change",$lang) ), $res);
                 }
             }
             else{
@@ -475,14 +507,14 @@ class Plain extends Luna\Controller {
             if($exito){
                 $req->data["emailto"]=$req->data["user"];
                 $this->mailer( $res , $req , $template);
-                echo $this->renderWiew($this->header("register"), $res);
+                echo $this->renderWiew($this->header("register",$lang), $res);
             }
             else{
                 $auser=array("nombre"=>$req->data["name"],"app"=>$req->data["lname"],"apm"=>$req->data["mlname"],"usr"=>$req->data["user"],"tel"=>$req->data["phone"],"iata"=>$req->data["iata"],"miembro"=>$req->data["member"],"anios"=>$req->data["years"]);
                 echo $this->renderWiew(array_merge(["user" => $auser]),$res);
             }
         }
-        echo $this->renderWiew($this->header("register"), $res);
+        echo $this->renderWiew($this->header("register",$lang), $res);
     }    
 }
 
