@@ -444,6 +444,15 @@ table tr.main{
 		height: 80%;
 		max-width: 80%;
 	}
+	.expose .cerrar{
+		position: relative;
+		top:15px;
+		right: -95%;
+		min-height: 40px;
+		width: 50px;
+		background-image: url("/bali/assets/img/xIcon.png");
+		background-repeat: no-repeat;
+	}
 #back {
 	text-decoration: none;
 	padding: 5px;
