@@ -38,9 +38,11 @@ class Hotel extends \Spot\Entity {
     {
         $eventEmitter->on('beforeInsert', function (Entity $entity, Mapper $mapper) {
             $entity->uri = self::normalize( str_replace( " " , "-" , $entity->name ) );
+            $entity->uri_es = self::normalize( str_replace( " " , "-" , $entity->name ) );
         });
         $eventEmitter->on('beforeUpdate', function (Entity $entity, Mapper $mapper) {
             $entity->uri = self::normalize( str_replace( " " , "-" , $entity->name ) );
+            $entity->uri_es = self::normalize( str_replace( " " , "-" , $entity->name ) );
         });
     }
 

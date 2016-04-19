@@ -172,7 +172,7 @@ class Tour extends Luna\Controller {
                 $horas = filter_var($req->data["horas"], FILTER_SANITIZE_NUMBER_INT);
                 $descripcion = filter_var($req->data["descripcion"], FILTER_SANITIZE_STRING);
                 $descripcion_spa=filter_var($req->data["descripcion_spa"], FILTER_SANITIZE_STRING);
-                $Transfer = filter_var($req->data["Transfer"], FILTER_SANITIZE_STRING);
+                $Transfer = filter_var($req->data["transfer"], FILTER_SANITIZE_STRING);
                 $Transfer_spa = filter_var($req->data["transfer_spa"], FILTER_SANITIZE_STRING);
                 if(isset($req->data["esPrincipal"])){
                     $home = true;

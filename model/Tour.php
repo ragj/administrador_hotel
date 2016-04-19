@@ -39,9 +39,11 @@ class Tour extends \Spot\Entity {
     {
         $eventEmitter->on('beforeInsert', function (Entity $entity, Mapper $mapper) {
             $entity->uri = self::normalize( str_replace( " " , "-" , $entity->title ) );
+            $entity->uri_es = self::normalize( str_replace( " " , "-" , $entity->title ) );
         });
         $eventEmitter->on('beforeUpdate', function (Entity $entity, Mapper $mapper) {
             $entity->uri = self::normalize( str_replace( " " , "-" , $entity->title ) );
+            $entity->uri_es = self::normalize( str_replace( " " , "-" , $entity->title ) );
         });
     }
 
