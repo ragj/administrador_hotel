@@ -55,12 +55,23 @@
 			</column>
 			<column cols="4"  >
 				<div class="pad">
+					<h2>Video</h2>
 					<blocks cols="3">
-						{{#hotel-data.images}}
-							<div>
-								<img onclick=" showImage(this) " src="/bali/assets/img/hotel/{{id_hotel}}/{{url}}">
+						{{# videos }}
+							<div class="himage">
+								<img onclick="showVideo('{{path}}')" src="http://img.youtube.com/vi/{{videoID}}/default.jpg">
 							</div>
-						{{/hotel-data.images}}
+						{{/ videos }}
+					</blocks>
+				</div>
+				<div class="pad">
+					<h2>Gallery</h2>
+					<blocks cols="3">
+						{{#images}}
+							<div class="himage">
+								<img onclick=" showImage(this) " src="/bali/assets/img/hotel/{{hotel_idhotel}}/{{path}}">
+							</div>
+						{{/images}}
 					</blocks>
 					{{&hotel-data.map}}
 				</div>
@@ -68,16 +79,13 @@
 		</row>
 
 	</div>
-	<div class="expose" onclick="$(this).fadeOut()">
-		<div class="bg" ></div>
-		<div class="cerrar"></div>
-		<img src="">
+	<div class="expose">
 	</div>
+
 	
 	{{/content}}
 	{{$ scripts}}
-        <script type="text/javascript">
-        	
+        <script type="text/javascript">	
 			$(function(){
 				jQuery.fn.center = function () {
 					this.css("position","absolute");
@@ -85,14 +93,25 @@
 			this.css("left", Math.max(0, ((jQuery(jQuery(this).parent()).width() - jQuery(this).outerWidth()) / 2) ) + "px");
 			return this; };
 			});
-
-			function showImage( e ){
-				var img = $(e);
+			function showImage(e){
+				var img = e;
+				$(".expose").append("<div class='bg' ></div>");
+				$(".expose").append("<div class='cerrar' onclick='quitar(this)'></div>");
+				$(".expose").append("<img src=''>");
 				$(".expose").find("img").attr("src" , $(e).attr("src") );
 				$(".expose").fadeIn();
-				$(".expose img").center();
 			}
-
+			function showVideo( e ){
+				$(".expose").append("<div class='bg' ></div>");
+				$(".expose").append("<div class='cerrar' onclick='quitar(this)'></div>");
+				$(".expose").append(e);
+				$(".expose iframe").center();
+				$(".expose").fadeIn();
+			}
+			function quitar(e){
+				$(".expose").empty();
+				$(".expose").fadeOut();
+			}
         </script>
     {{/ scripts}}
 {{/ panel}}

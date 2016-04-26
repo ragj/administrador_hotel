@@ -192,7 +192,7 @@ footer{
 		padding-left: 20px;
 		padding-right: 20px;
 		text-align: center;
-		font-size: 20px;
+		font-size: 17px;
 		color: #C39323;
 		margin: 0px;
 		margin-bottom: 20px;
@@ -430,6 +430,15 @@ table tr.main{
 	color: #C39323;
 	font-weight: normal;
 	font-size: 12px;
+}
+.himage{
+	padding: 2px;
+	height: 80px;
+	width: 110px;
+}
+.himage img{
+	height: 70px;
+	width: 110px;
 }
 .expose{
 	position: fixed;

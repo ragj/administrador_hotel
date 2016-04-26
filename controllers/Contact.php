@@ -5,7 +5,7 @@
     	**/
     	public function show($req,$res){
 	    	$contactMapper=$this->spot->mapper("Entity\Contact");
-	    	$contacto=$contactMapper->select();
+	    	$contacto=$contactMapper->select()->with("zona");
 	    	echo $this->renderWiew(array_merge(["contact" => $contacto]),$res);
 	    }
 	}

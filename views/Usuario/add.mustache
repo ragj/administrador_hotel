@@ -64,7 +64,7 @@
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">IATA:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="iata" class="form-control" placeholder="Write a IATA." required required value="{{#user}}{{iata}}{{/user}}"/>
+		                      				<input type="text" name="iata" class="form-control" placeholder="Write a IATA." required required/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
@@ -78,6 +78,28 @@
 		                    			<div class="col-sm-6">
 		                      				<input type="number" name="years" class="form-control" placeholder="Write a number of years." required value="{{#user}}{{anios}}{{/user}}"/>
 		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                  				<label class="col-sm-3 control-label">Rol:<span class="text-danger">*</span></label>
+		                  				<div class="col-sm-6">
+		                  					<select name="rol" class="form-control">
+		                  						<option value=""></option>
+		                  						{{# rols}}
+		                  							<option value="{{idrols}}">{{rol}}</option>
+		                  						{{/ rols}}
+		                  					</select>
+		                  				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                  				<label class="col-sm-3 control-label">Zone:<span class="text-danger">*</span></label>
+		                  				<div class="col-sm-6">
+		                  					<select name="zone" class="form-control">
+		                  						<option value=""></option>
+		                  						{{# zones}}
+		                  							<option value="{{idzona}}">{{zona}}</option>
+		                  						{{/ zones}}
+		                  					</select>
+		                  				</div>
 		                  			</div>
 		                  			<hr>
 		                  			<div class="row">
@@ -105,12 +127,7 @@
 					var formulario = document.newUser;
     				re_user = /^\w+$/;
     				re_pass1 = /[0-9]/;
-    				if(!re_user.test(formulario.user.value)) {
-      					alert("Error:The user only contain letters , numbers and underscore.");
-      					form.user.focus();
-      					todoCorrecto=false;
-    				}
-    				else if(re_pass1.test(formulario.name.value)){
+    				if(re_pass1.test(formulario.name.value)){
     					alert("Error: The first name only contain letters.");
       					form.name.focus();
       					todoCorrecto=false;

@@ -2,7 +2,33 @@
 
 class Hotel extends Luna\Controller {
     /**
-    *   Funcion que registra un objeto de la clase hotel_images
+    *   Metodo que registra un video a un hotel
+    **/
+    public function addVideo($req,$res){
+        if(isset($req->data["hotel"],$req->data["video"])){
+            $tipo="V";
+            $hotel=$req->data["hotel"];
+            $path=$req->data["video"];
+            $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
+            $entity=$hotelImageMapper->build([
+                'path' =>$path,
+                'tipo' =>$tipo,
+                'hotel_idhotel' =>$hotel
+            ]);
+            $result=$hotelImageMapper->insert($entity);
+        }
+         $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+        $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+        $aux=array();
+        foreach ($zones as $zone) {
+            array_push($aux,$zone['zona_idzona']);
+        }
+        $hotelMapper=$this->spot->mapper("Entity\Hotel");
+        $hotel=$hotelMapper->select()->where(['zona_idzona'=>$aux]);
+        echo $this->renderWiew(array_merge(["hotel" => $hotel]),$res);
+    }
+    /**
+    *   Metodo que registra un objeto de la clase hotel_images
     **/
     public function addImages($req,$res){
         if(isset($req->data["hotel"],$_FILES['imagen']['name'])){
@@ -10,8 +36,6 @@ class Hotel extends Luna\Controller {
             if (file_exists("./assets/img/hotel/".$req->data["hotel"])==false) {
                      mkdir("./assets/img/hotel/".$req->data["hotel"]);
             }
-           
-            
             //definimos un array de tipos de datos permitidos
             $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
              if(!($_FILES['imagen']['error']>0)){
@@ -27,8 +51,9 @@ class Hotel extends Luna\Controller {
                                 $file=$_FILES['imagen']['name'];
                                 $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
                                 $entity = $hotelImageMapper->build([
-                                    'id_hotel' =>$req->data["hotel"],
-                                    'url' =>$file
+                                    'hotel_idhotel' =>$req->data["hotel"],
+                                    'tipo'=>"I",
+                                    'path' =>$file
                                 ]);
                                 $result = $hotelImageMapper->insert($entity);
                                 echo "<div class=exito><p>Image Uploaded.</p></div>";
@@ -41,12 +66,18 @@ class Hotel extends Luna\Controller {
                 }
                 else{ echo "<div class=error><p>The image was not uploaded.</p></div>";}
         }
+        $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+        $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+        $aux=array();
+        foreach ($zones as $zone) {
+            array_push($aux,$zone['zona_idzona']);
+        }
         $hotelMapper=$this->spot->mapper("Entity\Hotel");
-        $hotel=$hotelMapper->select();
+        $hotel=$hotelMapper->select()->where(['zona_idzona'=>$aux]);
         echo $this->renderWiew(array_merge(["hotel" => $hotel]),$res);
     }
     /**
-    *   Funcion que muestra las imagenes por hotel
+    *   Metodo que muestra las imagenes por hotel
     **/
       public function showImages($req,$res){
          $hotelMapper = $this->spot->mapper("Entity\Hotel");
@@ -54,21 +85,21 @@ class Hotel extends Luna\Controller {
          echo $this->renderWiew(array_merge(["hotel" => $hotel]),$res);
     }
     /**
-    *   Funcion que sirve para editar una imagen de un hotel
+    *   Metodo que sirve para editar una imagen de un hotel
     **/
     public function editImages($req,$res){
         if($req->params["hotel"]!=null){
             //obtener imagen mediante el id
             $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
-            $hotelImage= $hotelImageMapper->select()->where(["id" => $req->params["hotel"]])->first(); 
+            $hotelImage= $hotelImageMapper->select()->where(["idhotelImages" => $req->params["hotel"]])->first(); 
             //obtener el tour mediante el id que obtenemos de la imagen
             $hotelMapper=$this->spot->mapper("Entity\Hotel");
-            $hotel=$hotelMapper->select()->where(["id" => $hotelImage->id_hotel])->first();
+            $hotel=$hotelMapper->select()->where(["idhotel" => $hotelImage->hotel_idhotel])->first();
         }
         if(isset($_FILES['imagen']['name'])){
             $imagen="";
             //establecemos el formato en que se almacena la url en la base de datos
-             if(strcmp($_FILES['imagen']['name'], $hotelImage->url)!==0 && $_FILES['imagen']['name']!=null)
+             if(strcmp($_FILES['imagen']['name'], $hotelImage->path)!==0 && $_FILES['imagen']['name']!=null)
             {
                 //establecemos el directorio con el cual trabajaremos
                 $dir="./assets/img/hotel/";
@@ -88,7 +119,7 @@ class Hotel extends Luna\Controller {
                             $resultado=@move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
                             if($resultado){
                                 //eliminamos fichero anterior
-                                @unlink($dir.$hotelImage->id_hotel."/".$hotelImage->url);
+                                @unlink($dir.$hotelImage->hotel_idhotel."/".$hotelImage->path);
                                 //obtenemos la ruta del archivo
                                 $imagen=$_FILES['imagen']['name'];                  
                             }
@@ -104,14 +135,28 @@ class Hotel extends Luna\Controller {
                 $imagen=$hotelImage->url;
             }
             //actualizamos atributo de la entidad
-            $hotelImage->url = $imagen;
+            $hotelImage->path = $imagen;
             //actualizamos la entidad
             $hotelImageMapper->update($hotelImage);
         }
         echo $this->renderWiew(array_merge(["hotel" => $hotel,"image"=>$hotelImage]),$res);
     }
-     /**
-    *   Funcion que sirve para eliminar una imagen relacionada a un tour
+    /**
+    *   Metodo que sirve para editar un video relacionado a un hotel
+    **/
+    public function editVideo($req,$res){
+        if(isset($req->params["hotel"])){
+            $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
+            $hotelImage= $hotelImageMapper->select()->with("hotel")->where(["idhotelImages" => $req->params["hotel"]])->first(); 
+        }
+        if(isset($req->data["video"])){
+            $hotelImage->path=$req->data["video"];
+            $hotelImageMapper->update($hotelImage);
+        }
+        echo $this->renderWiew(array_merge(["video"=>$hotelImage]),$res);
+    }
+    /**
+    *   Metodo que sirve para eliminar una imagen relacionada a un hotel
     **/
     public function deleteImages($req,$res)
     {
@@ -121,22 +166,43 @@ class Hotel extends Luna\Controller {
         $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
         $hotelMapper=$this->spot->mapper("Entity\Hotel");
         //Seleccionamos la experiencia que este registrado para ese ide
-        $hotelImage = $hotelImageMapper->select()->where(["id" => $req->params["hotel"]])->first();
-        $ruta="./assets/img/hotel/".$hotelImage->id_hotel."/".$hotelImage->url;
-        $hotel=$hotelMapper->select()->where(["id"=> $hotelImage->id_hotel])->first();
+        $hotelImage = $hotelImageMapper->select()->where(["idhotelImages" => $req->params["hotel"]])->first();
+        $ruta="./assets/img/hotel/".$hotelImage->hotel_idhotel."/".$hotelImage->path;
+        $hotel=$hotelMapper->select()->where(["idhotel"=> $hotelImage->hotel_idhotel])->first();
         //Eliminamos el registro del id seleccionado
         $hotelImage=null;
-        $hotelImage = $hotelImageMapper->delete(['id ='=>(integer)$var]);
-
+        $hotelImage = $hotelImageMapper->delete(['idhotelImages'=>(integer)$var]);
         //Establecemos a spot con que entity class vamos a trabajar
         @unlink($ruta);
         echo $this->renderWiew(array_merge(["hotel" => $hotel]),$res);
     }
     /**
-    * Funcion que sirve para registrar un hotel a la base de datos
+    *   Metodo que elimina un video de un hotel
+    **/
+    public function deleteVideo($req,$res){
+        if(isset($req->params["hotel"])){
+           $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
+           $hotelImage=$hotelImageMapper->select()->where(["idhotelImages"=>$req->params["hotel"]])->first();
+           $hotelMapper=$this->spot->mapper("Entity\Hotel");
+           $hotel=$hotelMapper->select()->where(["idhotel"=> $hotelImage->hotel_idhotel])->first()->toArray();
+           $hotelImage = $hotelImageMapper->delete(['idhotelImages'=>(integer)$req->params["hotel"]]);
+           header("Location:/bali/panel/hotel/edit/".$hotel["idhotel"]);
+        }
+    }
+
+    /**
+    * Metodo que sirve para registrar un hotel a la base de datos
     **/
     public function add($req, $res) {
-    	if(isset($req->data["name"])){
+        $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+        $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+        $aux=array();
+        foreach ($zones as $zone) {
+            array_push($aux,$zone['zona_idzona']);
+        }
+        $zoneMapper=$this->spot->mapper("Entity\Zona");
+        $zona=$zoneMapper->select()->where(["idzona"=>$aux]);
+    	if(isset($req->data["name"],$req->data["zone"])){
     		//definimos donde se almacenara el thumbnail
     		$dir="./assets/img/hotel-thumb/";
     		//array de tipos de archivos permitidos
@@ -150,6 +216,7 @@ class Hotel extends Luna\Controller {
     		$tel=filter_var($req->data["tel"], FILTER_SANITIZE_STRING);
     		$descripcion=filter_var($req->data["descripcion"], FILTER_SANITIZE_STRING);
             $descripcion_spa=filter_var($req->data["descripcion_spa"], FILTER_SANITIZE_STRING);
+            $zona=$req->data["zone"];
 
     		$thumb="";
     		$error=0;
@@ -194,7 +261,8 @@ class Hotel extends Luna\Controller {
                 'website' => $web,
                 'map' => $map,
                 'tel' => $tel,
-                'email' =>$email
+                'email' =>$email,
+                'zona_idzona'=>$zona
             ]);
             //insertamos la entidad si no hubo ningun error
             if($error==0){
@@ -203,23 +271,40 @@ class Hotel extends Luna\Controller {
             }
     	}
        
-        echo $this->renderWiew([], $res);
+        echo $this->renderWiew(array_merge(["zones"=>$zona]), $res);
     }
     /**
-    *	Funcion que obtiene todos los registros de la tabla hotel.
+    *	Metodo que obtiene todos los registros de la tabla hotel.
     **/
     public function show($req,$res){
+        $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+        $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+        $aux=array();
+        foreach ($zones as $zone) {
+            array_push($aux,$zone['zona_idzona']);
+        }
     	$hotelMapper=$this->spot->mapper("Entity\Hotel");
-    	$hotel=$hotelMapper->select();
+    	$hotel=$hotelMapper->select()->with("zona")->where(["zona_idzona"=>$aux]);
     	echo $this->renderWiew(array_merge(["hotel" => $hotel]),$res);
     }
     /**
-    *	Funcion que actualiza un objeto de las clase hotel.
+    *	Metodo que actualiza un objeto de las clase hotel.
     **/
     public function edit($req,$res){
         if($req->params["hotel"]!=null){
             $hotelMapper=$this->spot->mapper("Entity\Hotel");
-            $hotel = $hotelMapper->select()->with("images")->where(["id" => $req->params["hotel"]])->first();    
+            $hotel = $hotelMapper->select()->with("zona")->where(["idhotel" => $req->params["hotel"]])->first();
+            $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
+            $images=$hotelImageMapper->select()->where(["hotel_idhotel"=>$req->params["hotel"],"tipo"=>"I"]);
+            $videos=$hotelImageMapper->select()->where(["hotel_idhotel"=>$req->params["hotel"],"tipo"=>"V"]);
+            $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+            $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+            $aux=array();
+            foreach ($zones as $zone) {
+                array_push($aux,$zone['zona_idzona']);
+            }
+            $zoneMapper=$this->spot->mapper("Entity\Zona");
+            $zona=$zoneMapper->select()->where(["idzona"=>$aux]);    
         }
         if(isset($req->data["name"])){
             //definimos donde se almacenara el thumbnail
@@ -237,6 +322,7 @@ class Hotel extends Luna\Controller {
             $tel=$req->data["tel"]!=null?filter_var($req->data["tel"],FILTER_SANITIZE_STRING):$hotel->tel;
             $descripcion=$req->data["descripcion"]!=null?filter_var($req->data["descripcion"],FILTER_SANITIZE_STRING):$hotel->description;
             $description_es=$req->data["descripcion_spa"]!=null?filter_var($req->data["descripcion_spa"],FILTER_SANITIZE_STRING):$hotel->description_esp;
+            $zona=$req->data["zone"]!=null?$req->data["zone"]:$hotel->zona_idzona;
             $thumb="";
             $img="";
             $error=0;
@@ -291,11 +377,11 @@ class Hotel extends Luna\Controller {
             }
         }
         
-    	echo $this->renderWiew( array_merge(["hotel" => $hotel]), $res);
+    	echo $this->renderWiew( array_merge(["hotel" => $hotel,"zones"=>$zona,"images"=>$images,"videos"=>$videos]), $res);
     }
     
     /**
-    *	Funcion que elimina un registro de hotel y todas las imagenes relacionadas a esta 
+    *	Metodo que elimina un registro de hotel y todas las imagenes relacionadas a esta 
     *	hotel.
     **/
     public function delete($req,$res){
@@ -308,7 +394,7 @@ class Hotel extends Luna\Controller {
 	    	$ruta="./assets/img/hotel-thumb/".$hotel->thumbnail;
 			//Eliminamos el registro del id seleccionado
 			$hotel=null;
-	    	$hotel = $hotelMapper->delete(['id ='=>(integer)$var]);
+	    	$hotel = $hotelMapper->delete(['idhotel'=>(integer)$var]);
 	    	//Establecemos a spot con que entity class vamos a trabajar
 			$hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
 			//Obtenemos todas las imagenes que esten relacionadas con el post
@@ -320,11 +406,11 @@ class Hotel extends Luna\Controller {
 			$this->deleteDirectory("./assets/img/hotel/".$var);
 			//obtenemos la ruta de cada imagen asociada y eliminamos el ficher
 			$hotel=null;
-			$hotel = $hotelImageMapper->delete(['id_hotel =' => (integer)$var]);
+			$hotel = $hotelImageMapper->delete(['hotel_idhotel' => (integer)$var]);
 	    	echo $this->renderWiew( array_merge([]), $res);
     }
      /**
-    *   Funcion que elimina todos los archivos del directorio y el directorio
+    *   Metodo que elimina todos los archivos del directorio y el directorio
     *   @param $carpeta
     */
     private function eliminarFiles($carpeta)
@@ -342,7 +428,7 @@ class Hotel extends Luna\Controller {
         }
     }
     /**
-    *   funcion que elemina el directorio
+    *   Metodo que elemina el directorio
     *   @param $carpeta
     */
     private function deleteDirectory($dir) {

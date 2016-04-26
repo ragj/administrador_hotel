@@ -1,0 +1,53 @@
+{{% BLOCKS }}
+	{{< quirk }}
+		{{$ title}}
+            Add Hotel Video
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Hotel</a></li>
+			        <li class="active">Add Hotel Video</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-6 col-md-offset-3">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Form Hotel Video</h4>
+	        				</div>
+		        			<div class="panel-body">
+		        				<hr>			
+		        				<form class="form-horizontal" action="/bali/panel/hotel/addVideo" method="post" name="newHotel" class="form-horizontal">
+		        					<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Hotel: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<select name="hotel" class="form-control">
+				                            	<option value=""></option>
+				                            	{{#hotel}}
+				                            		<option value="{{idhotel}}">{{name}}</option>
+												{{/hotel}}
+											</select>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Video: Width:300 Height:100</label>
+		                    			<div class="col-sm-6">
+		                     				<input type="text" class="form-control" name="video" placeholder="Write the hotel's youtube video."/>
+		                    			</div>
+		                  			</div>
+		                  			<hr>
+		                  			<div class="row">
+	                    				<div class="col-sm-9 col-sm-offset-8">
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
+	                    				</div>
+	                  				</div>
+		        				</form>
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+		{{/ scripts }}
+	{{/ quirk }}

@@ -1,31 +1,28 @@
 <?php
 
-//  EJEMPLO
+	namespace Entity;
 
-namespace Entity;
+	use Spot\EntityInterface as Entity;
+	use Spot\MapperInterface as Mapper;
 
-use Spot\EntityInterface as Entity;
-use Spot\MapperInterface as Mapper;
+	/**
+	 *  Model for Hotel Image  
+	 */
+	class HotelImage extends \Spot\Entity {
 
-/**
- *  Model for Viaje
- *  
- */
-class HotelImage extends \Spot\Entity {
+	    protected static $table = 'hotelImages';
 
-    protected static $table = 'hotel_image';
-
-    public static function fields() {
-        return [
-            'id' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
-            'id_hotel' => ['type' => 'integer', 'required' => true],
-            'url' => ['type' => 'string' ]
-        ];
-    }
-
-    
-
-    
-}
-
+	    public static function fields() {
+	        return [
+	            'idhotelImages' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
+	            'path' => ['type' => 'string' ],
+	            'tipo' => ['type' => 'string'],
+	            'hotel_idhotel' => ['type' => 'integer', 'required' => true]
+	        ];
+	    }
+	    public static function relations(Mapper $mapper, Entity $entity)
+	    {
+	        return ['hotel' => $mapper->belongsTo($entity, 'Entity\Hotel', 'hotel_idhotel')];
+	    }
+	}
 ?>

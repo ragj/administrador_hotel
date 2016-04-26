@@ -1,62 +1,79 @@
 {{% BLOCKS }}
-	{{< quirk }}
-		{{$ title}}
-            Edit Tour
-        {{/ title}}
-        {{$ content }}
-    		<div class="contentpanel">
-    			<ol class="breadcrumb breadcrumb-quirk">
-			        <li><a href=""><i class="fa fa-home mr5"></i>Tour</a></li>
-			        <li class="active">Edit Tour</li>
-      			</ol>
-      			{{# tour }}
-	    			<div class="row">
-	    				<div class="col-md-6 col-md-offset-3">
-		        			<div class="panel">
-		        				<div class="panel-heading">
-		        					<h4 class="panel-title">Edit Tour</h4>
-		        				</div>
-			        			<div class="panel-body">
-			        				<hr>			
-			        				<form class="form-horizontal" action="/bali/panel/tour/edit/{{id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
-			        					<div class="form-group">
-			                    			<label class="col-sm-3 control-label">Title: <span class="text-danger">*</span></label>
-			                    			<div class="col-sm-6">
-			                      				<input type="text" name="name" class="form-control" placeholder="Write the tour's title." value="{{title}}" required />
-			                    			</div>
-			                  			</div>
-			                  			<div class="form-group">
-			                    			<label class="col-sm-3 control-label">Thumbnail:</label>
-			                    			<div class="col-sm-6">
-			                     				<input type="file"name="thumbnail">
-												<span class="help-block">THUMBNAIL Image size (000px*000px)</span>
-												<img src="/bali/assets/img/experience/indo/{{thumbnail}}" height="250px" width="250px"/>
-			                    			</div>
-			                  			</div>
-			                  			<div class="form-group">
-    										<label class="control-label col-sm-3" >Actual Type:</label>
-    										<div class="col-sm-6">
-      											{{type}}
-    										</div>
-  										</div>
-  										<div class="form-group">
-    										<label class="control-label col-sm-3" for="titulo">Type : </label>
-    										<div class="col-sm-6">
+{{< quirk }}
+  {{$ title}}
+    Edit Experience
+  {{/ title}}
+  {{$ content }}
+    <div class="contentpanel">
+    	<ol class="breadcrumb breadcrumb-quirk">
+        <li><a href=""><i class="fa fa-home mr5"></i>Experience</a></li>
+        <li class="active">Edit Experience</li>
+      </ol>
+      {{# tour }}
+	    	<div class="row">
+	    		<div class="col-md-6 col-md-offset-3">
+		        <div class="panel">
+		        	<div class="panel-heading">
+		        		<h4 class="panel-title">Edit Experience</h4>
+		        	</div>
+			        <div class="panel-body">
+			        	<hr>			
+			        	<form class="form-horizontal" action="/bali/panel/tour/edit/{{idexperience}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+			        		<div class="form-group">
+                    <label class="col-sm-3 control-label">Title: <span class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                      <input type="text" name="name" class="form-control" placeholder="Write the tour's title." value="{{title}}" required />
+                    </div>
+                  </div>
+                  <div class="form-group">
+			                    <label class="col-sm-3 control-label">Thumbnail:</label>
+			                    <div class="col-sm-6">
+			                     	<input type="file"name="thumbnail">
+												    <span class="help-block">THUMBNAIL Image size (000px*000px)</span>
+												    <img src="/bali/assets/img/experience/indo/{{thumbnail}}" height="250px" width="250px"/>
+			                    </div>
+                  </div>
+                  <div class="form-group">
+    										  <label class="control-label col-sm-3" >Actual Type:</label>
+    										  <div class="col-sm-6">
+                            {{type.type}}	
+    										  </div>
+                  </div>
+  								<div class="form-group">
+    										  <label class="control-label col-sm-3" for="titulo">Type : </label>
+    										  <div class="col-sm-6">
       											<select class="form-control" name="tipo">
-					                            	<option value=""></option>
-					                            	<option value="RECOMMENDED TOURS">RECOMMENDED TOURS</option>
-					                            	<option value="HALF DAY TOURS">HALF DAY TOURS</option>
-					                            	<option value="FULL DAY TOURS">FULL DAY TOURS</option>
-					                            </select>
-    										</div>
-  										</div>
-  										<div class="form-group">
+                              <option value=""></option>
+                              {{#types}}
+                                <option value="{{idtype}}">{{type}}</option>
+                              {{/types}}
+                            </select>
+    										  </div>
+  								</div>
+                  <div class="form-group">
+                          <label class="control-label col-sm-3" >Actual Zone:</label>
+                          <div class="col-sm-6">
+                            {{zona.zona}} 
+                          </div>
+                  </div>
+                  <div class="form-group">
+                          <label class="control-label col-sm-3" for="titulo">Zone : </label>
+                          <div class="col-sm-6">
+                            <select class="form-control" name="zona">
+                              <option value=""></option>
+                              {{#zones}}
+                                <option value="{{idzona}}">{{zona}}</option>
+                              {{/zones}}
+                            </select>
+                          </div>
+                  </div>
+  								<div class="form-group">
     										<label class="control-label col-sm-3" for="titulo">Actual Duration:</label>
     										<div class="col-sm-6">
       											{{duration}}<br>{{duration_esp}}
     										</div>
-  										</div>
-  										<div class="form-group">
+                  </div>
+  								<div class="form-group">
     										<label class="control-label col-sm-3" for="titulo">Duration:</label>
     										<div class="col-sm-6">
       											<select class="form-control" name="duracion">
@@ -65,94 +82,94 @@
 					                            	<option value="FULL DAY ">FULL DAY</option>
 					                            </select>
     										</div>
-  										</div>
-					                    <div class="form-group">
+  								</div>
+                  <div class="form-group">
     										<label class="control-label col-sm-3" for="titulo">Hours:</label>
     										<div class="col-sm-6">
       											<input type="number" class="form-control" placeholder="Hours" name="horas">
     										</div>
-  										</div>
-  										<div class="form-group">
+  								</div>
+  								<div class="form-group">
     										<label class="control-label col-sm-3" for="titulo">Description:</label>
     										<div class="col-sm-6">
       											<textarea class="form-control" name="descripcion" style="height: auto;">{{description}}</textarea>
     										</div>
-  										</div>
-  										<div class="form-group">
+  								</div>
+  								<div class="form-group">
     										<label class="control-label col-sm-3" for="titulo">Spanish Description:</label>
     										<div class="col-sm-6">
       											<textarea class="form-control" name="descripcion_esp" style="height: auto;">{{description_esp}}</textarea>
     										</div>
-  										</div>
-  										<div class="form-group">
+  								</div>
+  								<div class="form-group">
     										<label class="control-label col-sm-3" for="titulo">Transfer:</label>
     										<div class="col-sm-6">
       											<textarea class="form-control" name="Transfer">{{transfer}}</textarea>
     										</div>
-  										</div>
-  										<div class="form-group">
+  								</div>
+  								<div class="form-group">
     										<label class="control-label col-sm-3" for="titulo">Spanish Transfer:</label>
     										<div class="col-sm-6">
       											<textarea class="form-control" name="Transfer_esp">{{transfer_esp}}</textarea>
     										</div>
-  										</div>
-  										<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Home:</label>
-		                    				<div class="col-sm-6">
-		                    					{{#home}}
-       												<input type="checkbox" class="form-control" name="esPrincipal" value="true" checked/>
-       											{{/home}}
-       											{{^home}}
-       												<input type="checkbox" class="form-control" name="esPrincipal" value="true" />
-       											{{/home}}
-		                   					</div>
-		                  				</div>
-			                  			<div class="row">
-		                    				<div class="col-sm-9 col-sm-offset-8">
-						                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
-		                    				</div>
-		                  				</div>
-		                  				<hr>
-			                  			<div class="form-group">
-			                    			<label class="col-sm-3 control-label">New Image:</label>
-			                    			<div class="col-sm-6">
-			                    				<a href="/bali/panel/tour/addImages" target="_blank"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">New Image</button></a>	
-			                   				</div>
-			                  			</div>
-			                  			<hr>
-			        				</form>
-			        			</div>
-		        			</div>
-	        			</div>
-	    			</div>
-	    			<div class="row">
-        				<div class="col-md-8 col-md-offset-2">
-        					{{# images }}
-        						<div class="col-md-4">
-		          					<div class="panel">
-		            					<div class="panel-heading">
-		              						<h4 class="panel-title">Image {{url}}</h4>
-		            					</div>
-		            					<div class="panel-body">
-		              						<img src="/bali/assets/img/experience/{{url}}" class="img-rounded img-responsive" alt="Cinque Terre" width="150" height="50">
-						                    <a href="/bali/panel/tour/editImages/{{id}}"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i></button></a>
-						                    <a onclick=myFunction({{id}})><button type="button" class="btn btn-danger"><i class="fa fa-times"></i></button></a>	
-		            					</div>
-		          					</div>
-          						</div>
-        					{{/ images }}
-        					<script>
-                                function myFunction(id) {
-                                    if (confirm("Are you sure you want to delete this image?") == true) {
-                                        self.location = "/bali/panel/tour/deleteImages/"+id; 
-                                    } 
-                                }
-                            </script>
-          				</div>
-        			</div>
-	    		{{/ tour }}	
+  								</div>
+  								<div class="form-group">
+                        <label class="col-sm-3 control-label">Home:</label>
+		                    <div class="col-sm-6">
+		                    	{{#home}}
+       											<input type="checkbox" class="form-control" name="esPrincipal" value="true" checked/>
+       										{{/home}}
+       										{{^home}}
+       											<input type="checkbox" class="form-control" name="esPrincipal" value="true" />
+       										{{/home}}
+		                   	</div>
+		              </div>
+                  <div class="row">
+		                    <div class="col-sm-9 col-sm-offset-8">
+						              <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
+		                    </div>
+		              </div>
+		              <hr>
+                  <div class="form-group">
+                        <label class="col-sm-3 control-label">New Image:</label>
+                        <div class="col-sm-6">
+			                    <a href="/bali/panel/tour/addImages" target="_blank"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">New Image</button></a>	
+                        </div>
+                  </div>
+                  <hr>
+			        	</form>
+			        </div>
+		        </div>
+	        </div>
 	    	</div>
-        {{/ content }}
-		{{$ scripts }}
-		{{/ scripts }}
-	{{/ quirk }}
+	    {{/ tour }}
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          {{# tour.images }}
+            <div class="col-md-4">
+              <div class="panel">
+                <div class="panel-heading">
+                      <h4 class="panel-title">Image</h4>
+                </div>
+                <div class="panel-body" height="130px">
+                    <img src="/bali/assets/img/experience/{{path}}" class="img-rounded" height="120px" width="270px">
+                    <a href="/bali/panel/tour/editImages/{{idexperienceImages}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
+                    <a onclick=myFunction({{idexperienceImages}})><button type="button" class="btn btn-danger btn-quirk"><i class="fa fa-times"></i></button></a>
+                </div>
+              </div>
+            </div>
+          {{/ tour.images }}
+          <script>
+            function myFunction(id) {
+              if (confirm("Estas Seguro de Eliminar?") == true) {
+                self.location = "/bali/panel/tour/deleteImages/"+id; 
+              } 
+            }                    
+          </script>
+                  </div>
+              </div>	
+    </div>
+  {{/ content }}
+	{{$ scripts }}
+	{{/ scripts }}
+{{/ quirk }}

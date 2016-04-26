@@ -1,15 +1,10 @@
 <?php
-
-//  EJEMPLO
-
     namespace Entity;
-
     use Spot\EntityInterface as Entity;
     use Spot\MapperInterface as Mapper;
 
     /**
      *  Model for Contacto
-     *  TODO: Make it work
      */
     class Contact extends \Spot\Entity {
 
@@ -17,12 +12,17 @@
 
         public static function fields() {
             return [
-                'id' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
+                'idContact' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
                 'nombre' => ['type' => 'string', 'required' => true],
                 'email' => ['type' => 'string','requiered'=>true],
                 'mensaje' => ['type' => 'string','requiered'=>true ],
-                'created' => ['type' => 'datetime', 'required' => true , "value" => new \DateTime() ]
+                'created' => ['type' => 'datetime', 'required' => true , "value" => new \DateTime() ],
+                'zona_idzona'      => ['type' => 'integer', 'required' => true]
             ];
+        }
+        public static function relations(Mapper $mapper, Entity $entity)
+        {
+            return ['zona' => $mapper->belongsTo($entity, 'Entity\Zona', 'zona_idzona')];
         }
     }
 

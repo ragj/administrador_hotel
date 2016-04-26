@@ -36,7 +36,7 @@ class Usuario extends Luna\Controller {
         }
         if( (is_object($duration) && $duration->h > 0) || !is_object($current_data)){
             $data = file_get_contents("http://api.openweathermap.org/data/2.5/weather?id=1277539&APPID=6e387a73833fca13ccd287b1e7e2aa50&units=metric");
-            $wmpr->create([ "data" => $data , "updated" => new DateTime()]);
+            $wmpr->create([ "data" => $data , "updated" => new DateTime(),"zona_idzona"=>1]);
             $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
         }
         $date_bali = new DateTime("now" ,new DateTimeZone( "Asia/Makassar" ) );
@@ -82,7 +82,11 @@ class Usuario extends Luna\Controller {
     *   Metodo que sirve para añadir un usuario
     **/
     public function add($req,$res){
-        if(isset($req->data["name"],$req->data["app"],$req->data["user"],$req->data["pass"],$req->data["pass2"],$req->data["apm"],$req->data["tel"],$req->data["iata"],$req->data["member"],$req->data["years"])){
+        $rolMapper=$this->spot->mapper("Entity\Rols");
+        $rols=$rolMapper->select();
+        $zoneMapper=$this->spot->mapper("Entity\Zona");
+        $zones=$zoneMapper->select();
+        if(isset($req->data["name"],$req->data["app"],$req->data["user"],$req->data["pass"],$req->data["pass2"],$req->data["apm"],$req->data["tel"],$req->data["iata"],$req->data["member"],$req->data["years"],$req->data["rol"],$req->data["zone"])){
             $exito=true;
             //obtencion y sanitizacion de los datos
             $name=filter_var($req->data["name"], FILTER_SANITIZE_STRING);
@@ -95,8 +99,10 @@ class Usuario extends Luna\Controller {
             $iata=filter_var($req->data["iata"], FILTER_SANITIZE_STRING);
             $member=filter_var($req->data["member"], FILTER_SANITIZE_STRING);
             $years=filter_var($req->data["years"], FILTER_SANITIZE_NUMBER_INT);
+            $rol=$req->data["rol"];
+            $zone=$req->data["zone"];
             //varificación de disponibilidad del usuario
-            $usersMapper = $this->spot->mapper("Entity\Usuario");
+            $usersMapper = $this->spot->mapper("Entity\Users");
             //buscamos el usuario
             $user = $usersMapper->where(["usuario" => $user1]);
             //si hay un registro, entonces el usuario no esta disponible
@@ -138,11 +144,18 @@ class Usuario extends Luna\Controller {
                     'telefono' => $tel,
                     'iata' => $iata,
                     'miembros' => $member,
-                    'años' => $years,
-                    'activo'=>true
+                    'years' => $years,
+                    'activo'=>true,
+                    'rols_idrols'=>$rol
                 ]);
                 //insertamos la entidad
                 $result=$usersMapper->insert($entity);
+                $userZonesMapper=$this->spot->mapper("Entity\UsersZona");
+                $entity1=$userZonesMapper->build([
+                        'users_id'=>$entity->id,
+                        'zona_idzona'=>$zone
+                    ]);
+                $result=$userZonesMapper->insert($entity1);
                echo "
                         <script>
                             alert('user registered');
@@ -162,12 +175,12 @@ class Usuario extends Luna\Controller {
                     "iata"=>$iata,
                     "miembro"=>$member,
                     "anios"=>$years);
-                echo $this->renderWiew(array_merge(["user" => $auser]),$res);
+                echo $this->renderWiew(array_merge(["user" => $auser,"rols"=>$rols,"zones"=>$zones]),$res);
             }
             
         }
         else{
-            echo $this->renderWiew([],$res);
+            echo $this->renderWiew(array_merge(["rols"=>$rols,"zones"=>$zones]),$res);
         }
 
     }
@@ -175,7 +188,7 @@ class Usuario extends Luna\Controller {
     *   Metodo que sirve para listar todos los usarios
     **/
     public function show($req,$res){
-        $usersMapper=$this->spot->mapper("Entity\Usuario");
+        $usersMapper=$this->spot->mapper("Entity\Users");
         $users=$usersMapper->select();
         echo $this->renderWiew(array_merge(["user"=>$users]),$res);        
     }
@@ -184,8 +197,12 @@ class Usuario extends Luna\Controller {
     **/
     public function edit($req,$res){
         if($req->params["exper"]!=null){
-            $userMapper=$this->spot->mapper("Entity\Usuario");
-            $user = $userMapper->select()->where(["id" => $req->params["exper"]])->first();    
+            $userMapper=$this->spot->mapper("Entity\Users");
+            $user = $userMapper->select()->where(["id" => $req->params["exper"]])->with("zonas")->first();
+            $rolsMapper=$this->spot->mapper("Entity\Rols");
+            $rols=$rolsMapper->select();    
+            $zoneMapper=$this->spot->mapper("Entity\Zona");
+            $zones=$zoneMapper->select();
         }
         if(isset($req->data["name"],$req->data["app"],$req->data["user"])){
             $mensaje="";
@@ -198,6 +215,9 @@ class Usuario extends Luna\Controller {
             $iata = $req->data["iata"]!=null? filter_var($req->data["iata"], FILTER_SANITIZE_STRING) : $user->iata;
             $member = $req->data["member"]!=null? filter_var($req->data["member"], FILTER_SANITIZE_STRING) : $user->miembros;
             $years = $req->data["years"]!=null? filter_var($req->data["years"], FILTER_SANITIZE_STRING) : $user->años;
+            if(isset($req->data["rol"])){
+                $user->rols_idrols=$req->data["rol"];
+            }
             if(isset($req->data["esActivo"])){
                 $active = true;
             }else{
@@ -237,17 +257,78 @@ class Usuario extends Luna\Controller {
             $user->activo=$active;
             $userMapper->update($user);
         }
-        echo $this->renderWiew(array_merge(["user"=>$user]),$res);        
+        echo $this->renderWiew(array_merge(["user1"=>$user,"rols"=>$rols,"zones"=>$zones]),$res);        
+    }
+    /**
+    *   Metodo que sirve para añadir zona al usuario
+    **/
+    public function addZone($req,$res){
+        if(isset($req->data["zone"])){
+            $userZonesMapper=$this->spot->mapper("Entity\UsersZona");
+            $entity=$userZonesMapper->build([
+                'users_id'=>$req->data["userid"],
+                'zona_idzona'=>$req->data["zone"]
+            ]);
+            $result=$userZonesMapper->insert($entity);
+            $userMapper=$this->spot->mapper("Entity\Users");
+            $user = $userMapper->select()->where(["id" => $req->data["userid"]])->with("zonas")->first();
+            $rolsMapper=$this->spot->mapper("Entity\Rols");
+            $rols=$rolsMapper->select();    
+            $zoneMapper=$this->spot->mapper("Entity\Zona");
+            $zones=$zoneMapper->select();
+            $res->m = $res->mustache->loadTemplate("Usuario/edit.mustache");
+            echo $this->renderWiew(array_merge(["user1"=>$user,"rols"=>$rols,"zones"=>$zones]),$res);  
+        }
+        else{
+            $userMapper=$this->spot->mapper("Entity\Users");
+            $user = $userMapper->select()->where(["id" => $req->data["userid"]])->with("zonas")->first();
+            $rolsMapper=$this->spot->mapper("Entity\Rols");
+            $rols=$rolsMapper->select();    
+            $zoneMapper=$this->spot->mapper("Entity\Zona");
+            $zones=$zoneMapper->select();
+            $res->m = $res->mustache->loadTemplate("Usuario/edit.mustache");
+            echo $this->renderWiew(array_merge(["user1"=>$user,"rols"=>$rols,"zones"=>$zones]),$res);  
+        }
+
+    }
+    /**
+    *   Metodo que sireve para quitar zona al usuario
+    **/
+    public function deleteZone($req,$res){
+        if(isset($req->params["zona"],$req->params["user"])){
+            //eliminamos zona
+            $userZonesMapper=$this->spot->mapper("Entity\UsersZona");
+            $userzona=$userZonesMapper->delete(['users_id'=>$req->params["user"],'zona_idzona'=>$req->params["zona"]]);
+            //obtenemos datos usuario actual y renderizamos editUser
+            $userMapper=$this->spot->mapper("Entity\Users");
+            $user = $userMapper->select()->where(["id" => $req->params["user"]])->with("zonas")->first();
+            $rolsMapper=$this->spot->mapper("Entity\Rols");
+            $rols=$rolsMapper->select();    
+            $zoneMapper=$this->spot->mapper("Entity\Zona");
+            $zones=$zoneMapper->select();
+            $res->m = $res->mustache->loadTemplate("Usuario/edit.mustache");
+            echo $this->renderWiew(array_merge(["user1"=>$user,"rols"=>$rols,"zones"=>$zones]),$res);  
+        }
+        else{
+            ///mandamos para otro lado
+            header("Location:/bali/panel/user/show");
+        }
     }
     /**
     *   Metodo que sirve para eliminar un usuario
     **/
      public function delete($req,$res){
-        //Obtenemos el id, de la experiencia a eleminar
+        //Obtenemos el id, del usuario a eleminar
         $var=$req->params["exper"];
         //Establecemos a spot con que entity class vamos a trabajar
         $userMapper=$this->spot->mapper("Entity\Usuario");
-        //Seleccionamos la experiencia que este registrado para ese id
+        $userZoneMapper=$this->spot->mapper("Entity\UsersZona");
+        $forgotMapper=$this->spot->mapper("Entity\Forgot");
+        //Eliminamos las zonas que el usuario tenga registradas
+        $userzona=$userZonesMapper->delete(['users_id'=>$req->params["exper"]]);
+        //Eliminamos los forgots echos por el usuario
+        $forgot=$forgotMapper->delete(['users_id'=>$req->params["exper"]]);
+        //Eliminamos el usuario que este registrado para ese id
         $user = $userMapper->delete(['id ='=>(integer)$var]);  
         echo $this->renderWiew( array_merge([]), $res);
             

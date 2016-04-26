@@ -10,9 +10,8 @@ use OAuth2\Storage\UserCredentialsInterface as UserCredentialsInterface;
  	
  	public function checkUserCredentials($username, $password){
  		global $spot;
-		$usersMapper = $spot->mapper("Entity\User");
-
-		$user = $usersMapper->where(["username" => $username]);
+		$usersMapper = $spot->mapper("Entity\Users");
+		$user = $usersMapper->where(["usuario" => $username]);
 		if( $user->first() ){
 			return $user->first()->password === md5($password)?true:false;	
 		}else{
@@ -33,10 +32,10 @@ use OAuth2\Storage\UserCredentialsInterface as UserCredentialsInterface;
      */
     public function getUserDetails($username){
     	global $spot;
-		$usersMapper = $spot->mapper("Entity\User");
-    	$user = $usersMapper->where(["username" => $username])->first();
+		$usersMapper = $spot->mapper("Entity\Users");
+    	$user = $usersMapper->where(["usuario" => $username])->first();
     	return array(
-          "user_id"  => $user->username,    // REQUIRED user_id to be stored with the authorization code or access token
+          "user_id"  => $user->usuario,    // REQUIRED user_id to be stored with the authorization code or access token
           "scope"    => "ALL"      // OPTIONAL space-separated list of restricted scopes
      	);
     }

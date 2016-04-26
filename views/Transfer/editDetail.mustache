@@ -17,12 +17,8 @@
 	          					<p>Please fill the next form, thanks.</p>
 	        				</div>
 		        			<div class="panel-body">
-		        				<hr>
-		        				{{# transferDetail }}			
-		        				<form class="form-horizontal" action="/bali/panel/transfer/editDetail/{{td_id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
-		        					<div class="form-group">
-		        						<label class="col-sm-3 control-label">Transfer Block Actual:  {{#tactual}}{{TransferBlockTitle}}{{/tactual}}</label>
-		        					</div>
+		        				<hr>			
+		        				<form class="form-horizontal" action="/bali/panel/transfer/editDetail/{{idtransferDetail}}" method="post" name="newHotel"  class="form-horizontal">
 		        					<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Transfer Block:</label>
 		                    			<div class="col-sm-6">
@@ -34,62 +30,90 @@
 			                            	</select>
 		                   				</div>
 		                  			</div>
+		                  			{{# transferDetail }}
 		        					<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Description: <span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="desc" class="form-control" placeholder="Write the transfer's detail description." value="{{td_description}}" required />
+		                      				<input type="text" name="desc" class="form-control" placeholder="Write the transfer's detail description."  value="{{description}}" required />
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Spanish Description: <span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="descesp" class="form-control" placeholder="Write the transfer's spanish detail description." value="{{td_description_esp}}" required />
+		                      				<input type="text" name="descesp" class="form-control" placeholder="Write the transfer's spanish detail description." value="{{description_esp}}"required />
 		                    			</div>
 		                  			</div>
-		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">INNOVA SUV 1: <span class="text-danger">*</span></label>
-		                    			<div class="col-sm-6">
-		                    				<input type=number name="num1" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_innova_sub_1}}"/>
-		                    			</div>
-		                  			</div>
-		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">INNOVA SUV 2-4: <span class="text-danger">*</span></label>
-		                    			<div class="col-sm-6">
-		                      				<input type=number name="num2" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_innova_sub_2_4}}"/>
-		                    			</div>
-		                  			</div>
-		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">HIACE VAN 5-7: <span class="text-danger">*</span></label>
-		                    			<div class="col-sm-6">
-		                      				<input type=number name="num3" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_hiace_val_5_7}}"/>
-		                    			</div>
-		                  			</div>
-		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">HIACE VAN 8-10: <span class="text-danger">*</span></label>
-		                    			<div class="col-sm-6">
-		                      				<input type=number name="num4" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_hiace_val_8_10}}"/>
-		                    			</div>
-		                  			</div>
-		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">ALPHARD/MERCY E 200 1: <span class="text-danger">*</span></label>
-		                    			<div class="col-sm-6">
-		                      				<input type=number name="num5" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_alphard_mercy_1}}"/>
-		                    			</div>
-		                  			</div>
-		                  			<div class="form-group">
-		                    			<label class="col-sm-3 control-label">ALPHARD/MERCY E 200 2-4: <span class="text-danger">*</span></label>
-		                    			<div class="col-sm-6">
-		                      				<input type=number name="num6" min=0 step=0.01 class="form-control" placeholder="Write a decimal number." value="{{td_alphard_mercy_2_4}}"/>
-		                    			</div>
-		                  			</div>
-		                  			<hr>
+		                  			{{/ transferDetail }}
 		                  			<div class="row">
 	                    				<div class="col-sm-9 col-sm-offset-8">
 					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
 	                    				</div>
 	                  				</div>
 		        				</form>
-		        				{{/ transferDetail }}
+		        				<hr>
+		        				<div class="form-group">
+			                    	<label class="col-sm-3 control-label">New Value:</label>
+			                    	<div class="col-sm-6">
+			                    		<a href="/bali/panel/transfer/addValue" target="_blank"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">New Value</button></a>	
+			                   		</div>
+			                  	</div>
+			                  	<br>
+			                  	<br>
+		        				<hr>
+								<br>
+		        				<div class="table-responsive">
+		        					 <table id="dataTable1" class="table table-bordered table-striped-col">
+		        					 	<thead>
+							                <tr>
+							                  <th>Id</th>
+							                  <th>Value</th>
+							                  <th>Edit</th>
+							                  <th>Delete</th>
+							                </tr>
+              							</thead>
+							            <tfoot>
+											<tr>
+											  <th>Id</th>
+							                  <th>Value</th>
+							                  <th>Edit</th>
+							                  <th>Delete</th>
+							                </tr>
+							            </tfoot>
+							            <tbody>
+							            	{{# transferDetail.transferValue }}
+							            		<tr>
+							            			<td>
+							            				{{idtransferValues}}
+							            			</td>
+							            			<td>
+							            				{{val}}
+							            			</td>
+							            			<td>
+							            				<a href="/bali/panel/transfer/editValue/{{idtransferValues}}">
+			                                                <button type="button" class="btn btn-primary">
+			                                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+			                                                </button>
+			                                            </a>
+							            			</td>
+							            			<td>
+										            	<a onclick="myFunction({{idtransferValues}})">
+			                                                <button type="button" class="btn btn-danger">
+			                                                	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+			                                                </button>
+			                                            </a>
+										          	</td>
+							            		</tr>
+							            	{{/ transferDetail.transferValue }}
+							            </tbody>
+		        					 </table>
+		        				</div>
+		        				<script>
+		                            function myFunction(id) {
+		                                if (confirm("Estas Seguro de Eliminar?") == true) {
+		                                    self.location = "/bali/panel/transfer/deleteValue/"+id; 
+		                                } 
+		                            }
+		                        </script>
 		        			</div>
 	        			</div>
         			</div>

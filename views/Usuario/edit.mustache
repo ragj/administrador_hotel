@@ -22,25 +22,25 @@
 		        					<div class="form-group">
 		                    			<label class="col-sm-3 control-label">First Name: <span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="name" class="form-control" placeholder="Write a name." required value="{{#user}}{{nombre}}{{/user}}"/>
+		                      				<input type="text" name="name" class="form-control" placeholder="Write a name." required value="{{#user1}}{{nombre}}{{/user1}}"/>
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Last Name:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                     				<input type="text" name="app" class="form-control" placeholder="Write a last name." required value="{{#user}}{{papellido}}{{/user}}"/>
+		                     				<input type="text" name="app" class="form-control" placeholder="Write a last name." required value="{{#user1}}{{papellido}}{{/user1}}"/>
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Mother's Last Name:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                     				<input type="text" name="apm" class="form-control" placeholder="Write a Mother's Last Name." required value="{{#user}}{{lapellido}}{{/user}}"/>
+		                     				<input type="text" name="apm" class="form-control" placeholder="Write a Mother's Last Name." required value="{{#user1}}{{mapellido}}{{/user1}}"/>
 		                    			</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">User:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="email" class="form-control" placeholder="Write a user." required  readonly value="{{#user}}{{usuario}}{{/user}}"/>
+		                      				<input type="text" name="email" class="form-control" placeholder="Write a user." required  readonly value="{{#user1}}{{usuario}}{{/user1}}"/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
@@ -58,36 +58,49 @@
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Phone Number:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="tel" class="form-control" placeholder="Write a phone number." required value="{{#user}}{{telefono}}{{/user}}"/>
+		                      				<input type="text" name="tel" class="form-control" placeholder="Write a phone number." required value="{{#user1}}{{telefono}}{{/user1}}"/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">IATA:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="iata" class="form-control" placeholder="Write a IATA." required required value="{{#user}}{{iata}}{{/user}}"/>
+		                      				<input type="text" name="iata" class="form-control" placeholder="Write a IATA." required required value="{{#user1}}{{iata}}{{/user1}}"/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Member to an Affiliation or Program:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="text" name="member" class="form-control" placeholder="Write Yes or No, if Yes also write the name of the program." required required value="{{#user}}{{miembros}}{{/user}}"/>
+		                      				<input type="text" name="member" class="form-control" placeholder="Write Yes or No, if Yes also write the name of the program." required required value="{{#user1}}{{miembros}}{{/user1}}"/>
 		                   				</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Years in Business:<span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
-		                      				<input type="number" name="years" class="form-control" placeholder="Write a number of years." required value="{{#user}}{{años}}{{/user}}"/>
+		                      				<input type="number" name="years" class="form-control" placeholder="Write a number of years." required value="{{#user1}}{{years}}{{/user1}}"/>
 		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                  				<label class="col-sm-3 control-label">Rol:</label>
+		                  				<div class="col-sm-6">
+		                  					<select name="rol" class="form-control">
+		                  						<option value=""></option>
+		                  						{{# rols}}
+		                  							<option value="{{idrols}}">{{rol}}</option>
+		                  						{{/ rols}}
+		                  					</select>
+		                  				</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Active:</label>
 		                    			<div class="col-sm-6">
+		                    				{{#user1}}
 		                    					{{#activo}}
        												<input type="checkbox" class="form-control" name="esActivo" value="true" checked/>
        											{{/activo}}
        											{{^activo}}
        												<input type="checkbox" class="form-control" name="esActivo" value="true" />
        											{{/activo}}
+       										{{/user1}}
 		                   				</div>
 		                  			</div>
 		                  			<hr>
@@ -97,6 +110,67 @@
 	                    				</div>
 	                  				</div>
 		        				</form>
+		        				<hr>
+		        				<form class="form-horizontal" action="/bali/panel/user/zone" method="post" name="newUser" class="form-horizontal">
+		        					<h4 class="panel-title">Nuevas Zonas</h4>
+		        					<input type="hidden" name="userid" value="{{#user1}}{{id}}{{/user1}}">
+		        					<div class="form-group">
+		                  				<label class="col-sm-3 control-label">Zona:</label>
+		                  				<div class="col-sm-6">
+		                  					<select name="zone" class="form-control">
+		                  						<option value=""></option>
+		                  						{{# zones}}
+		                  							<option value="{{idzona}}">{{zona}}</option>
+		                  						{{/ zones}}
+		                  					</select>
+		                  				</div>
+		                  			</div>
+		                  			<div class="row">
+	                    				<div class="col-sm-9 col-sm-offset-8">
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
+	                    				</div>
+	                  				</div>
+		        				</form>
+		        				<hr>
+		        				<div class="table-responsive">
+				        			<table id="dataTable1" class="table table-bordered table-striped-col">
+				        				<thead>
+									        <tr>
+									            <th>Id</th>
+									            <th>Zone</th>
+									            <th>Delete</th>
+									        </tr>
+		              					</thead>
+									    <tbody>
+									    	{{#user1}}
+										        {{# zonas }}
+											        <tr>
+											           	<td>
+											            	{{idzona}}
+											          	</td>
+											            <td>
+											            	{{zona}}
+											            </td>
+											            <td>
+											            	<a onclick="myFunction({{idzona}},{{id}})">
+			                                                    <button type="button" class="btn btn-danger">
+			                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+			                                                    </button>
+			                                                </a>
+											            </td>
+											        </tr>
+										        {{/ zonas }}	
+									        {{/user1}}			            	
+									    </tbody>
+				        			</table>
+				        		</div>
+				        		<script>
+		                            function myFunction(id,ids) {
+		                                if (confirm("Estas Seguro de Eliminar?") == true) {
+		                                    self.location = "/bali/panel/user/deleteZona/"+id+"/"+ids; 
+		                                } 
+		                            }
+		                        </script>
 		        			</div>
 	        			</div>
         			</div>
@@ -145,6 +219,59 @@
     				}
 					if (todoCorrecto ==true) {formulario.submit();}
 				}
+			</script>
+			<script src="/bali/assets/quirk/lib/datatables/jquery.dataTables.js"></script>
+			<script src="/bali/assets/quirk/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+			<script src="/bali/assets/quirk/lib/select2/select2.js"></script>
+			<script>
+				$(document).ready(function() {
+  					'use strict';
+  					$('#dataTable1').DataTable();
+  					var exRowTable = $('#exRowTable').DataTable({
+    					responsive: true,
+    					'fnDrawCallback': function(oSettings) {
+      					$('#exRowTable_paginate ul').addClass('pagination-active-success');
+    					},
+    					'ajax': 'ajax/objects.txt',
+    					'columns': [{
+      						'class': 'details-control',
+      						'orderable': false,
+      						'data': null,
+      						'defaultContent': ''
+    						},
+	    					{ 'data': 'name' },
+	    					{ 'data': 'position' },
+	    					{ 'data': 'office' },
+	    					{ 'data': 'start_date'},
+	    					{ 'data': 'salary' }
+    					],
+    					'order': [[1, 'asc']]
+  					});
+				  	// Add event listener for opening and closing details
+				  	$('#exRowTable tbody').on('click', 'td.details-control', function () {
+					    var tr = $(this).closest('tr');
+					    var row = exRowTable.row( tr );
+					    if ( row.child.isShown() ) {
+					      // This row is already open - close it
+					      row.child.hide();
+					      tr.removeClass('shown');
+					    } else {
+					      // Open this row
+					      row.child( format(row.data()) ).show();
+					      tr.addClass('shown');
+					    }
+  					});
+
+  					function format (d) {
+    					// `d` is the original data object for the row
+    					return '<h4>'+d.name+'<small>'+d.position+'</small></h4>'+
+    					'<p class="nomargin">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>';
+  					}
+
+  					// Select2
+  					$('select').select2({ minimumResultsForSearch: Infinity });
+
+				});
 			</script>
 		{{/ scripts }}
 	{{/ quirk }}

@@ -32,11 +32,11 @@ class Tour extends Luna\Controller {
                             if($resultado){
                                 //Guardamos la experiencia en la base de datos
                                 $file=$_FILES['imagen']['name'];
-                                $tourMapper=$this->spot->mapper("Entity\TourImage");
+                                $tourMapper=$this->spot->mapper("Entity\ExperienceImage");
                                 $img=(string)$req->data["exper"]."/".(string)$_FILES['imagen']['name'];
                                 $entity = $tourMapper->build([
-                                    'id_tour' =>$req->data["exper"],
-                                    'url' =>$img
+                                    'experience_idexperience' =>$req->data["exper"],
+                                    'path' =>$img
                                 ]);
                                 $result = $tourMapper->insert($entity);
                                 echo "<div class=exito><p>The image was uploaded</p></div>";
@@ -49,7 +49,7 @@ class Tour extends Luna\Controller {
                 }
                 else{ echo "<div class=error><p>The image was not uploaded.</p></div>";}
         }
-        $tourMapper=$this->spot->mapper("Entity\Tour");
+        $tourMapper=$this->spot->mapper("Entity\Experience");
         $tour=$tourMapper->select();
         echo $this->renderWiew(array_merge(["tour" => $tour]),$res);
     }
@@ -57,7 +57,7 @@ class Tour extends Luna\Controller {
     *   Funcion que obtiene todos los registros de la tabla tour_images.
     **/
     public function showImages($req,$res){
-         $tourMapper = $this->spot->mapper("Entity\Tour");
+         $tourMapper = $this->spot->mapper("Entity\Experience");
          $tour = $tourMapper->select()->with("images");
          echo $this->renderWiew(array_merge(["tour" => $tour]),$res);
 
@@ -68,17 +68,17 @@ class Tour extends Luna\Controller {
     public function editImages($req,$res){
         if($req->params["exper"]!=null){
             //obtener imagen mediante el id
-            $tourImageMapper=$this->spot->mapper("Entity\TourImage");
-            $tourImage= $tourImageMapper->select()->where(["id" => $req->params["exper"]])->first(); 
+            $tourImageMapper=$this->spot->mapper("Entity\ExperienceImage");
+            $tourImage= $tourImageMapper->select()->where(["idexperienceImages" => $req->params["exper"]])->first(); 
             //obtener el tour mediante el id que obtenemos de la imagen
-            $tourMapper=$this->spot->mapper("Entity\Tour");
-            $tour=$tourMapper->select()->where(["id" => $tourImage->id_tour])->first();
+            $tourMapper=$this->spot->mapper("Entity\Experience");
+            $tour=$tourMapper->select()->where(["idexperience" => $tourImage->experience_idexperience])->first();
         }
         if(isset($_FILES['imagen']['name'])){
             $imagen="";
             //establecemos el formato en que se almacena la url en la base de datos
-            $aux=$tour->id."/".$_FILES['imagen']['name'];
-             if(strcmp($aux, $tourImage->url)!==0 && $_FILES['imagen']['name']!=null)
+            $aux=$tour->idexperience."/".$_FILES['imagen']['name'];
+             if(strcmp($aux, $tourImage->path)!==0 && $_FILES['imagen']['name']!=null)
             {
                 //establecemos el directorio con el cual trabajaremos
                 $dir="./assets/img/experience/";
@@ -98,7 +98,7 @@ class Tour extends Luna\Controller {
                             $resultado=@move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
                             if($resultado){
                                 //eliminamos fichero anterior
-                                @unlink($dir."/".$tourImage->url);
+                                @unlink($dir."/".$tourImage->path);
                                 //obtenemos la ruta del archivo
                                 $imagen=$aux;                  
                             }
@@ -111,12 +111,10 @@ class Tour extends Luna\Controller {
                 else{ echo "<div class=error><p>The image was not uploaded.</p></div>";}
             }
             else{
-                $imagen=$tourImage->url;
+                $imagen=$tourImage->path;
             }
-
-            
             //actualizamos atributo de la entidad
-            $tourImage->url = $imagen;
+            $tourImage->path = $imagen;
             //actualizamos la entidad
             $tourImageMapper->update($tourImage);
         }
@@ -130,24 +128,34 @@ class Tour extends Luna\Controller {
         //Obtenemos el id, de la experiencia a eleminar
         $var=$req->params["exper"];
         //Establecemos a spot con que entity class vamos a trabajar
-        $tourMapper=$this->spot->mapper("Entity\TourImage");
-        $tMapper=$this->spot->mapper("Entity\Tour");
+        $tourMapper=$this->spot->mapper("Entity\ExperienceImage");
+        $tMapper=$this->spot->mapper("Entity\Experience");
         //Seleccionamos la experiencia que este registrado para ese ide
-        $tour = $tourMapper->select()->where(["id" => $req->params["exper"]])->first();
-        $tou=$tMapper->select()->where(["id"=>$tour->id_tour])->first();
-        $ruta="./assets/img/experience/".$tour->url;
+        $tour = $tourMapper->select()->where(["idexperienceImages" => $req->params["exper"]])->first();
+        $tou=$tMapper->select()->where(["idexperience"=>$tour->experience_idexperience])->first();
+        $ruta="./assets/img/experience/".$tour->path;
         //Eliminamos el registro del id seleccionado
         $tour=null;
-        $tour = $tourMapper->delete(['id ='=>(integer)$var]);
+        $tour = $tourMapper->delete(['idexperienceImages ='=>(integer)$var]);
         //Establecemos a spot con que entity class vamos a trabajar
         @unlink($ruta);
         echo $this->renderWiew(array_merge(["tour" => $tou]),$res);
     }
     /**
-    *   Funcion que registra un objeto de las clase tour.
+    *   Metodo que registra un objeto de las clase tour.
     **/
     public function add($req, $res) 
     {
+        $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+        $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+        $aux=array();
+        foreach ($zones as $zone) {
+            array_push($aux,$zone['zona_idzona']);
+        }
+        $zoneMapper=$this->spot->mapper("Entity\Zona");
+        $zona=$zoneMapper->select()->where(["idzona"=>$aux]);
+        $typeMapper=$this->spot->mapper("Entity\Type");
+        $type=$typeMapper->select();
         if(isset($req->data["titulo"],$req->data["tipo"],$req->data["duracion"],$req->data["horas"],$req->data["descripcion"],$_FILES['thumbnail']['name']))
             {
                 //definimos la ruta donde se almacenara el thumbnail
@@ -155,7 +163,6 @@ class Tour extends Luna\Controller {
                 $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
                 //Obtenemos y sanitizamos los parametros obtenidos por el metodo  post.
                 $titulo =filter_var($req->data["titulo"], FILTER_SANITIZE_STRING);
-                $tipo = filter_var($req->data["tipo"], FILTER_SANITIZE_STRING);
                 $duracion = filter_var($req->data["duracion"] , FILTER_SANITIZE_STRING);
                 $duracion_spa="";
                 switch($duracion){
@@ -169,6 +176,8 @@ class Tour extends Luna\Controller {
                         $duracion_spa="Falta Traduccion";
                     break;
                 }
+                $tipo = $req->data["tipo"];
+                $zona = $req->data["zone"];
                 $horas = filter_var($req->data["horas"], FILTER_SANITIZE_NUMBER_INT);
                 $descripcion = filter_var($req->data["descripcion"], FILTER_SANITIZE_STRING);
                 $descripcion_spa=filter_var($req->data["descripcion_spa"], FILTER_SANITIZE_STRING);
@@ -192,11 +201,10 @@ class Tour extends Luna\Controller {
                             if($resultado){
                                 //Guardamos la experiencia en la base de datos
                                 $file=$_FILES['thumbnail']['name'];
-                                $tourMapper=$this->spot->mapper("Entity\Tour");
+                                $tourMapper=$this->spot->mapper("Entity\Experience");
                                 $entity = $tourMapper->build([
                                     'title' => $titulo,
                                     'thumbnail' => $file,
-                                    'type' =>$tipo,
                                     'duration' => $duracion."/".(String)$horas,
                                     'duration_esp' => $duracion_spa."/".(String)$horas,
                                     'description' => $descripcion,
@@ -204,6 +212,8 @@ class Tour extends Luna\Controller {
                                     'transfer' => $Transfer,
                                     'transfer_esp' => $Transfer_spa,
                                     'home'=>$home,
+                                    'zona_idzona'=>$zona,
+                                    'type_idtype'=>$tipo
                                 ]);
                                 $result = $tourMapper->insert($entity);
                                // header("Location: /panel/hotel/edit/".$entity->id);
@@ -218,44 +228,62 @@ class Tour extends Luna\Controller {
                 }
                 else{ echo "<p class=error>The image was not uploaded.</p></div>";}
             }
-        echo $this->renderWiew([], $res);
+        echo $this->renderWiew(array_merge(["zones"=>$zona,"types"=>$type]), $res);
     }
     /**
-    *	Funcion que obtiene todos los registros de la tabla tour.
+    *	Metodo que obtiene todos los registros de la tabla tour.
     **/
     public function show($req,$res){
-    	$tourMapper=$this->spot->mapper("Entity\Tour");
-    	$tour=$tourMapper->select();
+        $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+        $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+        $aux=array();
+        foreach ($zones as $zone) {
+            array_push($aux,$zone['zona_idzona']);
+        }
+    	$tourMapper=$this->spot->mapper("Entity\Experience");
+    	$tour=$tourMapper->select()->with("zona")->where(["zona_idzona"=>$aux]);
     	echo $this->renderWiew(array_merge(["tour" => $tour]),$res);
     }
     /**
     *	Funcion que actualiza un objeto de las clase tour.
     **/
     public function edit($req,$res){
+
         if($req->params["exper"]!=null){
-            $tourMapper=$this->spot->mapper("Entity\Tour");
-            $tour = $tourMapper->select()->where(["id" => $req->params["exper"]])->first(); 
-            $home="nada";   
+            $tourMapper=$this->spot->mapper("Entity\Experience");
+            $tour = $tourMapper->select()->with("type")->with("zona")->with("images")->where(["idexperience" => $req->params["exper"]])->first(); 
+            $typeMapper=$this->spot->mapper("Entity\Type");
+            $type=$typeMapper->select();
+            $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+            $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+            $aux=array();
+            foreach ($zones as $zone) {
+                array_push($aux,$zone['zona_idzona']);
+            }
+            $zoneMapper=$this->spot->mapper("Entity\Zona");
+            $zones=$zoneMapper->select()->where(["idzona"=>$aux]);
+            $home="";   
         }
-        if(isset($req->data["name"])){
+        if(isset($req->params["name"])){
             //obtenemos el id de la experiencia
             $id=$req->params["exper"]; 
             //obtenemos los elementos del formulario, verificamos que no sean nulos, en caso de ser nulo asignamos el valor que esta almacenado en dicho atributo en la base de datos.
             $titulo = $req->data["name"]!=null? filter_var($req->data["name"], FILTER_SANITIZE_STRING) : $tour->title;
-            $tipo = $req->data["tipo"]!=null? filter_var($req->data["tipo"], FILTER_SANITIZE_STRING) : $tour->type;
+            $tipo = $req->data["tipo"]!=null? $req->data["tipo"]: $tour->type;
+            $zona = $req->data["zona"]!=null? $req->data["zona"]: $tour->zona_idzona;
             $duracion = ($req->data["duracion"]!=null)&&($req->data["horas"]!=null)? filter_var($req->data["duracion"],FILTER_SANITIZE_STRING)."/".filter_var($req->data["horas"],FILTER_SANITIZE_NUMBER_INT): $tour->duration;
             $duracion_spa="";
-                switch($req->data["duracion"]){
-                    case "HALF DAY":
-                        $duracion_spa="MEDIO DIA"."/".filter_var($req->data["horas"]);
-                    break;
-                    case "FULL DAY":
-                        $duracion_spa="DIA COMPLETO"."/".filter_var($req->data["horas"]);
-                    break;
-                    default:
-                        $duracion_spa="Falta Traduccion";
-                    break;
-                }
+            switch($req->data["duracion"]){
+                case "HALF DAY":
+                    $duracion_spa="MEDIO DIA"."/".filter_var($req->data["horas"]);
+                break;
+                case "FULL DAY":
+                    $duracion_spa="DIA COMPLETO"."/".filter_var($req->data["horas"]);
+                break;
+                default:
+                    $duracion_spa="Falta Traduccion";
+                break;
+            }
             $descripcion = $req->data["descripcion"]!=null? filter_var($req->data["descripcion"], FILTER_SANITIZE_STRING) : $tour->description;
             $descripcion_spa = $req->data["descripcion_esp"]!=null? filter_var($req->data["descripcion_esp"], FILTER_SANITIZE_STRING) : $tour->description_esp;
             $transfer = $req->data["Transfer"]!=null? filter_var($req->data["Transfer"], FILTER_SANITIZE_STRING) : $tour->transfer;
@@ -266,6 +294,7 @@ class Tour extends Luna\Controller {
             }else{
                 $home = false;#default value
             }
+
             //comparamos el nombre de la imagen a subir y la imagen en la base de datos, en caso de ser diferentes subimos el archivo y borramos el archivo anterior
             if(strcmp($_FILES['thumbnail']['name'], $tour->thumbnail)!==0 && $_FILES['thumbnail']['name']!=null)
             {
@@ -304,6 +333,7 @@ class Tour extends Luna\Controller {
             $tour->title = $titulo;
             $tour->thumbnail = $thumbnail;
             $tour->type =  $tipo;
+            $tour->zona_idzona=$zona;
             $tour->duration = $duracion;
             $tour->duration_esp = $duracion_spa;
             $tour->description = $descripcion;
@@ -315,8 +345,7 @@ class Tour extends Luna\Controller {
             $tourMapper->update($tour);
             $tour = $tourMapper->select()->where(["id" => $req->params["exper"]])->first();
         }
-        
-    	echo $this->renderWiew( array_merge(["tour" => $tour]), $res);
+    	echo $this->renderWiew( array_merge(["tour" => $tour,"types"=>$type,"zones"=>$zones]), $res);
     }
     
     /**
@@ -327,15 +356,15 @@ class Tour extends Luna\Controller {
 	    	//Obtenemos el id, de la experiencia a eleminar
 	    	$var=$req->params["exper"];
 	    	//Establecemos a spot con que entity class vamos a trabajar
-	    	$tourMapper=$this->spot->mapper("Entity\Tour");
+	    	$tourMapper=$this->spot->mapper("Entity\Experience");
 	    	//Seleccionamos la experiencia que este registrado para ese ide
-	    	$tour = $tourMapper->select()->where(["id" => $req->params["exper"]])->first();
+	    	$tour = $tourMapper->select()->where(["idexperience" => $req->params["exper"]])->first();
 	    	$ruta="./assets/img/experience/indo/".$tour->thumbnail;
 			//Eliminamos el registro del id seleccionado
 			$tour=null;
-	    	$tour = $tourMapper->delete(['id ='=>(integer)$var]);
+	    	$tour = $tourMapper->delete(['idexperience ='=>(integer)$var]);
 	    	//Establecemos a spot con que entity class vamos a trabajar
-			$tourMapper=$this->spot->mapper("Entity\TourImage");
+			$tourMapper=$this->spot->mapper("Entity\ExperienceImage");
 			//Obtenemos todas las imagenes que esten relacionadas con el post
 			//eliminamos el directorio donde se encontraban las imagenes
 			//Obtenemos la ruta del thumbnail
@@ -345,7 +374,7 @@ class Tour extends Luna\Controller {
 			$this->deleteDirectory("./assets/img/experience/".$var);
 			//obtenemos la ruta de cada imagen asociada y eliminamos el ficher
 			$tour=null;
-			$tour = $tourMapper->delete(['id_tour =' => (integer)$var]);
+			$tour = $tourMapper->delete(['experience_idexperience =' => (integer)$var]);
 	    	echo $this->renderWiew( array_merge([] , $this->header("/panel/tour/show") ), $res);
     }
     /**

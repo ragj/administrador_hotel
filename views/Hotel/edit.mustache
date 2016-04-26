@@ -18,7 +18,7 @@
 		        				</div>
 			        			<div class="panel-body">
 			        				<hr>			
-			        				<form class="form-horizontal" action="/bali/panel/hotel/edit/{{id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+			        				<form class="form-horizontal" action="/bali/panel/hotel/edit/{{idhotel}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 			        					<div class="form-group">
 			                    			<label class="col-sm-3 control-label">Name: <span class="text-danger">*</span></label>
 			                    			<div class="col-sm-6">
@@ -68,6 +68,17 @@
 			                   				</div>
 			                  			</div>
 			                  			<div class="form-group">
+		                  				<label class="col-sm-3 control-label">Zone:<span class="text-danger"> Actual:{{zona.zona}}</span></label>
+			                  				<div class="col-sm-6">
+			                  					<select name="zone" class="form-control">
+			                  						<option value=""></option>
+			                  						{{# zones}}
+			                  							<option value="{{idzona}}">{{zona}}</option>
+			                  						{{/ zones}}
+			                  					</select>
+			                  				</div>
+		                  				</div>
+			                  			<div class="form-group">
 			                    			<label class="col-sm-3 control-label">Thumbnail:</label>
 			                    			<div class="col-sm-6">
 			                    				<img src="/bali/assets/img/hotel-thumb/{{thumbnail}}" height="250px" width="250px"/>
@@ -87,38 +98,66 @@
 			                    				<a href="/bali/panel/hotel/addImages" target="_blank"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">New Image</button></a>	
 			                   				</div>
 			                  			</div>
+			                  			<div class="form-group">
+			                    			<label class="col-sm-3 control-label">New Video:</label>
+			                    			<div class="col-sm-6">
+			                    				<a href="/bali/panel/hotel/addVideo" target="_blank"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">New Video</button></a>	
+			                   				</div>
+			                  			</div>
 			                  			<hr>
 			        				</form>
 			        			</div>
 		        			</div>
 	        			</div>
 	    			</div>
+	    			{{/ hotel }}
 	    			<div class="row">
         				<div class="col-md-8 col-md-offset-2">
         					{{# images }}
         						<div class="col-md-4">
 		          					<div class="panel">
 		            					<div class="panel-heading">
-		              						<h4 class="panel-title">Image {{url}}</h4>
+		              						<h4 class="panel-title">Image {{path}}</h4>
 		            					</div>
 		            					<div class="panel-body">
-		              						<img src="/bali/assets/img/hotel/{{id_hotel}}/{{url}}" class="img-rounded " width="200" height="150" >
-							                 <a href="/bali/panel/hotel/editImages/{{id}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
-							                 <a onclick=myFunction({{id}})><button type="button" class="btn btn-danger btn-quirk"><i class="fa fa-times"></i></button></a>
+		              						<img src="/bali/assets/img/hotel/{{hotel_idhotel}}/{{path}}" class="img-rounded " width="250" height="150" >
+							                 <a href="/bali/panel/hotel/editImages/{{idhotelImages}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
+							                 <a onclick=myFunction({{idhotelImages}})><button type="button" class="btn btn-danger btn-quirk"><i class="fa fa-times"></i></button></a>
 		            					</div>
 		          					</div>
           						</div>
         					{{/ images }}
+        					{{# videos }}
+        						<div class="col-md-4">
+		          					<div class="panel">
+		            					<div class="panel-heading">
+		              						<h4 class="panel-title">Video </h4>
+		            					</div>
+		            					<div class="panel-body">
+		            						<div width="250" height="150" class="img-rounded">
+		              							{{&path}}
+		              						</div>
+							                <a href="/bali/panel/hotel/editVideo/{{idhotelImages}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
+							                <a onclick=myFunction1({{idhotelImages}})><button type="button" class="btn btn-danger btn-quirk"><i class="fa fa-times"></i></button></a>
+		            					</div>
+		          					</div>
+          						</div>
+        					{{/ videos }}
         					<script>
-                                function myFunction(id) {
+        						function myFunction(id) {
                                     if (confirm("Estas Seguro de Eliminar?") == true) {
                                         self.location = "/bali/panel/hotel/deleteImages/"+id; 
+                                    } 
+                                }
+                                function myFunction1(id) {
+                                    if (confirm("Estas Seguro de Eliminar?") == true) {
+                                        self.location = "/bali/panel/hotel/deleteVideo/"+id; 
                                     } 
                                 }
                             </script>
           				</div>
         			</div>
-	    		{{/ hotel }}	
+	    			
 	    	</div>
         {{/ content }}
 		{{$ scripts }}

@@ -1,19 +1,19 @@
 {{% BLOCKS }}
 	{{< quirk }}
 		{{$ title}}
-			Add Tour
+			Add Experience
 		{{/ title}}
 		{{$ content }}
 			<div class="contentpanel">
     			<ol class="breadcrumb breadcrumb-quirk">
-			        <li><a href=""><i class="fa fa-home mr5"></i>Tour</a></li>
-			        <li class="active">Add Tour</li>
+			        <li><a href=""><i class="fa fa-home mr5"></i>Experience</a></li>
+			        <li class="active">Add Experience</li>
       			</ol>
     			<div class="row">
     				<div class="col-md-6 col-md-offset-3">
 	        			<div class="panel">
 	        				<div class="panel-heading">
-	        					<h4 class="panel-title">Tour Form</h4>
+	        					<h4 class="panel-title">Experience Form</h4>
 	          					<p>Please, fill the next form. Thanks.</p>
 	        				</div>
 		        			<div class="panel-body">
@@ -36,9 +36,10 @@
 		                    			<label class="col-sm-3 control-label">Type:*</label>
 		                    			<div class="col-sm-6">
 		                      				<select class="form-control" name="tipo">
-			                            		<option value="RECOMMENDED TOURS">RECOMMENDED TOURS</option>
-			                            		<option value="HALF DAY TOURS">HALF DAY TOURS</option>
-			                            		<option value="FULL DAY TOURS">FULL DAY TOURS</option>
+		                      					<option value=""></option>
+			                            		{{# types}}
+		                  							<option value="{{idtype}}">{{type}}</option>
+		                  						{{/ types}}
 			                            	</select>
 		                   				</div>
 		                  			</div>
@@ -46,6 +47,7 @@
 		                    			<label class="col-sm-3 control-label">Duration:*</label>
 		                    			<div class="col-sm-6">
 		                      				<select class="form-control" name="duracion">
+		                      					<option value=""></option>
 			                            		<option value="HALF DAY">HALF DAY</option>
 			                            		<option value="FULL DAY">FULL DAY</option>
 			                            	</select>
@@ -80,6 +82,17 @@
 		                    			<div class="col-sm-6">
 		                    				<textarea class="form-control" name="transfer_spa"  placeholder="Write the tour's spanish transfer."></textarea>
 		                   				</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                  				<label class="col-sm-3 control-label">Zone:<span class="text-danger">*</span></label>
+		                  				<div class="col-sm-6">
+		                  					<select name="zone" class="form-control">
+		                  						<option value=""></option>
+		                  						{{# zones}}
+		                  							<option value="{{idzona}}">{{zona}}</option>
+		                  						{{/ zones}}
+		                  					</select>
+		                  				</div>
 		                  			</div>
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Home:</label>

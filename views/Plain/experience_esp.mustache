@@ -17,14 +17,14 @@
 					document.writeln(url);
 	 			</script>
 		<div class="filter">
-			<a href="#" data-filter="*" class="actual"> ALL</a>
-        	<a href="#" data-filter=".HALF">HALF DAY TOURS</a> 
-        	<a href="#" data-filter=".RECOMMENDED">RECOMMENDED TOURS</a> 
-        	<a href="#" data-filter=".FULL">FULL DAY TOURS</a> 
+			<a href="javascript:void(0);" data-filter="*" class="actual"> ALL</a>
+        	<a href="javascript:void(0);" data-filter=".HALF">HALF DAY EXPERIENCES</a> 
+        	<a href="javascript:void(0);" data-filter=".RECOMMENDED">RECOMMENDED EXPERIENCES</a> 
+        	<a href="javascript:void(0);" data-filter=".FULL">FULL DAY EXPERIENCES</a> 
 		</div>
 		<blocks cols="3" class="portfolioContenedor">
 			{{#tours}}
-				<div class="{{type}} tour inner ">
+				<div class="{{type.type}} tour inner ">
 					<a href="/bali/es/experiencia/{{uri_es}}" style="text-decoration: none;">
 						<h1>
 							{{title}}
@@ -32,7 +32,7 @@
 						<img src="/bali/assets/img/experience/indo/{{thumbnail}}">
 						<h2>{{duration_esp}}</h2>
 						<p>
-							{{description_esp}}
+							{{&description_esp}}
 						</p>
 						<a href="">Más [+]</a>
 					</a>
@@ -50,8 +50,8 @@
 				jQuery(this).addClass('actual');
 				
 				var selector = jQuery(this).attr('data-filter');
-				jQuery('.portfolioContenedor > div').fadeIn();
-				jQuery('.portfolioContenedor > div').not(selector).hide('slow');
+				jQuery('.portfolioContenedor > div').fadeIn(1000);
+				jQuery('.portfolioContenedor > div').not(selector).fadeOut(1000);
 			});
 		});
 	 	</script>

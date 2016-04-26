@@ -16,9 +16,9 @@
 			var url = "<p id=bread>" + path+"</p>";
 			document.writeln(url);
 	 	</script>
-	 	{{# transferBlock }}
+	 	{{#transferBlock}}
 	 		<h1>
-	 			{{TransferBlockTitle_esp}}
+	 			{{es}}
 	 			<span>Precios transfer por persona en USD</span>
 	 		</h1>
 	 		<table>
@@ -37,17 +37,14 @@
 					<td class="data"> 1 </td>
 					<td class="data"> 2 - 4 </td>
 				</tr>
-			{{# detail }}
+				{{# detalle}}
 				<tr>
-					<td >{{ td_description_esp }}</td>
-					<td class="data">{{ td_innova_sub_1 }}</td>
-					<td class="data">{{ td_innova_sub_2_4 }}</td>
-					<td class="data">{{ td_hiace_val_5_7 }}</td>
-					<td class="data">{{ td_hiace_val_8_10 }}</td>
-					<td class="data">{{ td_alphard_mercy_1 }}</td>
-					<td class="data">{{ td_alphard_mercy_2_4 }}</td>
+					<td>{{es}}</td>
+					{{#vals}}
+						<td class="data">{{val}}</td>
+					{{/vals}}
 				</tr>
-			{{/ detail }}
+				{{/ detalle}}
 			</table>
 			<h2>Las tasas transfer incluyen :</h2>
 			Conductor, Gasolina y Estacionamient
@@ -55,7 +52,7 @@
 			<br>Seguro
 			<br>Toalla Refrescante
 			<br>Conexión Wi-fi en el carro	
-	 	{{/ transferBlock }}
+	 	{{/transferBlock}}
 	 	<br>Las donaciones , derecho de ingreso según itinerario , excepto Bali a tu antojo
 
 		<h1> Galeria </h1>

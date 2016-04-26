@@ -1,0 +1,54 @@
+{{% BLOCKS }}
+	{{< quirk }}
+		{{$ title}}
+            Edit Detail Value
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Transfer</a></li>
+			        <li class="active">Edit Detail Value</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-6 col-md-offset-3">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Edit Value Form</h4>
+	          					<p>Please fill the next form, thanks.</p>
+	        				</div>
+		        			<div class="panel-body">
+		        				<hr>			
+		        				<form class="form-horizontal" action="/bali/panel/transfer/editValue/{{#value}}{{idtransferValues}}{{/value}}" method="post" name="newHotel" class="form-horizontal">
+		        					<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Transfer Detail:</label>
+		                    			<div class="col-sm-6">
+		                      				<select class="form-control" name="tb">
+			                            		<option value=""></option>
+			                            		{{# details }}
+			                            			<option value="{{idtransferDetail}}">{{description}}</option>
+			                            		{{/ details }}
+			                            	</select>
+		                   				</div>
+		                  			</div>
+		        					<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Value: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="desc" class="form-control" placeholder="Write the transfer's value." value="{{#value}}{{val}}{{/value}}" required />
+		                    			</div>
+		                  			</div>
+		                  			<hr>
+		                  			<div class="row">
+	                    				<div class="col-sm-9 col-sm-offset-8">
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
+	                    				</div>
+	                  				</div>
+		        				</form>
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+		{{/ scripts }}
+	{{/ quirk }}

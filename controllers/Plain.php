@@ -17,7 +17,7 @@ class Plain extends Luna\Controller {
         }
         if( (is_object($duration) && $duration->h > 0) || !is_object($current_data)){
             $data = file_get_contents("http://api.openweathermap.org/data/2.5/weather?id=1277539&APPID=6e387a73833fca13ccd287b1e7e2aa50&units=metric");
-            $wmpr->create([ "data" => $data , "updated" => new DateTime()]);
+            $wmpr->create([ "data" => $data , "updated" => new DateTime(),"zona_idzona"=>1]);
             $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
         }
         $date_bali = new DateTime("now" ,new DateTimeZone( "Asia/Makassar" ) );
@@ -59,10 +59,11 @@ class Plain extends Luna\Controller {
             "current_time" => $dat,
             $menu => true] ;
     }
+
     public function home($req , $res){
         $lang=$req->lang;
-        $tourMapper=$this->spot->mapper("Entity\Tour");
-        $tour=$tourMapper->select()->where(["home"=>true])->order(['type' => 'DESC']);;
+        $tourMapper=$this->spot->mapper("Entity\Experience");
+        $tour=$tourMapper->select()->where(["home"=>true])->with("type")->order(['type_idtype' => 'DESC']);;
         switch($lang){
             case "es":
                 $res->m = $res->mustache->loadTemplate("Plain/home_esp.mustache");
@@ -107,6 +108,7 @@ class Plain extends Luna\Controller {
         }
         echo $this->renderWiew( $this->header("aviso",$lang), $res);
     }
+
     public function hotel($req , $res){
         $lang=$req->lang;
         if(isset($req->params["hotel"] ) ){
@@ -123,8 +125,18 @@ class Plain extends Luna\Controller {
             }
 
             $tourMapper = $this->spot->mapper("Entity\Hotel");
+            $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
             $params = [($req->lang=="es"?"uri_es":"uri") => $req->params["hotel"]];
-            $hotel = $tourMapper->select()->with("images")->where($params)->first();
+            $hotel = $tourMapper->select()->where($params)->first();
+            $aux=$hotel->toArray();
+            $images=$hotelImageMapper->select()->where(['hotel_idhotel'=>$aux['idhotel'],'tipo'=>"I"]);
+            $video=$hotelImageMapper->select()->where(['hotel_idhotel'=>$aux['idhotel'],'tipo'=>"V"]);
+            $videoID=array();
+            foreach ($video->toArray() as $v) {
+                $parse=explode('/embed/',$v["path"]);
+                $arrayName = array('videoID' =>substr($parse[1],0, strpos($parse[1],'"')),'path'=>$v["path"]);
+                array_push($videoID,$arrayName);
+            }
             // $uriHandler => array ( uri , mapper => "{param}" )
             if( $hotel ){
                 $this->hotel = $hotel;
@@ -135,7 +147,7 @@ class Plain extends Luna\Controller {
                     return Luna\Translate::to( $lang , ["uri"=> $uri, "mapper"=>"{hotel}"]);
                 };
 
-                echo $this->renderWiew( array_merge(["translate"=>$translate,"hotel-data" => $hotel] , $this->header("hotel",$lang) ), $res);    
+                echo $this->renderWiew( array_merge(["translate"=>$translate,"hotel-data" => $hotel,"images"=>$images,"videos"=>$videoID] , $this->header("hotel",$lang) ), $res);    
             }
             else{
                 header('Location:'.Luna\Translate::url("/holtel-collection"));
@@ -153,7 +165,7 @@ class Plain extends Luna\Controller {
                 break;
             }
             $hotelMapper=$this->spot->mapper("Entity\Hotel");
-            $hotel=$hotelMapper->select()->with("images");
+            $hotel=$hotelMapper->select()->where(["zona_idzona"=>1]);
             echo $this->renderWiew( array_merge(["hotel-data"=>$hotel], $this->header("hotel",$lang)), $res);
         }
         
@@ -173,7 +185,7 @@ class Plain extends Luna\Controller {
                     $res->m = $res->mustache->loadTemplate("Plain/experience-inner.mustache");
                 break;
             }
-            $tourMapper = $this->spot->mapper("Entity\Tour");
+            $tourMapper = $this->spot->mapper("Entity\Experience");
             $params = [($req->lang=="es"?"uri_es":"uri") => $req->params["exper"]];
             $tour = $tourMapper->select()->with("images")->where($params)->first();
             // $uriHandler => array ( uri , mapper => "{param}" )
@@ -201,8 +213,8 @@ class Plain extends Luna\Controller {
                     $res->m = $res->mustache->loadTemplate("Plain/experience.mustache");
                 break;
             }
-            $tourMapper = $this->spot->mapper("Entity\Tour");
-            $tours = $tourMapper->select()->with("images");
+            $tourMapper = $this->spot->mapper("Entity\Experience");
+            $tours = $tourMapper->select()->with("type")->where(["zona_idzona"=>1]);
             echo $this->renderWiew( array_merge(["tours" => $tours] , $this->header("experience",$lang) ), $res);
         }
     	
@@ -210,8 +222,35 @@ class Plain extends Luna\Controller {
 
     public function transfer($req , $res){
         $lang=$req->lang;
+        //obtencion de transfers
         $transferBlockMapper=$this->spot->mapper("Entity\TransferBlock");
-        $transfer=$transferBlockMapper->select()->with("detail");
+        $transfer=$transferBlockMapper->select()->with(["detail"])->where(["zona_idzona"=>1]);
+        $aux=$transfer->toArray();
+        //obtencion de ids que aplican
+        $ids=array();
+        foreach ($aux as $value) {
+            array_push($ids,$value["idtransferBlock"]);
+        }
+        //obtencion de detalles con valores de los ids de los transfers blocks
+        $detailMapper=$this->spot->mapper("Entity\TransferDetail");
+        $detailValues=$detailMapper->select()->with(["transferValue"])->where(["transferBlock_idtransferBlock"=>$ids])->order(['description' => 'DESC'])->toArray();
+        //construccion array perzonalizado para la vista necesaria
+        $pers=Array();
+        foreach ($aux as $tran) {
+            $title["en"]=$tran["TransferBlockTitle"];
+            $title["es"]=$tran["TransferBlockTitle_es"];
+            $title["tipo"]=$tran["tipo"];
+            $title["detalle"]=array();
+            foreach ($detailValues as $detail) {
+                if($tran["idtransferBlock"]==$detail["transferBlock_idtransferBlock"]){
+                    $subtitle["en"]=$detail["description"];
+                    $subtitle["es"]=$detail["description_esp"];
+                    $subtitle["vals"]=$detail["transferValue"];
+                    array_push($title["detalle"],$subtitle);
+                }    
+            }
+            array_push($pers,$title);
+        }
         switch($lang){
             case "es":
                 $res->m = $res->mustache->loadTemplate("Plain/transfer_esp.mustache");
@@ -223,7 +262,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/transfer.mustache");
             break;
         }
-    	echo $this->renderWiew( array_merge(["transferBlock" => $transfer] , $this->header("transfer",$lang) ), $res);
+    	echo $this->renderWiew( array_merge(["transferBlock" => $pers], $this->header("transfer",$lang) ), $res);
     }
 
     public function contact($req , $res){
@@ -241,20 +280,20 @@ class Plain extends Luna\Controller {
         }
         if(isset($req->data["name"],$req->data["email"],$req->data["message"])){
             $template="Mail/contacto.mustache";
-            /*********************************************************************************/
-            /*                                                                               */
-            /*  cambiar este correo por aquel al que llegaran los correos de contacto.       */
-            /*                                                                               */
-            /*********************************************************************************/
-            $req->data["emailto"]="geoshada@gmail.com";
+            $req->data["emailto"]="bali@lozano.com";
             $req->data["subject"]="Contacto desde pagina";
+            //Enviamos el primer correo
+            $this->mailer( $res , $req , $template);
+            $req->data["emailto"]="alex.mendiola@lozano.com";
+            //Enviamos el segundo correo
             $this->mailer( $res , $req , $template);
             $contactMapper=$this->spot->mapper("Entity\Contact");
             //construimos la entidad
             $entity = $contactMapper->build([
                 'nombre' => $req->data["name"],
                 'email' => $req->data["email"],
-                'mensaje' =>$req->data["message"]
+                'mensaje' =>$req->data["message"],
+                'zona_idzona'=>1
             ]);
             $result=$contactMapper->insert($entity);
         }
@@ -263,7 +302,7 @@ class Plain extends Luna\Controller {
     public function forgot($req , $res){
         $lang=$req->lang;
         if(isset($req->data["usuario"])){
-            $usersMapper = $this->spot->mapper("Entity\Usuario");
+            $usersMapper = $this->spot->mapper("Entity\Users");
             //buscamos el usuario
             $user = $usersMapper->where(["usuario" => $req->data["usuario"]]);
             if ($user->first()) {
@@ -332,7 +371,7 @@ class Plain extends Luna\Controller {
         $id=$req->params["uid"];
         $forgotMapper=$this->spot->mapper("Entity\Forgot");
         $forgot=$forgotMapper->where(["uid"=>$id]);
-        $userMapper=$this->spot->mapper("Entity\Usuario");
+        $userMapper=$this->spot->mapper("Entity\Users");
         $user=$userMapper->where(["id"=>$forgot->first()->userid]);
         //si existe un registro con ese uid
         if($forgot->first()){
@@ -343,7 +382,7 @@ class Plain extends Luna\Controller {
                     if($req->data["pass1"]==$req->data["pass2"]){ 
                         ///seteamos entidades
                         $forgotMapper=$this->spot->mapper("Entity\Forgot");
-                        $userMapper=$this->spot->mapper("Entity\Usuario");
+                        $userMapper=$this->spot->mapper("Entity\Users");
                         //seleccionamos elementos
                         $forgot=$forgotMapper->where(["uid"=>$id])->first();
                         $user=$userMapper->where(["id"=>$forgot->userid])->first();
@@ -377,7 +416,7 @@ class Plain extends Luna\Controller {
                     }
                 }
                 else{
-                    $userMapper=$this->spot->mapper("Entity\Usuario");
+                    $userMapper=$this->spot->mapper("Entity\Users");
                     $user=$userMapper->where(["id"=>$forgot->first()->userid]);
                     switch($lang){
                         case "es":
@@ -425,7 +464,7 @@ class Plain extends Luna\Controller {
         }
         if(isset($req->data["name"],$req->data["lname"],$req->data["mlname"],$req->data["user"],$req->data["pass"],$req->data["pass1"],$req->data["phone"],$req->data["iata"],$req->data["member"],$req->data["years"])){
             //verificacion de que el usuario no exista
-            $userMapper=$this->spot->mapper("Entity\Usuario");
+            $userMapper=$this->spot->mapper("Entity\Users");
             $user=$userMapper->select()->where(["usuario"=>$req->data["user"]]);
             $exito=true;
             if($user->first()){
@@ -486,6 +525,12 @@ class Plain extends Luna\Controller {
                     'años' => $req->data["years"]
                 ]);
                 $result=$usersMapper->insert($entity);
+                $usersZonesMapper=$this->spot->mapper("Entity\UsersZona");
+                $zona=$usersZonesMapper->build([
+                    'users_id'=>$entity->id,
+                    'zona_idzona'=>1
+                    ]);
+                $result1=$usersZonesMapper->insert($zona);
                 switch($lang){
                     case "es":
                         $template="Mail/welcome_esp.mustache";
