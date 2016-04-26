@@ -14,7 +14,7 @@
             return [
                 'idexperience' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
                 'title' => ['type' => 'string','required' => true],
-                'thumbnail' => ['type' => 'string','required' => true],
+                'thumbnail' => ['type' => 'string'],
                 'duration' => ['type' => 'string','required' => true],
                 'duration_esp' => ['type' => 'string','required' => true],
                 'description' => ['type' => 'text','required' => true],

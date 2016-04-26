@@ -105,39 +105,43 @@ function __construct($path = '/docs', $details = false) {
     foreach ($sorted_routes as $method => $mroutes) {
       ksort($mroutes);
       foreach ($mroutes as $id => $route) {
-        $reflector = new \ReflectionClass($route['callback'][0]);
-        $classFilename = $route['file'];
-        if (empty($classFilename)) {
-          $classFilename = basename($reflector->getFileName());
-        }
+        if(class_exists( $route['callback'][0] ) ){
 
-        $callbackMethod = $reflector->getMethod($route['callback'][1]);
-        $methodComments = trim(substr($callbackMethod->getDocComment(), 3, -2));
+          $reflector = new \ReflectionClass($route['callback'][0]);
+          $classFilename = $route['file'];
+          if (empty($classFilename)) {
+            $classFilename = basename($reflector->getFileName());
+          }
 
-        // remove the first *
-        $methodComments = preg_replace('/\*/', '', $methodComments, 1);
+          $callbackMethod = $reflector->getMethod($route['callback'][1]);
+          $methodComments = trim(substr($callbackMethod->getDocComment(), 3, -2));
 
-        $methodComments = preg_replace('/(@code+)/', '<pre> ', $methodComments);
-        $methodComments = preg_replace('/(@endcode+)/', '</pre> ', $methodComments);
-        $methodComments = preg_replace('/(@\w+)/', '<b class="tag">$1</b> ', $methodComments);
+          // remove the first *
+          $methodComments = preg_replace('/\*/', '', $methodComments, 1);
 
-        
-        
+          $methodComments = preg_replace('/(@code+)/', '<pre> ', $methodComments);
+          $methodComments = preg_replace('/(@endcode+)/', '</pre> ', $methodComments);
+          $methodComments = preg_replace('/(@\w+)/', '<b class="tag">$1</b> ', $methodComments);
 
-        // replace all the other *'s with line breaks
-        $methodComments = preg_replace('/\*/', '<br />', $methodComments);
+          
+          
 
-        $data = array(
-          '%i' => strtoupper($method) . ' ' . $id,
-          '%I' => $id,
-          '%f' => "<a href='subl://open/?url=file://{$reflector->getFileName()}'>".$classFilename."</a>",
-          '%d' => $methodComments,
-          '%c' => $route['callback'][0],
-          '%m' => $route['callback'][1]
-        );
+          // replace all the other *'s with line breaks
+          $methodComments = preg_replace('/\*/', '<br />', $methodComments);
 
-        if (strpos($methodComments, '@hidden') === false) {
-          $res->add( strtr($pattern, $data) );
+          $data = array(
+            '%i' => strtoupper($method) . ' ' . $id,
+            '%I' => $id,
+            '%f' => "<a href='subl://open/?url=file://{$reflector->getFileName()}'>".$classFilename."</a>",
+            '%d' => $methodComments,
+            '%c' => $route['callback'][0],
+            '%m' => $route['callback'][1]
+          );
+
+          if (strpos($methodComments, '@hidden') === false) {
+            $res->add( strtr($pattern, $data) );
+          }
+          
         }
       }
     }
