@@ -466,13 +466,19 @@ table tr.main{
 		position: absolute;
 		top:50%;
 		left: 5%;
-		background-repeat: no-repeat;
+	}
+	.expose .previo:hover img{
+		width: 100px;
+		height: 100px;
 	}
 	.expose .siguiente{
 		position: absolute;
 		top:50%;
 		right: 5%;
-		background-repeat: no-repeat;
+	}
+	.expose .siguiente:hover img{
+		width: 100px;
+		height: 100px;
 	}
 #back {
 	text-decoration: none;
