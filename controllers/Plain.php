@@ -318,17 +318,17 @@ class Plain extends Luna\Controller {
                 switch($lang){
                     case "es":
                         $req->data["subject"] = 'Contraseña Olvidada';
-                        $req->data["message"] = "http://bali/es/bali/forgot/".$entity->uid;
+                        $req->data["message"] = "http:".$_SERVER['HTTP_HOST']."/bali/es/forgot/".$entity->uid;
                         $template="Mail/forgot_esp.mustache";
                     break;
                     case "en":
                         $req->data["subject"] = 'Forgotten Password';
-                        $req->data["message"] = "http://bali/en/bali/forgot/".$entity->uid;
+                        $req->data["message"] = "http:".$_SERVER['HTTP_HOST']."/bali/en/forgot/".$entity->uid;
                         $template="Mail/forgot.mustache";
                     break;
                     default:
                         $req->data["subject"] = 'Forgotten Password';
-                        $req->data["message"] = "http://bali/en/bali/forgot/".$entity->uid; 
+                        $req->data["message"] = "http:".$_SERVER['HTTP_HOST']."/bali/en/forgot/".$entity->uid;
                         $template="Mail/forgot.mustache";               
                     break;
                 }

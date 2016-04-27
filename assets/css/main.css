@@ -462,6 +462,18 @@ table tr.main{
 		background-image: url("/bali/assets/img/xIcon.png");
 		background-repeat: no-repeat;
 	}
+	.expose .previo{
+		position: absolute;
+		top:50%;
+		left: 5%;
+		background-repeat: no-repeat;
+	}
+	.expose .siguiente{
+		position: absolute;
+		top:50%;
+		right: 5%;
+		background-repeat: no-repeat;
+	}
 #back {
 	text-decoration: none;
 	padding: 5px;

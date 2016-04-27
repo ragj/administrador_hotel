@@ -86,32 +86,118 @@
 	{{/content}}
 	{{$ scripts}}
         <script type="text/javascript">	
+        	var actual="0";
 			$(function(){
 				jQuery.fn.center = function () {
 					this.css("position","absolute");
-				this.css("top", Math.max(0, ((jQuery(jQuery(this).parent()).height() - jQuery(this).outerHeight()) / 2) ) + "px");
-			this.css("left", Math.max(0, ((jQuery(jQuery(this).parent()).width() - jQuery(this).outerWidth()) / 2) ) + "px");
-			return this; };
+					this.css("top", Math.max(0, ((jQuery(jQuery(this).parent()).height() - jQuery(this).outerHeight()) / 2) ) + "px");
+					this.css("left", Math.max(0, ((jQuery(jQuery(this).parent()).width() - jQuery(this).outerWidth()) / 2) ) + "px");
+				return this; };
 			});
 			function showImage(e){
 				var img = e;
 				$(".expose").append("<div class='bg' ></div>");
 				$(".expose").append("<div class='cerrar' onclick='quitar(this)'></div>");
-				$(".expose").append("<img src=''>");
+				$(".expose").append("<img src='' class='th'>");
 				$(".expose").find("img").attr("src" , $(e).attr("src") );
+				$(".expose .hr").center();
+				$(".expose").append("<div class='previo' onclick='previo()'><img src='/bali/assets/img/izq.png'></div>");
+				$(".expose").append("<div class='siguiente' onclick='siguiente()'><img src='/bali/assets/img/der.png'></div>");
 				$(".expose").fadeIn();
+				var image=new Array();
+				{{#images}}
+        			image.push("/bali/assets/img/hotel/{{hotel_idhotel}}/{{path}}");
+        		{{/images}}
+				actual=image.indexOf($(e).attr("src"));
 			}
 			function showVideo( e ){
 				$(".expose").append("<div class='bg' ></div>");
 				$(".expose").append("<div class='cerrar' onclick='quitar(this)'></div>");
 				$(".expose").append(e);
 				$(".expose iframe").center();
+				$(".expose").append("<div class='previo' onclick='previov()'><img src='/bali/assets/img/izq.png'></div>");
+				$(".expose").append("<div class='siguiente' onclick='siguientev()'><img src='/bali/assets/img/der.png'></div>");
 				$(".expose").fadeIn();
+				var video=new Array();
+				{{#videos}}
+					video.push('{{&path}}');
+				{{/videos}}
+				actual=video.indexOf(e);
 			}
 			function quitar(e){
 				$(".expose").empty();
 				$(".expose").fadeOut();
+				actual=0;
 			}
+			function previo(){
+				var image=new Array();
+				{{#images}}
+        			image.push("/bali/assets/img/hotel/{{hotel_idhotel}}/{{path}}");
+        		{{/images}}
+        		actual=actual==0?image.length-1:actual-1;
+        		$(".th").attr("src",image[actual]);
+			}
+			function siguiente(){
+				var image=new Array();
+				{{#images}}
+        			image.push("/bali/assets/img/hotel/{{hotel_idhotel}}/{{path}}");
+        		{{/images}}
+        		actual=actual==image.length-1?0:actual+1;
+        		$(".th").attr("src",image[actual]);
+        	}
+        	function previov(){
+        		$(".expose iframe").remove();
+				var video=new Array();
+				{{#videos}}
+        			video.push('{{&path}}');
+        		{{/videos}}
+        		actual=actual==0?video.length-1:actual-1;
+        		$(".expose").append(video[actual]);
+        		$(".expose iframe").fadeIn().center();
+			}
+			function siguientev(){
+				$(".expose iframe").remove();
+				var video=new Array();
+				{{#videos}}
+        			video.push('{{&path}}');
+        		{{/videos}}
+        		actual=actual==video.length-1?0:actual+1;
+        		$(".expose").append(video[actual]);
+        		$(".expose iframe").center();
+        	}
+        	$(document).keydown(function(tecla){
+        		if($(".th").length!=0){
+        			switch (tecla.keyCode){
+	        			case 37:
+	        				previo();
+	        			break;
+	        			case 39:
+	        				siguiente();
+	        			break;
+	        			case 27:
+	        				$(".expose").empty();
+							$(".expose").fadeOut();
+							actual=0;
+	        			break;
+        			}
+        		}
+        		if($("iframe").length!=0){
+        			switch (tecla.keyCode){
+	        			case 37:
+	        				previov();
+	        			break;
+	        			case 39:
+	        				siguientev();
+	        			break;
+	        			case 27:
+	        				$("iframe").remove();
+	        				$(".expose").empty();
+							$(".expose").fadeOut();
+							actual=0;
+	        			break;
+        			}
+        		}
+            });
         </script>
     {{/ scripts}}
 {{/ panel}}
