@@ -1,0 +1,134 @@
+{{% BLOCKS }}
+{{< panel}}
+	{{$header}}
+	{{/header}}
+	{{$content}}
+		<div class="fit contact">
+			<row>
+				<column	cols="3">
+				</column>
+				<column	cols="6">
+					<div class="element contact">
+						<form action="/bali/request" method="post" class="forms">
+							<h1>Hotel</h1>
+							<section>
+								<label>
+									Pick a Hotel
+								</label>
+								<select name="hotel">
+									<option value=""></option>
+									{{#hoteles}}
+										<option value="{{idhotel}}">{{name}}</option>
+									{{/hoteles}}
+								</select>
+							</section>
+							<section>
+								<label>
+									Arrival Date
+								</label>
+								<input type="date" name="aday">
+							</section>
+							<section>
+								<label>
+									Departure Date
+								</label>
+								<input type="date" name="dday">
+							</section>
+							<h1>Transfer</h1>
+							<section>
+								<label>
+									Pick a Transfer
+								</label>
+								<select name="transfer">
+									<option value=""></option>
+									{{#transfers}}
+										{{#detail}}
+											<option value="{{idtransferDetail}}">{{description}}</option>
+										{{/detail}}
+									{{/transfers}}
+								</select>
+							</section>
+							<section>
+								<label>
+									Pick a Type of Vehicle
+								</label>
+								<select name="vehicle">
+									<option value=""></option>
+									<option value="INNOVA SUV">INNOVA SUV</option>
+									<option value="HIACE VAN">HIACE VAN</option>
+									<option value="ALPHARD/MERCY E 200">ALPHARD/MERCY E 200</option>
+								</select>
+							</section>
+							<section>
+								<label>
+									Number of Passengers
+								</label>
+								<input type="number" name="passenger">
+							</section>
+							<section>
+								<label>
+									Date
+								</label>
+								<input type="date" name="tday">
+							</section>
+							<h1>Experiences</h1>
+							<section>
+								{{#experiences}}
+									<div class="{{idexperience}}-div">
+									<label>
+										<input type="checkbox" name="experience[{{idexperience}}][name]" id="{{idexperience}}" value="{{title}}"> {{title}}
+									</label>
+										<label class="{{idexperience}}-date" style="display: none;">
+											Date: 
+										</label>
+										
+									</div>
+								{{/experiences}}
+							</section>
+							<h1>Comments</h1>
+							<section>
+								<label>
+									Comments
+								</label>
+								<textarea name="comments" ></textarea>
+							</section>
+							<section>
+
+								<button type="primary">Send</button> 
+							</section>
+						</form>
+					</div>
+				</column>
+				<column	cols="3">
+				</column>
+			</row>
+		</div>
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		<script>
+			$( document ).ready(function() {
+        		console.log( "document loaded" );
+        		var cChecked = function() {
+        			if($(this).attr("id")){
+        				if($(this).is(":checked")){
+
+        					var n = "."+$(this).attr("id")+"-div";
+				  			$(n).append("<input type='date' name='experience["+$(this).attr("id")+"][date]' class='"+$(this).attr("id")+"-date' style='display: none;'>");
+				  			var m = "."+$(this).attr("id")+"-date";
+				  			$(m).show("slow");
+        				}
+        				else{
+        					var n = "."+$(this).attr("id")+"-date";
+				  			$(n).hide("slow");
+				  			$(n).remove();
+        				}
+        			}
+				  
+				};
+				cChecked();
+				$( "input[type=checkbox]" ).on( "click", cChecked );
+    		});
+ 
+			
+		</script>
+	{{/content}}
+{{/ panel}}

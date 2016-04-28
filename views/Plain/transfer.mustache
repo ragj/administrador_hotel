@@ -28,6 +28,10 @@
 			 			{{en}}
 			 			<span>Transfer prices per person in USD</span>
 			 		</h1>
+			 		<center>
+			 			<button type="button" onclick="window.location.href='/bali/en/request'">REQUEST / INQUIERE</button>
+			 		</center>
+			 		<br>
 			 		<table>
 						<tr class="main">
 							<td>Description</td>
@@ -71,8 +75,6 @@
 		<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_02.jpg">
 		<div class="clear"></div>
 	</div>
-	<div class="expose">
-	</div>
 	{{/content}}
 	{{$scripts}}
 		<script>
@@ -85,25 +87,6 @@
 					var selector = jQuery(this).attr('data-filter');
 					jQuery('.aux > div').fadeIn(1000);
 					jQuery('.aux > div').not(selector).hide();
-				});
-				jQuery(".modal").click(function(){
-					jQuery(".expose").append("<div id='bg'></div>");
-					jQuery(".expose").append("<div class='cerrar'></div>");
-					jQuery(".expose").append("<row><column cols='3'></column><column cols='6'><div class='element'></div></column><column cols='3'></column></row>");
-					jQuery(".element").append("<form action='' method='post' class='forms'>"
-						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
-						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
-						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
-						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
-						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
-						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
-						+"</form>"
-					);
-					jQuery(".expose").fadeIn("slow");
-					jQuery(".cerrar").click(function(){
-						jQuery(".expose").empty();
-						jQuery(".expose").fadeOut();
-					});
 				});
 		});
 	 	</script>

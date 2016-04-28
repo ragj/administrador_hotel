@@ -106,6 +106,13 @@ $ROUTES = [
 		'get' => array('Usuario', 'login'),
 		'post' => array('Usuario', 'login'),
 	],
+	"/request" => [
+		'es' => '/request',
+		'en' => '/request',
+		'path' => '/request',
+		'get' => array('Plain', 'inquiere'),
+		'post' => array('Plain', 'inquiere'),
+	],
 ];
 
 foreach ($ROUTES as $key => $route) {

@@ -318,6 +318,20 @@ footer{
 		
 .fit.contact{
 	background-image: url("/bali/assets/img/bg-contacto-us.jpg");
+}
+button{
+	padding: 0 32px;			
+	height: 40px;
+	border: 2px black #DBE1EB !important;
+ 	background-color: #C39323;
+	color: white;
+}
+button:hover{
+	padding: 0 32px;			
+	height: 40px;
+	border: 2px black #DBE1EB !important;
+ 	background-color: #C39323;
+	color: #F6E3CE;
 }		
 .element{
 	background-color: #FFF;

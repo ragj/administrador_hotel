@@ -26,7 +26,8 @@
                 'home' => ['type' => 'boolean' ],
                 'created' => ['type' => 'datetime', 'required' => true , "value" => new \DateTime() ],
                 'zona_idzona'=> ['type' => 'integer', 'required' => true],
-                'type_idtype'=> ['type' => 'integer', 'required' => true]
+                'type_idtype'=> ['type' => 'integer', 'required' => true],
+                'hotel_idhotel'=> ['type' => 'integer']
             ];
         }
         

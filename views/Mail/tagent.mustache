@@ -1,0 +1,39 @@
+{{% BLOCKS }}
+	{{< mail}}
+		{{$ header}}
+			<img style="width: 100%;" src="http://lozanodev.denumeris.com/wp-content/uploads/2016/04/email-banner.jpg">
+        {{/ header}}
+        {{$ content}}
+        	<tr style="height: 124px;">
+                <td>
+                    <p style="padding: 0 0 20px; margin: 0 50px; text-align: left; color: #707070; font-size: 13px; border-bottom: 0px solid #dadada;"> 
+                        <br><br><br>
+                        {{#data}}
+                            {{#hotel}}
+                                <h1>Hotel</h1>
+                                <span style="color: #af841d; font-size: 15px;">Hotel: </span>{{nombre}}<br><br><br>
+                                <span style="color: #af841d; font-size: 15px;">Arrival Date: </span>{{arrival}}<br><br><br>
+                                <span style="color: #af841d; font-size: 15px;">Departure Date: <br></span>{{departure}}<br><br><br>
+                            {{/hotel}}
+                            {{#transfer}}
+                                <h1>Transfer</h1>
+                                <span style="color: #af841d; font-size: 15px;">Transfer: </span>{{transfer}}<br><br><br>
+                                <span style="color: #af841d; font-size: 15px;">Vehicle: </span>{{vehicle}}<br><br><br>
+                                <span style="color: #af841d; font-size: 15px;">Passenger: <br></span>{{passenger}}<br><br><br>
+                                <span style="color: #af841d; font-size: 15px;">Date: <br></span>{{fecha}}<br><br><br>
+                            {{/transfer}}
+                            {{#experience}}
+                                <h1>Experiences</h1>
+                                <span style="color: #af841d; font-size: 15px;">Experience: </span>{{name}}<br>
+                                <span style="color: #af841d; font-size: 15px;">Date: </span>{{fecha}}<br><br><br>
+                            {{/experience}}
+                            {{#comments}}
+                                <h1>Transfer</h1>
+                                <span style="color: #af841d; font-size: 15px;">Comments: </span>{{data.comments}}<br><br><br>
+                            {{/comments}}
+                        {{/data}}
+                    </p>
+                </td>
+            </tr>
+        {{/ content}}
+	{{/ mail}}

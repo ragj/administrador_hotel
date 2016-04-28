@@ -299,6 +299,82 @@ class Plain extends Luna\Controller {
         }
     	echo $this->renderWiew( $this->header("contact",$lang), $res);
     }
+    public function inquiere($req , $res){
+        $lang=$req->lang;
+        switch($lang){
+            case "es":
+                $res->m = $res->mustache->loadTemplate("Plain/request_esp.mustache");
+            break;
+            case "en":
+                $res->m = $res->mustache->loadTemplate("Plain/request.mustache");
+            break;
+            default:
+                $res->m = $res->mustache->loadTemplate("Plain/request.mustache");
+            break;
+        }
+        $hotelMapper=$this->spot->mapper("Entity\Hotel");
+        $hotels=$hotelMapper->select()->where(["zona_idzona"=>1]);
+        $transferBlockMapper=$this->spot->mapper("Entity\TransferBlock");
+        $transfers=$transferBlockMapper->select()->with("detail")->where(["zona_idzona"=>1]);
+        $experienceMapper=$this->spot->mapper("Entity\Experience");
+        $experiences=$experienceMapper->select()->where(["zona_idzona"=>1]);
+        if(isset($req->data["hotel"],$req->data["aday"],$req->data["dday"])){
+            $TransferDetailBlock=$this->spot->mapper("Entity\TransferDetail");
+            $hotel=$hotelMapper->select()->where(["idhotel"=>$req->data["hotel"]])->first();
+            $arrival=$req->data["aday"];
+            $departure=$req->data["dday"];
+            $transferDetail=isset($req->data["transfer"])?$TransferDetailBlock->select()->where(["idtransferDetail"=>$req->data["transfer"]])->first():null;
+            $vehicle=isset($req->data["vehicle"])?$req->data["vehicle"]:null;
+            $passenger=isset($req->data["passenger"])?$req->data["passenger"]:null;
+            $tday=isset($req->data["tday"])?$req->data["tday"]:null;
+            $selected=isset($req->data["experience"])?$req->data["experience"]:null;
+            $comments=isset($req->data["comments"])?$req->data["comments"]:null;
+            switch($lang){
+                    case "es":
+                        $req->data["subject"] = 'Contacto Travel Agent';
+                        $template="Mail/tagent_esp.mustache";
+                        $des="Location:".$_SERVER['HTTP_HOST']."/bali/es/travelAgent";
+                    break;
+                    case "en":
+                        $req->data["subject"] = 'Contact Travel Agent';
+                        $template="Mail/tagent.mustache";
+                        $des="Location:".$_SERVER['HTTP_HOST']."/bali/en/travelAgent";
+                    break;
+                    default:
+                        $req->data["subject"] = 'Contact Travel Agent';
+                        $template="Mail/tagent.mustache"; 
+                        $des="Location:".$_SERVER['HTTP_HOST']."/bali/en/travelAgent";              
+                    break;
+            }
+            $req->data["hotel"]=array('nombre' => $hotel->name,'arrival' => $arrival,'departure'=>$departure );
+            if($transferDetail!=null){
+                $req->data["transfer"]=array('transfer' =>$transferDetail->description,'vehicle'=>$vehicle,'passenger'=>$passenger,'fecha'=>$tday);  
+            }
+            else{
+                $req->data["transfer"]==null;
+            }
+            if($selected!=null){
+                $aux=array();
+                foreach ($selected as $sel) {
+                    $aux2 = array('name' => $sel["name"],'fecha' => $sel["date"]);
+                    array_push($aux,$aux2);
+                }
+                $req->data["experience"]=$aux;
+            }
+            else{
+                $req->data["experience"]=null;
+            }
+            $req->data["comments"]=$comments;
+            $req->data["emailto"]="bali@lozano.com";
+            //mandamos mensaje
+            $this->mailer( $res , $req , $template);
+            $req->data["emailto"]="alex.mendiola@lozano.com";
+            //mandamos mensaje
+            $this->mailer( $res , $req , $template);
+            header($des);
+        }
+        echo $this->renderWiew(array_merge(["hoteles"=>$hotels,"transfers"=>$transfers,"experiences"=>$experiences],$this->header("request",$lang)), $res);
+    }
     public function forgot($req , $res){
         $lang=$req->lang;
         if(isset($req->data["usuario"])){

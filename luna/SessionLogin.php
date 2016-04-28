@@ -17,7 +17,7 @@ namespace Luna;
 class SessionLogin extends \Zaphpa\BaseMiddleware {
 
     private $urlPermitidas = ['/login', '/logout', '/','/about-us','/hotel-collection','/hotel-collection/{hotel}','/experience','/experience/{exper}','/contact-us','/home','/forgot','/forgot/{uid}','/register','/aviso','' ,"/migrate/up"];
-    private $common=['/transfer'];
+    private $common=['/transfer','/request'];
     private $admin=['/panel/hotel/add','/panel/hotel/show','/panel/hotel/edit/{hotel}','/panel/hotel/delete/{hotel}','/panel/hotel/addImages','/panel/hotel/editImages/{hotel}','/panel/hotel/deleteImages/{hotel}','/panel/tour/add','/panel/tour/show','/panel/tour/edit/{exper}','/panel/tour/delete/{exper}','/panel/tour/delete','/panel/tour/addImages','/panel/tour/editImages/{exper}','/panel/tour/deleteImages/{exper}','/panel/user/add','/panel/user/show','/panel/user/edit/{exper}','/panel/user/active/{exper}','/panel/user/delete/{exper}','/panel/contact/show','/panel/transfer/addBlock','/panel/transfer/addDetail','/panel/transfer/listBlock','/panel/transfer/editBlock/{block}','/panel/transfer/delete/{block}','/panel/transfer/editDetail/{detail}','/panel/transfer/deleteDetail/{detail}','/panel/user/zone','/panel/user/deleteZona/{zona}/{user}','/panel/hotel/addVideo','/panel/hotel/editVideo/{hotel}','/bali/panel/hotel/deleteVideo/{hotel}','/panel/transfer/addValue','/panel/transfer/editValue/{value}','/panel/transfer/deleteValue/{value}'];
 
     function preprocess(&$router) {
