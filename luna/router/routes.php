@@ -113,6 +113,14 @@ $ROUTES = [
 		'get' => array('Plain', 'inquiere'),
 		'post' => array('Plain', 'inquiere'),
 	],
+	"/transfers" => [
+		'es' => '/traslados',
+		'en' => '/transfers',
+		'allow' => true,
+		'path' => '/transfers',
+		'get' => array('Plain', 'transfers'),
+		'post' => array('Plain', 'transfers'),
+	]
 ];
 
 foreach ($ROUTES as $key => $route) {

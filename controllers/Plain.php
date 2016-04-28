@@ -92,7 +92,21 @@ class Plain extends Luna\Controller {
         }
     	echo $this->renderWiew( $this->header("about",$lang), $res);
     }
-
+    public function transfers($req , $res){
+        $lang=$req->lang;
+        switch($lang){
+            case "es":
+                $res->m = $res->mustache->loadTemplate("Plain/tranfers_esp.mustache");
+            break;
+            case "en":
+                $res->m = $res->mustache->loadTemplate("Plain/tranfers.mustache");
+            break;
+            default:
+                $res->m = $res->mustache->loadTemplate("Plain/tranfers.mustache");
+            break;
+        }
+        echo $this->renderWiew( $this->header("transfers",$lang), $res);
+    }
     public function aviso($req , $res){
         $lang=$req->lang;
         switch($lang){
