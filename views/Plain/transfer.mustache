@@ -65,25 +65,46 @@
 		</div>
 		<h1> Gallery </h1>
 		
-		<img src="/bali/assets/img/transfers/galeria_trasnfers/automovil_02.jpg">
+		<img src="/bali/assets/img/transfers/galeria_trasnfers/automovil_02.jpg" class="modal">
 		<img src="/bali/assets/img/transfers/galeria_trasnfers/automovil_01.jpg">
 		<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_01.jpg">
 		<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_02.jpg">
 		<div class="clear"></div>
+	</div>
+	<div class="expose">
 	</div>
 	{{/content}}
 	{{$scripts}}
 		<script>
 			jQuery.noConflict();
 			jQuery(window).load(function(){
-				jQuery('.filter a').click(function(){
-				jQuery('.filter .actual').removeClass('actual');
-				jQuery(this).addClass('actual');
-				
-				var selector = jQuery(this).attr('data-filter');
-				jQuery('.aux > div').fadeIn(1000);
-				jQuery('.aux > div').not(selector).hide();
-			});
+					jQuery('.filter a').click(function(){
+					jQuery('.filter .actual').removeClass('actual');
+					jQuery(this).addClass('actual');
+					
+					var selector = jQuery(this).attr('data-filter');
+					jQuery('.aux > div').fadeIn(1000);
+					jQuery('.aux > div').not(selector).hide();
+				});
+				jQuery(".modal").click(function(){
+					jQuery(".expose").append("<div id='bg'></div>");
+					jQuery(".expose").append("<div class='cerrar'></div>");
+					jQuery(".expose").append("<row><column cols='3'></column><column cols='6'><div class='element'></div><div id='cuadro'></div></column><column cols='3'></column></row>");
+					jQuery("#cuadro").append("<form action='' method='post' class='forms'>"
+						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
+						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
+						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
+						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
+						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
+						+"<section><label>User</label><input name='usuario' type='text' required/></section>"
+						+"</form>"
+					);
+					jQuery(".expose").fadeIn("slow");
+					jQuery(".cerrar").click(function(){
+						jQuery(".expose").empty();
+						jQuery(".expose").fadeOut();
+					});
+				});
 		});
 	 	</script>
 	{{/scripts}}
