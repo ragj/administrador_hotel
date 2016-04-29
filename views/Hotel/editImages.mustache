@@ -19,14 +19,14 @@
 			        			<div class="panel-body">
 			        				<hr>
 			        				{{# image}}			
-				        				<form class="form-horizontal" action="/bali/panel/hotel/editImages/{{id}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+				        				<form class="form-horizontal" action="/bali/panel/hotel/editImages/{{idhotelImages}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 				        					<div class="form-group">
 				                    			<label class="col-sm-3 control-label">Actual  Image:</label>
 				                    			<div class="col-sm-6">
 				                      				{{# hotel}}
 					                            		<p>{{name}}</p>
 					                            	{{/ hotel}}
-					                            	<img src="/bali/assets/img/hotel/{{hotel_idhotel}}/{{path}}" style="width:500px; height: 300px;">
+					                            	<img src="{{thumb}}hotel/{{hotel_idhotel}}/{{path}}" style="width:500px; height: 300px;">
 				                    			</div>
 				                  			</div>
 				                  			<div class="form-group">
