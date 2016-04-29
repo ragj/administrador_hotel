@@ -55,7 +55,8 @@ class Hotel extends Luna\Controller {
              if(!($_FILES['imagen']['error']>0)){
                     //validamos que la imagen sea de los tipos establecidos
                     if(in_array($_FILES['imagen']['type'], $permitidos)){
-                        $ruta=$dir.$req->data["hotel"]."/".$_FILES['imagen']['name'];
+                        $aux=explode('.',$_FILES['imagen']['name']);
+                        $ruta=$dir.$req->data["hotel"]."/".$aux[0].substr(uniqid(),0,-3).$aux[1];
                         //verificamos que no exista una imagen que se llame igual
                         if(!file_exists($ruta)){
                             //subimos la imagen al servidor
@@ -115,11 +116,12 @@ class Hotel extends Luna\Controller {
             {
                 //establecemos el directorio con el cual trabajaremos
                 $dir="./assets/img/hotel/";
+                $aux=explode('.',$_FILES['imagen']['name']);
                 if($hotel->zona_idzona==1){
-                    $ruta=$dir.$hotel->idhotel."/".$_FILES['imagen']['name'];
+                    $ruta=$dir.$hotel->idhotel."/".$aux[0].substr(uniqid(),0,-3).$aux[1];
                 }
                 else{
-                    $ruta="../maldivas/assets/img/hotel/".$hotel->idhotel."/".$_FILES['imagen']['name'];
+                    $ruta="../maldivas/assets/img/hotel/".$hotel->idhotel."/".$aux[0].substr(uniqid(),0,-3).$aux[1];
                     $dir="../maldivas/assets/img/hotel/";
                 }
                 //array con tipos de archivos 
@@ -246,11 +248,12 @@ class Hotel extends Luna\Controller {
     		if($_FILES['thumbnail']['name']!=null){
     			if(!($_FILES['thumbnail']['error']>0)){
     				if(in_array($_FILES['thumbnail']['type'],$permitidos)){
+                        $aux=explode('.',$_FILES['imagen']['name']);
                         if($zona==1){
-                            $ruta=$dir."/".$_FILES['thumbnail']['name'];
+                            $ruta=$dir."/".$aux[0].substr(uniqid(),0,-3).$aux[1];
                         }
                         else{
-                            $ruta="../maldivas/assets/img/hotel-thumb/".$_FILES['thumbnail']['name'];
+                            $ruta="../maldivas/assets/img/hotel-thumb/".$aux[0].substr(uniqid(),0,-3).$aux[1];
                         }
     					//verificamos si el archivo existe
     					if(!file_exists($ruta)){
@@ -362,7 +365,8 @@ class Hotel extends Luna\Controller {
                 if(!($_FILES['thumbnail']['error']>0)){
                     if(in_array($_FILES['thumbnail']['type'],$permitidos)){
                         //definimos la ruta de la imagen a subir
-                        $ruta=$dir."/".$_FILES['thumbnail']['name'];
+                        $aux=explode('.',$_FILES['imagen']['name']);
+                        $ruta=$dir."/".$aux[0].substr(uniqid(),0,-3).$aux[1];
                         //verificamos si el archivo existe
                         if(!file_exists($ruta)){
                             $resultado=@move_uploaded_file($_FILES['thumbnail']["tmp_name"],$ruta);

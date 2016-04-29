@@ -37,7 +37,8 @@ class Tour extends Luna\Controller {
             {
                 //validamos que la imagen sea de los tipos establecidos
                 if(in_array($_FILES['imagen']['type'], $permitidos)){
-                    $ruta=$dir.$req->data["exper"]."/".$_FILES['imagen']['name'];
+                    $aux=explode('.',$_FILES['imagen']['name']);
+                    $ruta=$dir."/".$aux[0].substr(uniqid(),0,-3).$aux[1];
                     //verificamos que no exista una imagen que se llame igual
                     if(!file_exists($ruta)){
                         //subimos la imagen al servidor
@@ -94,7 +95,8 @@ class Tour extends Luna\Controller {
         if(isset($_FILES['imagen']['name'])){
             $imagen="";
             //establecemos el formato en que se almacena la url en la base de datos
-            $aux=$tour->idexperience."/".$_FILES['imagen']['name'];
+            $aux2=explode('.',$_FILES['imagen']['name']);
+            $aux=$tour->idexperience."/".$aux2[0].substr(uniqid(),0,-3).$aux2[1];
              if(strcmp($aux, $tourImage->path)!==0 && $_FILES['imagen']['name']!=null)
             {
                 //establecemos el directorio con el cual trabajaremos
@@ -224,7 +226,8 @@ class Tour extends Luna\Controller {
                 {
                     //validamos que la imagen sea de los tipos establecidos
                     if(in_array($_FILES['thumbnail']['type'], $permitidos)){
-                        $ruta=$dir."/".$_FILES['thumbnail']['name'];
+                        $aux2=explode('.',$_FILES['imagen']['name']);
+                        $ruta=$dir."/".$aux2[0].substr(uniqid(),0,-3).$aux2[1];
                         //verificamos que no exista una imagen que se llame igual
                         if(!file_exists($ruta)){
                             //subimos la imagen al servidor
@@ -341,7 +344,8 @@ class Tour extends Luna\Controller {
                 else{
                     $dir="../maldivas/assets/img/experience/indo";
                 }
-                $ruta=$dir."/".$_FILES['thumbnail']['name'];
+                $aux2=explode('.',$_FILES['imagen']['name']);
+                $ruta=$dir."/".$aux2[0].substr(uniqid(),0,-3).$aux2[1];
                 $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
                 //Obtenemos y sanitizamos los parametros obtenidos por el metodo  post.
                 //validamos si se subio la imagen
