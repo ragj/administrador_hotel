@@ -304,7 +304,13 @@ class Hotel extends Luna\Controller {
                 array_push($aux,$zone['zona_idzona']);
             }
             $zoneMapper=$this->spot->mapper("Entity\Zona");
-            $zona=$zoneMapper->select()->where(["idzona"=>$aux]);    
+            $zona=$zoneMapper->select()->where(["idzona"=>$aux]);  
+            if($hotel->zona_idzona!=1){
+                $imagen="http://".$_SERVER['HTTP_HOST']."/maldivas/assets/img/";
+            }
+            else{
+                $imagen="/bali/assets/img/";
+            }  
         }
         if(isset($req->data["name"])){
             //definimos donde se almacenara el thumbnail
@@ -377,7 +383,7 @@ class Hotel extends Luna\Controller {
             }
         }
         
-    	echo $this->renderWiew( array_merge(["hotel" => $hotel,"zones"=>$zona,"images"=>$images,"videos"=>$videos]), $res);
+    	echo $this->renderWiew( array_merge(["hotel" => $hotel,"zones"=>$zona,"images"=>$images,"thumb"=>$imagen,"videos"=>$videos]), $res);
     }
     
     /**

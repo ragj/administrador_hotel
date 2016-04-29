@@ -18,7 +18,7 @@
 		        				</div>
 			        			<div class="panel-body">
 			        				<hr>			
-			        				<form class="form-horizontal" action="/bali/panel/hotel/edit/{{idhotel}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+			        				<form class="form-horizontal" action="./bali/panel/hotel/edit/{{idhotel}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 			        					<div class="form-group">
 			                    			<label class="col-sm-3 control-label">Name: <span class="text-danger">*</span></label>
 			                    			<div class="col-sm-6">
@@ -81,7 +81,7 @@
 			                  			<div class="form-group">
 			                    			<label class="col-sm-3 control-label">Thumbnail:</label>
 			                    			<div class="col-sm-6">
-			                    				<img src="/bali/assets/img/hotel-thumb/{{thumbnail}}" height="250px" width="250px"/>
+			                    				<img src="{{thumb}}hotel-thumb/{{thumbnail}}" height="250px" width="250px"/>
 			                    				<input type="file"name="thumbnail">
 												 <span class="help-block">THUMBNAIL Image size (000px*000px)</span>
 			                   				</div>
@@ -120,7 +120,7 @@
 		              						<h4 class="panel-title">Image {{path}}</h4>
 		            					</div>
 		            					<div class="panel-body">
-		              						<img src="/bali/assets/img/hotel/{{hotel_idhotel}}/{{path}}" class="img-rounded " width="250" height="150" >
+		              						<img src="{{thumb}}hotel/{{hotel_idhotel}}/{{path}}" class="img-rounded " width="250" height="150" >
 							                 <a href="/bali/panel/hotel/editImages/{{idhotelImages}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
 							                 <a onclick=myFunction({{idhotelImages}})><button type="button" class="btn btn-danger btn-quirk"><i class="fa fa-times"></i></button></a>
 		            					</div>
