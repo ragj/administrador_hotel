@@ -38,7 +38,7 @@ class Tour extends Luna\Controller {
                 //validamos que la imagen sea de los tipos establecidos
                 if(in_array($_FILES['imagen']['type'], $permitidos)){
                     $aux=explode('.',$_FILES['imagen']['name']);
-                    $ruta=$dir."/".$aux[0].substr(uniqid(),0,-3).$aux[1];
+                    $ruta=$dir."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
                     //verificamos que no exista una imagen que se llame igual
                     if(!file_exists($ruta)){
                         //subimos la imagen al servidor
@@ -47,7 +47,7 @@ class Tour extends Luna\Controller {
                             //Guardamos la experiencia en la base de datos
                             $file=$_FILES['imagen']['name'];
                             $tourMapper=$this->spot->mapper("Entity\ExperienceImage");
-                            $img=(string)$req->data["exper"]."/".(string)$_FILES['imagen']['name'];
+                            $img=(string)$req->data["exper"]."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
                             $entity = $tourMapper->build([
                                 'experience_idexperience' =>$req->data["exper"],
                                 'path' =>$img
@@ -96,7 +96,7 @@ class Tour extends Luna\Controller {
             $imagen="";
             //establecemos el formato en que se almacena la url en la base de datos
             $aux2=explode('.',$_FILES['imagen']['name']);
-            $aux=$tour->idexperience."/".$aux2[0].substr(uniqid(),0,-3).$aux2[1];
+            $aux=$tour->idexperience."/".$aux2[0].substr(uniqid(),0,-3).".".$aux2[1];
              if(strcmp($aux, $tourImage->path)!==0 && $_FILES['imagen']['name']!=null)
             {
                 //establecemos el directorio con el cual trabajaremos
@@ -227,14 +227,14 @@ class Tour extends Luna\Controller {
                     //validamos que la imagen sea de los tipos establecidos
                     if(in_array($_FILES['thumbnail']['type'], $permitidos)){
                         $aux2=explode('.',$_FILES['imagen']['name']);
-                        $ruta=$dir."/".$aux2[0].substr(uniqid(),0,-3).$aux2[1];
+                        $ruta=$dir."/".$aux2[0].substr(uniqid(),0,-3).".".$aux2[1];
                         //verificamos que no exista una imagen que se llame igual
                         if(!file_exists($ruta)){
                             //subimos la imagen al servidor
                             $resultado=@move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $ruta);
                             if($resultado){
                                 //Guardamos la experiencia en la base de datos
-                                $file=$_FILES['thumbnail']['name'];
+                                $file=$aux2[0].substr(uniqid(),0,-3).".".$aux2[1];
                                 $tourMapper=$this->spot->mapper("Entity\Experience");
                                 $entity = $tourMapper->build([
                                     'title' => $titulo,
@@ -345,7 +345,7 @@ class Tour extends Luna\Controller {
                     $dir="../maldivas/assets/img/experience/indo";
                 }
                 $aux2=explode('.',$_FILES['imagen']['name']);
-                $ruta=$dir."/".$aux2[0].substr(uniqid(),0,-3).$aux2[1];
+                $ruta=$dir."/".$aux2[0].substr(uniqid(),0,-3).".".$aux2[1];
                 $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
                 //Obtenemos y sanitizamos los parametros obtenidos por el metodo  post.
                 //validamos si se subio la imagen
@@ -361,7 +361,7 @@ class Tour extends Luna\Controller {
                                 //eliminamos fichero anterior
                                 @unlink($dir."/".$tour->thumbnail);
                                 //obtenemos la ruta del archivo
-                                $thumbnail=$_FILES['thumbnail']['name'];
+                                $thumbnail=$aux2[0].substr(uniqid(),0,-3).".".$aux2[1];
                                 
                             }
                             else{ echo "<div class=error><p>There was a problem uploading the image.</p></div>";}
