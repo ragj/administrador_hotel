@@ -370,7 +370,7 @@ class Hotel extends Luna\Controller {
                             $dir="./assets/img/hotel-thumb/";
                         }
                         else{
-                            $dir="../maldivas/assets/img/hotel-thumb"
+                            $dir="../maldivas/assets/img/hotel-thumb";
                         }
                         $ruta=$dir."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
                         //verificamos si el archivo existe
