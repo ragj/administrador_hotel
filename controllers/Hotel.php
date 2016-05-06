@@ -248,7 +248,7 @@ class Hotel extends Luna\Controller {
     		if($_FILES['thumbnail']['name']!=null){
     			if(!($_FILES['thumbnail']['error']>0)){
     				if(in_array($_FILES['thumbnail']['type'],$permitidos)){
-                        $aux=explode('.',$_FILES['imagen']['name']);
+                        $aux=explode('.',$_FILES['thumbnail']['name']);
                         if($zona==1){
                             $ruta=$dir."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
                         }
