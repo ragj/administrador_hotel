@@ -332,16 +332,43 @@ class Plain extends Luna\Controller {
         $transfers=$transferBlockMapper->select()->with("detail")->where(["zona_idzona"=>1]);
         $experienceMapper=$this->spot->mapper("Entity\Experience");
         $experiences=$experienceMapper->select()->where(["zona_idzona"=>1]);
-        if(isset($req->data["hotel"],$req->data["aday"],$req->data["dday"])){
+        if(isset($req->data["hotel"])){
             $TransferDetailBlock=$this->spot->mapper("Entity\TransferDetail");
-            $hotel=$hotelMapper->select()->where(["idhotel"=>$req->data["hotel"]])->first();
-            $arrival=$req->data["aday"];
-            $departure=$req->data["dday"];
-            $transferDetail=isset($req->data["transfer"])?$TransferDetailBlock->select()->where(["idtransferDetail"=>$req->data["transfer"]])->first():null;
-            $vehicle=isset($req->data["vehicle"])?$req->data["vehicle"]:null;
-            $passenger=isset($req->data["passenger"])?$req->data["passenger"]:null;
-            $tday=isset($req->data["tday"])?$req->data["tday"]:null;
-            $selected=isset($req->data["experience"])?$req->data["experience"]:null;
+            $requested_hotels=array();
+            foreach ($req->data["hotel"] as $hotel) {
+                $hot=$hotelMapper->select()->where(["idhotel"=>$hotel["idhotel"]])->first();
+                $arr=$hotel["aaday"];
+                $dday=$hotel["dday"];
+                $aux = array('name' =>$hot->name ,'arrival'=>$arr,'departure'=>$dday);
+                array_push($requested_hotels,$aux);
+            }
+            $requested_transfers=array();
+            if(isset($req->data["transfer"])){
+                foreach($req->data["transfer"] as $trans){
+                    if($trans['idtransferDetail']!=''){
+                        $transferDetail=$TransferDetailBlock->select()->where(["idtransferDetail"=>$trans['idtransferDetail']])->first();
+                        $aux=array('transfer' =>$transferDetail->description,'vehicle'=>$trans['vehicle'],'passenger'=>$trans['passanger'],'fecha'=>$trans['tday']);
+                        array_push($requested_transfers,$aux);
+                    }
+                }  
+            }
+            else{
+                $requested_transfers=null;
+            }
+            $requested_experiences=array();
+            if(isset($req->data["exper"])){
+                foreach ($req->data["exper"] as $exp) {
+                    if($exp!=''){
+                        $expe=$experienceMapper->select()->where(["idexperience"=>$exp['idexperience']])->first();
+                        $aux=array('experience'=>$expe->title,"tipo"=>$expe->duration,"fecha"=>$exp['date']);
+                        array_push($requested_experiences, $aux);
+                    }
+                }
+            }
+
+            else{
+                $requested_experiences=null;
+            }
             $comments=isset($req->data["comments"])?$req->data["comments"]:null;
             switch($lang){
                     case "es":
@@ -360,32 +387,18 @@ class Plain extends Luna\Controller {
                         $des="Location:".$_SERVER['HTTP_HOST']."/bali/en/travelAgent";              
                     break;
             }
-            $req->data["hotel"]=array('nombre' => $hotel->name,'arrival' => $arrival,'departure'=>$departure );
-            if($transferDetail!=null){
-                $req->data["transfer"]=array('transfer' =>$transferDetail->description,'vehicle'=>$vehicle,'passenger'=>$passenger,'fecha'=>$tday);  
-            }
-            else{
-                $req->data["transfer"]==null;
-            }
-            if($selected!=null){
-                $aux=array();
-                foreach ($selected as $sel) {
-                    $aux2 = array('name' => $sel["name"],'fecha' => $sel["date"]);
-                    array_push($aux,$aux2);
-                }
-                $req->data["experience"]=$aux;
-            }
-            else{
-                $req->data["experience"]=null;
-            }
+
+            $req->data["hotel"]=$requested_hotels;
+            $req->data["transfer"]=$requested_transfers;
+            $req->data["experience"]=$requested_experiences;
             $req->data["comments"]=$comments;
-            $req->data["emailto"]="bali@lozano.com";
+            $req->data["emailto"]="geoshada@gmail.com";
             //mandamos mensaje
             $this->mailer( $res , $req , $template);
-            $req->data["emailto"]="alex.mendiola@lozano.com";
+            //$req->data["emailto"]="alex.mendiola@lozano.com";
             //mandamos mensaje
-            $this->mailer( $res , $req , $template);
-            header($des);
+            //$this->mailer( $res , $req , $template);
+            //header($des);
         }
         echo $this->renderWiew(array_merge(["hoteles"=>$hotels,"transfers"=>$transfers,"experiences"=>$experiences],$this->header("request",$lang)), $res);
     }
