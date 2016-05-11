@@ -481,18 +481,10 @@ table tr.main{
 		top:50%;
 		left: 5%;
 	}
-	.expose .previo:hover img{
-		width: 100px;
-		height: 100px;
-	}
 	.expose .siguiente{
 		position: absolute;
 		top:50%;
 		right: 5%;
-	}
-	.expose .siguiente:hover img{
-		width: 100px;
-		height: 100px;
 	}
 	.expose #cuadro{
 		width: 100%;
