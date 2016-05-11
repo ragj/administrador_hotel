@@ -12,76 +12,105 @@
 						<form action="/bali/request" method="post" class="forms">
 							<div id="0"class="hotel" style="position: relative;">
 								<h1>Hotel</h1>
-								<section>
-									<label>
-										Pick a Hotel
-									</label>
-									<select name="hotel[0][idhotel]">
-										<option value=""></option>
-										{{#hoteles}}
-											<option value="{{idhotel}}">{{name}}</option>
-										{{/hoteles}}
-									</select>
-								</section>
-								<section>
-										Arrival Date: <input type="date" class="aaday" name="hotel[0][aaday]">   Departure Date: <input type="date" class="dday" name="hotel[0][dday]">
-								</section>
-								<a  href="javascript:void(0);" class="addHotel primary" id="0" style="text-decoration: none; padding: 10px; ">Agregar</a>
+								<fieldset>
+									<section>
+										<label>Pick a Hotel</label>
+										<select name="hotel[0][idhotel]"  class="select">
+											<option value=""></option>
+											{{#hoteles}}
+												<option value="{{idhotel}}">{{name}}</option>
+											{{/hoteles}}
+										</select>
+									</section>
+									<row>
+        								<column cols="6">
+								            <label>Arrival Date:</label>
+								            <input type="date" class="aaday width-12" name="hotel[0][aaday]">
+								        </column>
+								        <column cols="6">
+								            <label>Departure Date:</label>
+								            <input type="date" class="dday width-12" name="hotel[0][dday]">
+								        </column>
+								    </row>
+								</fieldset>
+								<a  href="javascript:void(0);" class="addHotel primary" id="0" style="text-decoration: none; padding: 10px; ">Add</a>
 								<br>
 								<br>
 							</div>
 							<hr>
 							<div id="0" class="trans" style="position: relative">
 								<h1>Transfer</h1>
-								<section>
-									<label>
-										Pick a Transfer:
-									</label>
-									<select name="transfer[0][idtransferDetail]" class="detail">
-										<option value=""></option>
-										{{#transfers}}
-											{{#detail}}
-												<option value="{{idtransferDetail}}">{{description}}</option>
-											{{/detail}}
-										{{/transfers}}
-									</select>
-								</section>
-								<section>
-									Pick a Type of Vehicle:
-									<select name="transfer[0][vehicle]" class="coche">
-										<option value=""></option>
-										<option value="INNOVA SUV">INNOVA SUV</option>
-										<option value="HIACE VAN">HIACE VAN</option>
-										<option value="ALPHARD/MERCY E 200">ALPHARD/MERCY E 200</option>
-									</select>
-								</section>  
-								<section>
-									Number of Passengers: <input type="number" name="transfer[0][passanger]" class="pas">
-									Date: <input type="date" name="transfer[0][tday]" class="tday">
-								</section>
-								<a  href="javascript:void(0);" class="addTransfer primary" id="0" style="text-decoration: none; padding: 10px; ">Agregar</a>
+								<fieldset>
+									<section>
+										<label>
+											Pick a Transfer:
+										</label>
+										<select name="transfer[0][idtransferDetail]" class="select">
+											<option value=""></option>
+											{{#transfers}}
+												{{#detail}}
+													<option value="{{idtransferDetail}}">{{description}}</option>
+												{{/detail}}
+											{{/transfers}}
+										</select>
+									</section>
+									<row>
+										<column cols="6">
+											<label>
+												Pick a Type of Vehicle:
+											</label>
+											<select name="transfer[0][vehicle]" class="coche select">
+												<option value=""></option>
+												<option value="INNOVA SUV">INNOVA SUV</option>
+												<option value="HIACE VAN">HIACE VAN</option>
+												<option value="ALPHARD/MERCY E 200">ALPHARD/MERCY E 200</option>
+											</select> 
+										</column>
+										<column cols="3">
+											<label>
+												Number of Passengers: 
+											</label>
+											<input type="number" name="transfer[0][passanger]" class="pas width-12">
+										</column>
+										<column cols="3">
+											<label>
+												Date: 
+											</label>
+											<input type="date" name="transfer[0][tday]" class="tday width-12">
+										</column>
+									</row>
+								</fieldset>
+								<a  href="javascript:void(0);" class="addTransfer primary" id="0" style="text-decoration: none; padding: 10px; ">Add</a>
 								<br>
 								<br>
 							</div>
 							<hr>
 							<div id="0" class="exper" style="position: relative;">
 								<h1>Experiences</h1>
+								<fieldset>
 								<section>
-									<label>
-										Pick an Experience:
-									</label>
-									<select name="exper[0][idexperience]" class="ex">
-										<option value=""></option>
-										{{#experiences}}
-											<option value="{{idexperience}}">{{title}}</div>
-										{{/experiences}}
-									</select>
-									<label class="fecha">Date:</label>
-									<input type="date" name="exper[0][date]" class="dat">
-									<a  href="javascript:void(0);" class="addExperience primary" id="0" style="text-decoration: none; padding: 10px; ">Agregar</a>
-									<br>
-									<br>
+									<row>
+										<column cols="7">
+											<label>
+												Pick an Experience:
+											</label>
+											<select name="exper[0][idexperience]" class="ex select">
+												<option value=""></option>
+												{{#experiences}}
+													<option value="{{idexperience}}">{{title}}</div>
+												{{/experiences}}
+											</select>
+										</column>
+										<column cols="5">
+											<label class="fecha">Date:</label>
+											<input type="date" name="exper[0][date]" class="dat width-12">
+										</column>
+									</row>
 								</section>
+								</fieldset>
+								<a  href="javascript:void(0);" class="addExperience primary" id="0" style="text-decoration: none; padding: 10px; ">Add</a>
+								<br>
+								<br>	
 							</div>
 							<h1>Comments</h1>
 							<section>
@@ -140,7 +169,7 @@
     				}
     				iCntT=iCntT+1;
         			$("div.trans:last").clone().attr('id',iCntT).insertAfter("div.trans:last");
-        			$("div.trans:last select.detail").attr('name','transfer['+iCntT+'][idtransferDetail]');
+        			$("div.trans:last select").attr('name','transfer['+iCntT+'][idtransferDetail]');
         			$("div.trans:last select.coche").attr('name','transfer['+iCntT+'][coche]');
         			$("div.trans:last input.pas").attr('name','transfer['+iCntT+'][passanger]');	
         			$("div.trans:last input.pas").val("");	
@@ -173,11 +202,8 @@
     				if($('div.exper').size()==1){
     					$("div.exper a.rmvExper").remove();
     				}
-				});	
-        		
-    		});
- 
-			
+				});	    		
+    		});		
 		</script>
 	{{/content}}
 {{/ panel}}

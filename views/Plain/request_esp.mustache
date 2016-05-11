@@ -9,90 +9,119 @@
 				</column>
 				<column	cols="6">
 					<div class="element contact">
-						<form action="/bali/es/request" method="post" class="forms">
-							<h1>Hotel</h1>
-							<section>
-								<label>
-									Seleccion un Hotel
-								</label>
-								<select name="hotel">
-									<option value=""></option>
-									{{#hoteles}}
-										<option value="{{idhotel}}">{{name}}</option>
-									{{/hoteles}}
-								</select>
-							</section>
-							<section>
-								<label>
-									Fecha de Llegada
-								</label>
-								<input type="date" name="aday">
-							</section>
-							<section>
-								<label>
-									Fecha de Partida
-								</label>
-								<input type="date" name="dday">
-							</section>
-							<h1>Traslado</h1>
-							<section>
-								<label>
-									Selecciona un Traslado
-								</label>
-								<select name="transfer">
-									<option value=""></option>
-									{{#transfers}}
-										{{#detail}}
-											<option value="{{idtransferDetail}}">{{description_esp}}</option>
-										{{/detail}}
-									{{/transfers}}
-								</select>
-							</section>
-							<section>
-								<label>
-									Selecciona un tipo de vehiculo
-								</label>
-								<select name="vehicle">
-									<option value=""></option>
-									<option value="INNOVA SUV">INNOVA SUV</option>
-									<option value="HIACE VAN">HIACE VAN</option>
-									<option value="ALPHARD/MERCY E 200">ALPHARD/MERCY E 200</option>
-								</select>
-							</section>
-							<section>
-								<label>
-									Numero de Pasajeros
-								</label>
-								<input type="number" name="passenger">
-							</section>
-							<section>
-								<label>
-									Fecha
-								</label>
-								<input type="date" name="tday">
-							</section>
-							<h1>Experiencias</h1>
-							<section>
-								{{#experiences}}
-									<div class="{{idexperience}}-div">
-									<label>
-										<input type="checkbox" name="experience[{{idexperience}}][name]" id="{{idexperience}}" value="{{title}}"> {{title}}
-									</label>
-										<label class="{{idexperience}}-date" style="display: none;">
-											Date: 
+						<form action="/bali/request" method="post" class="forms">
+							<div id="0"class="hotel" style="position: relative;">
+								<h1>Hotel</h1>
+								<fieldset>
+									<section>
+										<label>Escoje un hotel:</label>
+										<select name="hotel[0][idhotel]"  class="select">
+											<option value=""></option>
+											{{#hoteles}}
+												<option value="{{idhotel}}">{{name}}</option>
+											{{/hoteles}}
+										</select>
+									</section>
+									<row>
+        								<column cols="6">
+								            <label>Fecha de llegada:</label>
+								            <input type="date" class="aaday width-12" name="hotel[0][aaday]">
+								        </column>
+								        <column cols="6">
+								            <label>Fecha de salida:</label>
+								            <input type="date" class="dday width-12" name="hotel[0][dday]">
+								        </column>
+								    </row>
+								</fieldset>
+								<a  href="javascript:void(0);" class="addHotel primary" id="0" style="text-decoration: none; padding: 10px; ">Agregar</a>
+								<br>
+								<br>
+							</div>
+							<hr>
+							<div id="0" class="trans" style="position: relative">
+								<h1>Traslados</h1>
+								<fieldset>
+									<section>
+										<label>
+											Escoje un traslado:
 										</label>
-										
-									</div>
-								{{/experiences}}
-							</section>
+										<select name="transfer[0][idtransferDetail]" class="select">
+											<option value=""></option>
+											{{#transfers}}
+												{{#detail}}
+													<option value="{{idtransferDetail}}">{{description}}</option>
+												{{/detail}}
+											{{/transfers}}
+										</select>
+									</section>
+									<row>
+										<column cols="6">
+											<label>
+												Escoje un vehículo:
+											</label>
+											<select name="transfer[0][vehicle]" class="coche select">
+												<option value=""></option>
+												<option value="INNOVA SUV">INNOVA SUV</option>
+												<option value="HIACE VAN">HIACE VAN</option>
+												<option value="ALPHARD/MERCY E 200">ALPHARD/MERCY E 200</option>
+											</select> 
+										</column>
+										<column cols="3">
+											<label>
+												Número de Pasajeros: 
+											</label>
+											<input type="number" name="transfer[0][passanger]" class="pas width-12">
+										</column>
+										<column cols="3">
+											<label>
+												Fecha: 
+											</label>
+											<input type="date" name="transfer[0][tday]" class="tday width-12">
+										</column>
+									</row>
+								</fieldset>
+								<a  href="javascript:void(0);" class="addTransfer primary" id="0" style="text-decoration: none; padding: 10px; ">Agregar</a>
+								<br>
+								<br>
+							</div>
+							<hr>
+							<div id="0" class="exper" style="position: relative;">
+								<h1>Experiencia</h1>
+								<fieldset>
+								<section>
+									<row>
+										<column cols="7">
+											<label>
+												Escoje una Experiencia:
+											</label>
+											<select name="exper[0][idexperience]" class="ex select">
+												<option value=""></option>
+												{{#experiences}}
+													<option value="{{idexperience}}">{{title}}</div>
+												{{/experiences}}
+											</select>
+										</column>
+										<column cols="5">
+											<label class="fecha">Fecha:</label>
+											<input type="date" name="exper[0][date]" class="dat width-12">
+										</column>
+									</row>
+								</section>
+								</fieldset>
+								<a  href="javascript:void(0);" class="addExperience primary" id="0" style="text-decoration: none; padding: 10px; ">Agregar</a>
+								<br>
+								<br>	
+							</div>
 							<h1>Comentarios</h1>
 							<section>
-								<label>
-									Comentarios
-								</label>
-								<textarea name="comments" ></textarea>
+									<label>
+										Comentarios
+									</label>
+									<textarea name="comments" ></textarea>
 							</section>
+							
 							<section>
+
 								<button type="primary">Enviar</button> 
 							</section>
 						</form>
@@ -105,29 +134,76 @@
 		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 		<script>
 			$( document ).ready(function() {
-        		console.log( "document loaded" );
-        		var cChecked = function() {
-        			if($(this).attr("id")){
-        				if($(this).is(":checked")){
-
-        					var n = "."+$(this).attr("id")+"-div";
-				  			$(n).append("<input type='date' name='experience["+$(this).attr("id")+"][date]' class='"+$(this).attr("id")+"-date' style='display: none;'>");
-				  			var m = "."+$(this).attr("id")+"-date";
-				  			$(m).show("slow");
-        				}
-        				else{
-        					var n = "."+$(this).attr("id")+"-date";
-				  			$(n).hide("slow");
-				  			$(n).remove();
-        				}
-        			}
-				  
-				};
-				cChecked();
-				$( "input[type=checkbox]" ).on( "click", cChecked );
-    		});
- 
-			
+				var iCntH = 0;
+				var iCntT = 0;
+				var iCntE = 0;
+				$('body').on('click', '.addHotel',function(e) {
+    				if($('div.hotel').size()==1&&iCntH==0){
+    					$("div.hotel:last h1").after("<a  href='javascript:void(0);' class='rmvHotel primary' id='0' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
+    				}
+    				else if($('div.hotel').size()==1&&iCntH!=0){
+    					$("div.hotel:last h1").after("<a  href='javascript:void(0);' class='rmvHotel primary' id='"+e.target.id+"' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
+    				}
+    				iCntH=iCntH+1;
+        			$("div.hotel:last").clone().attr('id',iCntH).insertAfter("div.hotel:last");
+        			$("div.hotel:last select").attr('name','hotel['+iCntH+'][idhotel]');
+        			$("div.hotel:last a.rmvHotel").attr('id',iCntH);
+        			$("div.hotel:last input.aaday").attr('name','hotel['+iCntH+'][aaday]');
+        			$("div.hotel:last input.aaday").val("");
+        			$("div.hotel:last input.dday").attr('name','hotel['+iCntH+'][dday]');	
+        			$("div.hotel:last input.dday").val("");
+				});	
+				$('body').on('click', '.rmvHotel',function(e) {
+    				$(this).parent().fadeOut(300);
+    				$(this).parent().remove();
+    				if($('div.hotel').size()==1){
+    					$("div.hotel a.rmvHotel").remove();
+    				}
+				});	
+				$('body').on('click', '.addTransfer',function(e) {
+					if($('div.trans').size()==1&&iCntT==0){
+    					$("div.trans:last h1").after("<a  href='javascript:void(0);' class='rmvTrans primary' id='0' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
+    				}
+    				else if($('div.trans').size()==1&&iCntT!=0){
+    					$("div.trans:last h1").after("<a  href='javascript:void(0);' class='rmvTrans primary' id='"+e.target.id+"' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
+    				}
+    				iCntT=iCntT+1;
+        			$("div.trans:last").clone().attr('id',iCntT).insertAfter("div.trans:last");
+        			$("div.trans:last select").attr('name','transfer['+iCntT+'][idtransferDetail]');
+        			$("div.trans:last select.coche").attr('name','transfer['+iCntT+'][coche]');
+        			$("div.trans:last input.pas").attr('name','transfer['+iCntT+'][passanger]');	
+        			$("div.trans:last input.pas").val("");	
+        			$("div.trans:last input.tday").attr('name','transfer['+iCntT+'][tday]');
+        			$("div.trans:last input.tday").val("");		
+				});
+				$('body').on('click', '.rmvTrans',function(e) {
+    				$(this).parent().fadeOut(300);
+    				$(this).parent().remove();
+    				if($('div.trans').size()==1){
+    					$("div.trans a.rmvTrans").remove();
+    				}
+				});	
+				$('body').on('click', '.addExperience',function(e) {
+					if($('div.exper').size()==1&&iCntE==0){
+    					$("div.exper:last h1").after("<a  href='javascript:void(0);' class='rmvExper primary' id='0' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
+    				}
+    				else if($('div.exper').size()==1&&iCntE!=0){
+    					$("div.exper:last h1").after("<a  href='javascript:void(0);' class='rmvExper primary' id='"+e.target.id+"' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
+    				}
+    				iCntE=iCntE+1;
+        			$("div.exper:last").clone().attr('id',iCntE).insertAfter("div.exper:last");
+        			$("div.exper:last select.ex").attr('name','exper['+iCntE+'][idexperience]');
+        			$("div.exper:last input.dat").attr('name','exper['+iCntE+'][date]');
+        			$("div.exper:last input.dat").val("");	
+				});
+				$('body').on('click', '.rmvExper',function(e) {
+    				$(this).parent().fadeOut(300);
+    				$(this).parent().remove();
+    				if($('div.exper').size()==1){
+    					$("div.exper a.rmvExper").remove();
+    				}
+				});	    		
+    		});		
 		</script>
 	{{/content}}
 {{/ panel}}
