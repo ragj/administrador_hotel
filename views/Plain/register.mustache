@@ -15,81 +15,107 @@
 			var url = "<p id=bread>"+path+"</p>";
 			document.writeln(url);
 	 	</script>
+	 	<p class="intro"><b>Register</b></p>
+		<p class="detail"><b>Please fill the following form fields. Thanks</b></p>
 	 	<row>
-				<column	cols="3">
-					<p class="intro"><b>Register</b></p><br>
-					<p class="detail"><b>Please fill the following form fields. Thanks</b></p>
-				</column>
-				<column	cols="8">
-					<div class="element">
-						<form action="/bali/register" method="post" class="forms">
-							<section>
-								<label>
-									First Name
-								</label>
-								<input name="name" type="text" required value="{{#user}}{{nombre}}{{/user}}"/>
-							</section>
-							<section>
-								<label>
-									Last Name
-								</label>
-								<input name="lname" type="text" required value="{{#user}}{{app}}{{/user}}"/>
-							</section>
-							<section>
-								<label>
-									Mother's Last Name
-								</label>
-								<input name="mlname" type="text" required value="{{#user}}{{apm}}{{/user}}"/>
-							</section>
-							<section>
-								<label>
-									Email (username)
-								</label>
-								<input name="user" type="email" required value="{{#user}}{{usr}}{{/user}}"/>
-							</section>
-							<section>
-								<label>
-									Password
-								</label>
-								<input name="pass" type="password" required/>
-							</section>
-							<section>
-								<label>
-									Confirm Password
-								</label>
-								<input name="pass1" type="password" required/>
-							</section>
-							<section>
-								<label>
-									Phone Number
-								</label>
-								<input name="phone" type="text" required value="{{#user}}{{tel}}{{/user}}"/>
-							</section>
-							<section>
-								<label>
-									IATA
-								</label>
-								<input name="iata" type="text" required value="{{#user}}{{iata}}{{/user}}"/>
-							</section>
-							<section>
-								<label>
-									Member to an Affiliation or Program
-								</label>
-								<input name="member" type="text" required value="{{#user}}{{miembro}}{{/user}}"/>
-							</section>
-							<section>
-								<label>
-									Years in Business
-								</label>
-								<input name="years" type="text" required value="{{#user}}{{anios}}{{/user}}"/>
-							</section>
-							<section>
-								<input type="submit" class="primary" value="Register"/>
-							</section>
-						</form>
-					</div>
-				</column>
-			</row>
+	 		<column cols="6">
+	 			<div style="min-height: 140px"></div>
+	 			<img src="/bali/assets/img/Img_registro/01.jpg" height="221px" width="645px"/>
+	 			<div style="min-height: 120px"></div>
+	 			<img src="/bali/assets/img/Img_registro/02.jpg" height="221px" width="645px"/>
+	 			<div style="min-height: 120px"></div>
+	 			<img src="/bali/assets/img/Img_registro/03.jpg" height="221px" width="645px"/>
+	 		</column>
+	 		<column cols="6">
+	 			<div class="element">
+ 				<form action="/bali/register" method="post" class="forms">
+ 					<section>
+ 						<center>
+							<label>
+								First Name
+							</label>
+						</center>
+						<input name="name" type="text" required value="{{#user}}{{nombre}}{{/user}}"/>
+					</section>
+					<section>
+						<center>
+							<label>
+								Last Name
+							</label>
+						</center>
+						<input name="lname" type="text" required value="{{#user}}{{app}}{{/user}}"/>
+					</section>
+					<section>
+						<center>
+							<label>
+								Mother's Last Name
+							</label>
+						</center>
+						<input name="mlname" type="text" required value="{{#user}}{{apm}}{{/user}}"/>
+					</section>
+					<section>
+						<center>
+							<label>
+								Email (username)
+							</label>
+						</center>
+						<input name="user" type="email" required value="{{#user}}{{usr}}{{/user}}"/>
+					</section>
+					<section>
+						<center>
+							<label>
+								Password
+							</label>
+						</center>
+						<input name="pass" type="password" required/>
+					</section>
+					<section>
+						<center>
+							<label>
+								Confirm Password
+							</label>
+						</center>
+						<input name="pass1" type="password" required/>
+					</section>
+					<section>
+						<center>
+							<label>
+								Phone Number
+							</label>
+						</center>
+						<input name="phone" type="text" required value="{{#user}}{{tel}}{{/user}}"/>
+					</section>
+					<section>
+						<center>
+							<label>
+								IATA
+							</label>
+						</center>
+						<input name="iata" type="text" required value="{{#user}}{{iata}}{{/user}}"/>
+					</section>
+					<section>
+						<center>
+							<label>
+								Member to an Affiliation or Program
+							</label>
+						</center>
+						<input name="member" type="text" required value="{{#user}}{{miembro}}{{/user}}"/>
+					</section>
+					<section>
+						<center>
+							<label>
+								Years in Business
+							</label>
+						</center>
+						<input name="years" type="text" required value="{{#user}}{{anios}}{{/user}}"/>
+					</section>
+					<section>
+						<input type="submit" class="primary" value="Register"/>
+					</section>
+ 				</form>
+ 				</div>
+	 		</column>	
+		</row>
 	</div>	
 
 	

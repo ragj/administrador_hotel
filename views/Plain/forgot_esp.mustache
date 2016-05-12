@@ -1,7 +1,7 @@
 {{% BLOCKS }}
 {{< panel_esp}}
 	{{$content}}
-
+	<img src="/bali/assets/img/img_forgot.jpg">
 	<div class="holder">
 		<script>
 			var path = "";
@@ -16,12 +16,11 @@
 			document.writeln(url);
 	 	</script>
 	 	<row>
-				<column	cols="3">
-					<p class="intro"><b>¿Olvidaste tu contraseña?</b></p><br>
-					<p class="detail"><b>No te preocupes, solo tienes que llenar los siguientes campos.</b></p>
+				<column	cols="3">	
 				</column>
 				<column	cols="8">
 					<div class="element">
+						<p class="intro"><b>¿Olvidaste tu contraseña?</b></p><br>
 						<form action="/bali/forgot" method="post" class="forms">
 							<section>
 								<label>
@@ -33,7 +32,10 @@
 								<input type="submit" class="primary" value="Enviar"/>
 							</section>
 						</form>
+						<p class="detail"><b>No te preocupes, solo tienes que llenar los siguientes campos.</b></p>
 					</div>
+				</column>
+				<column	cols="3">
 				</column>
 			</row>
 	</div>	
