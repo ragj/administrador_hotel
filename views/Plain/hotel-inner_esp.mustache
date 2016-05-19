@@ -42,19 +42,19 @@
 							{{address}}
 						</p>
 						{{#website}}	
-							<h3>{{.}}</h3>
+							<a href={{.}} target="_blank" style="text-decoration:none;"><h3>{{.}}</h3></a>
 						{{/website}}
 						{{#tel}}	
-							<h3>{{.}}</h3>
+							<a href="tel:{{.}}" target="_blank" style="text-decoration:none;"><h3>{{.}}</h3></a>
 						{{/tel}}
 						{{#email}}	
-							<h3>{{.}}</h3>
+							< href="mailto:{{.}}" target="_blank" style="text-decoration:none;"><h3>{{.}}</h3></a>
 						{{/email}}
 					{{/hotel-data}}
 				</div>		
 			</column>
 			<column cols="4"  >
-				<div class="pad">
+				<div class="pad" id="vid">
 					<h2>Video</h2>
 					<blocks cols="3">
 						{{# videos }}
@@ -64,7 +64,7 @@
 						{{/ videos }}
 					</blocks>
 				</div>
-				<div class="pad">
+				<div class="pad" id="im">
 					<h2>Galeria</h2>
 					<blocks cols="3">
 						{{#images}}
@@ -86,6 +86,17 @@
 	{{$ scripts}}
         <script type="text/javascript">	
         	var actual="0";
+        	var actual="0";
+        	var vid=new Array();
+        	var img=new Array();
+        	{{#videos}}vid.push('{{&path}}');{{/videos}}
+        	{{#images}}img.push('{{path}}');{{/images}}
+        	if(vid.length==0){
+        		$("#vid").hide();
+        	}
+        	if(img.legth==0){
+        		$("#im").hide();
+        	}
 			$(function(){
 				jQuery.fn.center = function () {
 					this.css("position","absolute");

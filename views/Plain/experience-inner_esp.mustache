@@ -26,7 +26,7 @@
 			<column cols="7">
 				<div class="pad">
 					<h1>{{title}}</h1>
-					<h2>{{duration_esp}}</h2>
+					<h2>{{&duration_esp}}</h2>
 					<p>
 						{{&description_esp}}
 					</p>	
@@ -60,13 +60,13 @@
 					</p>
 				</div>
 			</column>
-			<column cols="5">
+			<column cols="4">
 				<div class="pad">
 					<h2>Galeria</h2>
-					<blocks cols="2">
+					<blocks cols="3">
 						
 						{{#images}}
-							<div>
+							<div class="himage">
 								<img onclick=" showImage(this) " src="/bali/assets/img/experience/{{path}}">
 							</div>
 						{{/images}}
