@@ -28,7 +28,7 @@
 					<h1>{{title}}</h1>
 					<h2>{{&duration_esp}}</h2>
 					<p>
-						{{&description_esp}}
+						{{{description_esp}}}
 					</p>	
 					<h2>TRANSFERENCIA DE PRECIOS POR PERSONA EN DOLARES</h2>
 					{{&transfer}}
@@ -61,7 +61,7 @@
 				</div>
 			</column>
 			<column cols="4">
-				<div class="pad">
+				<div class="pad" id="im">
 					<h2>Galeria</h2>
 					<blocks cols="3">
 						
@@ -83,6 +83,11 @@
 	{{$ scripts}}
         <script type="text/javascript">	
         	var actual="0";
+        	var img=new Array();
+        	{{#tour.images}}img.push('{{path}}');{{/tour.images}}
+        	if(img.length==0){
+        		$("#im").hide();
+        	}
 			$(function(){
 				jQuery.fn.center = function () {
 					this.css("position","absolute");

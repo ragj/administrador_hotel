@@ -309,7 +309,7 @@ class Plain extends Luna\Controller {
                 'mensaje' =>$req->data["message"],
                 'zona_idzona'=>1
             ]);
-            $result=$contactMapper->insert($entity);
+            $result=$contactMapper->insert($entity);                
         }
     	echo $this->renderWiew( $this->header("contact",$lang), $res);
     }
