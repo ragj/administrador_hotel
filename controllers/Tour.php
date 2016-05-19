@@ -226,7 +226,7 @@ class Tour extends Luna\Controller {
                 {
                     //validamos que la imagen sea de los tipos establecidos
                     if(in_array($_FILES['thumbnail']['type'], $permitidos)){
-                        $aux2=explode('.',$_FILES['imagen']['name']);
+                        $aux2=explode('.',$_FILES['thumbnail']['name']);
                         $ruta=$dir."/".$aux2[0].substr(uniqid(),0,-3).".".$aux2[1];
                         //verificamos que no exista una imagen que se llame igual
                         if(!file_exists($ruta)){
@@ -313,7 +313,7 @@ class Tour extends Luna\Controller {
             $zona = $req->data["zona"]!=null? $req->data["zona"]: $tour->zona_idzona;
             $duracion = ($req->data["duracion"]!=null)&&($req->data["horas"]!=null)? filter_var($req->data["duracion"],FILTER_SANITIZE_STRING)."/".filter_var($req->data["horas"],FILTER_SANITIZE_NUMBER_INT): $tour->duration;
             $duracion_spa="";
-            if(isset($duracion)){
+            if(isset($req->data["duracion"])){
                 switch($req->data["duracion"]){
                     case "HALF DAY":
                         $duracion_spa="MEDIO DIA"."/".filter_var($req->data["horas"]);
@@ -322,7 +322,7 @@ class Tour extends Luna\Controller {
                         $duracion_spa="DIA COMPLETO"."/".filter_var($req->data["horas"]);
                     break;
                     default:
-                        $duracion_spa="Falta Traduccion";
+                        $duracion_spa=$tour->duration_esp;
                     break;
                 }
 
@@ -438,7 +438,7 @@ class Tour extends Luna\Controller {
 			//obtenemos la ruta de cada imagen asociada y eliminamos el ficher
 			$tour=null;
 			$tour = $tourMapper->delete(['experience_idexperience =' => (integer)$var]);
-	    	echo $this->renderWiew( array_merge([] , $this->header("/panel/tour/show") ), $res);
+	    	echo $this->renderWiew([], $res);
     }
     /**
     *	Funcion que elimina todos los archivos del directorio y el directorio

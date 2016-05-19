@@ -85,10 +85,11 @@
 	            	array_push($aux,$zone['zona_idzona']);
 	        	}
 	        	$zoneMapper=$this->spot->mapper("Entity\Zona");
-	        	$zona=$zoneMapper->select()->where(["idzona"=>$aux]);
+	        	$zonaa=$zoneMapper->select()->where(["idzona"=>$aux]);
 	    		$transferBlockMapper=$this->spot->mapper("Entity\TransferBlock");
             	$transfer = $transferBlockMapper->select()->where(["idtransferBlock" => $req->params["block"]])->with("detail")->first();
             	if(isset($req->data["title"],$req->data["titleesp"],$req->data["zone"])){
+            		
 		    		$title=$req->data["title"]!=null? filter_var($req->data["title"],FILTER_SANITIZE_STRING): $transfer->TransferBlockTitle;
 	            	$titleesp=$req->data["titleesp"]!=null? filter_var($req->data["titleesp"],FILTER_SANITIZE_STRING): $transfer->TransferBlockTitle_es;
 	            	$zona=$req->data["zone"]!=null? $req->data["zone"]: $transfer->zona_idzona;
@@ -97,7 +98,7 @@
 	            	$transfer->zona_idzona=$zona;
 	            	$transferBlockMapper->update($transfer);
 	    		}
-            	echo $this->renderWiew(array_merge(["transfer"=>$transfer,"zones"=>$zona]),$res);
+            	echo $this->renderWiew(array_merge(["transfer"=>$transfer,"zones"=>$zonaa]),$res);
 	    	}
 	    }
  		/**
@@ -111,9 +112,9 @@
 	    		$transfer = $transferDetailMapper->select()->with("transferValue")->where(["idtransferDetail" => $req->params["detail"]])->first();
 	    		///Obtenemos y validamos si el campo es diferente de vacio, en caso de estar vacio obtenemos el valor de la base de datos
 	    		if(isset($req->data["desc"])){
-	    			$title=$req->data["desc"]!=null? filter_var($req->data["desc"],FILTER_SANITIZE_STRING): $transfer->description;
-	            	$titleesp=$req->data["descesp"]!=null? filter_var($req->data["descesp"],FILTER_SANITIZE_STRING): $transfer->description_esp;
-	            	$tb=$req->data["tb"]!=null? $req->data["tb"]: $transfer->transferBlock_idtransferBlock;
+	    			$transfer->description=$req->data["desc"]!=null? filter_var($req->data["desc"],FILTER_SANITIZE_STRING): $transfer->description;
+	            	$transfer->description_esp=$req->data["descesp"]!=null? filter_var($req->data["descesp"],FILTER_SANITIZE_STRING): $transfer->description_esp;
+	            	$transfer->transferBlock_idtransferBlock=$req->data["tb"]!=null? $req->data["tb"]: $transfer->transferBlock_idtransferBlock;
 		    		//actualizamos la entidad y volvemos a consultar la base
 		    		$transferDetailMapper->update($transfer);
 	            	$transfer = $transferDetailMapper->select()->where(["idtransferDetail" => $req->params["detail"]])->first();
@@ -157,7 +158,7 @@
 	    		}
 	    		$td=$transferValuesMapper->delete(['transferDetail_idtransferDetail'=>$aux]);
             	$t = $transferDetailMapper->delete(['transferBlock_idtransferBlock ='=>$req->params["block"]]);
-            	$tf = $transferDetailMapper->delete(['idtransferBlock ='=>$req->params["block"]]);
+            	$tf = $transferBlockMapper->delete(['idtransferBlock ='=>$req->params["block"]]);
 	    	}
 	    	$transferBlockMapper=$this->spot->mapper("Entity\TransferBlock");
 	    	$transferBlock = $transferBlockMapper->select();
@@ -174,8 +175,8 @@
 	    	if(isset($req->params["detail"])){
 	    		$transferDetailMapper=$this->spot->mapper("Entity\TransferDetail");
 	    		$transferValuesMapper=$this->spot->mapper("Entity\TransferValue");
-            	$t = $transferDetailMapper->delete(['idtransferDetail'=>$req->params["detail"]]);
             	$t = $transferValuesMapper->delete(['transferDetail_idtransferDetail'=>$req->params["detail"]]);
+            	$t = $transferDetailMapper->delete(['idtransferDetail'=>$req->params["detail"]]);
 	    	}
 	    	$res->m = $res->mustache->loadTemplate("Transfer/listBlock.mustache");
 	    	echo $this->renderWiew(array_merge(["transferBlock"=>$transferBlock]),$res);
@@ -189,7 +190,7 @@
 	    	$transferBlock = $transferBlockMapper->select();
 	    	if(isset($req->params["value"])){
 	    		$transferValuesMapper=$this->spot->mapper("Entity\TransferValue");
-            	$t = $transferValuesMapper->delete(['idtransferDetail'=>$req->params["value"]]);
+            	$t = $transferValuesMapper->delete(['idtransferValues'=>$req->params["value"]]);
 	    	}
 	    	$res->m = $res->mustache->loadTemplate("Transfer/listBlock.mustache");
 	    	echo $this->renderWiew(array_merge(["transferBlock"=>$transferBlock]),$res);

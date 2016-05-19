@@ -117,7 +117,6 @@ footer{
 	}
 	footer div.contact{
 		float: right;
-		marr
 		font-size: 12px;
 		line-height: 30px;
 		text-align: right;
@@ -137,11 +136,14 @@ footer{
 	height: 360px;
 	overflow: hidden;
 	position: relative;
+	max-width: 1200px;
+	margin:0 auto;
 }
 	.slider .slide{
 		position: absolute;
 		display: none;
 		top: 0px;
+		width: 1200px;
 	}
 		.slider .slide:not(a):first-child{
 			display: inline-block;

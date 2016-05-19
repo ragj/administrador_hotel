@@ -48,7 +48,7 @@
 							<a href="tel:{{.}}" target="_blank" style="text-decoration:none;"><h3>{{.}}</h3></a>
 						{{/tel}}
 						{{#email}}	
-							< href="mailto:{{.}}" target="_blank" style="text-decoration:none;"><h3>{{.}}</h3></a>
+							<a href="mailto:{{.}}" target="_blank" style="text-decoration:none;"><h3>{{.}}</h3></a>
 						{{/email}}
 					{{/hotel-data}}
 				</div>		
@@ -73,6 +73,8 @@
 							</div>
 						{{/images}}
 					</blocks>
+				</div>
+				<div class="pad">
 					{{&hotel-data.map}}
 				</div>
 			</column>
@@ -94,7 +96,7 @@
         	if(vid.length==0){
         		$("#vid").hide();
         	}
-        	if(img.legth==0){
+        	if(img.length==0){
         		$("#im").hide();
         	}
 			$(function(){

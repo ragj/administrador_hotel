@@ -290,7 +290,7 @@ $router->addRoute(array(
 $router->addRoute(array(
 	'path' => '/panel/transfer/addValue',
 	'get' => array('Transfer', 'addValue'),
-	'get' => array('Transfer', 'addValue'),
+	'post' => array('Transfer', 'addValue'),
 ));
 $router->addRoute(array(
 	'path' => '/panel/transfer/editValue/{value}',

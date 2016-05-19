@@ -204,13 +204,16 @@ class Usuario extends Luna\Controller {
             $zoneMapper=$this->spot->mapper("Entity\Zona");
             $zones=$zoneMapper->select();
         }
-        if(isset($req->data["name"],$req->data["app"],$req->data["user"])){
+        if(isset($req->data["name"],$req->data["app"],$req->data["email"])){
+            echo "<pre>";
+            print_r($req->data);
+            exit;
             $mensaje="";
             //obtencion y sanitizacion de datos
             $name = $req->data["name"]!=null? filter_var($req->data["name"], FILTER_SANITIZE_STRING) : $user->nombre;
             $app = $req->data["app"]!=null? filter_var($req->data["app"], FILTER_SANITIZE_STRING) : $user->papellido;
             $apm = $req->data["apm"]!=null? filter_var($req->data["apm"], FILTER_SANITIZE_STRING) : $user->lapellido;
-            $usr = $req->data["user"]!=null? filter_var($req->data["user"], FILTER_SANITIZE_EMAIL) : $user->usuario;
+            $usr = $req->data["email"]!=null? filter_var($req->data["email"], FILTER_SANITIZE_EMAIL) : $user->usuario;
             $tel = $req->data["tel"]!=null? filter_var($req->data["tel"], FILTER_SANITIZE_STRING) : $user->telefono;
             $iata = $req->data["iata"]!=null? filter_var($req->data["iata"], FILTER_SANITIZE_STRING) : $user->iata;
             $member = $req->data["member"]!=null? filter_var($req->data["member"], FILTER_SANITIZE_STRING) : $user->miembros;
@@ -321,11 +324,11 @@ class Usuario extends Luna\Controller {
         //Obtenemos el id, del usuario a eleminar
         $var=$req->params["exper"];
         //Establecemos a spot con que entity class vamos a trabajar
-        $userMapper=$this->spot->mapper("Entity\Usuario");
+        $userMapper=$this->spot->mapper("Entity\Users");
         $userZoneMapper=$this->spot->mapper("Entity\UsersZona");
         $forgotMapper=$this->spot->mapper("Entity\Forgot");
         //Eliminamos las zonas que el usuario tenga registradas
-        $userzona=$userZonesMapper->delete(['users_id'=>$req->params["exper"]]);
+        $userzona=$userZoneMapper->delete(['users_id'=>$req->params["exper"]]);
         //Eliminamos los forgots echos por el usuario
         $forgot=$forgotMapper->delete(['users_id'=>$req->params["exper"]]);
         //Eliminamos el usuario que este registrado para ese id
@@ -337,7 +340,7 @@ class Usuario extends Luna\Controller {
     *   Metodo que sirve para activar o desactivar un usuario
     **/
     public function active($req,$res){
-        $userMapper=$this->spot->mapper("Entity\Usuario");
+        $userMapper=$this->spot->mapper("Entity\Users");
         if(isset($req->params["exper"])){
             $user=$userMapper->select()->where(["id"=>$req->params["exper"]])->first();
             if($user->activo==true){

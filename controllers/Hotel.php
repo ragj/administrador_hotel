@@ -56,14 +56,14 @@ class Hotel extends Luna\Controller {
                     //validamos que la imagen sea de los tipos establecidos
                     if(in_array($_FILES['imagen']['type'], $permitidos)){
                         $aux=explode('.',$_FILES['imagen']['name']);
-                        $ruta=$dir.$req->data["hotel"]."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+                        $file=$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+                        $ruta=$dir.$req->data["hotel"]."/".$file;
                         //verificamos que no exista una imagen que se llame igual
                         if(!file_exists($ruta)){
                             //subimos la imagen al servidor
                             $resultado=@move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
                             if($resultado){
                                 //Guardamos la experiencia en la base de datos
-                                $file=$aux[0].substr(uniqid(),0,-3).".".$aux[1];
                                 $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
                                 $entity = $hotelImageMapper->build([
                                     'hotel_idhotel' =>$req->data["hotel"],
@@ -103,10 +103,10 @@ class Hotel extends Luna\Controller {
             $hotelMapper=$this->spot->mapper("Entity\Hotel");
             $hotel=$hotelMapper->select()->where(["idhotel" => $hotelImage->hotel_idhotel])->first();
             if($hotel->zona_idzona!=1){
-                $imagen="http://".$_SERVER['HTTP_HOST']."/maldivas/assets/img/";
+                $imagene="http://".$_SERVER['HTTP_HOST']."/maldivas/assets/img/";
             }
             else{
-                $imagen="/bali/assets/img/";
+                $imagene="/bali/assets/img/";
             }
         }
         if(isset($_FILES['imagen']['name'])){
@@ -117,11 +117,12 @@ class Hotel extends Luna\Controller {
                 //establecemos el directorio con el cual trabajaremos
                 $dir="./assets/img/hotel/";
                 $aux=explode('.',$_FILES['imagen']['name']);
+                $file=$aux[0].substr(uniqid(),0,-3).".".$aux[1];
                 if($hotel->zona_idzona==1){
-                    $ruta=$dir.$hotel->idhotel."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+                    $ruta=$dir.$hotel->idhotel."/".$file;
                 }
                 else{
-                    $ruta="../maldivas/assets/img/hotel/".$hotel->idhotel."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+                    $ruta="../maldivas/assets/img/hotel/".$hotel->idhotel."/".$file;
                     $dir="../maldivas/assets/img/hotel/";
                 }
                 //array con tipos de archivos 
@@ -140,7 +141,7 @@ class Hotel extends Luna\Controller {
                                 //eliminamos fichero anterior
                                 @unlink($dir.$hotelImage->hotel_idhotel."/".$hotelImage->path);
                                 //obtenemos la ruta del archivo
-                                $imagen=$aux[0].substr(uniqid(),0,-3).".".$aux[1];                  
+                                $imagen=$file;                  
                             }
                             else{ echo "<div class=error><p>There was a problem uploading the image.</p></div>";}
                         }
@@ -158,7 +159,7 @@ class Hotel extends Luna\Controller {
             //actualizamos la entidad
             $hotelImageMapper->update($hotelImage);
         }
-        echo $this->renderWiew(array_merge(["hotel" => $hotel,"image"=>$hotelImage,"thumb"=>$imagen]),$res);
+        echo $this->renderWiew(array_merge(["hotel" => $hotel,"image"=>$hotelImage,"thumb"=>$imagene]),$res);
     }
     /**
     *   Metodo que sirve para editar un video relacionado a un hotel
@@ -228,7 +229,7 @@ class Hotel extends Luna\Controller {
         $zona=$zoneMapper->select()->where(["idzona"=>$aux]);
     	if(isset($req->data["name"],$req->data["zone"])){
     		//definimos donde se almacenara el thumbnail
-    		$dir="/assets/img/hotel-thumb/";
+    		$dir="./assets/img/hotel-thumb";
     		//array de tipos de archivos permitidos
     		$permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
     		/*Obtencion y sanitizacion de parametros*/
@@ -249,18 +250,19 @@ class Hotel extends Luna\Controller {
     			if(!($_FILES['thumbnail']['error']>0)){
     				if(in_array($_FILES['thumbnail']['type'],$permitidos)){
                         $aux=explode('.',$_FILES['thumbnail']['name']);
+                        $file=$aux[0].substr(uniqid(),0,-3).".".$aux[1];
                         if($zona==1){
-                            $ruta=$dir."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+                            $ruta=$dir."/".$file;
                         }
                         else{
-                            $ruta="../maldivas/assets/img/hotel-thumb/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+                            $ruta="../maldivas/assets/img/hotel-thumb/".$file;
                         }
     					//verificamos si el archivo existe
     					if(!file_exists($ruta)){
     						$resultado=@move_uploaded_file($_FILES['thumbnail']["tmp_name"],$ruta);
     						//si la imagen se sube exitosamente asignamos a thumb el nombre del archivo
     						if($resultado){
-    							$thumb=$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+    							$thumb=$file;
     						}
     					}
     					else{		
@@ -280,6 +282,7 @@ class Hotel extends Luna\Controller {
     		//seleccionamos entidad a maperar
     		$hotelMapper=$this->spot->mapper("Entity\Hotel");
     		//construimos la entidad
+            
     		$entity = $hotelMapper->build([
                 'name' => $name,
                 'thumbnail' => $thumb,
@@ -365,14 +368,15 @@ class Hotel extends Luna\Controller {
                 if(!($_FILES['thumbnail']['error']>0)){
                     if(in_array($_FILES['thumbnail']['type'],$permitidos)){
                         //definimos la ruta de la imagen a subir
-                        $aux=explode('.',$_FILES['imagen']['name']);
+                        $aux=explode('.',$_FILES['thumbnail']['name']);
                         if($zona==1){
                             $dir="./assets/img/hotel-thumb/";
                         }
                         else{
                             $dir="../maldivas/assets/img/hotel-thumb";
                         }
-                        $ruta=$dir."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+                        $file=$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+                        $ruta=$dir."/".$file;
                         //verificamos si el archivo existe
                         if(!file_exists($ruta)){
                             $resultado=@move_uploaded_file($_FILES['thumbnail']["tmp_name"],$ruta);
@@ -381,7 +385,7 @@ class Hotel extends Luna\Controller {
                                 if($hotel->thumbnail!=null){
                                     @unlink($dir."/".$hotel->thumbnail);
                                 }
-                                $thumb=$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+                                $thumb=$file;
                             }
                         }
                         else{
@@ -432,7 +436,7 @@ class Hotel extends Luna\Controller {
 	    	//Establecemos a spot con que entity class vamos a trabajar
 	    	$hotelMapper=$this->spot->mapper("Entity\Hotel");
 	    	//Seleccionamos la hotel que este registrado para ese ide
-	    	$hotel = $hotelMapper->select()->where(["id" => $req->params["hotel"]])->first();
+	    	$hotel = $hotelMapper->select()->where(["idhotel" => $req->params["hotel"]])->first();
             $zona=$hotel->zona_idzona;
             if($zona==1){
                 $ruta="./assets/img/hotel-thumb/".$hotel->thumbnail;
