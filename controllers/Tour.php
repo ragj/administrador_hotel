@@ -38,7 +38,7 @@ class Tour extends Luna\Controller {
                 //validamos que la imagen sea de los tipos establecidos
                 if(in_array($_FILES['imagen']['type'], $permitidos)){
                     $aux=explode('.',$_FILES['imagen']['name']);
-                    $ruta=$dir."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+                    $ruta=$dir."/".$req->data["exper"]."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
                     //verificamos que no exista una imagen que se llame igual
                     if(!file_exists($ruta)){
                         //subimos la imagen al servidor
@@ -86,10 +86,10 @@ class Tour extends Luna\Controller {
             $tourMapper=$this->spot->mapper("Entity\Experience");
             $tour=$tourMapper->select()->where(["idexperience" => $tourImage->experience_idexperience])->first();
             if($tour->zona_idzona!=1){
-                $imagen="http://".$_SERVER['HTTP_HOST']."/maldivas/assets/img/experience/";
+                $imagene="http://".$_SERVER['HTTP_HOST']."/maldivas/assets/img/experience/";
             }
             else{
-                $imagen="/bali/assets/img/experience/";
+                $imagene="/bali/assets/img/experience/";
             }
         }
         if(isset($_FILES['imagen']['name'])){
@@ -142,7 +142,7 @@ class Tour extends Luna\Controller {
             //actualizamos la entidad
             $tourImageMapper->update($tourImage);
         }
-        echo $this->renderWiew(array_merge(["tour" => $tour,"image"=>$tourImage,"thumb"=>$imagen]),$res);
+        echo $this->renderWiew(array_merge(["tour" => $tour,"image"=>$tourImage,"thumb"=>$imagene]),$res);
     }
     /**
     *   Funcion que sirve para eliminar una imagen relacionada a un tour
@@ -157,7 +157,7 @@ class Tour extends Luna\Controller {
         //Seleccionamos la experiencia que este registrado para ese ide
         $tour = $tourMapper->select()->where(["idexperienceImages" => $req->params["exper"]])->first();
         $tou=$tMapper->select()->where(["idexperience"=>$tour->experience_idexperience])->first();
-        if($tour->zona_idzona==1){
+        if($tou->zona_idzona==1){
             $ruta="./assets/img/experience/".$tour->path;
         }
         else{
@@ -304,7 +304,7 @@ class Tour extends Luna\Controller {
             }
             $home="";   
         }
-        if(isset($req->params["name"])){
+        if(isset($req->data["name"])){
             //obtenemos el id de la experiencia
             $id=$req->params["exper"]; 
             //obtenemos los elementos del formulario, verificamos que no sean nulos, en caso de ser nulo asignamos el valor que esta almacenado en dicho atributo en la base de datos.
@@ -313,16 +313,19 @@ class Tour extends Luna\Controller {
             $zona = $req->data["zona"]!=null? $req->data["zona"]: $tour->zona_idzona;
             $duracion = ($req->data["duracion"]!=null)&&($req->data["horas"]!=null)? filter_var($req->data["duracion"],FILTER_SANITIZE_STRING)."/".filter_var($req->data["horas"],FILTER_SANITIZE_NUMBER_INT): $tour->duration;
             $duracion_spa="";
-            switch($req->data["duracion"]){
-                case "HALF DAY":
-                    $duracion_spa="MEDIO DIA"."/".filter_var($req->data["horas"]);
-                break;
-                case "FULL DAY":
-                    $duracion_spa="DIA COMPLETO"."/".filter_var($req->data["horas"]);
-                break;
-                default:
-                    $duracion_spa="Falta Traduccion";
-                break;
+            if(isset($duracion)){
+                switch($req->data["duracion"]){
+                    case "HALF DAY":
+                        $duracion_spa="MEDIO DIA"."/".filter_var($req->data["horas"]);
+                    break;
+                    case "FULL DAY":
+                        $duracion_spa="DIA COMPLETO"."/".filter_var($req->data["horas"]);
+                    break;
+                    default:
+                        $duracion_spa="Falta Traduccion";
+                    break;
+                }
+
             }
             $descripcion = $req->data["descripcion"]!=null? filter_var($req->data["descripcion"], FILTER_SANITIZE_STRING) : $tour->description;
             $descripcion_spa = $req->data["descripcion_esp"]!=null? filter_var($req->data["descripcion_esp"], FILTER_SANITIZE_STRING) : $tour->description_esp;
@@ -344,7 +347,7 @@ class Tour extends Luna\Controller {
                 else{
                     $dir="../maldivas/assets/img/experience/indo";
                 }
-                $aux2=explode('.',$_FILES['imagen']['name']);
+                $aux2=explode('.',$_FILES['thumbnail']['name']);
                 $ruta=$dir."/".$aux2[0].substr(uniqid(),0,-3).".".$aux2[1];
                 $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
                 //Obtenemos y sanitizamos los parametros obtenidos por el metodo  post.
@@ -389,7 +392,7 @@ class Tour extends Luna\Controller {
             $tour->home=$home;
             //actualizamos la entidad
             $tourMapper->update($tour);
-            $tour = $tourMapper->select()->where(["id" => $req->params["exper"]])->first();
+            $tour = $tourMapper->select()->where(["idexperience" => $req->params["exper"]])->first();
         }
     	echo $this->renderWiew( array_merge(["tour" => $tour,"types"=>$type,"zones"=>$zones,"thumb"=>$imagen]), $res);
     }
