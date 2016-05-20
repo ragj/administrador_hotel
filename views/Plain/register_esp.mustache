@@ -2,28 +2,20 @@
 {{< panel}}
 	{{$content}}
 
-	<div class="holder">
-		<script>
-			var path = "";
-			var href = window.location.pathname
-			var s = href.split("/");
-			for (var i=3;i<(s.length-1);i++) {
-				path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
-			}
-			i=s.length-1;
-			path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
-			var url = "<p id=bread>"+path+"</p>";
-			document.writeln(url);
-	 	</script>
-	 	<p class="intro"><b>Registro</b></p>
-		<p class="detail"><b>Por favor llene el siguiente formulario. Gracias</b></p>
+	<div class="holder reg">
+		
+			<center>
+	 			<h2>Registro</h2>
+				<p>Por favor llene el siguiente formulario. Gracias</p>
+			</center>
+	
 	 	<row>
 			<column cols="6">
-	 			<div style="min-height: 140px"></div>
+	 			<div style="min-height: 90px"></div>
 	 			<img src="/bali/assets/img/Img_registro/01.jpg" height="221px" width="645px"/>
-	 			<div style="min-height: 120px"></div>
+	 			<div style="min-height: 170px"></div>
 	 			<img src="/bali/assets/img/Img_registro/02.jpg" height="221px" width="645px"/>
-	 			<div style="min-height: 120px"></div>
+	 			<div style="min-height: 170px"></div>
 	 			<img src="/bali/assets/img/Img_registro/03.jpg" height="221px" width="645px"/>
 	 		</column>
 			<column	cols="6">
