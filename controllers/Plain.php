@@ -673,6 +673,12 @@ class Plain extends Luna\Controller {
             case "four-seasons-resort-bali-at-jimbaran-bay":
                 $res->m = $res->mustache->loadTemplate("hotelTransfer/jimbaran.mustache");
             break;
+            case "amanusa":
+                $res->m = $res->mustache->loadTemplate("hotelTransfer/a.mustache");
+            break;
+            case "como-shambhala-estate":
+                $res->m = $res->mustache->loadTemplate("hotelTransfer/b.mustache");
+            break;
 
         }
         $lang=$req->lang;
