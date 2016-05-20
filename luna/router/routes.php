@@ -58,6 +58,12 @@ $ROUTES = [
 		'path' => '/transfer',
 		'get' => array('Plain', 'transfer'),
 	],
+	"/jimbaran" => [
+		'es' => "/travelAgent/jimbaran",
+		'en' => "/travelAgent/jimbaran",
+		'path' => '/transfer/jimbaran',
+		'get' => array('Plain', 'jimbaran'),
+	],
 	"/contact-us" => [
 		'es' => "/contactanos",
 		'en' => "/contact-us",
