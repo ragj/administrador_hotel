@@ -1,20 +1,52 @@
 {{% BLOCKS }}
 {{< panel}}
 	{{$content}}
-	<div class="holder">
-		<script>
-			var path = "";
-			var href = window.location.pathname
-			var s = href.split("/");
-			for (var i=3;i<(s.length-1);i++) {
-				path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
-			}
-			i=s.length-1;
-			path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
-			var url = "<p id=bread>"+path+"</p>";
-			document.writeln(url);
-	 	</script>
-		<p class="intro"><b>Aviso de privacidad</b> </p>	
+	<div class="holder">		
+		<row>
+			<column cols="2"></column>
+			<column cols="8" style="text-align:justify;">
+				<h2>AVISO DE PRIVACIDAD</h2>
+				<p>El presente Aviso de Privacidad se ha elaborado de conformidad con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y demás disposiciones aplicables.  Este Aviso de Privacidad forma parte del sitio web www.lozano.travel</p>
+				<h2>RESPONSABLE</h2>
+				<p>LOZANO TRAVEL DE MEXICO, S.A. DE C.V. (en adelante LozanoTravel) que es una sociedad mercantil mexicana, con domicilio en la calle de Taine No. 709, Col. Polanco, C.P. 11560, en México, Distrito Federal y número de teléfono 52554455, es responsable de recabar sus datos personales, del uso que se le dé a los mismos y de su protección.  Una de las prioridades de LozanoTravel es respetar la privacidad de sus clientes o usuarios y mantener segura la información y los datos personales que recolecta.  El propósito de este Aviso es que LozanoTravel informe a sus clientes o usuarios qué tipo de datos recolecta, cómo los almacena, la finalidad del archivo, cómo los protege, el alcance de su compromiso de confidencialidad y los derechos que éste posee como titular de la información.</p>
+				<h2>DATOS PERSONALES</h2>
+				<p>En LozanoTravel, la información que se solicita es distinta y se almacena en bases de datos separadas.  La información deberá ser veraz y completa. El cliente o usuario responderá en todo momento por los datos proporcionados y en ningún caso LozanoTravel será responsable de la veracidad de los mismos.  Su información personal será utilizada para proveer los servicios y productos que ha solicitado, informarle sobre cambios en los mismos y evaluar la calidad del servicio que le brindamos.Para las finalidades antes mencionadas, requerimos obtener los siguientes datos personales:</p>
+				<p>Nombre completo, género, edad, fecha de nacimiento, dirección (personal, trabajo), teléfonos (casa, celular, trabajo), correo electrónico (personal, trabajo), estado civil, nacionalidad, márgenes de ingresos, destinos preferidos, fechas de vacaciones, lugar de trabajo.</p>
+				<h2>COOKIES Y CÓMO SE UTILIZAN</h2>
+				<p>En ocasiones este sitio podría hace uso de cookies, las cuales son pequeños ficheros de datos que se generan en su ordenador, pudiendo enviar información técnica sin proporcionar referencias que permitan deducir datos personales de este.</p>
+				<p>Usted podrá configurar su navegador para que notifique y rechace la instalación de las cookies enviadas por este sitio, sin que ello perjudique la posibilidad de acceder a los contenidos. Sin embargo, no nos responsabilizamos de que la desactivación de los mismos impida el buen funcionamiento del sitio.</p>
+				<h2>USO DE LA INFORMACIÓN</h2>
+				<p>La información solicitada permite a LozanoTravel contar con todos los elementos suficientes para cotizar los servicios solicitados y contactar a los clientes o usuarios cuando sea necesario para completar los procedimientos de contratación.  Asimismo, LozanoTravel utilizará la información obtenida para:</p>
+				<p>Procurar un servicio eficiente.</p>
+				<p>Informar sobre nuevos productos o servicios que estén o no relacionados con el contratado o adquirido por el cliente.</p>
+				<p>Informar sobre promociones, productos actuales, paquetes, nuevos productos y/o servicio.</p>
+				<p>Informar sobre cambios de nuestros productos o servicios.</p>
+				<p>Proveer una mejor atención al cliente o usuario.</p>
+				<p>Crear, comunicar y enviar campañas publicitarias según información personal, ingresos, destinos, estado civil o cualquier otro parámetro de información que se utilice.</p>
+				<p>Enviar e-newsletters, mails o cualquier otro mensaje a través de medios electrónicos.</p>
+				<p>Enviar publicidad e información según datos personales.</p>
+				<h2>PROTECCIÓN.</h2>
+				<p>LozanoTravel implementará las herramientas necesarias para la protección de la información del cliente o usuario.  La información está asegurada por un número de identificación personal, al que solo el cliente o usuario podrá acceder.</p>
+				<p>Una vez recibidos los datos, haremos todo lo posible para salvaguardar su seguridad en nuestros sistemas.</p>
+				<h2>LIMITACIÓN DE USO Y DIVULGACIÓM DE INFORMACIÓN</h2>
+				<p>En nuestro programa de notificación de promociones, ofertas y servicios a través de correo electrónico, sólo LozanoTravel tiene acceso a la información recabada. Este tipo de publicidad se realiza mediante avisos y mensajes promocionales de correo electrónico, los cuales sólo serán enviados a usted y a aquellos contactos registrados para tal propósito, esta indicación podrá usted modificarla en cualquier momento. En los correos electrónicos enviados, pueden incluirse ocasionalmente ofertas de terceras partes que sean nuestros socios comerciales.  Si usted desea dejar de recibir mensajes promocionales de nuestra parte puede solicitarlo a través de un aviso en dicho sentido a nuestro departamento de datos personales en el domicilio mencionado al inicio del presente Aviso o mediante solicitud enviada a: socialmedia@lozano.com </p>
+				<h2>DERECHOS ARCO (ACCESO, RECTIFICACIÓN, CANCELACIÓN Y OPOSICIÓN)</h2>
+				<p>Usted tiene derecho de acceder, rectificar y cancelar sus datos personales, así como de oponerse al tratamiento de los mismos o revocar el consentimiento que para tal fin nos haya otorgado, a través de los procedimientos que hemos implementado. Para conocer dichos procedimientos, los requisitos y plazos, se puede poner en contacto con nuestro departamento de datos personales en el domicilio mencionado al inicio del presente Aviso o mediante solicitud enviada a: socialmedia@lozano.com.</p>
+				<p>Los datos personales proporcionados por el cliente o usuario podrán formar parte de un archivo que contendrá su perfil, en su caso, el usuario puede acceder o modificar su perfil en cualquier momento utilizando su número de usuario / R.F.C.  LozanoTravel aconseja al usuario que actualice sus datos cada vez que éstos sufran alguna modificación, ya que esto permitirá brindarle un servicio más personalizado.</p>
+				<h2>TRANSFERENCIAS DE INFORMACIÓN CON TERCEROS </h2>
+				<p>Por ningún motivo y sin su previa autorización, se proporcionará su información personal a terceras personas, excepto cuando la información personal no se identifique como suya.</p>
+				<p>La página Web de LozanoTravel puede contener enlaces hacia páginas, productos y servicios de terceros.  La información recopilada por terceros, entre la que se incluye datos de localización o de contacto, está regulada por sus respectivas políticas de privacidad.</p>
+				<p>Cualquier sitio de un tercero con links desde nuestro sitio Web no queda bajo el control de LozanoTravel y no nos responsabilizamos de su contenido.  Le facilitamos a usted dichos links únicamente para mayor comodidad, y la inclusión de cualquier link en un sitio Web no implica la aceptación y respaldo por parte nuestra del contenido de dicho sitio, ni representan ningún tipo de relación entre LozanoTravel y el titular del sitio web al que se pueda acceder.</p>
+				<h2>CAMBIOS EN EL AVISO DE PRIVACIDAD </h2>
+				<p>LozanoTravel modificará, sin previo aviso, la presente política de privacidad siempre que sea necesario para adecuar la misma a cualquier cambio legislativo, reglamentario, jurisprudencial, administrativo o con cualquier objeto legítimo para LozanoTravel.</p>
+				<p>Cualquier modificación de esta política no obstante lo anterior, será publicada y advertida en la página Web Internet www.lozanotravel.com.mx, sección Aviso de Privacidad.</p>
+				<p>Por todo lo anterior, LozanoTravel recomienda a los usuarios la lectura periódica de estas políticas con el fin de poder conocer los cambios que en las mismas se efectúen.</p>
+				<h2>ACEPTACIÓN DE LOS TÉRMINOS </h2>
+				<p>Esta declaración de Privacidad está sujeta a los términos y condiciones de todos los sitios web de LozanoTravel, lo cual constituye un acuerdo legal entre el cliente o usuario y LozanoTravel.  Si el cliente o usuario utiliza los servicios en cualquiera de los sitios de LozanoTravel, significa que ha leído, entendido y acordado los términos antes expuestos. Si no está de acuerdo con ellos, el cliente o usuario no deberá proporcionar ninguna información personal, ni utilizar los servicios de los sitios de LozanoTravel.</p>
+				<h2>Fecha de la última actualización.</h2>
+				<p>Estimado cliente o usuario, se le notifica que el Aviso de Privacidad ha sido modificado el día 19 de mayo de 2016</p>
+			</column>
+		</row>	
 
 	</div>
 		

@@ -24,7 +24,7 @@
 								First Name
 							</label>
 						</center>
-						<input name="name" type="text" required value="{{#user}}{{nombre}}{{/user}}"/>
+						<input name="name" type="text" required="true" value="{{#user}}{{nombre}}{{/user}}" pattern="[a-zA-Z]{1,15}"  title="First Name should only contain letters"/>				
 					</section>
 					<section>
 						<center>
@@ -32,7 +32,7 @@
 								Last Name
 							</label>
 						</center>
-						<input name="lname" type="text" required value="{{#user}}{{app}}{{/user}}"/>
+						<input name="lname" type="text" required="true" value="{{#user}}{{app}}{{/user}}" pattern="[a-zA-Z]{1,15}"  title="Last Name should only contain letters"/>
 					</section>
 					<section>
 						<center>
@@ -40,7 +40,7 @@
 								Mother's Last Name
 							</label>
 						</center>
-						<input name="mlname" type="text" required value="{{#user}}{{apm}}{{/user}}"/>
+						<input name="mlname" type="text" required="true" value="{{#user}}{{apm}}{{/user}}" pattern="[a-zA-Z]{1,15}"  title="Mother's last name should only contain letters"/>
 					</section>
 					<section>
 						<center>
@@ -48,7 +48,7 @@
 								Email (username)
 							</label>
 						</center>
-						<input name="user" type="email" required value="{{#user}}{{usr}}{{/user}}"/>
+						<input name="user" type="email" required="true" value="{{#user}}{{usr}}{{/user}}"/>
 					</section>
 					<section>
 						<center>
@@ -56,7 +56,7 @@
 								Password
 							</label>
 						</center>
-						<input name="pass" type="password" required/>
+						<input name="pass" type="password" required="true"/>
 					</section>
 					<section>
 						<center>
@@ -64,7 +64,7 @@
 								Confirm Password
 							</label>
 						</center>
-						<input name="pass1" type="password" required/>
+						<input name="pass1" type="password" required="true"/>
 					</section>
 					<section>
 						<center>
@@ -72,7 +72,7 @@
 								Phone Number
 							</label>
 						</center>
-						<input name="phone" type="text" required value="{{#user}}{{tel}}{{/user}}"/>
+						<input name="phone" type="text" required="true" value="{{#user}}{{tel}}{{/user}}" pattern="[0-9]{1,15}"  title="Phone should only contain numbers"/>
 					</section>
 					<section>
 						<center>
@@ -80,7 +80,7 @@
 								IATA
 							</label>
 						</center>
-						<input name="iata" type="text" required value="{{#user}}{{iata}}{{/user}}"/>
+						<input name="iata" type="text" required="true" value="{{#user}}{{iata}}{{/user}}"/>
 					</section>
 					<section>
 						<center>
@@ -88,7 +88,7 @@
 								Member to an Affiliation or Program
 							</label>
 						</center>
-						<input name="member" type="text" required value="{{#user}}{{miembro}}{{/user}}"/>
+						<input name="member" type="text" required="true" value="{{#user}}{{miembro}}{{/user}}"/>
 					</section>
 					<section>
 						<center>
@@ -96,7 +96,7 @@
 								Years in Business
 							</label>
 						</center>
-						<input name="years" type="text" required value="{{#user}}{{anios}}{{/user}}"/>
+						<input name="years" type="text" required="true" value="{{#user}}{{anios}}{{/user}}" pattern="[0-9]{1,15}"  title="Should only contain numbers"/>
 					</section>
 					<section>
 						<input type="submit" class="primary" value="Register"/>
