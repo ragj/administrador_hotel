@@ -107,21 +107,6 @@ class Plain extends Luna\Controller {
         }
         echo $this->renderWiew( $this->header("transfers",$lang), $res);
     }
-    public function jimbaran($req , $res){
-        $lang=$req->lang;
-        switch($lang){
-            case "es":
-                $res->m = $res->mustache->loadTemplate("hotelTransfer/jimbaran.mustache");
-            break;
-            case "en":
-                $res->m = $res->mustache->loadTemplate("hotelTransfer/jimbaran.mustache");
-            break;
-            default:
-                $res->m = $res->mustache->loadTemplate("hotelTransfer/jimbaran.mustache");
-            break;
-        }
-        echo $this->renderWiew( $this->header("transfers",$lang), $res);
-    }
     public function aviso($req , $res){
         $lang=$req->lang;
         switch($lang){
@@ -678,6 +663,18 @@ class Plain extends Luna\Controller {
             }
         }
         echo $this->renderWiew($this->header("register",$lang), $res);
+    }
+    public function hotelTransfer($req , $res){
+        $uid=$req->params["uid"];
+        switch($uid){
+            case "four-seasons-resort-bali-at-sayan":
+                $res->m = $res->mustache->loadTemplate("hotelTransfer/jimbaran.mustache");
+            break;
+
+
+        }
+        $lang=$req->lang;
+        echo $this->renderWiew( $this->header("transfers",$lang), $res);
     }    
 }
 
