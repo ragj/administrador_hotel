@@ -668,13 +668,15 @@ class Plain extends Luna\Controller {
         $uid=$req->params["uid"];
         switch($uid){
             case "four-seasons-resort-bali-at-sayan":
+                $res->m = $res->mustache->loadTemplate("hotelTransfer/sayan.mustache");
+            break;
+            case "four-seasons-resort-bali-at-jimbaran-bay":
                 $res->m = $res->mustache->loadTemplate("hotelTransfer/jimbaran.mustache");
             break;
 
-
         }
         $lang=$req->lang;
-        echo $this->renderWiew( $this->header("transfers",$lang), $res);
+        echo $this->renderWiew( $this->header("transfer",$lang), $res);
     }    
 }
 

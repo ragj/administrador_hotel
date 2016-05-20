@@ -1,235 +1,318 @@
 {{% BLOCKS }}
 {{< panel}}
-	{{$content}}		
-		<row>
-			<column cols="1"></column>
-			<column cols="10">
-				<br>
-				<br>
-				<row>
-					<column cols="8">
-						<h1 style="text-align:left;">FOUR SEASONS RESORT BALI AT SAYAN</h1>
+	{{$content}}
+		<div class="hotel-trans">
+			<br>
+			<row>
+				<column cols="1"></column>
+				<column cols="10">
+					<row>
+						<script>
+							var path = "";
+							var href = window.location.pathname
+							var s = href.split("/");
+							for (var i=3;i<(s.length-1);i++) {
+								path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+							}
+							i=s.length-1;
+							path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+							var url = "<p id=bread>" + path+"</p>";
+							document.writeln(url);
+			 			</script>
+					</row>
+					<row>
+						<a href="/bali/en/travelAgent"  id="back" ><i class="fa fa-reply"></i> Back</a>
+					</row>		
+					<row>
+						<column cols="8">
+							<h1 style="text-align:left;">FOUR SEASONS RESORT BALI AT JIMBARAN BAY</h1>
+							<br>
+							<a style="color:#C39323;" href="/bali/en/hotel-collection/four-seasons-resort-bali-at-jimbaran-bay" target="_black">go to description page</a>
+						</column>
+						<column cols="4">
 						<br>
-						<a style="color:#C39323;" href="/bali/en/hotel-collection/four-seasons-resort-bali-at-sayan" target="_black">go to description page</a>
-					</column>
-					<column cols="4">
+							<h2> Address</h2>
+							<p>Jimbaran, South Kuta, Badung Regency, Bali, Indonesia</p>
+							<a style="text-decoration:none; color:#C39323;" href="http://www.fourseasons.com/jimbaranbay/" target="_black">http://www.fourseasons.com/jimbaranbay/</a>
+						</column>
+					</row>
+					<hr>
+					<h2>2016-2017 NETT RATES</h2>
+					<table>
+						<tr class="main">
+							<td class="data1" rowspan="4">CATEGORIES</td>
+							<td class="data1" rowspan="4"> <br>MAX OCUPANCY</td>
+							<td class="data1" >
+								LOW SEASON
+							</td>
+							<td class="data1" rowspan="4">
+								<br>HIGH SEASON<br>
+								15/Jul/2016 - 31/Aug/2016
+							</td>
+							<td class="data1" rowspan="4">
+								<br>PEAK SEASON<br>
+								24/Dec/2016 - 05/Jan/2017
+							</td>
+						</tr>
+						<tr class="main"><td class="data1">01/Apr/2016 - 14/Jul/2016</td></tr>
+						<tr class="main"><td class="data1">01/Sep/2016 - 23/Dec/2016</td></tr>
+						<tr class="main"><td class="data1">06/Jan/2017 - 31/Mar/2017</td></tr>
+
+						<tr>
+							<td class="data1">ONE-BEDROOM VILLA</td>
+							<td class="data1">3ADT/ 2ADT & 1CHD</td>
+							<td class="data1">USD 803			</td>
+							<td class="data1">USD 922			</td>
+							<td class="data1">USD 1,059			</td>
+						</tr>
+						<tr>
+							<td class="data1">OCEAN VIEW ONE-BEDROOM VILLA</td>
+							<td class="data1">3ADT/ 2ADT & 1CHD</td>
+							<td class="data1">USD 918</td>
+							<td class="data1">USD 1,043</td>
+							<td class="data1">USD 1,175</td>
+						</tr>
+						<tr>
+							<td class="data1">DELUXE OCEAN VIEW 1 BEDROOM VILLA</td>
+							<td class="data1">3ADT/ 2ADT & 1CHD</td>
+							<td class="data1">USD 1,035</td>
+							<td class="data1">USD 1,161</td>
+							<td class="data1">USD 1,294</td>
+						</tr>
+						<tr>
+							<td class="data1">OCEAN FRONT ONE-BEDROOM VILLA</td>
+							<td class="data1">3ADT/ 2ADT & 1CHD</td>
+							<td class="data1">USD 1,134</td>
+							<td class="data1">USD 1,260</td>
+							<td class="data1">USD 1,393</td>
+						</tr>
+						<tr>
+							<td class="data1">TWO-BEDROOM VILLA</td>
+							<td class="data1">3ADT/ 2ADT & 1CHD</td>
+							<td class="data1">USD 2,046</td>
+							<td class="data1">USD 2,288</td>
+							<td class="data1">USD 2,715</td>
+						</tr>
+						<tr>
+							<td class="data1">OCEAN VIEW TWO-BEDROOM VILLA</td>
+							<td class="data1">4ADT/ 4ADT & 2CHD</td>
+							<td class="data1">USD 2,254</td>
+							<td class="data1">USD 2,637</td>
+							<td class="data1">USD 3,064</td>
+						</tr>
+						<tr>
+							<td class="data1">OCEAN FRONT TWO-BEDROOM VILLA</td>
+							<td class="data1">4ADT/ 4ADT & 2CHD</td>
+							<td class="data1">USD 2,890</td>
+							<td class="data1">USD 3,250</td>
+							<td class="data1">USD 3,677</td>
+						</tr>
+						<tr>
+							<td class="data1">TWO-BEDROOM GARDEN VILLA</td>
+							<td class="data1">4ADT/ 4ADT & 2CHD</td>
+							<td class="data1">USD 2,067</td>
+							<td class="data1">USD 2,393</td>
+							<td class="data1">USD 2,774</td>
+						</tr>
+						<tr>
+							<td class="data1">TWO-BEDROOM JIMBARAN BAY VILLA</td>
+							<td class="data1">4ADT/ 4ADT & 2CHD</td>
+							<td class="data1">USD 2,285</td>
+							<td class="data1">USD 2,665</td>
+							<td class="data1">USD 3,100</td>
+						</tr>
+						<tr>
+							<td class="data1">TWO-BEDROOM PREMIER OCEAN VILLA</td>
+							<td class="data1">4ADT/ 4ADT & 2CHD</td>
+							<td class="data1">USD 2,937</td>
+							<td class="data1">USD 3,263</td>
+							<td class="data1">USD 3,698</td>
+						</tr>
+						<tr>
+							<td class="data1">ROYAL VILLA </td>
+							<td class="data1">4ADT/ 4ADT & 2CHD</td>
+							<td class="data1">USD 3,806</td>
+							<td class="data1">USD 4,296</td>
+							<td class="data1">USD 4,893</td>
+						</tr>
+						<tr>
+							<td class="data1">TWO-BEDROOM GARDEN RESIDENCE VILLA</td>
+							<td class="data1">4ADT/ 4ADT & 2CHD</td>
+							<td class="data1">USD 1,302</td>
+							<td class="data1">USD 2,023</td>
+							<td class="data1">USD 2,221</td>
+						</tr>
+						<tr>
+							<td class="data1">THREE-BEDROOM GARDEN RESIDENCE VILLA</td>
+							<td class="data1">6ADT/ 6ADT & 3CHD</td>
+							<td class="data1">USD 1,589</td>
+							<td class="data1">USD 2,412</td>
+							<td class="data1">USD 2,609</td>
+						</tr>
+						<tr>
+							<td class="data1">THREE-BEDROOM RESIDENCE VILLA</td>
+							<td class="data1">6ADT/ 6ADT & 3CHD</td>
+							<td class="data1">USD 1,877</td>
+							<td class="data1">USD 2,603</td>
+							<td class="data1">USD 2,800</td>
+						</tr>
+						<tr>
+							<td class="data1">FOUR-BEDROOM RESIDENCE VILLA</td>
+							<td class="data1">8ADT/ 8ADT & 4CHD</td>
+							<td class="data1">USD 2,310</td>
+							<td class="data1">USD 3,036</td>
+							<td class="data1">USD 3,234</td>
+						</tr>
+					</table>
+					<h2>CONDITIONS</h2>
+					<ul>
+						<li>The above rates are quoted in USD dollars. All government fees and services charges are subject to changes without prior notice.				</li>
+						<li>Rates quote apply to single or double occupancy are inclusive of breakfast for 2 people per room per night.				</li>
+						<li>Third adult will be quoted $131 net per room per day with extra bed and breakfast included				</li>
+						<li>Children Policy: A baby cot or an extra bed can be provided at no charge, a child Breakfast will be automatically charged ($22 USD). Maximum 1 child per room.</li>
+						<li style="list-style-type: none;">*Two Bedroom Garden Villa, Two Bedroom Jimbaran Bay Villa, Two Bedroom Premier Ocean Villa and Royal Villa are available from 01/Jul/2016				</li>
+						<li style="list-style-type: none;">*No check-out allowed on 31/Dec/2016 & 01/Jan/2017</li>
+					</ul>
+					<h2>OFFERS</h2>
+					<p class="trans"><b>Bonus Night:</b> Stay 3/Pay2 or Stay 10/Pay 7. Valid for all categories between 01/Apr/16 - 23/Dec/16 & 06/Jan/17 - 31/Mar/17. Not combinable with Combination Stay				</p><br>
+					<p class="trans"><b>Early Bird Offer:</b> To book within 45 days prior to arrival between 01/Apr/16 - 23/Dec/16 & 06/Jan/17 - 31/Mar/17, get 10% discount of the room rate. Valid for all categories with min stay of 3 nights. Not combinable with Combination Stay				</p><br>
+					<p class="trans"><b>Combination Stay:</b> Get 15% discount of the room rate for combination stay with Four Seasons Jimbaran. Valid between 01/Apr/16 - 23/Dec/16 & 06/Jan/17 - 31/Mar/17 for all categories with a min stay of 3 nights in each resort. Not combinable with Early Bird				</p><br>
+					<p class="trans"><b>Upgrade Promotion:</b> Upgrade from One Bedroom Villa to Ocean View One Bedroom Villa, or from Ocean View One Bedroom Villa to Deluxe One Bedroom Villa staying minimum 5 nights. Valid between 01/Apr/16 - 23/Dec/16 & 06/Jan/17 - 31/Mar/17. Not valid with Combination Stay.				</p><br>
+					<p class="trans"><b>Summer Special Promotion:</b>  Special Rates for the seasons and categories as the below table. Valid with minimum 2 nights stay. Rates quoted for (Single/Double or Twin Occupancy) per room per night  inclusive of 2 daily breakfasts.</p><br>
+					<p class="trans">Rates quoted are in USD and NETT, inclusive of tax and service charge, must be sold as a package with airfare or other components</p><br>
+					<p class="trans">The offer does not apply to groups and cannot be combined with any other promotions benefits and value adds.</p><br>
+					<p class="trans">Reservations have to made with the booking code “SUMMER SPECIAL PROMOTION” otherwise wholesales contract rates will be automatically applied.</p><br>
+						
 					<br>
-					<br>
-						<h2> Address</h2>
-						<p>Jimbaran, South Kuta, Badung Regency, Bali, Indonesia</p>
-						<a style="text-decoration:none; color:#C39323;" href="http://www.fourseasons.com/jimbaranbay/" target="_black">http://www.fourseasons.com/jimbaranbay/</a>
-					</column>
-				</row>
-				<hr>
-				<h2>2016-2017 NETT RATES</h2>
-				<table>
-					<tr class="main">
-						<td class="data1"> <br>CATEGORIES</td>
-						<td class="data1"> <br>MAX OCUPANCY</td>
-						<td class="data1">
-							LOW SEASON<br>
-							01/Apr/2016 - 14/Jul/2016<br>
-							01/Sep/2016 - 23/Dec/2016<br>
-							06/Jan/2017 - 31/Mar/2017
-						</td>
-						<td class="data1">
-							<br>HIGH SEASON<br>
-							15/Jul/2016 - 31/Aug/2016
-						</td>
-						<td class="data1">
-							<br>PEAK SEASON<br>
-							24/Dec/2016 - 05/Jan/2017
-						</td>
-					</tr>
-					<tr>
-						<td class="data1">ONE-BEDROOM DUPLEX SUITE</td>
-						<td class="data1">3ADT/ 2ADT & 1CHD</td>
-						<td class="data1">USD 589</td>
-						<td class="data1">USD 654 </td>
-						<td class="data1"> USD 801</td>
-					</tr>
-					<tr>
-						<td class="data1">ONE-BEDROOM SUITE</td>
-						<td class="data1">3ADT/ 2ADT & 1CHD</td>
-						<td class="data1">USD 681</td>
-						<td class="data1">USD 719</td>
-						<td class="data1"> USD 861</td>
-					</tr>
-					<tr>
-						<td class="data1">FAMILY SUITE</td>
-						<td class="data1">3ADT/ 2ADT & 2CHD</td>
-						<td class="data1">USD 812</td>
-						<td class="data1">USD 953</td>
-						<td class="data1"> USD 1,100</td>
-					</tr>
-					<tr>
-						<td class="data1">ONE-BEDROOM VILLA</td>
-						<td class="data1">3ADT/ 2ADT & 1CHD</td>
-						<td class="data1">USD 812</td>
-						<td class="data1">USD 953</td>
-						<td class="data1"> USD 1,100</td>
-					</tr>
-					<tr>
-						<td class="data1">RIVER FRONT ONE-BEDROOM VILLA</td>
-						<td class="data1">3ADT/ 2ADT & 1CHD</td>
-						<td class="data1">USD 969</td>
-						<td class="data1">USD 1,100</td>
-						<td class="data1"> USD 1,247</td>
-					</tr>
-					<tr>
-						<td class="data1">SAYAN VILLA</td>
-						<td class="data1">3ADT/ 2ADT & 1CHD</td>
-						<td class="data1">USD 969</td>
-						<td class="data1">USD 1,100</td>
-						<td class="data1"> USD 1,247</td>
-					</tr>
-					<tr>
-						<td class="data1">2-BEDROOM VILLA</td>
-						<td class="data1">6ADT/ 4ADT & 2CHD</td>
-						<td class="data1">USD 2,133</td>
-						<td class="data1">USD 2,437</td>
-						<td class="data1">USD 2,855 </td>
-					</tr>
-					<tr>
-						<td class="data1">RIVER VIEW TWO-BEDROOM VILLA</td>
-						<td class="data1">6ADT/ 4ADT & 2CHD</td>
-						<td class="data1">USD 2,372</td>
-						<td class="data1">USD 2,839</td>
-						<td class="data1">USD 3,258 </td>
-					</tr>
-					<tr>
-						<td class="data1">ROYAL VILLA (3-BEDROOM)</td>
-						<td class="data1">9ADT/ 6ADT & 3CHD</td>
-						<td class="data1">USD 3,492</td>
-						<td class="data1">USD 3,942</td>
-						<td class="data1">USD 4,403 </td>
-					</tr>
-				</table>
-				<h2>CONDITIONS</h2>
-				<ul>
-					<li>The above rates are quoted in USD dollars. All government fees and services charges are subject to changes without prior notice.</li>
-					<li>Rates quote apply to single or double occupancy are inclusive of breakfast for 2 people per room per night.</li>
-					<li>Third adult will be quoted $131 net per room per day with extra bed and breakfast included</li>
-					<li>Children Policy: A baby cot or an extra bed can be provided at no charge, a child breakfast will be automatically charged ($22 USD). Maximum 1 child per room.</li>
-					<li style="list-style-type: none;">*Minimum stay of 3 nights applies on Dec 27, 2016 - Jan 5, 2017.</li>
-					<li style="list-style-type: none;">*No check-out allowed on 31/Dec/2016 & 01/Jan/2017</li>
-				</ul>
-				<h2>OFFERS</h2>
-					<p>Bonus Night Offer 1: Stay 3/Pay 2 valid in all categories and applicable for multiple stay, valid between 01/May/16 - 14/Jul/16, 01/Sep/16 - 23/Dec/16 & 06/Jan/17 - 31/Mar/17. valid for a minimum of 3 consecutive nights.</p>
-					<p>Bonus Night Offer 2: Stay 4/Pay 3 valid in all categories and applicable for multiple stay, valid between 14/Jul/16 - 31/Aug/16. Valid for a minimum of 4 consecutive nights.</p>
-					<p>Early Bird Offer: To book within 45 days prior to arrival between 01/May/16 - 23/Dec/16 & 06/Jan/17 - 31/Mar/17, get 10% discount of the room rate. Valid for all categories with a minimum stay of 3 consecutive nights. Not combinable with Combination Stay</p>
-					<p>Combination Stay: Get 15% discount of the room rate for combination stay with Four Seasons Jimbaran. Valid between 01/May/16 - 23/Dec/16 & 06/Jan/17 - 31/Mar/17 for all categories with a min stay of 3 consecutive nights in each resort. Not combinable with Early Bird</p>
-					<p>Special Promotion: Get one time 3 course set dinner if staying at villas minimum 3 nights, or 1 time lunch staying at suites minimum 3 nights. Valid between 01/May/16 - 23/Dec/16 & 06/Jan/17 - 31/Mar/17. Not valid with combination stay</p>
-					<p>Upgrade Promotion: Upgrade from One-Bedroom Duplex Suite to One-Bedroom Villa, or from One-Bedroom Villa to River Front One-Bedroom Villa staying minimum 3 nights. Valid between 01/May/16 - 23/Dec/16 & 06/Jan/17 - 31/Mar/17</p>
-					<p>Summer Special Promotion:  Special Rates for the seasons and categories as the below table. Valid with minimum 2 nights stay. Rates quoted for (Single/Double or Twin Occupancy) per room per night  inclusive of 2 daily breakfasts.</p>
-					<p>Rates quoted are in USD and NETT, inclusive of tax and service charge, must be sold as a package with airfare or other components</p>
-					<p>The offer does not apply to groups and cannot be combined with any other promotions benefits and value adds.</p>
-					<p>Reservations have to made with the booking code “SUMMER SPECIAL PROMOTION” otherwise wholesales contract rates will be automatically applied.</p>
-				<table>
-					<tr class="main">
-						<td class="data1">CATEGORY<br></td>
-						<td class="data1">21/Apr/16 - 14/Jul/16<br>01/Sep/16 - 23/Dec/16</td>
-						<td class="data1">15/Jul/16 - 31/Aug/16<br></td>
-					</tr>
-					<tr>
-						<td class="data1">ONE-BEDROOM DUPLEX SUITE</td>
-						<td class="data1">USD 393</td>
-						<td class="data1">USD 459</td>
-					</tr>
-					<tr>
-						<td class="data1">ONE-BEDROOM SUITE</td>
-						<td class="data1">USD 459</td>
-						<td class="data1">USD 540</td>
-					</tr>
-					<tr>
-						<td class="data1">FAMILY SUITE</td>
-						<td class="data1">USD 546</td>
-						<td class="data1">USD 741</td>
-					</tr>
-					<tr>
-						<td class="data1">ONE-BEDROOM VILLA</td>
-						<td class="data1">USD 546</td>
-						<td class="data1">USD 741</td>
-					</tr>
-					<tr>
-						<td class="data1">RIVER FRONT ONE-BEDROOM VILLA</td>
-						<td class="data1">USD 654</td>
-						<td class="data1">USD 823</td>
-					</tr>
-				</table>
-				<h2>VALUE ADD</h2>
-				<row>
-					<column cols="6">
-						<p><b>Honeymooners:</b></p>
-						<ul>
-							<li>Tropical flower bouquet upon arrival</li>
-							<li>A honeymoon cake</li>
-							<li>Flower petals in bathtub</li>
-						</ul>
-					</column>
-					<column cols="6">
-					</column>
-				</row>
-				<h2>BREAKFAST</h2>
-				<row>
-					<column cols="6">
-						<p>Breakfast is included in the daily rates. Additional breakfast will be charged as the following rates. Additional breakfast for a child sharing the same villa with parent will be automatically charged.</p>
-					</column>
-					<column cols="6">
-						<table>
-							<tr class="main">
-								<td class="data1">under 5 years</td>
-								<td class="data1">5-12 years</td>
-								<td class="data1">over 12 years<br></td>
-							</tr>
-							<tr>
-								<td class="data1">complimentary</td>
-								<td class="data1">USD 22</td>
-								<td class="data1">USD 43</td>
-							</tr>
-						</table>
-					</column>
-				</row>
-				<h2>MEALPLAN</h2>
-				<row>
-					<column cols="6">
-						<p><b>Conditions:</b></p>
-						<ul>
-							<li>Rates are based on food only</li>
-							<li>Child under 5 years old will receive a complimentary meal, when dining with parents</li>
-							<li>Child of age 5 - 12 years will be charged 50% of above meal rates, when dining with parents</li>
-							<li>Valid for in house guest only</li>
-							<li>Above meal plan cannot be taken on 24 Dec and 31 Dec 2016</li>
-						</ul>
-					</column>
-					<column cols="6">
-						<br>
-						<table>
-							<tr class="main">
-								<td class="data1">Meal</td>
-								<td class="data1">Rate per Person</td>
-							</tr>
-							<tr>
-								<td class="data1">Three-Courses Lunch</td>
-								<td class="data1">USD 42</td>
-							</tr>
-							<tr>
-								<td class="data1">Three-Courses Dinner</td>
-								<td class="data1">USD 61</td>
-							</tr>
-							<tr>
-								<td class="data1">Rijstaffel Dinner</td>
-								<td class="data1">USD 73</td>
-							</tr>
-							<tr>
-								<td class="data1">Afternoon Tea</td>
-								<td class="data1">USD 20</td>
-							</tr>
-						</table>
-					</column>
-				</row>
-			</column>
-		</row>		
+					<table>
+						<tr class="main">
+							<td class="data1">CATEGORY<br></td>
+							<td class="data1">21/Apr/16 - 14/Jul/16<br>01/Sep/16 - 23/Dec/16</td>
+							<td class="data1">15/Jul/16 - 31/Aug/16<br></td>
+						</tr>
+						<tr>
+							<td class="data1">ONE BEDROOM VILLA</td>
+							<td class="data1">USD 486</td>
+							<td class="data1">USD 627</td>
+						</tr>
+						<tr>
+							<td class="data1">GARDEN VILLA</td>
+							<td class="data1">USD 535</td>
+							<td class="data1">USD 681</td>
+						</tr>
+						<tr>
+							<td class="data1">JIMBARAN BAY VILLA</td>
+							<td class="data1">USD 573</td>
+							<td class="data1">USD 736</td>
+						</tr>
+						<tr>
+							<td class="data1">OCEAN FRONT ONE BEDROOM VILLA</td>
+							<td class="data1">USD 681</td>
+							<td class="data1">USD 855</td>
+						</tr>
+						<tr>
+							<td class="data1">DELUXE VILLA</td>
+							<td class="data1">USD 747</td>
+							<td class="data1">USD 942</td>
+						</tr>
+						<tr>
+							<td class="data1">PREMIER OCEAN VILLA</td>
+							<td class="data1">USD 850</td>
+							<td class="data1">USD 942</td>
+						</tr>
+						<tr>
+							<td class="data1">FAMILY PREMIER VILLA</td>
+							<td class="data1">USD 1,046</td>
+							<td class="data1">USD 1,062</td>
+						</tr>
+					</table>
+					<h2>VALUE ADD</h2>
+					<row>
+						<column cols="6">
+							<p><b>Honeymooners:</b></p>
+							<ul>
+								<li>Tropical flower bouquet upon arrival</li>
+								<li>A honeymoon cake</li>
+								<li>Flower petals in bathtub</li>
+							</ul>
+						</column>
+						<column cols="6">
+							<p><b>Residence Villa Occupants will get the following benefits:</b></p>
+							<ul>
+								<li>24 hours butler service</li>
+								<li>Daily Breakfast</li>
+								<li>Complimentary laundry and pressing</li>
+							</ul>
+						</column>
+					</row>
+					<row>
+						<column cols="6">
+							<p><b>Special Services (Two-Bedroom and Royal Villas):</b></p>
+							<ul>
+								<li>Flower arrangements in the villas refreshed daily</li>
+								<li>Evening Canapé service and herbal tea for turndown (by Village Chef)</li>
+							</ul>
+						</column>
+						<column cols="6">
+						</column>
+					</row>
+					<h2>BREAKFAST</h2>
+					<row>
+						<column cols="6">
+							<p class="trans">Breakfast is included in the daily rates. Additional breakfast will be charged as the following rates. Additional breakfast for a child sharing the same villa with parent will be automatically charged</p><br>
+						</column>
+						<column cols="6">
+							<table>
+								<tr class="main">
+									<td class="data1">under 5 years</td>
+									<td class="data1">5-12 years</td>
+									<td class="data1">over 12 years<br></td>
+								</tr>
+								<tr>
+									<td class="data1">complimentary</td>
+									<td class="data1">USD 22</td>
+									<td class="data1">USD 43</td>
+								</tr>
+							</table>
+						</column>
+					</row>
+					<h2>MEALPLAN</h2>
+					<row>
+						<column cols="6">
+							<p><b>Conditions:</b></p>
+							<ul>
+								<li>Rates are based on food only</li>
+								<li>Child under 5 years old will receive a complimentary meal, when dining with parents</li>
+								<li>Child of age 5 - 12 years will be charged 50% of above meal rates, when dining with parents</li>
+								<li>Valid for in house guest only</li>
+								<li>Above meal plan cannot be taken on 24 Dec and 31 Dec 2016</li>
+							</ul>
+						</column>
+						<column cols="6">
+							<br>
+							<table>
+								<tr class="main">
+									<td class="data1">Meal</td>
+									<td class="data1">Rate per Person</td>
+								</tr>
+								<tr>
+									<td class="data1">Lunch</td>
+									<td class="data1">USD 49</td>
+								</tr>
+								<tr>
+									<td class="data1">Dinner</td>
+									<td class="data1">USD 76</td>
+								</tr>
+								<tr>
+									<td class="data1">Three-Courses Dinner (excluding Lobster and Wagyu Beef)</td>
+									<td class="data1">USD 76</td>
+								</tr>
+							</table>
+						</column>
+					</row>
+				</column>
+			</row>
+		</div>		
 	{{/content}}
 	{{$ scripts}}
 		

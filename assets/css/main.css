@@ -409,6 +409,7 @@ table tr td.data {
 table tr td.data1 {
 	text-align: center;
 	color: black;
+	vertical-align: middle;
 	border-right: 1px solid #C39323;
 }
 	table tr td.data1:last-child {
@@ -426,6 +427,7 @@ table tr.main{
 	table tr.main td{
 		color: #FFF;
 		border-right-color: #FFF;
+		border-bottom-color: #FFF;
 	}
 
 .transfer img{
@@ -526,6 +528,21 @@ table tr.main{
 #bread a{
 	text-decoration: none;
 	color: #C39323;
+}
+.trans{
+	font-size: 13px;
+	text-align: justify;
+	margin: 3px auto;
+	line-height: 15px;
+}
+.hotel-trans li{
+	font-size: 13px;
+	text-align: justify;
+	margin: 3px auto;
+}
+.hotel-trans{
+	padding-left: 40px;
+	padding-right: 40px;
 }
 /* MEDIA */
 @media (max-width: 768px){
