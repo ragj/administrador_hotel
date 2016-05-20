@@ -115,7 +115,6 @@
 body{
   font-family: 'Open Sans', sans-serif;
 }
-
 h1{
 	color: #C39323;
 	text-align: center;
@@ -145,7 +144,7 @@ header{
 	background-color: #FFF;
 }
 	header .logo{
-		background-image: url("/bali/assets/img/logo-bali-lozano.png");
+		background-image: url("/bali/assets/img/logo/logo-lozano-bali.png");
 		background-size: 100%;
 		margin-top: 20px;
 		margin-left: 20px;
@@ -224,7 +223,6 @@ footer{
 	}
 	footer div.contact{
 		float: right;
-		marr
 		font-size: 12px;
 		line-height: 30px;
 		text-align: right;
@@ -244,11 +242,14 @@ footer{
 	height: 360px;
 	overflow: hidden;
 	position: relative;
+	max-width: 1200px;
+	margin:0 auto;
 }
 	.slider .slide{
 		position: absolute;
 		display: none;
 		top: 0px;
+		width: 1200px;
 	}
 		.slider .slide:not(a):first-child{
 			display: inline-block;
@@ -288,6 +289,10 @@ footer{
 	margin: auto;
 	padding: 20px;
 }
+.reg row{
+	padding: 0px;
+	margin-top: -65px;
+}
 .tour{
 
 
@@ -310,6 +315,7 @@ footer{
 			padding-left: 0px;
 			padding-right: 0px;
 			font-size: 15px;
+			height: 40px;
 		}
 	.tour h2{
 		padding-left: 15px;
@@ -507,10 +513,19 @@ table tr td.data {
 	table tr td.data:last-child {
 		border-right: 0px;
 	}
+table tr td.data1 {
+	text-align: center;
+	color: black;
+	border-right: 1px solid #C39323;
+}
+	table tr td.data1:last-child {
+		border-right: 0px;
+	}
 	table tr td:first-child {
 		border-right: 1px solid #C39323;
 		padding-left: 5px;
 	}
+
 
 table tr.main{
 	background-color: #C39323;

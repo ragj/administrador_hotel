@@ -58,6 +58,12 @@ $ROUTES = [
 		'path' => '/transfer',
 		'get' => array('Plain', 'transfer'),
 	],
+	"/hTransfer" => [
+		'es' => "/travelAgent/{uid}",
+		'en' => "/travelAgent/{uid}",
+		'path' => '/transfer/{uid}',
+		'get' => array('Plain', 'hotelTransfer'),
+	],
 	"/contact-us" => [
 		'es' => "/contactanos",
 		'en' => "/contact-us",
@@ -290,7 +296,7 @@ $router->addRoute(array(
 $router->addRoute(array(
 	'path' => '/panel/transfer/addValue',
 	'get' => array('Transfer', 'addValue'),
-	'get' => array('Transfer', 'addValue'),
+	'post' => array('Transfer', 'addValue'),
 ));
 $router->addRoute(array(
 	'path' => '/panel/transfer/editValue/{value}',

@@ -400,7 +400,7 @@ class Plain extends Luna\Controller {
             //$this->mailer( $res , $req , $template);
             //header($des);
         }
-        echo $this->renderWiew(array_merge(["hoteles"=>$hotels,"transfers"=>$transfers,"experiences"=>$experiences],$this->header("request",$lang)), $res);
+        echo $this->renderWiew(array_merge(["hoteles"=>$hotels,"transfers"=>$transfers,"experiences"=>$experiences],$this->header("transfer",$lang)), $res);
     }
     public function forgot($req , $res){
         $lang=$req->lang;
@@ -663,6 +663,18 @@ class Plain extends Luna\Controller {
             }
         }
         echo $this->renderWiew($this->header("register",$lang), $res);
+    }
+    public function hotelTransfer($req , $res){
+        $uid=$req->params["uid"];
+        switch($uid){
+            case "four-seasons-resort-bali-at-sayan":
+                $res->m = $res->mustache->loadTemplate("hotelTransfer/jimbaran.mustache");
+            break;
+
+
+        }
+        $lang=$req->lang;
+        echo $this->renderWiew( $this->header("transfers",$lang), $res);
     }    
 }
 
