@@ -1,6 +1,113 @@
 /*
 	GOLD:color: #C39323;
- */
+*/
+
+.request-holder{
+	background-color: #f4f4f4;
+	min-height: 1000px;
+	text-align: center;
+	padding: 20px 10px;
+}
+	.request{
+		background-color: #FFF;
+		text-align: left;
+		max-width: 1000px;
+		min-height: 300px;
+		padding: 20px 40px;
+		margin: auto;
+	}	
+		.request .commnet{
+			color: #ccc;
+		}
+		.request header{
+			border-bottom: 1px solid transparent;
+		}
+		.request .date{
+			float: right;
+			color: #AAA;
+		}
+		.request h1{
+			text-align: left;
+			margin-top: 0px;
+			font-size: 25px;
+		}
+	.request .btn{
+		background-color: #C39323;
+		color: #FFF;
+	}
+		.text-center{
+			text-align: center;
+			margin-top: 30px;
+			margin-bottom: 100px;
+		}
+		.request input[type=submit].btn{
+			margin: auto;
+			text-align: center;
+			font-size: 20px;
+			line-height: 40px;
+			height: 60px;
+		}
+	.segments{
+		/*padding: 20px;*/
+	}
+	.segment-item{
+		display: block;
+		margin-top: 0px;
+		clear: both;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		line-height: 45px;
+		font-size: 13px;
+		cursor: pointer;
+	}
+		.segment-item:hover{
+			background-color: #F1F1F1;
+		}
+	.segment-item .type{
+		color: #C39323;
+		min-width: 90px;
+		font-weight: bolder;
+		margin-left: 10px;
+		display: inline-block;
+	}
+	.segments .note{
+		float: right;
+		color: #222;
+		font-size: 11px;
+		line-height: 12px;
+		display: block;
+
+	}
+	.segment-item:hover a.dlt{
+		display: inline-block;
+	}
+	.more-data{
+		float: right;
+		color: #bbb;
+	}
+	.segment-item a.dlt{
+		color: #ccc;
+		display: none;
+		position: absolute;
+		left: -20px;
+	}
+	.create-segment{
+		padding: 20px 10px;
+		border-bottom: 1px solid #eee;
+		margin-bottom: 10px;
+	}
+	.add{
+		padding: 10px;
+		margin-bottom: 30px;
+	}
+	.add .lbl{
+		line-height: 40px;
+		font-size: 12px;
+		display: inline-block;
+		width: 40px;
+		margin-right: 20px;
+		border-right: 1px solid #ddd;
+	}
 .clear{
 	display: block;
 	clear: both;
