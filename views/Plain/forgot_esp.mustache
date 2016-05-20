@@ -2,25 +2,13 @@
 {{< panel_esp}}
 	{{$content}}
 	<img src="/bali/assets/img/img_forgot.jpg">
-	<div class="holder">
-		<script>
-			var path = "";
-			var href = window.location.pathname
-			var s = href.split("/");
-			for (var i=3;i<(s.length-1);i++) {
-				path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
-			}
-			i=s.length-1;
-			path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
-			var url = "<p id=bread>"+path+"</p>";
-			document.writeln(url);
-	 	</script>
+	<div class="holder reg">
 	 	<row>
 				<column	cols="3">	
 				</column>
 				<column	cols="8">
 					<div class="element">
-						<p class="intro"><b>¿Olvidaste tu contraseña?</b></p><br>
+						<center><h1>¿Olvidaste tu contraseña?</h1></center><br>
 						<form action="/bali/forgot" method="post" class="forms">
 							<section>
 								<label>
@@ -32,7 +20,7 @@
 								<input type="submit" class="primary" value="Enviar"/>
 							</section>
 						</form>
-						<p class="detail"><b>No te preocupes, solo tienes que llenar los siguientes campos.</b></p>
+						<p class="detail"><b>No te preocupes, solo tienes que llenar el campo.</b></p>
 					</div>
 				</column>
 				<column	cols="3">
