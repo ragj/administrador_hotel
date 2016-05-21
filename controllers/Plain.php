@@ -679,6 +679,9 @@ class Plain extends Luna\Controller {
             case "como-shambhala-estate":
                 $res->m = $res->mustache->loadTemplate("hotelTransfer/b.mustache");
             break;
+            case "uma-by-como,-ubud":
+                $res->m = $res->mustache->loadTemplate("hotelTransfer/c.mustache");
+            break;
 
         }
         $lang=$req->lang;
