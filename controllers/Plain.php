@@ -685,6 +685,12 @@ class Plain extends Luna\Controller {
             case "viceroy-bali":
                 $res->m = $res->mustache->loadTemplate("hotelTransfer/d.mustache");
             break;
+            case "the-st.-regis-bali-resort":
+                $res->m = $res->mustache->loadTemplate("hotelTransfer/e.mustache");
+            break;
+            case "bvlgari-bali":
+                $res->m = $res->mustache->loadTemplate("hotelTransfer/g.mustache");
+            break;
             case "mandapa,-a-ritz-carlton-reserve":
                 $res->m = $res->mustache->loadTemplate("hotelTransfer/h.mustache");
             break;
