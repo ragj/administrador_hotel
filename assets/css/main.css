@@ -108,6 +108,43 @@
 		margin-right: 20px;
 		border-right: 1px solid #ddd;
 	}
+
+.tabs{
+	border-bottom: 1px solid #C39323;
+}
+	.tabs a{
+		display: inline-block;
+		padding: 5px 20px;
+		color: #222;
+		
+		background-color: #FFF;
+		text-decoration: none;
+		margin-right: 10px;
+	}
+
+	.tabs a.actve{
+		color: #C39323;
+		position: relative;
+		bottom: -1px;
+		border: 1px solid #C39323;
+		border-bottom: 0px;
+		
+	}
+
+	.hoteles-travel{
+		display: none;
+	}
+		.hoteles-travel img{
+			width: 100%;
+		}
+		.hoteles-travel .tour h1{
+			margin-bottom: 0px !important;
+			height: 20px !important;
+		}
+		blocks > div.tour{
+			margin-bottom: 0px !important;
+
+		}
 .clear{
 	display: block;
 	clear: both;
@@ -537,9 +574,12 @@ table tr.main{
 		border-bottom-color: #FFF;
 	}
 
-.transfer img{
+.transfer div:not(.hoteles-travel) img{
 	float: left;
 	width: 25%;
+}
+.transfer div.hoteles-travel img{
+	width: 100%;
 }
 
 .pad{
