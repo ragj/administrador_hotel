@@ -535,6 +535,8 @@ table tr.main{
 		color: #FFF;
 		border-right-color: #FFF;
 		border-bottom-color: #FFF;
+		border-left-color: #FFF;
+		border-top-color: #FFF;
 	}
 
 .transfer img{
