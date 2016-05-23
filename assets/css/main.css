@@ -614,7 +614,8 @@ table tr.main{
 		border-top-color: #FFF;
 	}
 
-.transfer div:not(.hoteles-travel) img{
+
+.transfer div:not(.hoteles-travel) div:not(.himage)img{
 	float: left;
 	width: 25%;
 }
@@ -872,6 +873,9 @@ table tr.main{
 			text-align: left;
 			line-height: 40px;
 		}
+	.tabs a{
+		padding: 3px 15px;
+	}
 	footer p{
 		display: block;
 		float: none;
