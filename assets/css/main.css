@@ -895,6 +895,17 @@ table tr.main{
 		line-height: 15px;
 		font-size: 12px;
 	}
+	.intro{
+		text-align: left;
+		line-height: 19px;
+		font-size: 17px;
+
+	}
+	.detail{
+		text-align: left;
+		color: #666;
+		line-height: 17px;
+	}
 	.request select,
 	.request input[type=date], 
 	input[type=submit], 
@@ -932,6 +943,10 @@ table tr.main{
 		display: block;
 		float: none;
 		font-size: 18px;
+	}
+
+	.pad{
+		overflow: hidden;
 	}
 		footer div.contact{
 			float: none;
