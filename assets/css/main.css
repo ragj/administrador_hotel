@@ -737,6 +737,22 @@ table tr.main{
 }
 
 @media (max-width: 768px){
+	header .logo{
+		width: 200px;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	body > img{
+		min-height: 150px;
+
+	}
+	.himage{
+		height: auto;
+	}
+	.himage img{
+		width: 100%;
+		height: auto;
+	}
 	.slider{
 		height: 200px;
 	}	
@@ -808,6 +824,13 @@ table tr.main{
 		transition: all linear 0.2s;
 		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
 	}
+		header nav:after{
+			position: fixed;
+			top: 0px;
+			bottom: 0px;
+			width: 100%;
+			background-color: transparent;
+		}
 		header nav.show{
 			transition: all linear 0.2s;
 			left: 0px;
