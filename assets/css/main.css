@@ -65,6 +65,7 @@
 		}
 	.segment-item .type{
 		color: #C39323;
+		text-transform: capitalize;
 		min-width: 90px;
 		font-weight: bolder;
 		margin-left: 10px;
@@ -85,17 +86,33 @@
 		float: right;
 		color: #bbb;
 	}
+	.segment-item a.dlt:hover{
+		display: inline-block;
+	}
 	.segment-item a.dlt{
 		color: #ccc;
 		display: none;
+		width: 30px;
+		padding-right: 10px;
+		height: 50px;
+		text-align: right;
 		position: absolute;
-		left: -20px;
+		left: -30px;
 	}
+
 	.create-segment{
 		padding: 20px 10px;
 		border-bottom: 1px solid #eee;
 		margin-bottom: 10px;
 	}
+		.create-segment h2{
+			margin-bottom: 20px;
+		}
+		.segment-item .create-segment{
+			border-bottom: 1px solid transparent;
+			padding: 20px;
+			padding-right: 30px;
+		}
 	.add{
 		padding: 10px;
 		margin-bottom: 30px;
@@ -149,9 +166,20 @@
 	display: block;
 	clear: both;
 }
-/*.tmpl{
+.tmpl{
+	position: relative;
 	display: none;
-}*/
+}
+.cancel{
+	display: inline-block;
+	position: absolute;
+	top: 20px;
+	right: 10px;
+	color: #222;
+}
+	.segment-item .cancel{
+		top: 10px;
+	}
 body{
   font-family: 'Open Sans', sans-serif;
 }

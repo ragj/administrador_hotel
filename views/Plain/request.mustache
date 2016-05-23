@@ -21,49 +21,24 @@
 
 					<div class="segments">
 						<p class="note">click entry to edit the information</p>
-						<div class="segment-item">
-							<a href="#" class="dlt"><i class="fa fa-times"></i></a>
-							<span class="type">Experience</span>
-							<span class="name">FOUR SEASON AT JIMBARAN</span>
-							<span class="more-data">
-								10 / 10 / 2016 - 10 / 10 / 2016 
-							</span>
-						</div>
-						<div class="segment-item">
-							<a href="#" class="dlt"><i class="fa fa-times"></i></a>
-							<span class="type">Experience</span>
-							<span class="name">FOUR SEASON AT JIMBARAN</span>
-							<span class="more-data">
-								10 / 10 / 2016 - 10 / 10 / 2016 
-							</span>
-						</div>
-						<div class="segment-item">
-							<a href="#" class="dlt"><i class="fa fa-times"></i></a>
-							<span class="type">Experience</span>
-							<span class="name">FOUR SEASON AT JIMBARAN</span>
-							<span class="more-data">
-								10 / 10 / 2016 - 10 / 10 / 2016 
-							</span>
-						</div>
-						<div class="segment-item">
-							<a href="#" class="dlt"><i class="fa fa-times"></i></a>
-							<span class="type">Experience</span>
-							<span class="name">FOUR SEASON AT JIMBARAN</span>
-							<span class="more-data">
-								10 / 10 / 2016 - 10 / 10 / 2016 
-							</span>
-						</div>
 					</div>
-					<div class="create-segment hotel-tmpl tmpl">
+
+					<div class="current-create">
+						
+					</div>
+					
+		
+					{{! Templates de nuevos items }}
+
+					<div id="hotel-tmpl" data-type="hotel" class="create-segment hotel-tmpl tmpl">
 						<h2> New Hotel </h2>
-						<br>
 						<div class="form-segment forms ">
 							<row>
 								<column cols="5">
 									<label>
 										Pick a Hotel
 									</label>
-									<select name="hotel[0][idhotel]"  class="select">
+									<select name="hotelT[@][idhotel]"  class="select">
 										{{#hoteles}}
 											<option value="{{idhotel}}">{{name}}</option>
 										{{/hoteles}}
@@ -71,29 +46,29 @@
 								</column>
 								<column cols="3">
 									<label for="">Pick a date of arrival</label>
-									<input class="width-12" type="date" name="hotel[0][aaday]" placeholder="10/10/2016">
+									<input class="width-12" type="date" name="hotelT[@][aaday]" placeholder="10/10/2016">
 								</column>
 								<column cols="3">
 									<label>Pick a date of departure</label>
-									<input class="width-12"type="date" name="hotel[0][dday]" placeholder="10/10/2016">
+									<input class="width-12"type="date" name="hotelT[@][dday]" placeholder="10/10/2016">
 								</column>
 								<column cols="1">
 									<br>
-									<input class="btn " type="button" class="btn" value="Add">
+									<input class="btn " type="button" class="btn" value="Add" onclick="create(this)">
 								</column>
 							</row>
 						</div>
+						<a href="#" class="cancel">Cancel</a>
 					</div>
-					<div class="create-segment trasnfer-tmpl tmpl">
+					<div id="transfer-tmpl" data-type="transfer" class="create-segment transfer-tmpl tmpl">
 						<h2> New Trasfer </h2>
-						<br>
 						<div class="form-segment forms ">
 							<row>
 								<column cols="3">
 									<label>
 										Pick a Transfer
 									</label>
-									<select name="transfer[0][idtransferDetail]" class="select">
+									<select name="transferT[@][idtransferDetail]" class="select">
 										{{#transfers}}
 											{{#detail}}
 												<option value="{{idtransferDetail}}">{{description}}</option>
@@ -105,7 +80,7 @@
 									<label>
 										Pick a Type of Vehicle
 									</label>
-									<select name="transfer[0][vehicle]" class="coche select">
+									<select name="transferT[@][vehicle]" class="coche select">
 										<option value="INNOVA SUV">INNOVA SUV</option>
 										<option value="HIACE VAN">HIACE VAN</option>
 										<option value="ALPHARD/MERCY E 200">ALPHARD/MERCY E 200</option>
@@ -115,31 +90,31 @@
 									<label>
 										Number of Passengers 
 									</label>
-									<input type="number" name="transfer[0][passanger]" class="pas width-12">
+									<input type="number" name="transferT[@][passanger]" class="pas width-12">
 								</column>
 								<column cols="2">
 									<label>
 										Pick a Date 
 									</label>
-									<input type="date" name="transfer[0][tday]" class="pas width-12">
+									<input type="date" name="transferT[@][tday]" class="pas width-12">
 								</column>
 								<column cols="1">
 									<br>
-									<input class="btn " type="button" class="btn" value="Add">
+									<input class="btn " type="button" class="btn" value="Add" onclick="create(this)">
 								</column>
 							</row>
 						</div>
+						<a href="#" class="cancel">Cancel</a>
 					</div>
-					<div class="create-segment experience-tmpl tmpl">
+					<div id="experience-tmpl" data-type="experience" class="create-segment experience-tmpl tmpl">
 						<h2> New Experience </h2>
-						<br>
 						<div class="form-segment forms ">
 							<row>
 								<column cols="4">
 									<label>
 										Pick a Experience
 									</label>
-									<select name="exper[0][idexperience]" class="ex select">
+									<select name="experT[@][idexperience]" class="ex select">
 										{{#experiences}}
 											<option value="{{idexperience}}">{{title}}</div>
 										{{/experiences}}
@@ -149,28 +124,29 @@
 									<label >
 										Pick the date
 									</label>
-									<input type="date" name="exper[0][date]" class="dat width-12">
+									<input type="date" name="experT[@][date]" class="dat width-12" >
 								</column>
 								<column cols="3">
 									<label>
 										Number of people 
 									</label>
-									<input type="number" name="exper[0][passanger]" class="pas width-12">
+									<input type="number" name="experT[@][passanger]" class="pas width-12" >
 								</column>
 								<column cols="1">
 									<br>
-									<input class="btn " type="button" class="btn" value="Add">
+									<input class="btn" type="button" class="btn" value="Add" onclick="create(this)">
 								</column>
 							</row>
 						</div>
+						<a href="#" class="cancel">Cancel</a>
 					</div>
 					<div class="add">
 						<span class="lbl">
 							Add
 						</span>
-						<input type="button" class="btn" value="+ Hotel">
-						<input type="button" class="btn" value="+ Trasfer">
-						<input type="button" class="btn" value="+ Experience">
+						<input type="button" onclick="add('#hotel-tmpl')" class="btn" value="+ Hotel">
+						<input type="button" onclick="add('#transfer-tmpl')" class="btn" value="+ Trasfer">
+						<input type="button" onclick="add('#experience-tmpl')" class="btn" value="+ Experience">
 					</div>
 
 					<h2>
@@ -181,10 +157,129 @@
 						<input type="submit"  class="btn" value="SEND INQUIRE" >
 					</div>
 				</div>
+
+				<div id="segment-item" class="segment-item tmpl">
+					<a href="#" class="dlt"><i class="fa fa-times"></i></a>
+					<div class="data">
+						<span class="type">type</span>
+						<span class="name">name</span>
+						<span class="more-data">more-data</span>
+					</div>
+				</div>
 			</form>
 		</div>
 		<script type="text/javascript">
-			
+			var filedsIndex = { hotel:0,
+							    transfer:0,
+							    experience:0 };
+			function add( idd ){
+				var tmpl = $(idd).clone();
+				tmpl.show()
+				tmpl.removeClass("tmpl")
+				$(".current-create").html( tmpl );
+			}
+
+			function create( e ){
+				var segment = $("#segment-item").clone();
+				segment.attr("id" , "");
+				var currentForm = $(e).parent().parent().parent().parent();
+				var form = $(e).parent().parent().parent().parent().clone();
+				var type = $(e).parent().parent().parent().parent().data("type");
+
+				segment.attr("type" , type );
+
+				form.find("*[name]").each(function(){
+					var currentName = $(this).attr("name");
+					currentName = currentName.split("T[@]").join( "["+filedsIndex[ type ]+"]" );
+					$(this).attr("name" , currentName);
+				});
+				filedsIndex[ type ] += 1;
+
+				//  BUILD 
+				segment.show();
+				form.find("h2").remove();
+				form.attr("id" , "");
+				var btn = form.find(".btn");
+				btn.val("Edit")
+				btn.attr("onclick" , "");
+				form.hide();
+
+				segment.find(".data").after(form);
+
+				//  FILL DATA
+				segment.find(".type").html( type );
+				var selectActive = segment.find("select")[0].selectedIndex;
+				var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
+				segment.find(".name").html( selectValue );
+
+				var inputs = segment.find("input[type=date]:not(.btn)").toArray();
+				var otherData = "";
+
+				for( i in inputs){
+					otherData +=  " - "+$(inputs[i]).val();
+				}
+				segment.find(".more-data").html( otherData );
+
+				segment.find(".data").show();
+
+
+				//  ACTIONS 
+
+				segment.find(".dlt").click(function(event){
+					event.preventDefault();
+					$(this).parent().remove();
+				});
+
+				segment.click(function(){
+					if( ! $(this).data("active") ){
+						$(this).data("active" , true );
+						$(this).find(".data").hide();
+						$(this).find(".create-segment").show();	
+					}
+				});
+
+				btn.click(function( event ){
+					event.preventDefault();
+					var segment = $(this).parent().parent().parent().parent().parent();
+					segment.find(".data").show();
+					
+					//  FILL DATA 
+					var selectActive = segment.find("select")[0].selectedIndex;
+					var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
+					segment.find(".name").html( selectValue );
+
+
+					segment.find(".create-segment").hide();	
+					setTimeout(function(){
+						segment.data("active" , false );	
+					} , 100 );
+					
+				});
+
+				segment.find(".cancel").click(function( event ){
+					event.preventDefault();
+					var segment = $(this).parent().parent();
+					//  FILL DATA 
+					var selectActive = segment.find("select")[0].selectedIndex;
+					var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
+					segment.find(".name").html( selectValue );
+
+					segment.find(".data").show();
+					segment.find(".create-segment").hide();	
+					setTimeout(function(){
+						segment.data("active" , false );	
+					} , 100 );
+					
+				});
+
+				if( $(".segments .segment-item")[0] != undefined ){
+					$(".segments .segment-item").last().after( segment );
+				}else{
+					$(".segments .note").after( segment );
+				}
+
+				$(currentForm).remove();
+			}
 		</script>
 	{{/content}}
 {{/ panel}}
