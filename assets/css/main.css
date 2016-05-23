@@ -738,7 +738,8 @@ table tr.main{
 }
 
 @media (max-width: 768px){
-	.fit.contact{
+	.fit.contact ,
+	.fit{
 		background-image: none;
 		background-color: #f1f1f1;
 	}
@@ -754,12 +755,26 @@ table tr.main{
 		.fit .intro b{
 			color: #999;
 		}
+		.fit:not(.contact) .intro{
+			color: #aaa;
+			font-size: 15px;
+			line-height: 18px;
+			margin-bottom: 0px;
+			display: none;
+		}
+		.fit:not(.contact) .element{
+			margin-top: 0px;
+			border-radius: 0px;
+			margin-bottom: 0px;
+		}
 	header .logo{
 		width: 200px;
 		background-repeat: no-repeat;
 		background-position: center;
 	}
-
+	.hide-mobile{
+		display: none;
+	}
 	.transfer div:not(.hoteles-travel) img{
 		float: none;
 		width: 100%;
@@ -876,6 +891,43 @@ table tr.main{
 	.tabs a{
 		padding: 3px 15px;
 	}
+	.request .commnet{
+		line-height: 15px;
+		font-size: 12px;
+	}
+	.request select,
+	.request input[type=date], 
+	input[type=submit], 
+	.request textarea 
+	{
+		-webkit-appearance: none;
+	}
+
+	.segment-item.active a.dlt{
+		left: 0px;
+		top: 5px;
+		right: auto;
+	}
+		.segment-item  a.dlt{
+			right: 0px;
+			left: auto;
+			color: #222;
+			display: inline-block;
+		}
+
+	.segment-item .type{
+		font-family: Verdana;
+		font-size: 10px;
+		min-width: 66px;
+	}
+	.segment-item .name{
+		display: block;
+	    margin-left: 10px;
+	    line-height: 14px;
+	}
+	.more-data{
+		display: none;
+	}
 	footer p{
 		display: block;
 		float: none;
@@ -888,4 +940,31 @@ table tr.main{
 			text-align: left;
 			line-height: 25px;
 		}
+		.request{
+			padding: 20px 20px;
+		}
+		.request h2{
+			line-height: 20px;
+			font-size: 15px;
+		}
+		.request .add{
+			padding: 0px;
+		}
+	.request .add .btn {
+		display: inline-block;
+		width: calc( 33% - 2px );
+		padding: 0px;
+		font-size: 12px;
+
+	}
+	.add .lbl{
+		display: inline-block;
+		font-weight: bolder;
+		font-size: 15px;
+		color: #aaa;
+		width: 100%;
+		margin: 0px;
+		text-align: center;
+		border-right: 0px;
+	}
 }

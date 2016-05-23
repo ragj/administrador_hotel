@@ -57,6 +57,7 @@
 									<input class="btn " type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
+							<p class="msg2" style="display:none;color:red;">Por favor introduce fechas.</p>
 							<p class="msg1" style="display:none;color:red;">Por favor introduce fechas validas. Las fechas no pueden ser previas a la fecha actual.</p>
 							<p class="msg" style="display:none;color:red;">Por favor introduce fechas validas. La fecha de llegada debe ser previa a la fecha de salida.</p>
 						</div>
@@ -105,6 +106,7 @@
 									<input class="btn " type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
+							<p class="msg2" style="display:none;color:red;">Por favor introduce una fecha.</p>
 							<p class="msg1" style="display:none;color:red;">Por favor introduce fecha valida. La fecha no puede ser previa a la fecha actual.</p>
 						</div>
 						<a href="#" class="cancel">Cancelar</a>
@@ -140,6 +142,7 @@
 									<input class="btn" type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
+							<p class="msg2" style="display:none;color:red;">Por favor introduce fechas.</p>
 							<p class="msg1" style="display:none;color:red;">Por favor introduce fechas validas. Las fechas no pueden ser previas a la fecha actual.</p>
 							<p class="msg" style="display:none;color:red;">Por favor introduce fechas validas. La fecha de llegada debe ser previa a la fecha de salida.</p>
 						</div>
@@ -219,33 +222,51 @@
 
 				var inputs = segment.find("input[type=date]:not(.btn)").toArray();
 				var otherData = "";
-				if(inputs.length!=1){
-					var isAfter=moment(moment()).isAfter(inputs[0].value);
-					var isBefore=moment(inputs[0].value).isAfter(inputs[1].value);
-					if(isAfter==true){
-						$(".msg1").show();
+				if(inputs.length==2 ){
+					if(inputs[0].value==''&&inputs[1].value==''){
+						$(".msg2").show();
 						err=1;
 					}
-					else if(isBefore==true){
-						$(".msg1").hide();
-						$(".msg").show();
-						err=1;
-					}
-					else{
-						$(".msg1").hide();
-						$(".msg").hide();
+					else
+					{
+						$(".msg2").hide();
 						err=0;
+						var isAfter=moment(moment()).isAfter(inputs[0].value);
+						var isBefore=moment(inputs[0].value).isAfter(inputs[1].value);
+						if(isAfter==true){
+							$(".msg1").show();
+							err=1;
+						}
+						else if(isBefore==true){
+							$(".msg1").hide();
+							$(".msg").show();
+							err=1;
+						}
+						else{
+							$(".msg1").hide();
+							$(".msg").hide();
+							err=0;
+						}
+
 					}
 				}
-				if(inputs.length==1){
-					var isAfter=moment(moment()).isAfter(inputs[0].value);
-					if(isAfter==true){
-						$(".msg1").show();
+				else if(inputs.length==1){
+					if(inputs[0].value==0){
+						$(".msg2").show();
 						err=1;
 					}
 					else{
-						$(".msg1").hide();
+						$(".msg2").hide();
 						err=0;
+						var isAfter=moment(moment()).isAfter(inputs[0].value);
+						if(isAfter==true){
+							$(".msg1").show();
+							err=1;
+						}
+						else{
+							$(".msg1").hide();
+							err=0;
+						}
 					}
 
 				}
@@ -265,13 +286,16 @@
 						$(this).parent().remove();
 					});
 
-					segment.click(function(){
-						if( ! $(this).data("active") ){
-							$(this).data("active" , true );
-							$(this).find(".data").hide();
-							$(this).find(".create-segment").show();	
-						}
-					});
+
+				segment.click(function(){
+					if( ! $(this).data("active") ){
+						$(this).data("active" , true );
+						$(this).addClass("active");
+						$(this).find(".data").hide();
+						$(this).find(".create-segment").show();	
+					}
+				});
+
 
 					btn.click(function( event ){
 						event.preventDefault();
@@ -284,27 +308,30 @@
 						segment.find(".name").html( selectValue );
 
 
-						segment.find(".create-segment").hide();	
-						setTimeout(function(){
-							segment.data("active" , false );	
-						} , 100 );
-						
-					});
+					segment.find(".create-segment").hide();	
+					setTimeout(function(){
+						segment.data("active" , false );	
+						segment.removeClass("active");
+					} , 100 );
+					
+				});
 
-					segment.find(".cancel").click(function( event ){
-						event.preventDefault();
-						var segment = $(this).parent().parent();
-						//  FILL DATA 
-						var selectActive = segment.find("select")[0].selectedIndex;
-						var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
-						segment.find(".name").html( selectValue );
-						segment.find(".data").show();
-						segment.find(".create-segment").hide();	
-						setTimeout(function(){
-							segment.data("active" , false );	
-						} , 100 );
-						
-					});
+				segment.find(".cancel").click(function( event ){
+					event.preventDefault();
+					var segment = $(this).parent().parent();
+					//  FILL DATA 
+					var selectActive = segment.find("select")[0].selectedIndex;
+					var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
+					segment.find(".name").html( selectValue );
+					segment.find(".data").show();
+					segment.find(".create-segment").hide();	
+					setTimeout(function(){
+						segment.data("active" , false );	
+						segment.removeClass("active");
+					} , 100 );
+					
+				});
+
 
 					if( $(".segments .segment-item")[0] != undefined ){
 						$(".segments .segment-item").last().after( segment );
