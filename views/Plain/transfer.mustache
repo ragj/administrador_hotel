@@ -21,6 +21,9 @@
 	 		<a href="javascript:void(0);" class="actve" onclick="changeTab( this , '.trasfer-travel' )">
 	 			TRANSFERS
 	 		</a>
+	 		<a href="javascript:void(0);"  id="experiences" onclick="changeTab( this , '.experiences-travel' )">
+	 			EXPERIENCES
+	 		</a>
 	 		<a href="javascript:void(0);"  id="hotels" onclick="changeTab( this , '.hoteles-travel' )">
 	 			HOTELS
 	 		</a>
@@ -91,11 +94,6 @@
 			</blocks>
 	 	</div>
 	 	<div class="trasfer-travel">
-		 	<div class="filter">
-				<a href="javascript:void(0);" data-filter="*" class="actual"> <h2>ALL</h2></a>
-				<a href="javascript:void(0);" data-filter=".T"><h2>TRANSFERS</h2></a> 
-	        	<a href="javascript:void(0);" data-filter=".E"><h2>EXPERIENCES</h2></a> 
-			</div>
 			<div class="aux">
 			 	{{#transferBlock}}
 			 		<div class="{{tipo}}">
@@ -149,25 +147,71 @@
 			<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_01.jpg">
 			<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_02.jpg">
 			<div class="clear"></div>
-	</div>
+		</div>
+		<div class="experiences-travel">
+			<div class="aux">
+			 	{{#experBlock}}
+			 		<div class="{{tipo}}">
+				 		<h1>
+				 			{{en}}
+				 			<span>Transfer prices per person in USD</span>
+				 		</h1>
+				 		<center>
+				 			<button type="button" onclick="window.location.href='/bali/en/request'">REQUEST / INQUIERE</button>
+				 		</center>
+				 		<br>
+				 		<table>
+							<tr class="main">
+								<td>Description</td>
+								<td colspan="2" class="data">INNOVA SUV</td>
+								<td colspan="2" class="data">HIACE VAN</td>
+								<td colspan="2" class="data">ALPHARD/MERCY E 200</td>
+							</tr>
+							<tr>
+								<td>Passengers</td>
+								<td class="data">1</td>
+								<td class="data">2 - 4</td>
+								<td class="data">5 - 7</td>
+								<td class="data">8 - 10 
+								<td class="data"> 1 </td>
+								<td class="data"> 2 - 4 </td>
+							</tr>
+							{{# detalle}}
+								<tr>
+									<td>{{en}}</td>
+									{{#vals}}
+										<td class="data">{{val}}</td>
+									{{/vals}}
+								</tr>
+							{{/ detalle}}
+						</table>
+						<h2>Transfer rates includes :</h2>
+						Driver, Gasoline, Parking.
+						<br>Spanish / English speaking guide
+						<br>Insurance
+						<br>Refreshing towel
+						<br>Wi-fi connection in the car		
+						<br>Tips
+						<br>Donations, Entrance fee based on itinerary except Bali as You Please
+					</div>
+				{{/experBlock}}
+			</div>
+			<h1> Gallery </h1>
+			
+			<img src="/bali/assets/img/transfers/galeria_trasnfers/automovil_02.jpg" class="modal">
+			<img src="/bali/assets/img/transfers/galeria_trasnfers/automovil_01.jpg">
+			<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_01.jpg">
+			<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_02.jpg">
+			<div class="clear"></div>
+		</div>
 	</div>
 	{{/content}}
 	{{$scripts}}
 		<script>
 			jQuery.noConflict();
 			jQuery(window).load(function(){
-					jQuery('.filter a').click(function(){
-					jQuery('.filter .actual').removeClass('actual');
-					jQuery(this).addClass('actual');
-					
-					var selector = jQuery(this).attr('data-filter');
-					jQuery('.aux > div').fadeIn(1000);
-					jQuery('.aux > div').not(selector).hide();
-				});
 
 				try{
-					
-					
 					if( window.location.hash === "#hotels" ){
 						jQuery("#hotels").trigger("click")
 					}
@@ -181,7 +225,7 @@
 		function changeTab( e , classe ){
 			jQuery(".tabs a.actve").removeClass("actve");
 			jQuery(e).addClass("actve");
-			jQuery(".trasfer-travel , .hoteles-travel").fadeOut(
+			jQuery(".trasfer-travel , .hoteles-travel,.experiences-travel").fadeOut(
 			function(){
 				jQuery(classe).fadeIn();
 			});

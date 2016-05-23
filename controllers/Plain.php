@@ -247,24 +247,39 @@ class Plain extends Luna\Controller {
         }
         //obtencion de detalles con valores de los ids de los transfers blocks
         $detailMapper=$this->spot->mapper("Entity\TransferDetail");
-        $detailValues=$detailMapper->select()->with(["transferValue"])->where(["transferBlock_idtransferBlock"=>$ids])->order(['description' => 'DESC'])->toArray();
+        $detailValues=$detailMapper->select()->with(["transferValue"])->where(["transferBlock_idtransferBlock"=>$ids[0]])->order(['description' => 'DESC'])->toArray();
         //construccion array perzonalizado para la vista necesaria
         $pers=Array();
-        foreach ($aux as $tran) {
-            $title["en"]=$tran["TransferBlockTitle"];
-            $title["es"]=$tran["TransferBlockTitle_es"];
-            $title["tipo"]=$tran["tipo"];
-            $title["detalle"]=array();
-            foreach ($detailValues as $detail) {
-                if($tran["idtransferBlock"]==$detail["transferBlock_idtransferBlock"]){
-                    $subtitle["en"]=$detail["description"];
-                    $subtitle["es"]=$detail["description_esp"];
-                    $subtitle["vals"]=$detail["transferValue"];
-                    array_push($title["detalle"],$subtitle);
-                }    
-            }
-            array_push($pers,$title);
+        
+        $title["en"]=$aux[0]["TransferBlockTitle"];
+        $title["es"]=$aux[0]["TransferBlockTitle_es"];
+        $title["tipo"]=$aux[0]["tipo"];
+        $title["detalle"]=array();
+        foreach ($detailValues as $detail) {
+            if($aux[0]["idtransferBlock"]==$detail["transferBlock_idtransferBlock"]){
+                $subtitle["en"]=$detail["description"];
+                $subtitle["es"]=$detail["description_esp"];
+                $subtitle["vals"]=$detail["transferValue"];
+                array_push($title["detalle"],$subtitle);
+            }    
         }
+        array_push($pers,$title);
+        $detailValues=$detailMapper->select()->with(["transferValue"])->where(["transferBlock_idtransferBlock"=>$ids[1]])->order(['description' => 'DESC'])->toArray();
+        $exps=array();
+        $title["en"]=$aux[1]["TransferBlockTitle"];
+        $title["es"]=$aux[1]["TransferBlockTitle_es"];
+        $title["tipo"]=$aux[1]["tipo"];
+        $title["detalle"]=array();
+        foreach ($detailValues as $detail) {
+            if($aux[1]["idtransferBlock"]==$detail["transferBlock_idtransferBlock"]){
+                $subtitle["en"]=$detail["description"];
+                $subtitle["es"]=$detail["description_esp"];
+                $subtitle["vals"]=$detail["transferValue"];
+                array_push($title["detalle"],$subtitle);
+            }    
+        }
+        array_push($exps,$title);
+    
         switch($lang){
             case "es":
                 $res->m = $res->mustache->loadTemplate("Plain/transfer_esp.mustache");
@@ -276,7 +291,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/transfer.mustache");
             break;
         }
-    	echo $this->renderWiew( array_merge(["transferBlock" => $pers], $this->header("transfer",$lang) ), $res);
+    	echo $this->renderWiew( array_merge(["transferBlock" => $pers,"experBlock"=>$exps], $this->header("transfer",$lang) ), $res);
     }
 
     public function contact($req , $res){
