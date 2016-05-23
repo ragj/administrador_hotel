@@ -8,6 +8,9 @@
 	text-align: center;
 	padding: 20px 10px;
 }
+	.transfer.tabs{
+		min-height: 500px;
+	}
 	.request{
 		background-color: #FFF;
 		text-align: left;
@@ -156,14 +159,14 @@
 		.hoteles-travel img{
 			width: 100%;
 		}
-		.hoteles-travel .tour h1{
+		/*.hoteles-travel .tour h1{
 			margin-bottom: 0px !important;
 			height: 20px !important;
 		}
 		blocks > div.tour{
 			margin-bottom: 0px !important;
 
-		}
+		}*/
 .clear{
 	display: block;
 	clear: both;
@@ -386,6 +389,7 @@ footer{
 			padding-right: 0px;
 			font-size: 15px;
 			height: 40px;
+			line-height: 20px;
 		}
 	.tour h2{
 		padding-left: 15px;
