@@ -882,7 +882,7 @@ table tr.main{
 	}
 	.request select,
 	.request input[type=date]{
-		-webkit-appearance:none;
+		-webkit-appearance: caret;
 	}
 	.segment-item.active a.dlt{
 		left: 0px;
@@ -900,6 +900,11 @@ table tr.main{
 		font-family: Verdana;
 		font-size: 10px;
 		min-width: 66px;
+	}
+	.segment-item .name{
+		display: block;
+	    margin-left: 10px;
+	    line-height: 14px;
 	}
 	.more-data{
 		display: none;
