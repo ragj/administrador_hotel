@@ -880,7 +880,8 @@ table tr.main{
 		line-height: 15px;
 		font-size: 12px;
 	}
-	.request select{
+	.request select,
+	.request input[type=date]{
 		-webkit-appearance:none;
 	}
 	.segment-item.active a.dlt{
