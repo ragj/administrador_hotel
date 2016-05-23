@@ -57,9 +57,9 @@
 									<input class="btn " type="button" class="btn" value="Add" onclick="create(this)">
 								</column>
 							</row>
-							<p class="msg2" style="display:none;color:red;">Please enter dates.</p>
-							<p class="msg1" style="display:none;color:red;">Please enter valids dates. Dates can not be earlier than the current date</p>
-							<p class="msg" style="display:none;color:red;">Please enter valids dates. The arrival date must be before the departure date.</p>
+							<p class="ms msg2" style="display:none;color:red;">Please enter dates.</p>
+							<p class="ms msg1" style="display:none;color:red;">Please enter valids dates. Dates can not be earlier than the current date</p>
+							<p class="ms msg" style="display:none;color:red;">Please enter valids dates. The arrival date must be before the departure date.</p>
 						</div>
 						<a href="#" class="cancel">Cancel</a>
 					</div>
@@ -106,8 +106,8 @@
 									<input class="btn " type="button" class="btn" value="Add" onclick="create(this)">
 								</column>
 							</row>
-							<p class="msg2" style="display:none;color:red;">Please enter dates.</p>
-							<p class="msg1" style="display:none;color:red;">Please enter valid date. Date can not be earlier than the current date</p>
+							<p class="ms msg2" style="display:none;color:red;">Please enter dates.</p>
+							<p class="ms msg1" style="display:none;color:red;">Please enter valid date. Date can not be earlier than the current date</p>
 						</div>
 						<a href="#" class="cancel">Cancel</a>
 					</div>
@@ -142,9 +142,9 @@
 									<input class="btn" type="button" class="btn" value="Add" onclick="create(this)">
 								</column>
 							</row>
-							<p class="msg2" style="display:none;color:red;">Please enter dates.</p>
-							<p class="msg1" style="display:none;color:red;">Please enter valids dates. Dates can not be earlier than the current date</p>
-							<p class="msg" style="display:none;color:red;">Please enter valids dates. The arrival date must be before the departure date.</p>
+							<p class="ms msg2" style="display:none;color:red;">Please enter dates.</p>
+							<p class="ms msg1" style="display:none;color:red;">Please enter valids dates. Dates can not be earlier than the current date</p>
+							<p class="ms msg" style="display:none;color:red;">Please enter valids dates. The arrival date must be before the departure date.</p>
 						</div>
 						<a href="#" class="cancel">Cancel</a>
 					</div>
@@ -215,7 +215,10 @@
 				btn.attr("onclick" , "");
 				form.hide();
 
+
+				form.find(".ms").remove();
 				segment.find(".data").after(form);
+
 
 				//  FILL DATA
 				segment.find(".type").html( type );
@@ -226,8 +229,8 @@
 				var inputs = segment.find("input[type=date]:not(.btn)").toArray();
 				var otherData = "";
 				if(inputs.length==2 ){
-					if(inputs[0].value==''&&inputs[1].value==''){
-						$(".msg2").show();
+					if(inputs[0].value==''||inputs[1].value==''){
+						$(".msg2").hide();
 						err=1;
 					}
 					else
