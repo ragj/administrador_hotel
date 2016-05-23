@@ -91,7 +91,7 @@
         	var vid=new Array();
         	var img=new Array();
         	{{#videos}}vid.push('{{&path}}');{{/videos}}
-        	{{#images}}img.push('{{path}}');{{/images}}
+        	{{#images}}img.push("{{path}}");{{/images}}
         	if(vid.length==0){
         		$("#vid").hide();
         	}
