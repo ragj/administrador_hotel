@@ -882,7 +882,7 @@ table tr.main{
 	}
 	.request select,
 	.request input[type=date]{
-		-webkit-appearance: caret;
+		/*-webkit-appearance: caret;*/
 	}
 	.segment-item.active a.dlt{
 		left: 0px;
