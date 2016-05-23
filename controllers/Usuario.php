@@ -106,7 +106,7 @@ class Usuario extends Luna\Controller {
             //buscamos el usuario
             $user = $usersMapper->where(["usuario" => $user1]);
             //si hay un registro, entonces el usuario no esta disponible
-            if ($user->first()) {
+            if ($user->first()!=null) {
                 echo "
                         <script>
                             alert('User not available, please try another.');
@@ -170,7 +170,7 @@ class Usuario extends Luna\Controller {
                     "nombres"=>$name,
                     "app"=>$app,
                     "apm"=>$apm,
-                    "usr"=>$usr,
+                    "usr"=>$user1,
                     "tel"=>$tel,
                     "iata"=>$iata,
                     "miembro"=>$member,
@@ -205,19 +205,17 @@ class Usuario extends Luna\Controller {
             $zones=$zoneMapper->select();
         }
         if(isset($req->data["name"],$req->data["app"],$req->data["email"])){
-            echo "<pre>";
-            print_r($req->data);
-            exit;
+            
             $mensaje="";
             //obtencion y sanitizacion de datos
             $name = $req->data["name"]!=null? filter_var($req->data["name"], FILTER_SANITIZE_STRING) : $user->nombre;
             $app = $req->data["app"]!=null? filter_var($req->data["app"], FILTER_SANITIZE_STRING) : $user->papellido;
-            $apm = $req->data["apm"]!=null? filter_var($req->data["apm"], FILTER_SANITIZE_STRING) : $user->lapellido;
+            $apm = $req->data["apm"]!=null? filter_var($req->data["apm"], FILTER_SANITIZE_STRING) : $user->mapellido;
             $usr = $req->data["email"]!=null? filter_var($req->data["email"], FILTER_SANITIZE_EMAIL) : $user->usuario;
             $tel = $req->data["tel"]!=null? filter_var($req->data["tel"], FILTER_SANITIZE_STRING) : $user->telefono;
             $iata = $req->data["iata"]!=null? filter_var($req->data["iata"], FILTER_SANITIZE_STRING) : $user->iata;
             $member = $req->data["member"]!=null? filter_var($req->data["member"], FILTER_SANITIZE_STRING) : $user->miembros;
-            $years = $req->data["years"]!=null? filter_var($req->data["years"], FILTER_SANITIZE_STRING) : $user->años;
+            $years = $req->data["years"]!=null? filter_var($req->data["years"], FILTER_SANITIZE_STRING) : $user->years;
             if(isset($req->data["rol"])){
                 $user->rols_idrols=$req->data["rol"];
             }
@@ -252,11 +250,11 @@ class Usuario extends Luna\Controller {
             }
             $user->nombre=$name;
             $user->papellido=$app;
-            $user->lapellido=$apm;
+            $user->mapellido=$apm;
             $user->telefono=$tel;
             $user->iata=$iata;
             $user->miembros=$member;
-            $user->años=$years;
+            $user->years=$years;
             $user->activo=$active;
             $userMapper->update($user);
         }
@@ -330,7 +328,7 @@ class Usuario extends Luna\Controller {
         //Eliminamos las zonas que el usuario tenga registradas
         $userzona=$userZoneMapper->delete(['users_id'=>$req->params["exper"]]);
         //Eliminamos los forgots echos por el usuario
-        $forgot=$forgotMapper->delete(['users_id'=>$req->params["exper"]]);
+        $forgot=$forgotMapper->delete(['userid'=>$req->params["exper"]]);
         //Eliminamos el usuario que este registrado para ese id
         $user = $userMapper->delete(['id ='=>(integer)$var]);  
         echo $this->renderWiew( array_merge([]), $res);

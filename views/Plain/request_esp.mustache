@@ -57,9 +57,9 @@
 									<input class="btn " type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
-							<p class="msg2" style="display:none;color:red;">Por favor introduce fechas.</p>
-							<p class="msg1" style="display:none;color:red;">Por favor introduce fechas validas. Las fechas no pueden ser previas a la fecha actual.</p>
-							<p class="msg" style="display:none;color:red;">Por favor introduce fechas validas. La fecha de llegada debe ser previa a la fecha de salida.</p>
+							<p class="ms msg2" style="display:none;color:red;">Por favor introduce fechas.</p>
+							<p class="ms msg1" style="display:none;color:red;">Por favor introduce fechas validas. Las fechas no pueden ser previas a la fecha actual.</p>
+							<p class="ms msg" style="display:none;color:red;">Por favor introduce fechas validas. La fecha de llegada debe ser previa a la fecha de salida.</p>
 						</div>
 						<a href="#" class="cancel">Cancelar</a>
 					</div>
@@ -106,8 +106,8 @@
 									<input class="btn " type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
-							<p class="msg2" style="display:none;color:red;">Por favor introduce una fecha.</p>
-							<p class="msg1" style="display:none;color:red;">Por favor introduce fecha valida. La fecha no puede ser previa a la fecha actual.</p>
+							<p class="ms msg2" style="display:none;color:red;">Por favor introduce una fecha.</p>
+							<p class="ms msg1" style="display:none;color:red;">Por favor introduce fecha valida. La fecha no puede ser previa a la fecha actual.</p>
 						</div>
 						<a href="#" class="cancel">Cancelar</a>
 					</div>
@@ -142,9 +142,9 @@
 									<input class="btn" type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
-							<p class="msg2" style="display:none;color:red;">Por favor introduce fechas.</p>
-							<p class="msg1" style="display:none;color:red;">Por favor introduce fechas validas. Las fechas no pueden ser previas a la fecha actual.</p>
-							<p class="msg" style="display:none;color:red;">Por favor introduce fechas validas. La fecha de llegada debe ser previa a la fecha de salida.</p>
+							<p class="ms msg2" style="display:none;color:red;">Por favor introduce fechas.</p>
+							<p class="ms msg1" style="display:none;color:red;">Por favor introduce fechas validas. Las fechas no pueden ser previas a la fecha actual.</p>
+							<p class="ms msg" style="display:none;color:red;">Por favor introduce fechas validas. La fecha de llegada debe ser previa a la fecha de salida.</p>
 						</div>
 						<a href="#" class="cancel">Cancelar</a>
 					</div>
@@ -212,6 +212,7 @@
 				btn.attr("onclick" , "");
 				form.hide();
 
+				form.find(".ms").remove();
 				segment.find(".data").after(form);
 
 				//  FILL DATA
