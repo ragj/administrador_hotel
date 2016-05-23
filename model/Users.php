@@ -24,7 +24,7 @@
                 'iata' => ['type' => 'string', 'required' => false],
                 'miembros' => ['type' => 'string', 'required' => false],
                 'years' => ['type' => 'string', 'required' => false],
-                'activo' => ['type' => 'boolean', 'required' => true],
+                'activo' => ['type' => 'boolean', 'required' => true ,'value'=>0],
                 'create_at' => ['type' => 'datetime', 'required' => false],
                 'rols_idrols'=> ['type' => 'integer', 'required' => true]
             ];

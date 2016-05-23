@@ -5,10 +5,16 @@
         {{/ header}}
         {{$ content}}
         	<tr style="height: 124px;">
-                <td>
+                <td style="text-align:left">
                     <p style="padding: 0 0 20px; margin: 0 50px; text-align: left; color: #707070; font-size: 13px; border-bottom: 0px solid #dadada;"> 
                         <br><br><br>
                         {{#data}}
+                            {{#agent}}
+                                <h1>Agent</h1>
+                                <span style="color: #af841d; font-size: 15px;">Name: </span>{{nombre}} {{papellido}} {{mapellido}}<br>
+                                <span style="color: #af841d; font-size: 15px;">Email: </span>{{usuario}}<br>
+                                <span style="color: #af841d; font-size: 15px;">Phone: <br></span>{{telefono}}<br><br><br>
+                            {{/agent}}
                             {{#hotel}}
                                 <h1>Hotel</h1>
                                 <span style="color: #af841d; font-size: 15px;">Hotel: </span>{{name}}<br>
@@ -29,8 +35,8 @@
                                 <span style="color: #af841d; font-size: 15px;">Date: </span>{{fecha}}<br><br><br>
                             {{/experience}}
                             {{#comments}}
-                                <h1>Transfer</h1>
-                                <span style="color: #af841d; font-size: 15px;">Comments: </span>{{data.comments}}<br><br><br>
+                                <h1>Comments</h1>
+                                <span style="color: #af841d; font-size: 15px;">Comments: </span>{{{data.comments}}}<br><br><br>
                             {{/comments}}
                         {{/data}}
                     </p>

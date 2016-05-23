@@ -332,7 +332,9 @@ class Plain extends Luna\Controller {
         $transfers=$transferBlockMapper->select()->with("detail")->where(["zona_idzona"=>1]);
         $experienceMapper=$this->spot->mapper("Entity\Experience");
         $experiences=$experienceMapper->select()->where(["zona_idzona"=>1]);
+
         if(isset($req->data["hotel"])){
+            
             $TransferDetailBlock=$this->spot->mapper("Entity\TransferDetail");
             $requested_hotels=array();
             foreach ($req->data["hotel"] as $hotel) {
@@ -387,12 +389,15 @@ class Plain extends Luna\Controller {
                         $des="Location:".$_SERVER['HTTP_HOST']."/bali/en/travelAgent";              
                     break;
             }
-
+            
             $req->data["hotel"]=$requested_hotels;
             $req->data["transfer"]=$requested_transfers;
             $req->data["experience"]=$requested_experiences;
-            $req->data["comments"]=$comments;
-            $req->data["emailto"]="geoshada@gmail.com";
+            $req->data["comments"]=nl2br( $comments );
+            $req->data["agent"]=$req->user;
+            $req->data["emailto"]="julzebadua@gmail.com";
+
+            
             //mandamos mensaje
             $this->mailer( $res , $req , $template);
             //$req->data["emailto"]="alex.mendiola@lozano.com";
@@ -567,8 +572,8 @@ class Plain extends Luna\Controller {
         }
         if(isset($req->data["name"],$req->data["lname"],$req->data["mlname"],$req->data["user"],$req->data["pass"],$req->data["pass1"],$req->data["phone"],$req->data["iata"],$req->data["member"],$req->data["years"])){
             //verificacion de que el usuario no exista
-            $userMapper=$this->spot->mapper("Entity\Users");
-            $user=$userMapper->select()->where(["usuario"=>$req->data["user"]]);
+            $usersMapper=$this->spot->mapper("Entity\Users");
+            $user=$usersMapper->select()->where(["usuario"=>$req->data["user"]]);
             $exito=true;
             if($user->first()){
                 switch($lang){
@@ -625,9 +630,11 @@ class Plain extends Luna\Controller {
                     'telefono' => $req->data["phone"],
                     'iata' => $req->data["iata"],
                     'miembros' => $req->data["member"],
-                    'años' => $req->data["years"]
+                    'rols_idrols' => '1',
+                    'years' => $req->data["years"]
                 ]);
                 $result=$usersMapper->insert($entity);
+                
                 $usersZonesMapper=$this->spot->mapper("Entity\UsersZona");
                 $zona=$usersZonesMapper->build([
                     'users_id'=>$entity->id,

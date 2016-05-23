@@ -149,6 +149,9 @@
 	display: block;
 	clear: both;
 }
+/*.tmpl{
+	display: none;
+}*/
 body{
   font-family: 'Open Sans', sans-serif;
 }

@@ -4,100 +4,187 @@
 	{{/header}}
 	{{$content}}
 		<div class="request-holder">
-			<div class="request">
-				<header>
-					<span class="date">
-						11 - Oct - 2016
-					</span>
-					<h1>
-						Request / Inquire
-					</h1>
-					
-				</header>
-				<p class="commnet">
-					Please add a hotel or a transfer or an experience to start
-				</p>
+			<form method="post">
+				<div class="request">
+					<header>
+						<span class="date">
+							11 - Oct - 2016
+						</span>
+						<h1>
+							Request / Inquire
+						</h1>
+						
+					</header>
+					<p class="commnet">
+						Please add a hotel or a transfer or an experience to start
+					</p>
 
-				<div class="segments">
-					<p class="note">click entry to edit the information</p>
-					<div class="segment-item">
-						<a href="#" class="dlt"><i class="fa fa-times"></i></a>
-						<span class="type">Experience</span>
-						<span class="name">FOUR SEASON AT JIMBARAN</span>
-						<span class="more-data">
-							10 / 10 / 2016 - 10 / 10 / 2016 
+					<div class="segments">
+						<p class="note">click entry to edit the information</p>
+						<div class="segment-item">
+							<a href="#" class="dlt"><i class="fa fa-times"></i></a>
+							<span class="type">Experience</span>
+							<span class="name">FOUR SEASON AT JIMBARAN</span>
+							<span class="more-data">
+								10 / 10 / 2016 - 10 / 10 / 2016 
+							</span>
+						</div>
+						<div class="segment-item">
+							<a href="#" class="dlt"><i class="fa fa-times"></i></a>
+							<span class="type">Experience</span>
+							<span class="name">FOUR SEASON AT JIMBARAN</span>
+							<span class="more-data">
+								10 / 10 / 2016 - 10 / 10 / 2016 
+							</span>
+						</div>
+						<div class="segment-item">
+							<a href="#" class="dlt"><i class="fa fa-times"></i></a>
+							<span class="type">Experience</span>
+							<span class="name">FOUR SEASON AT JIMBARAN</span>
+							<span class="more-data">
+								10 / 10 / 2016 - 10 / 10 / 2016 
+							</span>
+						</div>
+						<div class="segment-item">
+							<a href="#" class="dlt"><i class="fa fa-times"></i></a>
+							<span class="type">Experience</span>
+							<span class="name">FOUR SEASON AT JIMBARAN</span>
+							<span class="more-data">
+								10 / 10 / 2016 - 10 / 10 / 2016 
+							</span>
+						</div>
+					</div>
+					<div class="create-segment hotel-tmpl tmpl">
+						<h2> New Hotel </h2>
+						<br>
+						<div class="form-segment forms ">
+							<row>
+								<column cols="5">
+									<label>
+										Pick a Hotel
+									</label>
+									<select name="hotel[0][idhotel]"  class="select">
+										{{#hoteles}}
+											<option value="{{idhotel}}">{{name}}</option>
+										{{/hoteles}}
+									</select>
+								</column>
+								<column cols="3">
+									<label for="">Pick a date of arrival</label>
+									<input class="width-12" type="date" name="hotel[0][aaday]" placeholder="10/10/2016">
+								</column>
+								<column cols="3">
+									<label>Pick a date of departure</label>
+									<input class="width-12"type="date" name="hotel[0][dday]" placeholder="10/10/2016">
+								</column>
+								<column cols="1">
+									<br>
+									<input class="btn " type="button" class="btn" value="Add">
+								</column>
+							</row>
+						</div>
+					</div>
+					<div class="create-segment trasnfer-tmpl tmpl">
+						<h2> New Trasfer </h2>
+						<br>
+						<div class="form-segment forms ">
+							<row>
+								<column cols="3">
+									<label>
+										Pick a Transfer
+									</label>
+									<select name="transfer[0][idtransferDetail]" class="select">
+										{{#transfers}}
+											{{#detail}}
+												<option value="{{idtransferDetail}}">{{description}}</option>
+											{{/detail}}
+										{{/transfers}}
+									</select>
+								</column>
+								<column cols="3">
+									<label>
+										Pick a Type of Vehicle
+									</label>
+									<select name="transfer[0][vehicle]" class="coche select">
+										<option value="INNOVA SUV">INNOVA SUV</option>
+										<option value="HIACE VAN">HIACE VAN</option>
+										<option value="ALPHARD/MERCY E 200">ALPHARD/MERCY E 200</option>
+									</select> 
+								</column>
+								<column cols="3">
+									<label>
+										Number of Passengers 
+									</label>
+									<input type="number" name="transfer[0][passanger]" class="pas width-12">
+								</column>
+								<column cols="2">
+									<label>
+										Pick a Date 
+									</label>
+									<input type="date" name="transfer[0][tday]" class="pas width-12">
+								</column>
+								<column cols="1">
+									<br>
+									<input class="btn " type="button" class="btn" value="Add">
+								</column>
+							</row>
+						</div>
+					</div>
+					<div class="create-segment experience-tmpl tmpl">
+						<h2> New Experience </h2>
+						<br>
+						<div class="form-segment forms ">
+							<row>
+								<column cols="4">
+									<label>
+										Pick a Experience
+									</label>
+									<select name="exper[0][idexperience]" class="ex select">
+										{{#experiences}}
+											<option value="{{idexperience}}">{{title}}</div>
+										{{/experiences}}
+									</select>
+								</column>
+								<column cols="4">
+									<label >
+										Pick the date
+									</label>
+									<input type="date" name="exper[0][date]" class="dat width-12">
+								</column>
+								<column cols="3">
+									<label>
+										Number of people 
+									</label>
+									<input type="number" name="exper[0][passanger]" class="pas width-12">
+								</column>
+								<column cols="1">
+									<br>
+									<input class="btn " type="button" class="btn" value="Add">
+								</column>
+							</row>
+						</div>
+					</div>
+					<div class="add">
+						<span class="lbl">
+							Add
 						</span>
+						<input type="button" class="btn" value="+ Hotel">
+						<input type="button" class="btn" value="+ Trasfer">
+						<input type="button" class="btn" value="+ Experience">
 					</div>
-					<div class="segment-item">
-						<a href="#" class="dlt"><i class="fa fa-times"></i></a>
-						<span class="type">Experience</span>
-						<span class="name">FOUR SEASON AT JIMBARAN</span>
-						<span class="more-data">
-							10 / 10 / 2016 - 10 / 10 / 2016 
-						</span>
-					</div>
-					<div class="segment-item">
-						<a href="#" class="dlt"><i class="fa fa-times"></i></a>
-						<span class="type">Experience</span>
-						<span class="name">FOUR SEASON AT JIMBARAN</span>
-						<span class="more-data">
-							10 / 10 / 2016 - 10 / 10 / 2016 
-						</span>
-					</div>
-					<div class="segment-item">
-						<a href="#" class="dlt"><i class="fa fa-times"></i></a>
-						<span class="type">Experience</span>
-						<span class="name">FOUR SEASON AT JIMBARAN</span>
-						<span class="more-data">
-							10 / 10 / 2016 - 10 / 10 / 2016 
-						</span>
-					</div>
-				</div>
-				<div class="create-segment">
-					<h2> New Hotel </h2>
-					<br>
-					<div class="form-segment forms">
-						<row>
-							<column cols="5">
-								<label>
-									Pick a Hotel
-								</label>
-								<select>
-									<option>FOUR SEASON AT JIMBARAN</option>
-								</select>
-							</column>
-							<column cols="3">
-								<label for="">Pick a date of arrival</label>
-								<input class="width-12" type="date" name="date" placeholder="10/10/2016">
-							</column>
-							<column cols="3">
-								<label>Pick a date of departure</label>
-								<input class="width-12"type="date" name="date" placeholder="10/10/2016">
-							</column>
-							<column cols="1">
-								<br>
-								<input class="btn " type="button" class="btn" value="Add">
-							</column>
-						</row>
-					</div>
-				</div>
-				<div class="add">
-					<span class="lbl">
-						Add
-					</span>
-					<input type="button" class="btn" value="+ Hotel">
-					<input type="button" class="btn" value="+ Trasfer">
-					<input type="button" class="btn" value="+ Experience">
-				</div>
 
-				<h2>
-					Let us know if there is something  else we can help you with 
-				</h2>
-				<textarea rows="10" placeholder="add a comment to my request......."></textarea>
-				<div class="text-center">
-					<input type="submit"  class="btn" value="SEND INQUIRE" >
+					<h2>
+						Let us know if there is something  else we can help you with 
+					</h2>
+					<textarea rows="10" name="comments" placeholder="add a comment to my request......."></textarea>
+					<div class="text-center">
+						<input type="submit"  class="btn" value="SEND INQUIRE" >
+					</div>
 				</div>
-			</div>
+			</form>
 		</div>
+		<script type="text/javascript">
+			
+		</script>
 	{{/content}}
 {{/ panel}}
