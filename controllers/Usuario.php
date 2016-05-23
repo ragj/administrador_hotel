@@ -205,9 +205,7 @@ class Usuario extends Luna\Controller {
             $zones=$zoneMapper->select();
         }
         if(isset($req->data["name"],$req->data["app"],$req->data["email"])){
-            echo "<pre>";
-            print_r($req->data);
-            exit;
+            
             $mensaje="";
             //obtencion y sanitizacion de datos
             $name = $req->data["name"]!=null? filter_var($req->data["name"], FILTER_SANITIZE_STRING) : $user->nombre;
