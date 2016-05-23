@@ -147,7 +147,9 @@
 		border-bottom: 0px;
 		
 	}
-
+	.experiences-travel{
+		display: none;
+	}
 	.hoteles-travel{
 		display: none;
 	}
