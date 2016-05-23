@@ -8,7 +8,7 @@
 				<div class="request">
 					<header>
 						<span class="date">
-							11 - Oct - 2016
+							{{! 11 - Oct - 2016 }}
 						</span>
 						<h1>
 							Request / Inquire
@@ -69,11 +69,11 @@
 										Pick a Transfer
 									</label>
 									<select name="transferT[@][idtransferDetail]" class="select">
-										{{#transfers}}
+										{{#transfersd}}
 											{{#detail}}
 												<option value="{{idtransferDetail}}">{{description}}</option>
 											{{/detail}}
-										{{/transfers}}
+										{{/transfersd}}
 									</select>
 								</column>
 								<column cols="3">

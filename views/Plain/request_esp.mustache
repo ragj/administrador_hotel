@@ -1,209 +1,284 @@
 {{% BLOCKS }}
-{{< panel}}
+{{< panel_esp}}
 	{{$header}}
 	{{/header}}
 	{{$content}}
-		<div class="fit contact">
-			<row>
-				<column	cols="3">
-				</column>
-				<column	cols="6">
-					<div class="element contact">
-						<form action="/bali/request" method="post" class="forms">
-							<div id="0"class="hotel" style="position: relative;">
-								<h1>Hotel</h1>
-								<fieldset>
-									<section>
-										<label>Escoje un hotel:</label>
-										<select name="hotel[0][idhotel]"  class="select">
-											<option value=""></option>
-											{{#hoteles}}
-												<option value="{{idhotel}}">{{name}}</option>
-											{{/hoteles}}
-										</select>
-									</section>
-									<row>
-        								<column cols="6">
-								            <label>Fecha de llegada:</label>
-								            <input type="date" class="aaday width-12" name="hotel[0][aaday]">
-								        </column>
-								        <column cols="6">
-								            <label>Fecha de salida:</label>
-								            <input type="date" class="dday width-12" name="hotel[0][dday]">
-								        </column>
-								    </row>
-								</fieldset>
-								<a  href="javascript:void(0);" class="addHotel primary" id="0" style="text-decoration: none; padding: 10px; ">Agregar</a>
-								<br>
-								<br>
-							</div>
-							<hr>
-							<div id="0" class="trans" style="position: relative">
-								<h1>Traslados</h1>
-								<fieldset>
-									<section>
-										<label>
-											Escoje un traslado:
-										</label>
-										<select name="transfer[0][idtransferDetail]" class="select">
-											<option value=""></option>
-											{{#transfers}}
-												{{#detail}}
-													<option value="{{idtransferDetail}}">{{description}}</option>
-												{{/detail}}
-											{{/transfers}}
-										</select>
-									</section>
-									<row>
-										<column cols="6">
-											<label>
-												Escoje un vehículo:
-											</label>
-											<select name="transfer[0][vehicle]" class="coche select">
-												<option value=""></option>
-												<option value="INNOVA SUV">INNOVA SUV</option>
-												<option value="HIACE VAN">HIACE VAN</option>
-												<option value="ALPHARD/MERCY E 200">ALPHARD/MERCY E 200</option>
-											</select> 
-										</column>
-										<column cols="3">
-											<label>
-												Número de Pasajeros: 
-											</label>
-											<input type="number" name="transfer[0][passanger]" class="pas width-12">
-										</column>
-										<column cols="3">
-											<label>
-												Fecha: 
-											</label>
-											<input type="date" name="transfer[0][tday]" class="tday width-12">
-										</column>
-									</row>
-								</fieldset>
-								<a  href="javascript:void(0);" class="addTransfer primary" id="0" style="text-decoration: none; padding: 10px; ">Agregar</a>
-								<br>
-								<br>
-							</div>
-							<hr>
-							<div id="0" class="exper" style="position: relative;">
-								<h1>Experiencia</h1>
-								<fieldset>
-								<section>
-									<row>
-										<column cols="7">
-											<label>
-												Escoje una Experiencia:
-											</label>
-											<select name="exper[0][idexperience]" class="ex select">
-												<option value=""></option>
-												{{#experiences}}
-													<option value="{{idexperience}}">{{title}}</div>
-												{{/experiences}}
-											</select>
-										</column>
-										<column cols="5">
-											<label class="fecha">Fecha:</label>
-											<input type="date" name="exper[0][date]" class="dat width-12">
-										</column>
-									</row>
-								</section>
-								</fieldset>
-								<a  href="javascript:void(0);" class="addExperience primary" id="0" style="text-decoration: none; padding: 10px; ">Agregar</a>
-								<br>
-								<br>	
-							</div>
-							<h1>Comentarios</h1>
-							<section>
-									<label>
-										Comentarios
-									</label>
-									<textarea name="comments" ></textarea>
-							</section>
-							
-							<section>
+		<div class="request-holder">
+			<form method="post">
+				<div class="request">
+					<header>
+						<span class="date">
+							{{! 11 - Oct - 2016 }}
+						</span>
+						<h1>
+							Request / Inquire
+						</h1>
+						
+					</header>
+					<p class="commnet">
+						Please add a hotel or a transfer or an experience to start
+					</p>
 
-								<button type="primary">Enviar</button> 
-							</section>
-						</form>
+					<div class="segments">
+						<p class="note">click entry to edit the information</p>
 					</div>
-				</column>
-				<column	cols="3">
-				</column>
-			</row>
+
+					<div class="current-create">
+						
+					</div>
+					
+		
+					{{! Templates de nuevos items }}
+
+					<div id="hotel-tmpl" data-type="hotel" class="create-segment hotel-tmpl tmpl">
+						<h2> New Hotel </h2>
+						<div class="form-segment forms ">
+							<row>
+								<column cols="5">
+									<label>
+										Pick a Hotel
+									</label>
+									<select name="hotelT[@][idhotel]"  class="select">
+										{{#hoteles}}
+											<option value="{{idhotel}}">{{name}}</option>
+										{{/hoteles}}
+									</select>
+								</column>
+								<column cols="3">
+									<label for="">Pick a date of arrival</label>
+									<input class="width-12" type="date" name="hotelT[@][aaday]" placeholder="10/10/2016">
+								</column>
+								<column cols="3">
+									<label>Pick a date of departure</label>
+									<input class="width-12"type="date" name="hotelT[@][dday]" placeholder="10/10/2016">
+								</column>
+								<column cols="1">
+									<br>
+									<input class="btn " type="button" class="btn" value="Add" onclick="create(this)">
+								</column>
+							</row>
+						</div>
+						<a href="#" class="cancel">Cancel</a>
+					</div>
+					<div id="transfer-tmpl" data-type="transfer" class="create-segment transfer-tmpl tmpl">
+						<h2> New Trasfer </h2>
+						<div class="form-segment forms ">
+							<row>
+								<column cols="3">
+									<label>
+										Pick a Transfer
+									</label>
+									<select name="transferT[@][idtransferDetail]" class="select">
+										{{#transfersd}}
+											{{#detail}}
+												<option value="{{idtransferDetail}}">{{description}}</option>
+											{{/detail}}
+										{{/transfersd}}
+									</select>
+								</column>
+								<column cols="3">
+									<label>
+										Pick a Type of Vehicle
+									</label>
+									<select name="transferT[@][vehicle]" class="coche select">
+										<option value="INNOVA SUV">INNOVA SUV</option>
+										<option value="HIACE VAN">HIACE VAN</option>
+										<option value="ALPHARD/MERCY E 200">ALPHARD/MERCY E 200</option>
+									</select> 
+								</column>
+								<column cols="3">
+									<label>
+										Number of Passengers 
+									</label>
+									<input type="number" name="transferT[@][passanger]" class="pas width-12">
+								</column>
+								<column cols="2">
+									<label>
+										Pick a Date 
+									</label>
+									<input type="date" name="transferT[@][tday]" class="pas width-12">
+								</column>
+								<column cols="1">
+									<br>
+									<input class="btn " type="button" class="btn" value="Add" onclick="create(this)">
+								</column>
+							</row>
+						</div>
+						<a href="#" class="cancel">Cancel</a>
+					</div>
+					<div id="experience-tmpl" data-type="experience" class="create-segment experience-tmpl tmpl">
+						<h2> New Experience </h2>
+						<div class="form-segment forms ">
+							<row>
+								<column cols="4">
+									<label>
+										Pick a Experience
+									</label>
+									<select name="experT[@][idexperience]" class="ex select">
+										{{#experiences}}
+											<option value="{{idexperience}}">{{title}}</div>
+										{{/experiences}}
+									</select>
+								</column>
+								<column cols="4">
+									<label >
+										Pick the date
+									</label>
+									<input type="date" name="experT[@][date]" class="dat width-12" >
+								</column>
+								<column cols="3">
+									<label>
+										Number of people 
+									</label>
+									<input type="number" name="experT[@][passanger]" class="pas width-12" >
+								</column>
+								<column cols="1">
+									<br>
+									<input class="btn" type="button" class="btn" value="Add" onclick="create(this)">
+								</column>
+							</row>
+						</div>
+						<a href="#" class="cancel">Cancel</a>
+					</div>
+					<div class="add">
+						<span class="lbl">
+							Add
+						</span>
+						<input type="button" onclick="add('#hotel-tmpl')" class="btn" value="+ Hotel">
+						<input type="button" onclick="add('#transfer-tmpl')" class="btn" value="+ Trasfer">
+						<input type="button" onclick="add('#experience-tmpl')" class="btn" value="+ Experience">
+					</div>
+
+					<h2>
+						Let us know if there is something  else we can help you with 
+					</h2>
+					<textarea rows="10" name="comments" placeholder="add a comment to my request......."></textarea>
+					<div class="text-center">
+						<input type="submit"  class="btn" value="SEND INQUIRE" >
+					</div>
+				</div>
+
+				<div id="segment-item" class="segment-item tmpl">
+					<a href="#" class="dlt"><i class="fa fa-times"></i></a>
+					<div class="data">
+						<span class="type">type</span>
+						<span class="name">name</span>
+						<span class="more-data">more-data</span>
+					</div>
+				</div>
+			</form>
 		</div>
-		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-		<script>
-			$( document ).ready(function() {
-				var iCntH = 0;
-				var iCntT = 0;
-				var iCntE = 0;
-				$('body').on('click', '.addHotel',function(e) {
-    				if($('div.hotel').size()==1&&iCntH==0){
-    					$("div.hotel:last h1").after("<a  href='javascript:void(0);' class='rmvHotel primary' id='0' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
-    				}
-    				else if($('div.hotel').size()==1&&iCntH!=0){
-    					$("div.hotel:last h1").after("<a  href='javascript:void(0);' class='rmvHotel primary' id='"+e.target.id+"' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
-    				}
-    				iCntH=iCntH+1;
-        			$("div.hotel:last").clone().attr('id',iCntH).insertAfter("div.hotel:last");
-        			$("div.hotel:last select").attr('name','hotel['+iCntH+'][idhotel]');
-        			$("div.hotel:last a.rmvHotel").attr('id',iCntH);
-        			$("div.hotel:last input.aaday").attr('name','hotel['+iCntH+'][aaday]');
-        			$("div.hotel:last input.aaday").val("");
-        			$("div.hotel:last input.dday").attr('name','hotel['+iCntH+'][dday]');	
-        			$("div.hotel:last input.dday").val("");
-				});	
-				$('body').on('click', '.rmvHotel',function(e) {
-    				$(this).parent().fadeOut(300);
-    				$(this).parent().remove();
-    				if($('div.hotel').size()==1){
-    					$("div.hotel a.rmvHotel").remove();
-    				}
-				});	
-				$('body').on('click', '.addTransfer',function(e) {
-					if($('div.trans').size()==1&&iCntT==0){
-    					$("div.trans:last h1").after("<a  href='javascript:void(0);' class='rmvTrans primary' id='0' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
-    				}
-    				else if($('div.trans').size()==1&&iCntT!=0){
-    					$("div.trans:last h1").after("<a  href='javascript:void(0);' class='rmvTrans primary' id='"+e.target.id+"' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
-    				}
-    				iCntT=iCntT+1;
-        			$("div.trans:last").clone().attr('id',iCntT).insertAfter("div.trans:last");
-        			$("div.trans:last select").attr('name','transfer['+iCntT+'][idtransferDetail]');
-        			$("div.trans:last select.coche").attr('name','transfer['+iCntT+'][coche]');
-        			$("div.trans:last input.pas").attr('name','transfer['+iCntT+'][passanger]');	
-        			$("div.trans:last input.pas").val("");	
-        			$("div.trans:last input.tday").attr('name','transfer['+iCntT+'][tday]');
-        			$("div.trans:last input.tday").val("");		
+		<script type="text/javascript">
+			var filedsIndex = { hotel:0,
+							    transfer:0,
+							    experience:0 };
+			function add( idd ){
+				var tmpl = $(idd).clone();
+				tmpl.show()
+				tmpl.removeClass("tmpl")
+				$(".current-create").html( tmpl );
+			}
+
+			function create( e ){
+				var segment = $("#segment-item").clone();
+				segment.attr("id" , "");
+				var currentForm = $(e).parent().parent().parent().parent();
+				var form = $(e).parent().parent().parent().parent().clone();
+				var type = $(e).parent().parent().parent().parent().data("type");
+
+				segment.attr("type" , type );
+
+				form.find("*[name]").each(function(){
+					var currentName = $(this).attr("name");
+					currentName = currentName.split("T[@]").join( "["+filedsIndex[ type ]+"]" );
+					$(this).attr("name" , currentName);
 				});
-				$('body').on('click', '.rmvTrans',function(e) {
-    				$(this).parent().fadeOut(300);
-    				$(this).parent().remove();
-    				if($('div.trans').size()==1){
-    					$("div.trans a.rmvTrans").remove();
-    				}
-				});	
-				$('body').on('click', '.addExperience',function(e) {
-					if($('div.exper').size()==1&&iCntE==0){
-    					$("div.exper:last h1").after("<a  href='javascript:void(0);' class='rmvExper primary' id='0' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
-    				}
-    				else if($('div.exper').size()==1&&iCntE!=0){
-    					$("div.exper:last h1").after("<a  href='javascript:void(0);' class='rmvExper primary' id='"+e.target.id+"' style='position:absolute; right:5px; top:5px;text-decoration: none; padding: 10px; margin-left:15px;'><i class='fa fa-times' aria-hidden='true'></i></a>");
-    				}
-    				iCntE=iCntE+1;
-        			$("div.exper:last").clone().attr('id',iCntE).insertAfter("div.exper:last");
-        			$("div.exper:last select.ex").attr('name','exper['+iCntE+'][idexperience]');
-        			$("div.exper:last input.dat").attr('name','exper['+iCntE+'][date]');
-        			$("div.exper:last input.dat").val("");	
+				filedsIndex[ type ] += 1;
+
+				//  BUILD 
+				segment.show();
+				form.find("h2").remove();
+				form.attr("id" , "");
+				var btn = form.find(".btn");
+				btn.val("Edit")
+				btn.attr("onclick" , "");
+				form.hide();
+
+				segment.find(".data").after(form);
+
+				//  FILL DATA
+				segment.find(".type").html( type );
+				var selectActive = segment.find("select")[0].selectedIndex;
+				var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
+				segment.find(".name").html( selectValue );
+
+				var inputs = segment.find("input[type=date]:not(.btn)").toArray();
+				var otherData = "";
+
+				for( i in inputs){
+					otherData +=  " - "+$(inputs[i]).val();
+				}
+				segment.find(".more-data").html( otherData );
+
+				segment.find(".data").show();
+
+
+				//  ACTIONS 
+
+				segment.find(".dlt").click(function(event){
+					event.preventDefault();
+					$(this).parent().remove();
 				});
-				$('body').on('click', '.rmvExper',function(e) {
-    				$(this).parent().fadeOut(300);
-    				$(this).parent().remove();
-    				if($('div.exper').size()==1){
-    					$("div.exper a.rmvExper").remove();
-    				}
-				});	    		
-    		});		
+
+				segment.click(function(){
+					if( ! $(this).data("active") ){
+						$(this).data("active" , true );
+						$(this).find(".data").hide();
+						$(this).find(".create-segment").show();	
+					}
+				});
+
+				btn.click(function( event ){
+					event.preventDefault();
+					var segment = $(this).parent().parent().parent().parent().parent();
+					segment.find(".data").show();
+					
+					//  FILL DATA 
+					var selectActive = segment.find("select")[0].selectedIndex;
+					var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
+					segment.find(".name").html( selectValue );
+
+
+					segment.find(".create-segment").hide();	
+					setTimeout(function(){
+						segment.data("active" , false );	
+					} , 100 );
+					
+				});
+
+				segment.find(".cancel").click(function( event ){
+					event.preventDefault();
+					var segment = $(this).parent().parent();
+					//  FILL DATA 
+					var selectActive = segment.find("select")[0].selectedIndex;
+					var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
+					segment.find(".name").html( selectValue );
+					segment.find(".data").show();
+					segment.find(".create-segment").hide();	
+					setTimeout(function(){
+						segment.data("active" , false );	
+					} , 100 );
+					
+				});
+
+				if( $(".segments .segment-item")[0] != undefined ){
+					$(".segments .segment-item").last().after( segment );
+				}else{
+					$(".segments .note").after( segment );
+				}
+
+				$(currentForm).remove();
+			}
 		</script>
 	{{/content}}
-{{/ panel}}
+{{/ panel_esp}}

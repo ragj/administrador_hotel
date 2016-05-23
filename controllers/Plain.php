@@ -419,7 +419,7 @@ class Plain extends Luna\Controller {
             $this->mailer( $res , $req , $template);
             //header($des);
         }
-        echo $this->renderWiew(array_merge(["hoteles"=>$hotels,"transfers"=>$transfers,"experiences"=>$experiences],$this->header("transfer",$lang)), $res);
+        echo $this->renderWiew(array_merge(["hoteles"=>$hotels,"transfersd"=>$transfers,"experiences"=>$experiences],$this->header("transfer",$lang)), $res);
     }
     public function forgot($req , $res){
         $lang=$req->lang;
