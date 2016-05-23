@@ -348,6 +348,7 @@ class Plain extends Luna\Controller {
         $transfers=$transferBlockMapper->select()->with("detail")->where(["zona_idzona"=>1]);
         $experienceMapper=$this->spot->mapper("Entity\Experience");
         $experiences=$experienceMapper->select()->where(["zona_idzona"=>1]);
+            
 
         if(isset($req->data["hotel"])){
             
@@ -414,7 +415,6 @@ class Plain extends Luna\Controller {
             $req->data["agent"]=$req->user;
             $req->data["emailto"]="julzebadua@gmail.com";
 
-            
             //mandamos mensaje
             $this->mailer( $res , $req , $template);
             //header($des);
