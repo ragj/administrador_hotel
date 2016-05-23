@@ -328,7 +328,7 @@ class Usuario extends Luna\Controller {
         //Eliminamos las zonas que el usuario tenga registradas
         $userzona=$userZoneMapper->delete(['users_id'=>$req->params["exper"]]);
         //Eliminamos los forgots echos por el usuario
-        $forgot=$forgotMapper->delete(['users_id'=>$req->params["exper"]]);
+        $forgot=$forgotMapper->delete(['userid'=>$req->params["exper"]]);
         //Eliminamos el usuario que este registrado para ese id
         $user = $userMapper->delete(['id ='=>(integer)$var]);  
         echo $this->renderWiew( array_merge([]), $res);
