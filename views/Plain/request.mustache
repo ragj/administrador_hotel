@@ -168,6 +168,8 @@
 				</div>
 			</form>
 		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+		
 		<script type="text/javascript">			
 			var filedsIndex = { hotel:0,
 							    transfer:0,
@@ -214,6 +216,16 @@
 
 				var inputs = segment.find("input[type=date]:not(.btn)").toArray();
 				var otherData = "";
+				if(inputs.length!=1){
+					var isBefore=moment(inputs[0].value).isBefore(inputs[1].value);
+					if(isBefore==false){
+						console.log("fechas validas");
+					}
+					else{
+						console.log("fechas invalidas")
+					}
+				}
+				
 
 				for( i in inputs){
 					otherData +=  " - "+$(inputs[i]).val();
