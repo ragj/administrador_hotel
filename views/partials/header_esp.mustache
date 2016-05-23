@@ -1,13 +1,18 @@
 <header>
-	<section class="logo"></section>
+	<a href="/bali/">
+		<section class="logo"></section>
+	</a>
 	<section class="lang">
 		<a href="{{#translate.call}}es{{/translate.call}}{{^translate.call}}{{#lan}}es{{/lan}}{{/translate.call}}" class="active">Español</a>
 		<a href="{{#translate.call}}en{{/translate.call}}{{^translate.call}}{{#lan}}en{{/lan}}{{/translate.call}}" >Inglés</a>
 	</section> 
 	<section class="weather"> 
 		{{current_time}} {{weather.temp}}ºC 
+		<div class="clear"></div>
+		<a href="#" class="menu-bars" onclick="showMenu(event)"><i class="fa fa-bars" aria-hidden="true"></i></a>
 	</section>
 	<nav>
+	<a href="#"  class="close-menu" onclick="hideMenu(event)"><i class="fa fa-times"></i></a>
 		<ul>
 			<li>
 				<a href="{{#url}}/{{/url}}" {{#home}}class="active"{{/home}} >Inicio</a>
@@ -40,3 +45,15 @@
 	</nav>
 	<div class="clear"></div>
 </header>
+<script type="text/javascript">
+	function hideMenu(event){
+		event.preventDefault();
+		jQuery("header nav").removeClass("show")
+		jQuery("header .lang").removeClass("show")
+	}
+	function showMenu(event){
+		event.preventDefault();
+		jQuery("header nav").addClass("show")
+		jQuery("header .lang").addClass("show")
+	}
+</script>
