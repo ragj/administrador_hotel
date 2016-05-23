@@ -884,6 +884,9 @@ table tr.main{
 	.request input[type=date]{
 		/*-webkit-appearance: caret;*/
 	}
+	.request input[type=date]{
+		width: 100%;
+	}
 	.segment-item.active a.dlt{
 		left: 0px;
 		top: 5px;
