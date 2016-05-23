@@ -881,7 +881,9 @@ table tr.main{
 		font-size: 12px;
 	}
 	.request select,
-	.request input[type=date]{
+	.request input[type=date], 
+	.request textarea 
+	{
 		-webkit-appearance: none;
 	}
 
