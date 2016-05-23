@@ -614,7 +614,8 @@ table tr.main{
 		border-top-color: #FFF;
 	}
 
-.transfer div:not(.hoteles-travel) img{
+
+.transfer div:not(.hoteles-travel) div:not(.himage)img{
 	float: left;
 	width: 25%;
 }
