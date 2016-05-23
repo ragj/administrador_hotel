@@ -737,13 +737,34 @@ table tr.main{
 }
 
 @media (max-width: 768px){
+	.fit.contact{
+		background-image: none;
+		background-color: #f1f1f1;
+	}
+	.fit .intro{
+		margin-top: 0px;
+		font-size: 20px;
+		color: #aaa;
+		padding: 20px;
+		text-align: left;
+		line-height: 30px;
+	}
+
+		.fit .intro b{
+			color: #999;
+		}
 	header .logo{
 		width: 200px;
 		background-repeat: no-repeat;
 		background-position: center;
 	}
+
+	.transfer div:not(.hoteles-travel) img{
+		float: none;
+		width: 100%;
+	}
 	body > img{
-		min-height: 150px;
+		min-height: 128px;
 
 	}
 	.himage{
@@ -774,12 +795,19 @@ table tr.main{
 		float: none;
 		position: absolute;
 		color: #ccc;
-		top: 20px;
+		top: 10px;
 		right: 20px;
 		font-size: 12px;
 		padding: 0px;
 		padding-top: 0px;
 		display: block;
+	}
+	.filter a{
+		display: block;
+		border-right: 0px;
+		margin-bottom: 10px;
+		padding-bottom: 5px;
+		border-bottom: 1px solid #C39323;
 	}
 	.menu-bars{
 	 color: #C39323;
@@ -843,5 +871,17 @@ table tr.main{
 			float: none;
 			text-align: left;
 			line-height: 40px;
+		}
+	footer p{
+		display: block;
+		float: none;
+		font-size: 18px;
+	}
+		footer div.contact{
+			float: none;
+			font-size: 15px;
+			padding: 20px;
+			text-align: left;
+			line-height: 25px;
 		}
 }
