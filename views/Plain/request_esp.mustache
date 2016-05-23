@@ -57,6 +57,8 @@
 									<input class="btn " type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
+							<p class="msg1" style="display:none;color:red;">Por favor introduce fechas validas. Las fechas no pueden ser previas a la fecha actual.</p>
+							<p class="msg" style="display:none;color:red;">Por favor introduce fechas validas. La fecha de llegada debe ser previa a la fecha de salida.</p>
 						</div>
 						<a href="#" class="cancel">Cancelar</a>
 					</div>
@@ -103,6 +105,7 @@
 									<input class="btn " type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
+							<p class="msg1" style="display:none;color:red;">Por favor introduce fecha valida. La fecha no puede ser previa a la fecha actual.</p>
 						</div>
 						<a href="#" class="cancel">Cancelar</a>
 					</div>
@@ -137,6 +140,8 @@
 									<input class="btn" type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
+							<p class="msg1" style="display:none;color:red;">Por favor introduce fechas validas. Las fechas no pueden ser previas a la fecha actual.</p>
+							<p class="msg" style="display:none;color:red;">Por favor introduce fechas validas. La fecha de llegada debe ser previa a la fecha de salida.</p>
 						</div>
 						<a href="#" class="cancel">Cancelar</a>
 					</div>
@@ -168,6 +173,7 @@
 				</div>
 			</form>
 		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
 		<script type="text/javascript">
 			var filedsIndex = { hotel:0,
 							    transfer:0,
@@ -213,70 +219,101 @@
 
 				var inputs = segment.find("input[type=date]:not(.btn)").toArray();
 				var otherData = "";
-
-				for( i in inputs){
-					otherData +=  " - "+$(inputs[i]).val();
-				}
-				segment.find(".more-data").html( otherData );
-
-				segment.find(".data").show();
-
-
-				//  ACTIONS 
-
-				segment.find(".dlt").click(function(event){
-					event.preventDefault();
-					$(this).parent().remove();
-				});
-
-				segment.click(function(){
-					if( ! $(this).data("active") ){
-						$(this).data("active" , true );
-						$(this).find(".data").hide();
-						$(this).find(".create-segment").show();	
+				if(inputs.length!=1){
+					var isAfter=moment(moment()).isAfter(inputs[0].value);
+					var isBefore=moment(inputs[0].value).isAfter(inputs[1].value);
+					if(isAfter==true){
+						$(".msg1").show();
+						err=1;
 					}
-				});
-
-				btn.click(function( event ){
-					event.preventDefault();
-					var segment = $(this).parent().parent().parent().parent().parent();
-					segment.find(".data").show();
-					
-					//  FILL DATA 
-					var selectActive = segment.find("select")[0].selectedIndex;
-					var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
-					segment.find(".name").html( selectValue );
-
-
-					segment.find(".create-segment").hide();	
-					setTimeout(function(){
-						segment.data("active" , false );	
-					} , 100 );
-					
-				});
-
-				segment.find(".cancel").click(function( event ){
-					event.preventDefault();
-					var segment = $(this).parent().parent();
-					//  FILL DATA 
-					var selectActive = segment.find("select")[0].selectedIndex;
-					var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
-					segment.find(".name").html( selectValue );
-					segment.find(".data").show();
-					segment.find(".create-segment").hide();	
-					setTimeout(function(){
-						segment.data("active" , false );	
-					} , 100 );
-					
-				});
-
-				if( $(".segments .segment-item")[0] != undefined ){
-					$(".segments .segment-item").last().after( segment );
-				}else{
-					$(".segments .note").after( segment );
+					else if(isBefore==true){
+						$(".msg1").hide();
+						$(".msg").show();
+						err=1;
+					}
+					else{
+						$(".msg1").hide();
+						$(".msg").hide();
+						err=0;
+					}
 				}
+				if(inputs.length==1){
+					var isAfter=moment(moment()).isAfter(inputs[0].value);
+					if(isAfter==true){
+						$(".msg1").show();
+						err=1;
+					}
+					else{
+						$(".msg1").hide();
+						err=0;
+					}
 
-				$(currentForm).remove();
+				}
+				if(err==0){
+					for( i in inputs){
+						otherData +=  " - "+$(inputs[i]).val();
+					}
+					segment.find(".more-data").html( otherData );
+
+					segment.find(".data").show();
+
+
+					//  ACTIONS 
+
+					segment.find(".dlt").click(function(event){
+						event.preventDefault();
+						$(this).parent().remove();
+					});
+
+					segment.click(function(){
+						if( ! $(this).data("active") ){
+							$(this).data("active" , true );
+							$(this).find(".data").hide();
+							$(this).find(".create-segment").show();	
+						}
+					});
+
+					btn.click(function( event ){
+						event.preventDefault();
+						var segment = $(this).parent().parent().parent().parent().parent();
+						segment.find(".data").show();
+						
+						//  FILL DATA 
+						var selectActive = segment.find("select")[0].selectedIndex;
+						var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
+						segment.find(".name").html( selectValue );
+
+
+						segment.find(".create-segment").hide();	
+						setTimeout(function(){
+							segment.data("active" , false );	
+						} , 100 );
+						
+					});
+
+					segment.find(".cancel").click(function( event ){
+						event.preventDefault();
+						var segment = $(this).parent().parent();
+						//  FILL DATA 
+						var selectActive = segment.find("select")[0].selectedIndex;
+						var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
+						segment.find(".name").html( selectValue );
+						segment.find(".data").show();
+						segment.find(".create-segment").hide();	
+						setTimeout(function(){
+							segment.data("active" , false );	
+						} , 100 );
+						
+					});
+
+					if( $(".segments .segment-item")[0] != undefined ){
+						$(".segments .segment-item").last().after( segment );
+					}else{
+						$(".segments .note").after( segment );
+					}
+
+					$(currentForm).remove();
+				}
 			}
 		</script>
 	{{/content}}
