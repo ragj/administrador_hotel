@@ -210,10 +210,13 @@
 				segment.show();
 				form.find("h2").remove();
 				form.attr("id" , "");
+
 				var btn = form.find(".btn");
 				btn.val("Edit")
 				btn.attr("onclick" , "");
 				form.hide();
+
+				form.find("select").val( currentForm.find("select").val() );
 
 				segment.find(".data").after(form);
 
@@ -221,6 +224,8 @@
 				segment.find(".type").html( type );
 				var selectActive = segment.find("select")[0].selectedIndex;
 				var selectValue = segment.find("select").first().find("option")[selectActive].innerHTML;
+
+
 				segment.find(".name").html( selectValue );
 
 				var inputs = segment.find("input[type=date]:not(.btn)").toArray();
