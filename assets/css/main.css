@@ -1,7 +1,9 @@
 /*
 	GOLD:color: #C39323;
 */
-
+.current-create{
+	position: relative;
+}
 .request-holder{
 	background-color: #f4f4f4;
 	min-height: 1000px;
