@@ -294,12 +294,13 @@ class Plain extends Luna\Controller {
         }
         if(isset($req->data["name"],$req->data["email"],$req->data["message"])){
             $template="Mail/contacto.mustache";
-            $req->data["emailto"]="bali@lozano.com";
+            
             $req->data["subject"]="Contacto desde pagina";
             //Enviamos el primer correo
+            $req->data["emailto"]="bali@lozano.com";
             $this->mailer( $res , $req , $template);
-            $req->data["emailto"]="alex.mendiola@lozano.com";
             //Enviamos el segundo correo
+            $req->data["emailto"]="alex.mendiola@lozano.com";
             $this->mailer( $res , $req , $template);
             $contactMapper=$this->spot->mapper("Entity\Contact");
             //construimos la entidad
@@ -393,6 +394,7 @@ class Plain extends Luna\Controller {
             $req->data["hotel"]=$requested_hotels;
             $req->data["transfer"]=$requested_transfers;
             $req->data["experience"]=$requested_experiences;
+
             $req->data["comments"]=nl2br( $comments );
             $req->data["agent"]=$req->user;
             $req->data["emailto"]="julzebadua@gmail.com";
@@ -400,9 +402,6 @@ class Plain extends Luna\Controller {
             
             //mandamos mensaje
             $this->mailer( $res , $req , $template);
-            //$req->data["emailto"]="alex.mendiola@lozano.com";
-            //mandamos mensaje
-            //$this->mailer( $res , $req , $template);
             //header($des);
         }
         echo $this->renderWiew(array_merge(["hoteles"=>$hotels,"transfers"=>$transfers,"experiences"=>$experiences],$this->header("transfer",$lang)), $res);
@@ -661,6 +660,12 @@ class Plain extends Luna\Controller {
             }
             if($exito){
                 $req->data["emailto"]=$req->data["user"];
+                $this->mailer( $res , $req , $template);
+                //Enviamos el primer correo
+                $req->data["emailto"]="bali@lozano.com";
+                $this->mailer( $res , $req , $template);
+                //Enviamos el segundo correo
+                $req->data["emailto"]="alex.mendiola@lozano.com";
                 $this->mailer( $res , $req , $template);
                 echo $this->renderWiew($this->header("register",$lang), $res);
             }
