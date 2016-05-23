@@ -11,16 +11,16 @@
 							{{! 11 - Oct - 2016 }}
 						</span>
 						<h1>
-							Request / Inquire
+							Solicitud
 						</h1>
 						
 					</header>
 					<p class="commnet">
-						Please add a hotel or a transfer or an experience to start
+						Por favor añade un hotel o traslado o una experiencia para empezar
 					</p>
 
 					<div class="segments">
-						<p class="note">click entry to edit the information</p>
+						<p class="note">haz click en el item para editar</p>
 					</div>
 
 					<div class="current-create">
@@ -31,12 +31,12 @@
 					{{! Templates de nuevos items }}
 
 					<div id="hotel-tmpl" data-type="hotel" class="create-segment hotel-tmpl tmpl">
-						<h2> New Hotel </h2>
+						<h2> Nuevo Hotel </h2>
 						<div class="form-segment forms ">
 							<row>
 								<column cols="5">
 									<label>
-										Pick a Hotel
+										Escoge un Hotel
 									</label>
 									<select name="hotelT[@][idhotel]"  class="select">
 										{{#hoteles}}
@@ -45,40 +45,40 @@
 									</select>
 								</column>
 								<column cols="3">
-									<label for="">Pick a date of arrival</label>
+									<label for="">Escoge una fecha de llegada</label>
 									<input class="width-12" type="date" name="hotelT[@][aaday]" placeholder="10/10/2016">
 								</column>
 								<column cols="3">
-									<label>Pick a date of departure</label>
+									<label>Escoge una fecha de salida</label>
 									<input class="width-12"type="date" name="hotelT[@][dday]" placeholder="10/10/2016">
 								</column>
 								<column cols="1">
 									<br>
-									<input class="btn " type="button" class="btn" value="Add" onclick="create(this)">
+									<input class="btn " type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
 						</div>
-						<a href="#" class="cancel">Cancel</a>
+						<a href="#" class="cancel">Cancelar</a>
 					</div>
 					<div id="transfer-tmpl" data-type="transfer" class="create-segment transfer-tmpl tmpl">
-						<h2> New Trasfer </h2>
+						<h2> Nuevo Traslado </h2>
 						<div class="form-segment forms ">
 							<row>
 								<column cols="3">
 									<label>
-										Pick a Transfer
+										Escoge un Traslado
 									</label>
 									<select name="transferT[@][idtransferDetail]" class="select">
 										{{#transfersd}}
 											{{#detail}}
-												<option value="{{idtransferDetail}}">{{description}}</option>
+												<option value="{{idtransferDetail_esp}}">{{description}}</option>
 											{{/detail}}
 										{{/transfersd}}
 									</select>
 								</column>
 								<column cols="3">
 									<label>
-										Pick a Type of Vehicle
+										Escoge un Tipo de Vehículo
 									</label>
 									<select name="transferT[@][vehicle]" class="coche select">
 										<option value="INNOVA SUV">INNOVA SUV</option>
@@ -88,31 +88,31 @@
 								</column>
 								<column cols="3">
 									<label>
-										Number of Passengers 
+										Número de Pasajeros 
 									</label>
 									<input type="number" name="transferT[@][passanger]" class="pas width-12">
 								</column>
 								<column cols="2">
 									<label>
-										Pick a Date 
+										Escoge una fecha
 									</label>
 									<input type="date" name="transferT[@][tday]" class="pas width-12">
 								</column>
 								<column cols="1">
 									<br>
-									<input class="btn " type="button" class="btn" value="Add" onclick="create(this)">
+									<input class="btn " type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
 						</div>
-						<a href="#" class="cancel">Cancel</a>
+						<a href="#" class="cancel">Cancelar</a>
 					</div>
 					<div id="experience-tmpl" data-type="experience" class="create-segment experience-tmpl tmpl">
-						<h2> New Experience </h2>
+						<h2> Nueva Experiencia </h2>
 						<div class="form-segment forms ">
 							<row>
 								<column cols="4">
 									<label>
-										Pick a Experience
+										Escoge una Experiencia
 									</label>
 									<select name="experT[@][idexperience]" class="ex select">
 										{{#experiences}}
@@ -122,48 +122,48 @@
 								</column>
 								<column cols="4">
 									<label >
-										Pick the date
+										Escoge una fecha
 									</label>
 									<input type="date" name="experT[@][date]" class="dat width-12" >
 								</column>
 								<column cols="3">
 									<label>
-										Number of people 
+										Número de personas
 									</label>
 									<input type="number" name="experT[@][passanger]" class="pas width-12" >
 								</column>
 								<column cols="1">
 									<br>
-									<input class="btn" type="button" class="btn" value="Add" onclick="create(this)">
+									<input class="btn" type="button" class="btn" value="Agregar" onclick="create(this)">
 								</column>
 							</row>
 						</div>
-						<a href="#" class="cancel">Cancel</a>
+						<a href="#" class="cancel">Cancelar</a>
 					</div>
 					<div class="add">
 						<span class="lbl">
-							Add
+							Agregar
 						</span>
 						<input type="button" onclick="add('#hotel-tmpl')" class="btn" value="+ Hotel">
-						<input type="button" onclick="add('#transfer-tmpl')" class="btn" value="+ Trasfer">
-						<input type="button" onclick="add('#experience-tmpl')" class="btn" value="+ Experience">
+						<input type="button" onclick="add('#transfer-tmpl')" class="btn" value="+ Traslado">
+						<input type="button" onclick="add('#experience-tmpl')" class="btn" value="+ Experiencia">
 					</div>
 
 					<h2>
-						Let us know if there is something  else we can help you with 
+						Dejanos saber si hay algo mas en lo que te podemos ayudar 
 					</h2>
-					<textarea rows="10" name="comments" placeholder="add a comment to my request......."></textarea>
+					<textarea rows="10" name="comments" placeholder="Agregar un comentario a mi solicitud......."></textarea>
 					<div class="text-center">
-						<input type="submit"  class="btn" value="SEND INQUIRE" >
+						<input type="submit"  class="btn" value="Enviar Solicitud" >
 					</div>
 				</div>
 
 				<div id="segment-item" class="segment-item tmpl">
 					<a href="#" class="dlt"><i class="fa fa-times"></i></a>
 					<div class="data">
-						<span class="type">type</span>
-						<span class="name">name</span>
-						<span class="more-data">more-data</span>
+						<span class="type">Tipo</span>
+						<span class="name">Nombre</span>
+						<span class="more-data">Más Datos</span>
 					</div>
 				</div>
 			</form>
