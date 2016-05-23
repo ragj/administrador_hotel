@@ -897,6 +897,7 @@ table tr.main{
 	}
 	.request select,
 	.request input[type=date], 
+	.request input[type=submit], 
 	.request textarea 
 	{
 		-webkit-appearance: none;
