@@ -1,94 +1,236 @@
 {{% BLOCKS }}
 {{< panel_esp}}
 	{{$content}}
-	<img src="/bali/assets/img/Agente-de-viajes.jpg">
-	<div class="holder transfer">
+	<img src="/bali/assets/img/Travel_agent.jpg">
+	
+	<div class="holder transfer tabs">
 		<script>
-					var path = "";
-					var href = window.location.pathname
-					var s = href.split("/");
-					for (var i=3;i<(s.length-1);i++) {
-						path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
-					}
-					i=s.length-1;
-					path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
-					var url = "<p id=bread>" + path+"</p>";
-					document.writeln(url);
+			var path = "";
+			var href = window.location.pathname
+			var s = href.split("/");
+			for (var i=3;i<(s.length-1);i++) {
+				path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+			}
+			i=s.length-1;
+			path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+			var url = "<p id=bread>" + path+"</p>";
+			document.writeln(url);
 	 	</script>
-	 	<div class="filter">
-			<a href="javascript:void(0);" data-filter="*" class="actual"> <h2>TODO</h2></a>
-			<a href="javascript:void(0);" data-filter=".T"><h2>TRASLADOS</h2></a> 
-        	<a href="javascript:void(0);" data-filter=".E"><h2>EXPERIENCIAS</h2></a> 
-		</div>
-		<div class="aux">
-		 	{{#transferBlock}}
-		 		<div class="{{tipo}}">
-			 		<h1>
-			 			{{es}}
-		 				<span>Precios de traslado por persona en USD</span>
-			 		</h1>
-			 		<center>
-			 			<button type="button" onclick="window.location.href='/bali/es/request'">SOLICITUD</button>
-			 		</center>
-			 		<br>
-			 		<table>
-						<tr class="main">
-							<td>Descripción</td>
-							<td colspan="2" class="data">INNOVA SUV</td>
-							<td colspan="2" class="data">HIACE VAN</td>
-							<td colspan="2" class="data">ALPHARD/MERCY E 200</td>
-						</tr>
-						<tr>
-							<td>Pasajeros</td>
-							<td class="data">1</td>
-							<td class="data">2 - 4</td>
-							<td class="data">5 - 7</td>
-							<td class="data">8 - 10 
-							<td class="data"> 1 </td>
-							<td class="data"> 2 - 4 </td>
-						</tr>
-						{{# detalle}}
-							<tr>
-								<td>{{&es}}</td>
-								{{#vals}}
-									<td class="data">{{val}}</td>
-								{{/vals}}
-							</tr>
-						{{/ detalle}}
-					</table>
-					<h2>Las tasas transfer incluye :</h2>
-					Conductor, hasolina, estacionamiento
-					<br>Guia de habla hispana / inglesa 
-					<br>Seguro
-					<br>Toalla Refrescante
-					<br>Conexión Wi-Fi en el carro	
-					<br>Propinas, pago de entradas según itinerario, excepto “Bali as you pleased”
-				</div>
-			{{/transferBlock}}
-		</div>
-		<h1> Gallería </h1>
 		
-		<img src="/bali/assets/img/transfers/galeria_trasnfers/automovil_02.jpg" class="modal">
-		<img src="/bali/assets/img/transfers/galeria_trasnfers/automovil_01.jpg">
-		<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_01.jpg">
-		<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_02.jpg">
-		<div class="clear"></div>
+	 	<div class="tabs">
+	 		<a href="javascript:void(0);" class="actve" onclick="changeTab( this , '.trasfer-travel' )">
+	 			TRASLADOS
+	 		</a>
+	 		<a href="javascript:void(0);"  id="experiences" onclick="changeTab( this , '.experiences-travel' )">
+	 			EXPERIENCIAS
+	 		</a>
+	 		<a href="javascript:void(0);"  id="hotels" onclick="changeTab( this , '.hoteles-travel' )">
+	 			HOTELES
+	 		</a>
+	 	</div>
+		 	<div class="hoteles-travel ttrl">
+		 		<br>
+		 		<br>
+			 	<blocks cols="3">
+						<div class="tour hotel">
+							<a href="/bali/travelAgent/four-seasons-resort-bali-at-jimbaran-bay" style="text-decoration: none;">
+								<h1>FOUR SEASONS AT JIMBARAN</h1>
+								<img src="/bali/assets/img/hotel-thumb/four-seasons-jimbaran-hotel.jpg">
+							</a>	
+						</div>
+						<div class="tour hotel">
+							<a href="/bali/travelAgent/four-seasons-resort-bali-at-sayan" style="text-decoration: none;">
+								<h1>Four Seasons Resort Bali At Sayan</h1>
+								<img src="/bali/assets/img/hotel-thumb/four-seasons-resort-bali-at-sayan-hotel.jpg">
+							</a>	
+						</div>
+						<div class="tour hotel">
+							<a href="/bali/travelAgent/mandapa,-a-ritz-carlton-reserve" style="text-decoration: none;">
+								<h1>Mandapa, a Ritz-Carlton Reserve</h1>
+								<img src="/bali/assets/img/hotel-thumb/Mandapa_Reserve_by_Ritz_Carlton.jpg">
+							</a>	
+						</div>
+						<div class="tour hotel">
+							<a href="/bali/travelAgent/bvlgari-bali" style="text-decoration: none;">
+								<h1>bvlgari</h1>
+								<img src="/bali/assets/img/hotel-thumb/Bulgari.jpg">
+							</a>	
+						</div>
+						<div class="tour hotel">
+							<a href="/bali/travelAgent/como-shambhala-estate" style="text-decoration: none;">
+								<h1>COMO SHAMBHALA ESTATE</h1>
+								<img src="/bali/assets/img/hotel-thumb/COMO-Shambahla-Estate.jpg">
+							</a>	
+						</div>
+						<div class="tour hotel">
+							<a href="/bali/travelAgent/uma-by-como,-ubud" style="text-decoration: none;">
+								<h1>UMA BY COMO</h1>
+								<img src="/bali/assets/img/hotel-thumb/Uma-by-COMO.jpg">
+							</a>	
+						</div>
+						<div class="tour hotel">
+							<a href="/bali/travelAgent/amanusa" style="text-decoration: none;">
+								<h1>AMANUSA</h1>
+								<img src="/bali/assets/img/hotel-thumb/amanusa-hotel.jpg">
+							</a>	
+						</div>
+						<div class="tour hotel">
+							<a href="/bali/travelAgent/viceroy-bali" style="text-decoration: none;">
+								<h1>VICEROY</h1>
+								<img src="/bali/assets/img/hotel-thumb/1303374893975.jpg">
+							</a>	
+						</div>
+						<div class="tour hotel">
+							<a href="/bali/travelAgent/the-st.-regis-bali-resort" style="text-decoration: none;">
+								<h1>ST REGIS BALI R</h1>
+								<img src="/bali/assets/img/hotel-thumb/Pool%20Suite2.jpg">
+							</a>	
+						</div>
+						<div class="tour hotel">
+							<a href="/bali/travelAgent/alila-villas-uluwatu" style="text-decoration: none;">
+								<h1>ALILA VILLAS ULUWATU1</h1>
+								<img src="/bali/assets/img/hotel-thumb/alila-villas-uluwatu-01.jpg">
+							</a>	
+						</div>
+				</blocks>
+		 	</div>
+		 	<div class="trasfer-travel ttrl">
+				<div class="aux">
+				 	{{#transferBlock}}
+				 		<div class="{{tipo}}">
+					 		<h1>
+					 			{{en}}
+					 			<span>Precios de traslados por persona en Dolares Americanos</span>
+					 		</h1>
+					 		<center>
+					 			<button type="button" onclick="window.location.href='/bali/es/request'">SOLICITUD</button>
+					 		</center>
+					 		<br>
+					 		<table>
+								<tr class="main">
+									<td>Descripción</td>
+									<td colspan="2" class="data">INNOVA SUV</td>
+									<td colspan="2" class="data">HIACE VAN</td>
+									<td colspan="2" class="data">ALPHARD/MERCY E 200</td>
+								</tr>
+								<tr>
+									<td>Pasajeros</td>
+									<td class="data">1</td>
+									<td class="data">2 - 4</td>
+									<td class="data">5 - 7</td>
+									<td class="data">8 - 10 
+									<td class="data"> 1 </td>
+									<td class="data"> 2 - 4 </td>
+								</tr>
+								{{# detalle}}
+									<tr>
+										<td>{{es}}</td>
+										{{#vals}}
+											<td class="data">{{val}}</td>
+										{{/vals}}
+									</tr>
+								{{/ detalle}}
+							</table>
+							<h2>Las tasas transfer incluye :</h2>
+							Conductor, hasolina, estacionamiento
+							<br>Guia de habla hispana / inglesa 
+							<br>Seguro
+							<br>Toalla Refrescante
+							<br>Conexión Wi-Fi en el carro	
+							<br>Propinas
+						</div>
+					{{/transferBlock}}
+				</div>
+				<h1>  Galería </h1>
+				
+				<img src="/bali/assets/img/transfers/galeria_trasnfers/automovil_02.jpg" class="modal">
+				<img src="/bali/assets/img/transfers/galeria_trasnfers/automovil_01.jpg">
+				<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_01.jpg">
+				<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_02.jpg">
+				<div class="clear"></div>
+			</div>
+		
+			<div class="experiences-travel ttrl">
+				<div class="aux">
+				 	{{#experBlock}}
+				 		<div class="{{tipo}}">
+					 		<h1>
+					 			{{en}}
+					 			<span>Precios de traslados por persona en Dolares Americanos</span>
+					 		</h1>
+					 		<center>
+					 			<button type="button" onclick="window.location.href='/bali/es/request'">SOLICITUD</button>
+					 		</center>
+					 		<br>
+					 		<table>
+								<tr class="main">
+									<td>Descripción</td>
+									<td colspan="2" class="data">INNOVA SUV</td>
+									<td colspan="2" class="data">HIACE VAN</td>
+									<td colspan="2" class="data">ALPHARD/MERCY E 200</td>
+								</tr>
+								<tr>
+									<td>Pasajeros</td>
+									<td class="data">1</td>
+									<td class="data">2 - 4</td>
+									<td class="data">5 - 7</td>
+									<td class="data">8 - 10 
+									<td class="data"> 1 </td>
+									<td class="data"> 2 - 4 </td>
+								</tr>
+								{{# detalle}}
+									<tr>
+										<td>{{es}}</td>
+										{{#vals}}
+											<td class="data">{{val}}</td>
+										{{/vals}}
+									</tr>
+								{{/ detalle}}
+							</table>
+							<h2>Las tasas transfer incluye :</h2>
+							Conductor, hasolina, estacionamiento
+							<br>Guia de habla hispana / inglesa 
+							<br>Seguro
+							<br>Toalla Refrescante
+							<br>Conexión Wi-Fi en el carro	
+							<br>Propinas, Excepto "Bali as you please"
+						</div>
+					{{/experBlock}}
+				</div>
+				<h1> Galería </h1>
+				
+				<img src="/bali/assets/img/transfers/galeria_trasnfers/automovil_02.jpg" class="modal">
+				<img src="/bali/assets/img/transfers/galeria_trasnfers/automovil_01.jpg">
+				<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_01.jpg">
+				<img src="/bali/assets/img/transfers/galeria_trasnfers/camioneta_02.jpg">
+				<div class="clear"></div>
+			</div>
 	</div>
 	{{/content}}
 	{{$scripts}}
 		<script>
 			jQuery.noConflict();
 			jQuery(window).load(function(){
-					jQuery('.filter a').click(function(){
-					jQuery('.filter .actual').removeClass('actual');
-					jQuery(this).addClass('actual');
-					
-					var selector = jQuery(this).attr('data-filter');
-					jQuery('.aux > div').fadeIn(1000);
-					jQuery('.aux > div').not(selector).hide();
-				});
-		});
+
+				try{
+					if( window.location.hash === "#hotels" ){
+						jQuery("#hotels").trigger("click")
+					}
+
+				}catch(e){
+
+				}
+
+			});
+		
+		function changeTab( e , classe ){
+			jQuery(".tabs a.actve").removeClass("actve");
+			jQuery(e).addClass("actve");
+			jQuery(".ttrl").fadeOut(100,function(){
+				setTimeout(function(){jQuery(classe).fadeIn();} , 100);
+			});
+		}
+		
 	 	</script>
 	{{/scripts}}
 {{/ panel_esp}}
-	
