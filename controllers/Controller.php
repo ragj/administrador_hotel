@@ -22,6 +22,8 @@ class Controller {
     public $bread = array();
     public $views = "views/";
     public $adminviews = "admin/";
+    public $cmail;
+    public $ccmail;
 
     /**
      * Comienza la session en el constructor de la accion
@@ -47,6 +49,11 @@ class Controller {
 
         global $mail;
         $this->mail = $mail;
+
+        global $cmail;
+        $this->cmail=$cmail;
+        global $ccmail;
+        $this->ccmail=$ccmail;
         
     }
 

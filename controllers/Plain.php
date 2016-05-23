@@ -8,6 +8,7 @@
 
 
 class Plain extends Luna\Controller {
+    
      public function header( $menu,$lang ){
         $wmpr = $this->spot->mapper("Entity\Weather");
         $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
@@ -312,10 +313,10 @@ class Plain extends Luna\Controller {
             
             $req->data["subject"]="Contacto desde pagina";
             //Enviamos el primer correo
-            $req->data["emailto"]="bali@lozano.com";
+            $req->data["emailto"]=$this->cmail;
             $this->mailer( $res , $req , $template);
             //Enviamos el segundo correo
-            $req->data["emailto"]="alex.mendiola@lozano.com";
+            $req->data["emailto"]=$this->ccmail;
             $this->mailer( $res , $req , $template);
             $contactMapper=$this->spot->mapper("Entity\Contact");
             //construimos la entidad
@@ -413,9 +414,10 @@ class Plain extends Luna\Controller {
 
             $req->data["comments"]=($comments );
             $req->data["agent"]=$req->user;
-            $req->data["emailto"]="julzebadua@gmail.com";
-
+            $req->data["emailto"]=$this->cmail;
             //mandamos mensaje
+            $this->mailer( $res , $req , $template);
+            $req->data["emailto"]=$this->ccmail;
             $this->mailer( $res , $req , $template);
             //header($des);
             switch($lang){
@@ -689,10 +691,10 @@ class Plain extends Luna\Controller {
                 $req->data["emailto"]=$req->data["user"];
                 $this->mailer( $res , $req , $template);
                 //Enviamos el primer correo
-                $req->data["emailto"]="bali@lozano.com";
+                $req->data["emailto"]=$this->cmail;
                 $this->mailer( $res , $req , $template);
                 //Enviamos el segundo correo
-                $req->data["emailto"]="alex.mendiola@lozano.com";
+                $req->data["emailto"]=$this->ccmail;
                 $this->mailer( $res , $req , $template);
                 echo $this->renderWiew($this->header("register",$lang), $res);
             }
