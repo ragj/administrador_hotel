@@ -738,7 +738,8 @@ table tr.main{
 }
 
 @media (max-width: 768px){
-	.fit.contact{
+	.fit.contact ,
+	.fit{
 		background-image: none;
 		background-color: #f1f1f1;
 	}
@@ -754,12 +755,26 @@ table tr.main{
 		.fit .intro b{
 			color: #999;
 		}
+		.fit:not(.contact) .intro{
+			color: #aaa;
+			font-size: 15px;
+			line-height: 18px;
+			margin-bottom: 0px;
+			display: none;
+		}
+		.fit:not(.contact) .element{
+			margin-top: 0px;
+			border-radius: 0px;
+			margin-bottom: 0px;
+		}
 	header .logo{
 		width: 200px;
 		background-repeat: no-repeat;
 		background-position: center;
 	}
-
+	.hide-mobile{
+		display: none;
+	}
 	.transfer div:not(.hoteles-travel) img{
 		float: none;
 		width: 100%;
