@@ -4,7 +4,7 @@ global $mail;
 $mail = new PHPMailer();
 $mail->IsSMTP();
 $mail->isHTML(true);
-$mail->SMTPAuth = false;
+$mail->SMTPAuth = true;
 
 $mail->SMTPSecure = 'ssl';
 $mail->Host = 'smtp.gmail.com';
