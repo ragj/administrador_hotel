@@ -257,6 +257,7 @@ header{
 		display: block;
 		margin-top: -10px;
 	}
+
 		header nav ul{
 			float: right;
 			display: inline-block;
@@ -731,8 +732,116 @@ table tr.main{
 	padding-right: 40px;
 }
 /* MEDIA */
+.menu-bars , .close-menu{
+	display: none;
+}
+
 @media (max-width: 768px){
+	header .logo{
+		width: 200px;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	body > img{
+		min-height: 150px;
+
+	}
+	.himage{
+		height: auto;
+	}
+	.himage img{
+		width: 100%;
+		height: auto;
+	}
 	.slider{
 		height: 200px;
 	}	
+	.close-menu,.close-menu:hover{
+		color: #C39323;
+		position: absolute;
+		top: 10px;
+		z-index: 1000000;
+		right: 0px;
+		font-size: 12px;
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		background-color: #f4f4f4;
+		display: inline-block;
+	}
+	header .weather{
+		float: none;
+		position: absolute;
+		color: #ccc;
+		top: 20px;
+		right: 20px;
+		font-size: 12px;
+		padding: 0px;
+		padding-top: 0px;
+		display: block;
+	}
+	.menu-bars{
+	 color: #C39323;
+	 float: right;
+	 display: block;
+	 clear: both;
+	 margin-top: 10px;
+	 font-size: 20px;
+	 border: 3px solid #C39323;
+	 border-radius: 50%;
+	 width: 40px;
+	 height: 40px;
+	 text-align: center;
+	 line-height: 35px;
+	}
+		.menu-bars:hover{
+			color: #C39323;
+		}
+	header .lang{
+		position: absolute;
+		left: -200px;
+		top: 5px;
+		width: 120px;
+		text-align: left;
+		z-index: 10000;
+		transition: all linear 0.2s;
+	}
+		header .lang.show{
+			transition: all linear 0.2s;
+			left: 20px;
+		}
+	header nav{
+		position: fixed;
+		left: -200px;
+		top: 0px;
+		width: 200px;
+		padding-top: 50px;
+		bottom: 0px;
+		z-index: 1000;
+		border-right: 1px solid #C39323;
+		background-color: #FFF;
+		transition: all linear 0.2s;
+		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+	}
+		header nav:after{
+			position: fixed;
+			top: 0px;
+			bottom: 0px;
+			width: 100%;
+			background-color: transparent;
+		}
+		header nav.show{
+			transition: all linear 0.2s;
+			left: 0px;
+		}
+		header nav ul{
+			float: left;
+		}
+		header nav ul li{
+			display: block;
+			float: none;
+			text-align: left;
+			line-height: 40px;
+		}
 }
