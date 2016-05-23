@@ -32,7 +32,7 @@
 	    *	Metodo que obtiene los transfer blocks y agrega el detalle del transfer block
 	    **/
 	    public function addDetail($req,$res){
-	    	if(isset($req->data["tb"],$req->data["desc"],$req->data["descesp"])){
+	    	if(isset($req->data["tb"],$req->data["desc"],$req->data["descesp"])){	
 	    		$transferDetailMapper=$this->spot->mapper("Entity\TransferDetail");
 	    		$entity=$transferDetailMapper->build([
 		    		'description' => $req->data["desc"],

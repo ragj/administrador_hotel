@@ -39,7 +39,6 @@
 
 	  $tokens = parse_url('http://lozano.travel' . str_replace($BASE , "" , $_SERVER["REQUEST_URI"] ));
       $uri = rawurldecode( isset($tokens['path'])?$tokens['path']:"/");
-      
       $router->route( \Luna\Translate :: uri( $uri ) );
 
       
