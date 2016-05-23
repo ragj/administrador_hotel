@@ -944,6 +944,10 @@ table tr.main{
 		float: none;
 		font-size: 18px;
 	}
+
+	.pad{
+		overflow: hidden;
+	}
 		footer div.contact{
 			float: none;
 			font-size: 15px;
