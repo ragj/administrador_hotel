@@ -4,10 +4,14 @@
 		<a href="{{#translate.call}}es{{/translate.call}}{{^translate.call}}{{#lan}}es{{/lan}}{{/translate.call}}" >Spanish</a>
 		<a href="{{#translate.call}}en{{/translate.call}}{{^translate.call}}{{#lan}}en{{/lan}}{{/translate.call}}" class="active" >English</a>
 	</section>
+
 	<section class="weather"> 
 		{{current_time}} {{weather.temp}}ºC 
+		<div class="clear"></div>
+		<a href="#" class="menu-bars" onclick="showMenu(event)"><i class="fa fa-bars" aria-hidden="true"></i></a>
 	</section>
-	<nav>
+	<nav >
+		<a href="#"  class="close-menu" onclick="hideMenu(event)"><i class="fa fa-times"></i></a>
 		<ul>
 			<li>
 				<a href="{{#url}}/{{/url}}" {{#home }}class="active"{{/home}} >Home</a>
@@ -37,6 +41,19 @@
 				{{/user.nombre}}
 			</li>
 		</ul>
+		
 	</nav>
 	<div class="clear"></div>
 </header>
+<script type="text/javascript">
+	function hideMenu(event){
+		event.preventDefault();
+		jQuery("header nav").removeClass("show")
+		jQuery("header .lang").removeClass("show")
+	}
+	function showMenu(event){
+		event.preventDefault();
+		jQuery("header nav").addClass("show")
+		jQuery("header .lang").addClass("show")
+	}
+</script>
