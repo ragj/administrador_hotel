@@ -232,6 +232,7 @@
 				segment.click(function(){
 					if( ! $(this).data("active") ){
 						$(this).data("active" , true );
+						$(this).addClass("active");
 						$(this).find(".data").hide();
 						$(this).find(".create-segment").show();	
 					}
@@ -251,6 +252,7 @@
 					segment.find(".create-segment").hide();	
 					setTimeout(function(){
 						segment.data("active" , false );	
+						segment.removeClass("active");
 					} , 100 );
 					
 				});
@@ -266,6 +268,7 @@
 					segment.find(".create-segment").hide();	
 					setTimeout(function(){
 						segment.data("active" , false );	
+						segment.removeClass("active");
 					} , 100 );
 					
 				});

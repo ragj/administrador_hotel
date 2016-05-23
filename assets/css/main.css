@@ -876,6 +876,30 @@ table tr.main{
 	.tabs a{
 		padding: 3px 15px;
 	}
+	.request .commnet{
+		line-height: 15px;
+		font-size: 12px;
+	}
+	.segment-item.active a.dlt{
+		left: 0px;
+		top: 5px;
+		right: auto;
+	}
+		.segment-item  a.dlt{
+			right: 0px;
+			left: auto;
+			color: #222;
+			display: inline-block;
+		}
+
+	.segment-item .type{
+		font-family: Verdana;
+		font-size: 10px;
+		min-width: 66px;
+	}
+	.more-data{
+		display: none;
+	}
 	footer p{
 		display: block;
 		float: none;
@@ -888,4 +912,31 @@ table tr.main{
 			text-align: left;
 			line-height: 25px;
 		}
+		.request{
+			padding: 20px 20px;
+		}
+		.request h2{
+			line-height: 20px;
+			font-size: 15px;
+		}
+		.request .add{
+			padding: 0px;
+		}
+	.request .add .btn {
+		display: inline-block;
+		width: calc( 33% - 2px );
+		padding: 0px;
+		font-size: 12px;
+
+	}
+	.add .lbl{
+		display: inline-block;
+		font-weight: bolder;
+		font-size: 15px;
+		color: #aaa;
+		width: 100%;
+		margin: 0px;
+		text-align: center;
+		border-right: 0px;
+	}
 }
