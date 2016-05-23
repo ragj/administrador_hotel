@@ -880,6 +880,9 @@ table tr.main{
 		line-height: 15px;
 		font-size: 12px;
 	}
+	.request select{
+		-webkit-appearance:none;
+	}
 	.segment-item.active a.dlt{
 		left: 0px;
 		top: 5px;
