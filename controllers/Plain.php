@@ -411,13 +411,25 @@ class Plain extends Luna\Controller {
             $req->data["transfer"]=$requested_transfers;
             $req->data["experience"]=$requested_experiences;
 
-            $req->data["comments"]=nl2br( $comments );
+            $req->data["comments"]=($comments );
             $req->data["agent"]=$req->user;
             $req->data["emailto"]="julzebadua@gmail.com";
 
             //mandamos mensaje
             $this->mailer( $res , $req , $template);
             //header($des);
+            switch($lang){
+            case "es":
+                $res->m = $res->mustache->loadTemplate("Plain/requesta_esp.mustache");
+            break;
+            case "en":
+                $res->m = $res->mustache->loadTemplate("Plain/requesta.mustache");
+            break;
+            default:
+                $res->m = $res->mustache->loadTemplate("Plain/requesta.mustache");
+            break;
+        }
+
         }
         echo $this->renderWiew(array_merge(["hoteles"=>$hotels,"transfersd"=>$transfers,"experiences"=>$experiences],$this->header("transfer",$lang)), $res);
     }
