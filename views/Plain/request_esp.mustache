@@ -40,7 +40,7 @@
 									</label>
 									<select name="hotelT[@][idhotel]"  class="select">
 										{{#hoteles}}
-											<option value="{{idhotel}}">{{name}}</option>
+											<option value="{{idhotel}}">{{name|upper}}</option>
 										{{/hoteles}}
 									</select>
 								</column>
@@ -74,7 +74,7 @@
 									<select name="transferT[@][idtransferDetail]" class="select">
 										{{#transfersd}}
 											{{#detail}}
-												<option value="{{idtransferDetail_esp}}">{{description}}</option>
+												<option value="{{idtransferDetail_esp}}">{{description|upper}}</option>
 											{{/detail}}
 										{{/transfersd}}
 									</select>
@@ -121,7 +121,7 @@
 									</label>
 									<select name="experT[@][idexperience]" class="ex select">
 										{{#experiences}}
-											<option value="{{idexperience}}">{{title}}</div>
+											<option value="{{idexperience}}">{{title|upper}}</div>
 										{{/experiences}}
 									</select>
 								</column>

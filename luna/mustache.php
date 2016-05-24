@@ -48,7 +48,10 @@ class Mustache extends \Zaphpa\BaseMiddleware {
     } );
     $mustache->addHelper('lan' , function($value) {
         return \Luna\Translate::to( $value );
+    } );
 
+    $mustache->addHelper('upper' , function($value) {
+        return strtoupper( $value);
     } );
 
     $res->mustache = $mustache;

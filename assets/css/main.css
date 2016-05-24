@@ -76,6 +76,13 @@
 		margin-left: 10px;
 		display: inline-block;
 	}
+		.segment-item .name{
+			text-transform: uppercase;
+		}
+		.segment select{
+			text-transform: uppercase;
+		}
+
 	.segments .note{
 		float: right;
 		color: #222;
