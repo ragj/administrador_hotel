@@ -216,8 +216,14 @@
 				btn.attr("onclick" , "");
 				form.hide();
 
-
-				form.find("select").val( currentForm.find("select").val() );
+				if( type == "transfer"){
+					form.find("select").first().val( currentForm.find("select").first().val() );
+					alert( currentForm.find("select").last().val()  );
+					form.find("select").last().val( currentForm.find("select").last().val() );
+				}else{
+					form.find("select").val( currentForm.find("select").val() );
+				}
+				
 
 				form.find(".ms").remove();
 

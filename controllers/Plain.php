@@ -351,7 +351,7 @@ class Plain extends Luna\Controller {
         $experiences=$experienceMapper->select()->where(["zona_idzona"=>1]);
             
 
-        if(isset($req->data["hotel"])){
+        if(isset($req->data["hotel"]) || isset($req->data["transfer"])|| isset($req->data["exper"]) ){
             
             $TransferDetailBlock=$this->spot->mapper("Entity\TransferDetail");
             $requested_hotels=array();
@@ -363,6 +363,7 @@ class Plain extends Luna\Controller {
                 array_push($requested_hotels,$aux);
             }
             $requested_transfers=array();
+           
             if(isset($req->data["transfer"])){
                 foreach($req->data["transfer"] as $trans){
                     if($trans['idtransferDetail']!=''){
@@ -412,6 +413,7 @@ class Plain extends Luna\Controller {
             $req->data["transfer"]=$requested_transfers;
             $req->data["experience"]=$requested_experiences;
 
+            
             $req->data["comments"]=($comments );
             $req->data["agent"]=$req->user;
             $req->data["emailto"]=$this->cmail;
