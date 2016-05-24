@@ -742,8 +742,6 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("hotelTransfer/h.mustache");
             break;
 
-            
-
         }
         $lang=$req->lang;
         echo $this->renderWiew( $this->header("transfer",$lang), $res);
