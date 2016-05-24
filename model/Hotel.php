@@ -24,6 +24,7 @@
                 'email' => ['type' => 'string' ],
                 'uri' => ['type' => 'text' ],
                 'uri_es' => ['type' => 'text' ],
+                'oculto'=>['type'=>'boolean','value' => false],
                 'created' => ['type' => 'datetime', 'required' => true , "value" => new \DateTime() ],
                 'zona_idzona'=> ['type' => 'integer', 'required' => true]
             ];

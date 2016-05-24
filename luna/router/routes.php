@@ -150,6 +150,13 @@ $router->addRoute(array(
 	'get' => array('Hotel', 'delete'),
 ));
 
+$router->addRoute(array(
+	'path' => '/panel/hotel/show/{hotel}',
+	'get' => array('Hotel', 'hide'),
+));
+
+
+
 ///HotelImages Routes
 $router->addRoute(array(
 	'path' => '/panel/hotel/addImages',
@@ -202,6 +209,10 @@ $router->addRoute(array(
 $router->addRoute(array(
 	'path' => '/panel/tour/delete',
 	'get' => array('Tour', 'show'),
+));
+$router->addRoute(array(
+	'path' => '/panel/tour/show/{exper}',
+	'get' => array('Tour', 'hide'),
 ));
 
 ///TourImages Routes
@@ -308,10 +319,8 @@ $router->addRoute(array(
 	'get' => array('Transfer', 'deleteValue'),
 	'post' => array('Transfer', 'deleteValue')
 ));
-
-
-
-
-
-
+$router->addRoute(array(
+	'path' => '/panel/transfer/hide/{detail}',
+	'get' => array('Transfer', 'hide'),
+));
 ?>

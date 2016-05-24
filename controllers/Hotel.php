@@ -467,6 +467,25 @@ class Hotel extends Luna\Controller {
 			$hotel = $hotelImageMapper->delete(['hotel_idhotel' => (integer)$var]);
 	    	echo $this->renderWiew( array_merge([]), $res);
     }
+    /**
+    *   Metodo que sirve para ocultar o mostrar el elemento
+    **/
+    public function hide($req,$res){
+        $hotelMapper=$this->spot->mapper("Entity\Hotel");
+        if(isset($req->params["hotel"])){
+            $hotel=$hotelMapper->select()->where(["idhotel"=>$req->params["hotel"]])->first();
+            if($hotel->oculto==true){
+                $hotel->oculto=false;
+            }
+            else{
+                $hotel->oculto=true;
+            }
+            $hotelMapper->update($hotel);
+        }
+        $hotels=$hotelMapper->select();
+        $res->m = $res->mustache->loadTemplate("Hotel/show.mustache");
+        echo $this->renderWiew(array_merge(["hotel" => $hotels]),$res);  
+    }
      /**
     *   Metodo que elimina todos los archivos del directorio y el directorio
     *   @param $carpeta

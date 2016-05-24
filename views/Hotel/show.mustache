@@ -24,6 +24,7 @@
 							                <tr>
 							                  <th>Hotel</th>
 							                  <th>Zone</th>
+							                  <th>Show</th>
 							                  <th>Edit</th>
 							                  <th>Delete</th>
 							                </tr>
@@ -32,6 +33,7 @@
 											<tr>
 							                  <th>Hotel</th>
 							                  <th>Zone</th>
+							                  <th>Show</th>
 							                  <th>Edit</th>
 							                  <th>Delete</th>							                
 							                </tr>
@@ -44,6 +46,22 @@
 							            			</td>
 							            			<td>
 							            				{{zona.zona}}
+							            			</td>
+							            			<td>
+							            				{{#oculto}}
+  															<a href="/bali/panel/hotel/show/{{idhotel}}">
+	                                                            <button type="button" class="btn btn-primary">
+	                                                                <span class="glyphicon" aria-hidden="true"></span> Show
+	                                                            </button>
+                                                        	</a>
+														{{/oculto}}
+														{{^oculto}}
+															<a href="/bali/panel/hotel/show/{{idhotel}}">
+	                                                            <button type="button" class="btn btn-info">
+	                                                                <span class="glyphicon" aria-hidden="true"></span> Hide
+	                                                            </button>
+                                                        	</a>
+														{{/oculto}}
 							            			</td>
 							            			<td>
 							            				<a href="/bali/panel/hotel/edit/{{idhotel}}">

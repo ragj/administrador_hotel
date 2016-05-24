@@ -181,6 +181,34 @@
 	    	$res->m = $res->mustache->loadTemplate("Transfer/listBlock.mustache");
 	    	echo $this->renderWiew(array_merge(["transferBlock"=>$transferBlock]),$res);
 	    }
+	    /**
+	    *   Metodo que sirve para ocultar o mostrar el elemento
+	    **/
+	    public function hide($req,$res){
+	        $detailMapper=$this->spot->mapper("Entity\TransferDetail");
+	        if(isset($req->params["detail"])){
+	            $detail=$detailMapper->select()->where(["idtransferDetail"=>$req->params["detail"]])->first();
+	            if($detail->oculto==true){
+	                $detail->oculto=false;
+	            }
+	            else{
+	                $detail->oculto=true;
+	            }
+	            $detailMapper->update($detail);
+	        }
+	        $transferBlockMapper=$this->spot->mapper("Entity\TransferBlock");
+            $transfer = $transferBlockMapper->select()->where(["idtransferBlock" => $detail->transferBlock_idtransferBlock])->with("detail")->first();
+            $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+            $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+        	$aux=array();
+        	foreach ($zones as $zone) {
+            	array_push($aux,$zone['zona_idzona']);
+        	}
+        	$zoneMapper=$this->spot->mapper("Entity\Zona");
+        	$zonaa=$zoneMapper->select()->where(["idzona"=>$aux]);
+        	$res->m = $res->mustache->loadTemplate("Transfer/editBlock.mustache");
+        	echo $this->renderWiew(array_merge(["transfer"=>$transfer,"zones"=>$zonaa]),$res);
+	    }
 
 	    /**
 	    *	Metodo que sirve para eliminar un valor

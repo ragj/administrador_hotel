@@ -64,7 +64,7 @@ class Plain extends Luna\Controller {
     public function home($req , $res){
         $lang=$req->lang;
         $tourMapper=$this->spot->mapper("Entity\Experience");
-        $tour=$tourMapper->select()->where(["home"=>true])->with("type")->order(['type_idtype' => 'DESC']);;
+        $tour=$tourMapper->select()->where(["home"=>true])->where(["oculto"=>false])->with("type")->order(['type_idtype' => 'DESC']);;
         switch($lang){
             case "es":
                 $res->m = $res->mustache->loadTemplate("Plain/home_esp.mustache");
@@ -180,7 +180,7 @@ class Plain extends Luna\Controller {
                 break;
             }
             $hotelMapper=$this->spot->mapper("Entity\Hotel");
-            $hotel=$hotelMapper->select()->where(["zona_idzona"=>1]);
+            $hotel=$hotelMapper->select()->where(["zona_idzona"=>1])->where(["oculto"=>false]);
             echo $this->renderWiew( array_merge(["hotel-data"=>$hotel], $this->header("hotel",$lang)), $res);
         }
         
@@ -229,7 +229,7 @@ class Plain extends Luna\Controller {
                 break;
             }
             $tourMapper = $this->spot->mapper("Entity\Experience");
-            $tours = $tourMapper->select()->with("type")->where(["zona_idzona"=>1]);
+            $tours = $tourMapper->select()->with("type")->where(["zona_idzona"=>1])->where(["oculto"=>false]);
             echo $this->renderWiew( array_merge(["tours" => $tours] , $this->header("experience",$lang) ), $res);
         }
     	
@@ -248,7 +248,7 @@ class Plain extends Luna\Controller {
         }
         //obtencion de detalles con valores de los ids de los transfers blocks
         $detailMapper=$this->spot->mapper("Entity\TransferDetail");
-        $detailValues=$detailMapper->select()->with(["transferValue"])->where(["transferBlock_idtransferBlock"=>$ids[0]])->order(['description' => 'DESC'])->toArray();
+        $detailValues=$detailMapper->select()->with(["transferValue"])->where(["transferBlock_idtransferBlock"=>$ids[0]])->where(["oculto"=>false])->order(['description' => 'DESC'])->toArray();
         //construccion array perzonalizado para la vista necesaria
         $pers=Array();
         
@@ -265,7 +265,7 @@ class Plain extends Luna\Controller {
             }    
         }
         array_push($pers,$title);
-        $detailValues=$detailMapper->select()->with(["transferValue"])->where(["transferBlock_idtransferBlock"=>$ids[1]])->order(['description' => 'DESC'])->toArray();
+        $detailValues=$detailMapper->select()->with(["transferValue"])->where(["transferBlock_idtransferBlock"=>$ids[1]])->where(["oculto"=>false])->order(['description' => 'DESC'])->toArray();
         $exps=array();
         $title["en"]=$aux[1]["TransferBlockTitle"];
         $title["es"]=$aux[1]["TransferBlockTitle_es"];
