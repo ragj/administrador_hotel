@@ -223,5 +223,52 @@
 	    	$res->m = $res->mustache->loadTemplate("Transfer/listBlock.mustache");
 	    	echo $this->renderWiew(array_merge(["transferBlock"=>$transferBlock]),$res);
 	    }
+	    /**
+	    *	Metodo que obtiene los transfer detail y agrega el valor del transfer detail
+	    **/
+	    public function addHotel($req,$res){
+	    	$hotelMapper=$this->spot->mapper("Entity\Hotel");
+	    	$hotels=$hotelMapper->select()->where(["zona_idzona"=>1]);
+	    	if(isset($req->data["hotel"],$req->data["content"])){
+
+	    		//insertamos este nuevo elemento
+	    		$hotelTransferMapper=$this->spot->mapper("Entity\HotelTransfer");
+	    		$htransfer=$hotelTransferMapper->build([
+	    			'content'=>$req->data["content"],
+	    			'hotel_idhotel'=>$req->data["hotel"]
+	    		]);
+	    		$hotelTransferMapper->insert($htransfer);
+	    	}	    	
+	    	echo $this->renderWiew(array_merge(["hotel"=>$hotels]),$res);
+	    }
+	    /**
+	    *	Metodo que obtiene los transfer detail y agrega el valor del transfer detail
+	    **/
+	    public function editHotel($req,$res){
+	    	$hotelMapper=$this->spot->mapper("Entity\Hotel");
+	    	$hotels=$hotelMapper->select()->where(["zona_idzona"=>1]);
+	    	$hotelTransferMapper=$this->spot->mapper("Entity\HotelTransfer");
+	    	$tHotel=$hotelTransferMapper->select()->where(["idhotelTransfer"=>$req->params["hTrans"]]);
+	    	if(isset($req->data["hotel"],$req->data["content"])){
+
+	    		//insertamos este nuevo elemento
+	    		$hotelTransferMapper=$this->spot->mapper("Entity\HotelTransfer");
+	    		$htransfer=$hotelTransferMapper->build([
+	    			'content'=>$req->data["content"],
+	    			'hotel_idhotel'=>$req->data["hotel"]
+	    		]);
+	    		$hotelTransferMapper->insert($htransfer);
+	    	}	    	
+	    	echo $this->renderWiew(array_merge(["tHotel"=>$tHotel,"hotel"=>$hotels]),$res);
+	    }
+	     /**
+	    *	Metodo que obtiene los transfer detail y agrega el valor del transfer detail
+	    **/
+	    public function showHotel($req,$res){
+	    	$hotelTransferMapper=$this->spot->mapper("Entity\HotelTransfer");
+	    	$tHotel=$hotelTransferMapper->select()->with("hotel");    	
+	    	echo $this->renderWiew(array_merge(["tHotel"=>$tHotel,"hotel"=>$hotels]),$res);
+	    }
+
 	}
 ?>

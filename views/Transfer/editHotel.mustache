@@ -1,0 +1,56 @@
+{{% BLOCKS }}
+	{{< quirk }}
+		{{$ title}}
+            Add Hotel Transfer
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Transfer</a></li>
+			        <li class="active">Add Hotel Transfer</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-10 col-md-offset-1">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Add Hotel Transfer</h4>
+	          					<p>Please fill the next form, thanks.</p>
+	        				</div>
+		        			<div class="panel-body">
+		        				<hr>
+		        				{{#tHotel}}			
+		        				<form class="form-horizontal" action="/bali/panel/transfer/addHotel" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+		        					<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Hotel: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<select name="hotel" class="form-control">
+				                            	<option value="">Pick a Hotel:</option>
+				                            	{{#hotel}}
+				                            		<option value="{{idhotel}}">{{name}}</option>
+												{{/hotel}}
+											</select>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Content: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<textarea name="content"  placeholder="content" required/>{{content}}</textarea>
+		                    			</div>
+		                  			</div>
+		                  			<hr>
+		                  			<div class="row">
+	                    				<div class="col-sm-9 col-sm-offset-8">
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
+	                    				</div>
+	                  				</div>
+		        				</form>
+		        				{{/tHotel}}
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+		{{/ scripts }}
+	{{/ quirk }}

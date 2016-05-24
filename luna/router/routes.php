@@ -318,6 +318,15 @@ $router->addRoute(array(
 	'post' => array('Transfer', 'addValue'),
 ));
 $router->addRoute(array(
+	'path' => '/panel/transfer/addHotel',
+	'get' => array('Transfer', 'addHotel'),
+	'post' => array('Transfer', 'addHotel'),
+));
+$router->addRoute(array(
+	'path' => '/panel/transfer/listHotel',
+	'get' => array('Transfer', 'listHotel')
+));
+$router->addRoute(array(
 	'path' => '/panel/transfer/editValue/{value}',
 	'get' => array('Transfer', 'editValue'),
 	'post' => array('Transfer', 'editValue'),
