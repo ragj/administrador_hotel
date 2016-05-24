@@ -24,6 +24,7 @@
                 'transfer' => ['type' => 'text' ],
                 'transfer_esp' => ['type' => 'text' ],
                 'home' => ['type' => 'boolean' ],
+                'oculto'=>['type'=>'boolean','value' => false],
                 'created' => ['type' => 'datetime', 'required' => true , "value" => new \DateTime() ],
                 'zona_idzona'=> ['type' => 'integer', 'required' => true],
                 'type_idtype'=> ['type' => 'integer', 'required' => true],

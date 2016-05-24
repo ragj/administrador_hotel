@@ -16,6 +16,7 @@
                 'idtransferDetail' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
                 'description' => ['type' => 'string','required'=>true],
                 'description_esp' => ['type' => 'string','required'=>true],
+                'oculto'=>['type'=>'boolean','value' => false],
                 'transferBlock_idtransferBlock' => ['type' => 'integer','required'=>true]
             ];
         }

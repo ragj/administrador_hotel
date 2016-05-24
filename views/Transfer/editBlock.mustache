@@ -65,6 +65,7 @@
 									                  <th>Title</th>
 									                  <th>Spanish Title</th>
 									                  <th>Edit</th>
+									                  <th>Show</th>
 									                  <th>Delete</th>
 									                </tr>
 		              							</thead>
@@ -77,6 +78,22 @@
 										            		<td>
 										            			{{description_esp}}
 										            		</td>
+										            		<td>
+		                                                        {{#oculto}}
+		                                                            <a href="/bali/panel/transfer/hide/{{idtransferDetail}}">
+		                                                                <button type="button" class="btn btn-primary">
+		                                                                    <span class="glyphicon" aria-hidden="true"></span> Show
+		                                                                </button>
+		                                                            </a>
+		                                                        {{/oculto}}
+		                                                        {{^oculto}}
+		                                                            <a href="/bali/panel/transfer/hide/{{idtransferDetail}}">
+		                                                                <button type="button" class="btn btn-info">
+		                                                                    <span class="glyphicon" aria-hidden="true"></span> Hide
+		                                                                </button>
+		                                                            </a>
+		                                                        {{/oculto}}
+                                                    		</td>
 										            		<td>
 										            			<a href="/bali/panel/transfer/editDetail/{{idtransferDetail}}">
 			                                                        <button type="button" class="btn btn-primary">

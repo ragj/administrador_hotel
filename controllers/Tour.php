@@ -440,6 +440,26 @@ class Tour extends Luna\Controller {
 			$tour = $tourMapper->delete(['experience_idexperience =' => (integer)$var]);
 	    	echo $this->renderWiew([], $res);
     }
+
+    /**
+    *   Metodo que sirve para ocultar o mostrar el elemento 
+    **/
+    public function hide($req,$res){
+        $tourMapper=$this->spot->mapper("Entity\Experience");
+        if(isset($req->params["exper"])){
+            $tour=$tourMapper->select()->where(["idexperience"=>$req->params["exper"]])->first();
+            if($tour->oculto==true){
+                $tour->oculto=false;
+            }
+            else{
+                $tour->oculto=true;
+            }
+            $tourMapper->update($tour);
+        }
+        $tours=$tourMapper->select();
+        $res->m = $res->mustache->loadTemplate("Tour/show.mustache");
+        echo $this->renderWiew(array_merge(["tour" => $tours]),$res);
+    }
     /**
     *	Funcion que elimina todos los archivos del directorio y el directorio
     *	@param $carpeta
