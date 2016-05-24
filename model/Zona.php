@@ -12,7 +12,7 @@
 
         public static function fields() {
             return [
-                'idzona' => ['type' => 'integer', 'primary' => true],
+                'idzona' => ['type' => 'integer', 'primary' => true,'autoincrement' => true],
                 'zona' => ['type' => 'string', 'required' => true]
             ];
         }

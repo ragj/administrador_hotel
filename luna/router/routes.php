@@ -270,7 +270,15 @@ $router->addRoute(array(
 	'path' => '/panel/contact/show',
 	'get' => array('Contact', 'show'),
 ));
-
+//request routes
+$router->addRoute(array(
+	'path' => '/panel/request/show',
+	'get' => array('Request', 'show'),
+));
+$router->addRoute(array(
+	'path' => '/panel/request/show/{req}',
+	'get' => array('Request', 'showDet'),
+));
 //transfer Blocks routes
 $router->addRoute(array(
 	'path' => '/panel/transfer/addBlock',

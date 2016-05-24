@@ -344,29 +344,64 @@ class Plain extends Luna\Controller {
             break;
         }
         $hotelMapper=$this->spot->mapper("Entity\Hotel");
-        $hotels=$hotelMapper->select()->where(["zona_idzona"=>1]);
+        $hotels=$hotelMapper->select()->where(["zona_idzona"=>1])->where(["oculto"=>false]);
         $transferBlockMapper=$this->spot->mapper("Entity\TransferBlock");
         $transfers=$transferBlockMapper->select()->with("detail")->where(["zona_idzona"=>1]);
         $experienceMapper=$this->spot->mapper("Entity\Experience");
-        $experiences=$experienceMapper->select()->where(["zona_idzona"=>1]);
+        $experiences=$experienceMapper->select()->where(["zona_idzona"=>1])->where(["oculto"=>false]);
             
 
         if(isset($req->data["hotel"]) || isset($req->data["transfer"])|| isset($req->data["exper"]) ){
-            
             $TransferDetailBlock=$this->spot->mapper("Entity\TransferDetail");
+            //verificamos si hay algo en comments de lo contrario lo ponemos en nulo
+            $comments=isset($req->data["comments"])?$req->data["comments"]:null;
+            //creamos entidad request
+            $requestMapper=$this->spot->mapper("Entity\Request");
+            $request=$requestMapper->build([
+                'comment'=>$comments,
+                'users_usersid'=>$req->user["id"]
+            ]);
+            $requestMapper->insert($request);
+            //obtenemos el id del request actual insertado
+            $idr=$request->idrequest;
+            //si hotel fue añadido procedemos a la obtencion de sus datos e insercion en la base de datos, de lo contrario no hacemos nada            
             $requested_hotels=array();
-            foreach ($req->data["hotel"] as $hotel) {
-                $hot=$hotelMapper->select()->where(["idhotel"=>$hotel["idhotel"]])->first();
-                $arr=$hotel["aaday"];
-                $dday=$hotel["dday"];
-                $aux = array('name' =>$hot->name ,'arrival'=>$arr,'departure'=>$dday);
-                array_push($requested_hotels,$aux);
+            if(isset($req->data["hotel"])){
+                $requestHotelMapper=$this->spot->mapper("Entity\RequestHotel");
+                foreach ($req->data["hotel"] as $hotel) {
+                    $rhotel=$requestHotelMapper->build([
+                        'arrival_date'=>$hotel["aaday"],
+                        'departure_date'=>$hotel["dday"],
+                        'request_idrequest'=>$idr,
+                        'hotel_idhotel'=>$hotel["idhotel"]
+                    ]);
+                    $requestHotelMapper->insert($rhotel);
+                    $hot=$hotelMapper->select()->where(["idhotel"=>$hotel["idhotel"]])->first();
+                    $arr=$hotel["aaday"];
+                    $dday=$hotel["dday"];
+                    $aux = array('name' =>$hot->name ,'arrival'=>$arr,'departure'=>$dday);
+                    array_push($requested_hotels,$aux);
+                }
+            }
+            else{
+                $requested_hotels=null;
             }
             $requested_transfers=array();
            
             if(isset($req->data["transfer"])){
+                $requestTransferDMapper=$this->spot->mapper("Entity\RequestTransferD");
+                $vehicleMapper=$this->spot->mapper("Entity\Vehicle");
                 foreach($req->data["transfer"] as $trans){
                     if($trans['idtransferDetail']!=''){
+                        $vehicle=$vehicleMapper->select()->where(["name"=>$trans['vehicle']])->first();
+                        $rtransfer=$requestTransferDMapper->build([
+                            'wanted_date'=>$trans['tday'],
+                            'peaple'=>$trans['passanger'],
+                            'request_idrequest'=>$idr,
+                            'transferDetail_idtransferDetail'=>$trans['idtransferDetail'],
+                            'vehicle_idvehicle'=>$vehicle->idVehicle
+                        ]);
+                        $requestTransferDMapper->insert($rtransfer);
                         $transferDetail=$TransferDetailBlock->select()->where(["idtransferDetail"=>$trans['idtransferDetail']])->first();
                         $aux=array('transfer' =>$transferDetail->description,'vehicle'=>$trans['vehicle'],'passenger'=>$trans['passanger'],'fecha'=>$trans['tday']);
                         array_push($requested_transfers,$aux);
@@ -378,8 +413,16 @@ class Plain extends Luna\Controller {
             }
             $requested_experiences=array();
             if(isset($req->data["exper"])){
+                $requestExperience=$this->spot->mapper("Entity\RequestExperience");
                 foreach ($req->data["exper"] as $exp) {
                     if($exp!=''){
+                        $rexperience=$requestExperience->build([
+                            'wanted_date'=>$exp['date'],
+                            'peaple'=>$exp['passanger'],
+                            'request_idrequest'=>$idr,
+                            'experience_idexperience'=>$exp['idexperience']
+                        ]);
+                        $requestExperience->insert($rexperience);
                         $expe=$experienceMapper->select()->where(["idexperience"=>$exp['idexperience']])->first();
                         $aux=array('experience'=>$expe->title,"tipo"=>$expe->duration,"fecha"=>$exp['date']);
                         array_push($requested_experiences, $aux);
@@ -390,7 +433,6 @@ class Plain extends Luna\Controller {
             else{
                 $requested_experiences=null;
             }
-            $comments=isset($req->data["comments"])?$req->data["comments"]:null;
             switch($lang){
                     case "es":
                         $req->data["subject"] = 'Contacto Travel Agent';
@@ -423,16 +465,16 @@ class Plain extends Luna\Controller {
             $this->mailer( $res , $req , $template);
             //header($des);
             switch($lang){
-            case "es":
-                $res->m = $res->mustache->loadTemplate("Plain/requesta_esp.mustache");
-            break;
-            case "en":
-                $res->m = $res->mustache->loadTemplate("Plain/requesta.mustache");
-            break;
-            default:
-                $res->m = $res->mustache->loadTemplate("Plain/requesta.mustache");
-            break;
-        }
+                case "es":
+                    $res->m = $res->mustache->loadTemplate("Plain/requesta_esp.mustache");
+                break;
+                case "en":
+                    $res->m = $res->mustache->loadTemplate("Plain/requesta.mustache");
+                break;
+                default:
+                    $res->m = $res->mustache->loadTemplate("Plain/requesta.mustache");
+                break;
+            }
 
         }
         echo $this->renderWiew(array_merge(["hoteles"=>$hotels,"transfersd"=>$transfers,"experiences"=>$experiences],$this->header("transfer",$lang)), $res);

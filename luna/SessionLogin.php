@@ -82,7 +82,7 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                         if(strcmp($BASE,strtolower("/".$zona["zona"]))==0){
                             $permiso=true;
                         }
-                    }
+                    } 
                     //Si permiso de zona es true, vemos el rol y vemos si tiene habilitada la url
                     if($permiso){
                         switch($rol){
@@ -90,7 +90,8 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                             case 1:
                                 if(in_array(self::$context["pattern"], $this->admin)){
                                         $session->set("user", $req->user);
-                                        $session->set("zonas", $permisoZone); 
+                                        $session->set("zonas", $permisoZone);
+                                        
                                 }
                             break;
                             //solo tiene acceso a lo privado

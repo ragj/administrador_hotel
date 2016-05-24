@@ -74,7 +74,9 @@
 									<select name="transferT[@][idtransferDetail]" class="select">
 										{{#transfersd}}
 											{{#detail}}
-												<option value="{{idtransferDetail}}">{{description|upper}}</option>
+												{{^oculto}}
+													<option value="{{idtransferDetail}}">{{description|upper}}</option>
+												{{/oculto}}
 											{{/detail}}
 										{{/transfersd}}
 									</select>
