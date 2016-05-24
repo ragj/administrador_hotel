@@ -22,9 +22,14 @@
 		        				<form class="form-horizontal" action="/bali/panel/transfer/editHotel/{{idhotelTransfer}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Content: <span class="text-danger">*</span></label>
-		                    			<div class="col-sm-6">
+		                    			<br>
+		                    			<!--div class="col-sm-6">
 		                      				<textarea name="content"  placeholder="content" required/>{{content}}</textarea>
-		                    			</div>
+		                    			</div -->
+		                    			<div id="summernote">
+		                    				{{content}}
+		                      			</div>
+
 		                  			</div>
 		                  			<hr>
 		                  			<div class="row">
@@ -41,5 +46,27 @@
     		</div>
         {{/ content }}
 		{{$ scripts }}
+		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			  $('#summernote').summernote({
+			  	airMode: true,
+			  	airPopover: [
+				    // [groupName, [list of button]]
+				    ['style', ['bold', 'italic', 'underline' , 'link']]
+				  ],
+				callbacks: {
+				    onChange: function (contents, $editable) {
+						console.log(contents) ;
+		                $("#contn").val(contents);
+		            }
+				  }
+			  });
+			});
+
+
+
+		</script>
 		{{/ scripts }}
 	{{/ quirk }}
