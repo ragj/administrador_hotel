@@ -27,7 +27,7 @@
 	$router->attach('\Luna\Migrator');
 	$router->attach('\Luna\Mustache');
 	$router->attach('\Luna\AutoDocumentator', '/apidocs' , $details = true);
-	$router->attach('\Luna\SessionLogin');
+	//$router->attach('\Luna\SessionLogin');
 
 
 	//  ROUTES
