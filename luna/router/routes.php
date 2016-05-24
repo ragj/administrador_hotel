@@ -323,9 +323,19 @@ $router->addRoute(array(
 	'post' => array('Transfer', 'addHotel'),
 ));
 $router->addRoute(array(
-	'path' => '/panel/transfer/listHotel',
-	'get' => array('Transfer', 'listHotel')
+	'path' => '/panel/transfer/showHotel',
+	'get' => array('Transfer', 'showHotel')
 ));
+$router->addRoute(array(
+	'path' => '/panel/transfer/editHotel/{hTrans}',
+	'get' => array('Transfer', 'editHotel'),
+	'post' => array('Transfer', 'editHotel'),
+));
+$router->addRoute(array(
+	'path' => '/panel/transfer/hotelDelete/{hTrans}',
+	'get' => array('Transfer', 'deleteHotel')
+));
+
 $router->addRoute(array(
 	'path' => '/panel/transfer/editValue/{value}',
 	'get' => array('Transfer', 'editValue'),

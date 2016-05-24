@@ -19,18 +19,7 @@
 		        			<div class="panel-body">
 		        				<hr>
 		        				{{#tHotel}}			
-		        				<form class="form-horizontal" action="/bali/panel/transfer/addHotel" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
-		        					<div class="form-group">
-		                    			<label class="col-sm-3 control-label">Hotel: <span class="text-danger">*</span></label>
-		                    			<div class="col-sm-6">
-		                      				<select name="hotel" class="form-control">
-				                            	<option value="">Pick a Hotel:</option>
-				                            	{{#hotel}}
-				                            		<option value="{{idhotel}}">{{name}}</option>
-												{{/hotel}}
-											</select>
-		                    			</div>
-		                  			</div>
+		        				<form class="form-horizontal" action="/bali/panel/transfer/editHotel/{{idhotelTransfer}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 		                  			<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Content: <span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">

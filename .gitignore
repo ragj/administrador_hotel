@@ -5,3 +5,19 @@
 
 #ignorando intel Sublime
 .phpintel/
+migration/20160525010958/ExperienceImage.json
+migration/20160525010958/Forgot.json
+migration/20160525010958/HotelTransfer.json
+migration/20160525010958/Request.json
+migration/20160525010958/RequestExperience.json
+migration/20160525010958/RequestHotel.json
+migration/20160525010958/RequestTransferD.json
+migration/20160525010958/Rols.json
+migration/20160525010958/TransferBlock.json
+migration/20160525010958/TransferDetail.json
+migration/20160525010958/TransferValue.json
+migration/20160525010958/Type.json
+migration/20160525010958/Users.json
+migration/20160525010958/UsersZona.json
+migration/20160525010958/Vehicle.json
+migration/20160525010958/Zona.json

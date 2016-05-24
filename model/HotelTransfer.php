@@ -29,13 +29,8 @@
         {
             $eventEmitter->on('beforeInsert', function (Entity $entity, Mapper $mapper) {
             	global $spot;
-            	$hotelMapper=$spot->mapper("Entity\Hotel");
-            	$hotel=$hotelMapper->select()->where(["idhotel"=>$entity->hotel_idhotel])->first();
-                $entity->uri = $hotel->uri;
-            });
-            $eventEmitter->on('beforeUpdate', function (Entity $entity, Mapper $mapper) {
-            	global $spot;
-                $hotelMapper=$spot->mapper("Entity\Hotel");
+            	$aux=$spot;
+            	$hotelMapper=$aux->mapper("Entity\Hotel");
             	$hotel=$hotelMapper->select()->where(["idhotel"=>$entity->hotel_idhotel])->first();
                 $entity->uri = $hotel->uri;
             });

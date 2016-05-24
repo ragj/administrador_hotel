@@ -15,18 +15,18 @@
         public static function fields() {
             return [
                 'id' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
-                'nombre' => ['type' => 'string', 'required' => true],
-                'papellido' => ['type' => 'string', 'required' => true],
-                'mapellido' => ['type' => 'string', 'required' => true],
-                'usuario' => ['type' => 'string', 'required' => true],
-                'password' => ['type' => 'string', 'required' => true],
-                'telefono' => ['type' => 'string', 'required' => true],
+                'nombre' => ['type' => 'string', 'required' => false],
+                'papellido' => ['type' => 'string', 'required' => false],
+                'mapellido' => ['type' => 'string', 'required' => false],
+                'usuario' => ['type' => 'string', 'required' => false],
+                'password' => ['type' => 'string', 'required' => false],
+                'telefono' => ['type' => 'string', 'required' => false],
                 'iata' => ['type' => 'string', 'required' => false],
                 'miembros' => ['type' => 'string', 'required' => false],
                 'years' => ['type' => 'string', 'required' => false],
-                'activo' => ['type' => 'boolean', 'required' => true ,'value'=>0],
+                'activo' => ['type' => 'boolean', 'required' => false ,'value'=>0],
                 'create_at' => ['type' => 'datetime', 'required' => false],
-                'rols_idrols'=> ['type' => 'integer', 'required' => true]
+                'rols_idrols'=> ['type' => 'integer', 'required' => false]
             ];
         }
         
