@@ -15,7 +15,7 @@
 	    	$requestMapper=$this->spot->mapper("Entity\Request");
 	    	$request=$requestMapper->select()->with("user")->with("rhotels")->with("rexperience")->with("rtransfer")->where(["idrequest"=>$req->params["req"]]);
 	    	
-	    	echo $this->renderWiew(array_merge(["request" => $request]),$res);
+	    	echo $this->renderWiew(array_merge(["request" => $request->first()]),$res);
 	    }
 	}
 ?>

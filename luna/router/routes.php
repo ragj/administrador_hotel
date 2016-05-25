@@ -358,4 +358,25 @@ $router->addRoute(array(
 	'path' => '/panel/transfer/hide/{detail}',
 	'get' => array('Transfer', 'hide'),
 ));
+//routes for vehicle
+$router->addRoute(array(
+	'path' => '/panel/vehicles/show',
+	'get' => array('Vehicle', 'show')
+));
+$router->addRoute(array(
+	'path' => '/panel/vehicles/add',
+	'get' => array('Vehicle', 'add'),
+	'post' => array('Vehicle', 'add')
+));
+$router->addRoute(array(
+	'path' => '/panel/vehicles/edit/{car}',
+	'get' => array('Vehicle', 'edit'),
+	'post' => array('Vehicle', 'edit'),
+));
+$router->addRoute(array(
+	'path' => '/panel/vehicles/delete/{car}',
+	'get' => array('Vehicle', 'delete')
+));
+
+
 ?>
