@@ -749,7 +749,7 @@ class Plain extends Luna\Controller {
         }
         echo $this->renderWiew($this->header("register",$lang), $res);
     }
-    public function hotelTransfer($req , $res){
+    /*public function hotelTransfer($req , $res){
         $uid=$req->params["uid"];
         switch($uid){
             case "four-seasons-resort-bali-at-sayan":
@@ -787,7 +787,36 @@ class Plain extends Luna\Controller {
         }
         $lang=$req->lang;
         echo $this->renderWiew( $this->header("transfer",$lang), $res);
-    }    
+    }*/
+     public function hotelTransfer($req , $res){
+        $uid=$req->params["uid"];
+        $hotelTransferMapper=$this->spot->mapper("Entity\hotelTransfer");
+        $trans=$hotelTransferMapper->select()->where(["uri"=>$uid])->with("hotel")->first();
+        $lang=$req->lang;
+        switch($lang){
+            case "es":
+                $res->m = $res->mustache->loadTemplate("hotelTransfer/hTransfer_esp.mustache");
+            break;
+            case "en":
+                $res->m = $res->mustache->loadTemplate("hotelTransfer/hTransfer.mustache");
+            break;
+            default:
+                $res->m = $res->mustache->loadTemplate("hotelTransfer/hTransfer.mustache");
+            break;
+        }
+        if( $trans ){
+            $this->trans = $trans;
+            $translate = new stdClass();
+            $translate->call = function( $lang ){
+                $uri = $lang=="es"?$this->trans->uri_es:$this->trans->uri;
+                return Luna\Translate::to( $lang , ["uri"=> $uri, "mapper"=>"{uid}"]);
+            };
+            echo $this->renderWiew( array_merge(["translate"=>$translate,"trans" => $trans] , $this->header("transfer",$lang) ), $res);   
+        }
+        else{
+            header('Location:'.Luna\Translate::url("/travelAgent"));
+        }
+    }        
 }
 
 ?>

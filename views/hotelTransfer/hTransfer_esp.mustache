@@ -1,0 +1,49 @@
+{{% BLOCKS }}
+{{< panel_esp}}
+	{{$content}}
+		<div class="hotel-trans">
+			<br>
+			<row>
+				<column cols="1"></column>
+				<column cols="10">
+					<row>
+						<script>
+							var path = "";
+							var href = window.location.pathname
+							var s = href.split("/");
+							for (var i=3;i<(s.length-1);i++) {
+								path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+							}
+							i=s.length-1;
+							path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+							var url = "<p id=bread>" + path+"</p>";
+							document.writeln(url);
+			 			</script>
+					</row>
+					{{#trans}}
+						<row>
+							<column cols="8">
+								<h1 style="text-align:left; text-transform: uppercase;">{{hotel.name}}</h1>
+								<br>
+								<a style="color:#C39323;" href="/bali/en/hotel-collection/{{hotel.uri}}" target="_black">go to description page</a>
+							</column>
+							<column cols="4">
+							<br>
+								<h2> Dirección</h2>
+								<p>{{hotel.address}}</p>
+								<a style="text-decoration:none; color:#C39323;" href="{{hotel.website}}" target="_black">{{hotel.website}}</a>
+							</column>
+						</row>
+						{{{content_spa}}}
+					{{/trans}}
+					{{^trans}}
+						<center><h2>No Hay contenido para este hotel.</h2></center>
+					{{/trans}}
+				</column>
+			</row>
+		</div>		
+	{{/content}}
+	{{$ scripts}}
+		
+    {{/ scripts}}
+{{/ panel_esp}}

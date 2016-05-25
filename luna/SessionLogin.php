@@ -17,8 +17,7 @@ namespace Luna;
 class SessionLogin extends \Zaphpa\BaseMiddleware {
 
     private $urlPermitidas = ['/login', '/logout', '/','/about-us','/hotel-collection','/hotel-collection/{hotel}','/experience','/experience/{exper}','/contact-us','/home','/forgot','/forgot/{uid}','/register','/aviso','/transfers','' ,"/migrate/up"];
-    private $common=['/transfer','/request'];
-    private $admin=['/panel/hotel/add','/panel/hotel/show','/panel/hotel/edit/{hotel}','/panel/hotel/delete/{hotel}','/panel/hotel/addImages','/panel/hotel/editImages/{hotel}','/panel/hotel/deleteImages/{hotel}','/panel/tour/add','/panel/tour/show','/panel/tour/edit/{exper}','/panel/tour/delete/{exper}','/panel/tour/delete','/panel/tour/addImages','/panel/tour/editImages/{exper}','/panel/tour/deleteImages/{exper}','/panel/user/add','/panel/user/show','/panel/user/edit/{exper}','/panel/user/active/{exper}','/panel/user/delete/{exper}','/panel/contact/show','/panel/transfer/addBlock','/panel/transfer/addDetail','/panel/transfer/listBlock','/panel/transfer/editBlock/{block}','/panel/transfer/delete/{block}','/panel/transfer/editDetail/{detail}','/panel/transfer/deleteDetail/{detail}','/panel/user/zone','/panel/user/deleteZona/{zona}/{user}','/panel/hotel/addVideo','/panel/hotel/editVideo/{hotel}','/bali/panel/hotel/deleteVideo/{hotel}','/panel/transfer/addValue','/panel/transfer/editValue/{value}','/panel/transfer/deleteValue/{value}'];
+    private $common=['/transfer','/request','/transfer/{uid}'];
 
     function preprocess(&$router) {
         $router->addRoute(array(
@@ -88,11 +87,8 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                         switch($rol){
                         //si rol es uno, entonces tiene acceso al panel admin y a lo privado
                             case 1:
-                                if(in_array(self::$context["pattern"], $this->admin)){
-                                        $session->set("user", $req->user);
-                                        $session->set("zonas", $permisoZone);
-                                        
-                                }
+                                $session->set("user", $req->user);
+                                $session->set("zonas", $permisoZone);
                             break;
                             //solo tiene acceso a lo privado
                             case 2:
@@ -127,11 +123,11 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                 $username = $req->data["usuario"];
                 $password = $req->data["password"];
 
-                $user = $usersMapper->where(["usuario" => $username]);
-                if ($user->first()) {
-                    if ($user->first()->password === md5($password)||$user->first->activo=== true) {
+                $user = $usersMapper->where(["usuario" => $username])->first();
+                if ($user){
+                    if ($user->password === md5($password)||$user->activo=== true) {
                         /// LOGIN SUCCESS
-                        $user = $user->first()->toArray();
+                        $user = $user->toArray();
                         $session->set("user", $user);
                         if (isset($req->data["redirect"])) {
                             header("Location: http://" . $_SERVER["SERVER_NAME"] . $req->data["redirect"]);

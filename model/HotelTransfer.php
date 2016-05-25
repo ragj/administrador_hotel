@@ -17,7 +17,9 @@
 	        return [
 	            'idhotelTransfer' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
 	            'content' => ['type' => 'text' ],
+	            'content_spa' => ['type' => 'text'],
 	            'uri'=>['type' => 'text' ],
+	            'uri_es'=>['type' => 'text' ],
 	            'hotel_idhotel' => ['type' => 'integer', 'required' => true]
 	        ];
 	    }
@@ -33,6 +35,8 @@
             	$hotelMapper=$aux->mapper("Entity\Hotel");
             	$hotel=$hotelMapper->select()->where(["idhotel"=>$entity->hotel_idhotel])->first();
                 $entity->uri = $hotel->uri;
+                $entity->uri_es=$hotel->uri_es;
+                $entity->content_spa=$entity->content;
             });
         }
 	}

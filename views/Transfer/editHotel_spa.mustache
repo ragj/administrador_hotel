@@ -15,6 +15,7 @@
 					      <span class="icon-bar"></span>
 					    </button>
     					<a class="navbar-brand">Edit Hotel Transfer</a>
+    					<a class="navbar-brand">Spanish</a>
   					</div>
   					<div class="collapse navbar-collapse navbar-ex1-collapse">
 					    <ul class="nav navbar-nav">
@@ -22,7 +23,7 @@
 					    </ul>
   					</div>
 				</nav>
-        		<form class="form-horizontal" action="/bali/panel/transfer/editHotel/{{idhotelTransfer}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+        		<form class="form-horizontal" action="/bali/panel/transfer/editHotel_spa/{{idhotelTransfer}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 		        	<div class="hotel-trans" style="position:relative;top:50px;">
 		        		<br>
 						<row>
@@ -30,7 +31,7 @@
 							<column cols="10">
 								<textarea name="content" style="visibility:hidden; height:0px; width:0px;"  placeholder="content" id="contn" required/></textarea>
 								<div id="summernote">
-			                    	{{{content}}}
+			                    	{{{content_spa}}}
 			                    </div>								
 							</column>
 							<column cols="1"></column>

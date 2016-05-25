@@ -224,7 +224,7 @@
 	    	echo $this->renderWiew(array_merge(["transferBlock"=>$transferBlock]),$res);
 	    }
 	    /**
-	    *	Metodo que obtiene los transfer detail y agrega el valor del transfer detail
+	    *	Metodo que agrega un transfer de hotel
 	    **/
 	    public function addHotel($req,$res){
 	    	$hotelMapper=$this->spot->mapper("Entity\Hotel");
@@ -242,22 +242,39 @@
 	    	echo $this->renderWiew(array_merge(["hotel"=>$hotels]),$res);
 	    }
 	    /**
-	    *	Metodo que obtiene los transfer detail y agrega el valor del transfer detail
+	    *	Metodo que sirve para editar el contenido de un transfer en ingles
 	    **/
 	    public function editHotel($req,$res){
 	    	$hotelTransferMapper=$this->spot->mapper("Entity\HotelTransfer");
-	    	$tHotel=$hotelTransferMapper->select()->where(["idhotelTransfer"=>$req->params["hTrans"]]);
+	    	$tHotel=$hotelTransferMapper->select()->where(["idhotelTransfer"=>$req->params["hTrans"]])->first();
 	    	if(isset($req->data["content"])){
 	    		if(isset($req->data["hotel"])){
 	    			$tHotel->hotel_idhotel=$req->data["hotel"];
 	    		}
 	    		$tHotel->content=$req->data["content"];
-	    		//$hotelTransferMapper->update($tHotel); aqui hay un problema
+	    		
+	    		$hotelTransferMapper->update($tHotel);
 	    	}	    	
 	    	echo $this->renderWiew(array_merge(["tHotel"=>$tHotel]),$res);
 	    }
+	    /**
+	    *	Metodo que sirve para editar el contenido de un transfer en español
+	    **/
+	    public function editHotelSpa($req,$res){
+	    	$hotelTransferMapper=$this->spot->mapper("Entity\HotelTransfer");
+	    	$tHotel=$hotelTransferMapper->select()->where(["idhotelTransfer"=>$req->params["hTrans"]])->first();
+	    	if(isset($req->data["content"])){
+	    		if(isset($req->data["hotel"])){
+	    			$tHotel->hotel_idhotel=$req->data["hotel"];
+	    		}
+	    		$tHotel->content_spa=$req->data["content"];
+	    		$hotelTransferMapper->update($tHotel);
+	    	}
+	    	$res->m = $res->mustache->loadTemplate("Transfer/editHotel_spa.mustache");	    	
+	    	echo $this->renderWiew(array_merge(["tHotel"=>$tHotel]),$res);
+	    }
 	     /**
-	    *	Metodo que obtiene los transfer detail y agrega el valor del transfer detail
+	    *	Metodo que sirve para eliminar un transfer de hotel
 	    **/
 	    public function deleteHotel($req,$res){
 	    	if(isset($req->params["hTrans"])){
@@ -268,8 +285,8 @@
 	    	exit;   
 	    }
 
-	     /**
-	    *	Metodo que obtiene los transfer detail y agrega el valor del transfer detail
+	    /**
+	    *	Metodo que muestra todos los transfers de hoteles
 	    **/
 	    public function showHotel($req,$res){
 	    	$hotelTransferMapper=$this->spot->mapper("Entity\HotelTransfer");

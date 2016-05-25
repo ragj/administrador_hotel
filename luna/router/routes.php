@@ -332,6 +332,11 @@ $router->addRoute(array(
 	'post' => array('Transfer', 'editHotel'),
 ));
 $router->addRoute(array(
+	'path' => '/panel/transfer/editHotel_spa/{hTrans}',
+	'get' => array('Transfer', 'editHotelSpa'),
+	'post' => array('Transfer', 'editHotelSpa'),
+));
+$router->addRoute(array(
 	'path' => '/panel/transfer/hotelDelete/{hTrans}',
 	'get' => array('Transfer', 'deleteHotel')
 ));
