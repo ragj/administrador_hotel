@@ -37,66 +37,14 @@
 				<br>
 		 		<br>
 			 	<blocks cols="3">
-						<div class="tour hotel">
-							<a href="/bali/travelAgent/four-seasons-resort-bali-at-jimbaran-bay" style="text-decoration: none;">
-								<h1>FOUR SEASONS AT JIMBARAN</h1>
-								<img src="/bali/assets/img/hotel-thumb/four-seasons-jimbaran-hotel.jpg">
-							</a>	
-						</div>
-						<div class="tour hotel">
-							<a href="/bali/travelAgent/four-seasons-resort-bali-at-sayan" style="text-decoration: none;">
-								<h1>Four Seasons Resort Bali At Sayan</h1>
-								<img src="/bali/assets/img/hotel-thumb/four-seasons-resort-bali-at-sayan-hotel.jpg">
-							</a>	
-						</div>
-						<div class="tour hotel">
-							<a href="/bali/travelAgent/mandapa,-a-ritz-carlton-reserve" style="text-decoration: none;">
-								<h1>Mandapa, a Ritz-Carlton Reserve</h1>
-								<img src="/bali/assets/img/hotel-thumb/Mandapa_Reserve_by_Ritz_Carlton.jpg">
-							</a>	
-						</div>
-						<div class="tour hotel">
-							<a href="/bali/travelAgent/bvlgari-bali" style="text-decoration: none;">
-								<h1>bvlgari</h1>
-								<img src="/bali/assets/img/hotel-thumb/Bulgari.jpg">
-							</a>	
-						</div>
-						<div class="tour hotel">
-							<a href="/bali/travelAgent/como-shambhala-estate" style="text-decoration: none;">
-								<h1>COMO SHAMBHALA ESTATE</h1>
-								<img src="/bali/assets/img/hotel-thumb/COMO-Shambahla-Estate.jpg">
-							</a>	
-						</div>
-						<div class="tour hotel">
-							<a href="/bali/travelAgent/uma-by-como,-ubud" style="text-decoration: none;">
-								<h1>UMA BY COMO</h1>
-								<img src="/bali/assets/img/hotel-thumb/Uma-by-COMO.jpg">
-							</a>	
-						</div>
-						<div class="tour hotel">
-							<a href="/bali/travelAgent/amanusa" style="text-decoration: none;">
-								<h1>AMANUSA</h1>
-								<img src="/bali/assets/img/hotel-thumb/amanusa-hotel.jpg">
-							</a>	
-						</div>
-						<div class="tour hotel">
-							<a href="/bali/travelAgent/viceroy-bali" style="text-decoration: none;">
-								<h1>VICEROY</h1>
-								<img src="/bali/assets/img/hotel-thumb/1303374893975.jpg">
-							</a>	
-						</div>
-						<div class="tour hotel">
-							<a href="/bali/travelAgent/the-st.-regis-bali-resort" style="text-decoration: none;">
-								<h1>ST REGIS BALI R</h1>
-								<img src="/bali/assets/img/hotel-thumb/Pool%20Suite2.jpg">
-							</a>	
-						</div>
-						<div class="tour hotel">
-							<a href="/bali/travelAgent/alila-villas-uluwatu" style="text-decoration: none;">
-								<h1>ALILA VILLAS ULUWATU</h1>
-								<img src="/bali/assets/img/hotel-thumb/alila-villas-uluwatu-01.jpg">
-							</a>	
-						</div>
+			 			{{#hotelBlock}}
+			 				<div class="tour hotel">
+								<a href="/bali/en/travelAgent/{{uri}}" style="text-decoration: none;">
+									<h1>{{hotel.name}}</h1>
+									<img src="/bali/assets/img/hotel-thumb/{{hotel.thumbnail}}">
+								</a>	
+							</div>
+			 			{{/hotelBlock}}
 				</blocks>
 		 	</div>
 		 	<div class="trasfer-travel ttrl">

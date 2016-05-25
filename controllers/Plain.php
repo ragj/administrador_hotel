@@ -237,6 +237,9 @@ class Plain extends Luna\Controller {
 
     public function transfer($req , $res){
         $lang=$req->lang;
+        //obtencion de hoteles
+        $hotelMapper=$this->spot->mapper("Entity\hotelTransfer");
+        $hotelTransfer=$hotelMapper->select()->with("hotel");
         //obtencion de transfers
         $transferBlockMapper=$this->spot->mapper("Entity\TransferBlock");
         $transfer=$transferBlockMapper->select()->with(["detail"])->where(["zona_idzona"=>1]);
@@ -292,7 +295,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/transfer.mustache");
             break;
         }
-    	echo $this->renderWiew( array_merge(["transferBlock" => $pers,"experBlock"=>$exps], $this->header("transfer",$lang) ), $res);
+    	echo $this->renderWiew( array_merge(["transferBlock" => $pers,"experBlock"=>$exps,"hotelBlock"=>$hotelTransfer], $this->header("transfer",$lang) ), $res);
     }
 
     public function contact($req , $res){
