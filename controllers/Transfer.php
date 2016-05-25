@@ -98,7 +98,18 @@
 	            	$transfer->zona_idzona=$zona;
 	            	$transferBlockMapper->update($transfer);
 	    		}
-            	echo $this->renderWiew(array_merge(["transfer"=>$transfer,"zones"=>$zonaa]),$res);
+	    		switch ($req->params["block"]){
+	    			case 1:
+	    				$title="TRANSFERS";
+	    			break;
+	    			case 2:
+	    				$title="EXPERIENCES";
+	    			break;
+	    			default:
+	    				$title="";
+	    			break;
+	    		}
+            	echo $this->renderWiew(array_merge(["transfer"=>$transfer,"zones"=>$zonaa,"title"=>$title]),$res);
 	    	}
 	    }
  		/**
