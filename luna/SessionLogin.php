@@ -36,11 +36,19 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                 if(self::$context["pattern"]==$route["es"]&&$route["allow"]==true){
                     array_push($this->urlPermitidas,self::$context["pattern"]);
                 }
+                $route["rol"]=isset($route["rol"])?$route["rol"]:'';
+                if(self::$context["pattern"]==$route["es"]&&$route["rol"]=='common'){
+                    array_push($this->common, self::$context["pattern"]);
+                }
             }
             if(isset($route["en"])){
                 $route["allow"]=isset($route["allow"])?$route["allow"]:false;
                 if(self::$context["pattern"]==$route["en"]&&$route["allow"]==true){
                     array_push($this->urlPermitidas,self::$context["pattern"]);
+                }
+                $route["rol"]=isset($route["rol"])?$route["rol"]:'';
+                if(self::$context["pattern"]==$route["en"]&&$route["rol"]=='common'){
+                    array_push($this->common, self::$context["pattern"]);
                 }
             }
         }

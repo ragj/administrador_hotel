@@ -56,13 +56,14 @@ $ROUTES = [
 		'es' => "/travelAgent",
 		'en' => "/travelAgent",
 		'path' => '/transfer',
+		'rol'=>'common',
 		'get' => array('Plain', 'transfer'),
 	],
 	"/hTransfer" => [
 		'es' => "/travelAgent/{uid}",
 		'en' => "/travelAgent/{uid}",
 		'path' => '/transfer/{uid}',
-		
+		'rol'=>'common',
 		'get' => array('Plain', 'hotelTransfer'),
 	],
 	"/contact-us" => [
@@ -117,6 +118,7 @@ $ROUTES = [
 		'es' => '/request',
 		'en' => '/request',
 		'path' => '/request',
+		'rol'=>'common',
 		'get' => array('Plain', 'inquiere'),
 		'post' => array('Plain', 'inquiere'),
 	],
