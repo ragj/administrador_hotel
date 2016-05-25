@@ -4,44 +4,46 @@
             Edit Hotel Transfer
         {{/ title}}
         {{$ content }}
-        	{{#tHotel}}	
-        		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
- 					<div class="navbar-header">
-					    <button type="button" class="navbar-toggle" data-toggle="collapse"
-					            data-target=".navbar-ex1-collapse">
-					      <span class="sr-only">Desplegar navegación</span>
-					      <span class="icon-bar"></span>
-					      <span class="icon-bar"></span>
-					      <span class="icon-bar"></span>
-					    </button>
-    					<a class="navbar-brand">Edit Hotel Transfer</a>
-    					<a class="navbar-brand">Spanish</a>
-  					</div>
-  					<div class="collapse navbar-collapse navbar-ex1-collapse">
-					    <ul class="nav navbar-nav">
-					      <li><a href="/bali/panel/transfer/showHotel">Back to Admin</a></li>
-					    </ul>
-  					</div>
-				</nav>
-        		<form class="form-horizontal" action="/bali/panel/transfer/editHotel_spa/{{idhotelTransfer}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
-		        	<div class="hotel-trans" style="position:relative;top:50px;">
-		        		<br>
-						<row>
-							<column cols="1"></column>
-							<column cols="10">
-								<textarea name="content" style="visibility:hidden; height:0px; width:0px;"  placeholder="content" id="contn" required/></textarea>
-								<div id="summernote">
-			                    	{{{content_spa}}}
-			                    </div>								
-							</column>
-							<column cols="1"></column>
-							<nav class="navbar navbar-default navbar-fixed-bottom">
-								<button type="submit" class="btn-success" style="float:right; margin-right:50px;">Save</button>
-							</nav>
-						</row>
-		        	</div>
-        		</form>
-			{{/tHotel}}	
+        	<div class="container-fluid">
+	        	{{#tHotel}}	
+	        		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	 					<div class="navbar-header">
+						    <button type="button" class="navbar-toggle" data-toggle="collapse"
+						            data-target=".navbar-ex1-collapse">
+						      <span class="sr-only">Desplegar navegación</span>
+						      <span class="icon-bar"></span>
+						      <span class="icon-bar"></span>
+						      <span class="icon-bar"></span>
+						    </button>
+	    					<a class="navbar-brand">Edit Hotel Transfer</a>
+	    					<a class="navbar-brand">Spanish</a>
+	  					</div>
+	  					<div class="collapse navbar-collapse navbar-ex1-collapse">
+						    <ul class="nav navbar-nav">
+						      <li><a href="/bali/panel/transfer/showHotel">Back to Admin</a></li>
+						    </ul>
+	  					</div>
+					</nav>
+	        		<form class="form-horizontal" action="/bali/panel/transfer/editHotel_spa/{{idhotelTransfer}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+			        	<div class="hotel container-fluid" style="position:relative;top:50px;">
+			        		<br>
+							<row>
+								<column cols="1"></column>
+								<column cols="10">
+									<textarea name="content" style="visibility:hidden; height:0px; width:0px;"  placeholder="content" id="contn" required/></textarea>
+									<div id="summernote">
+				                    	{{{content_spa}}}
+				                    </div>								
+								</column>
+								<column cols="1"></column>
+								<nav class="navbar navbar-default navbar-fixed-bottom">
+									<button type="submit" class="btn-success" style="float:right; margin-right:50px;">Save</button>
+								</nav>
+							</row>
+			        	</div>
+	        		</form>
+				{{/tHotel}}
+			</div>	
         {{/ content }}
 		{{$ scripts }}
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">

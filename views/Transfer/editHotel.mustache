@@ -4,6 +4,7 @@
             Edit Hotel Transfer
         {{/ title}}
         {{$ content }}
+        	<div class="container-fluid">
         	{{#tHotel}}	
         		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
  					<div class="navbar-header">
@@ -23,7 +24,7 @@
   					</div>
 				</nav>
         		<form class="form-horizontal" action="/bali/panel/transfer/editHotel/{{idhotelTransfer}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
-		        	<div class="hotel-trans" style="position:relative;top:50px;">
+		        	<div class="hotel" style="position:relative;top:50px;">
 		        		<br>
 						<row>
 							<column cols="1"></column>
@@ -41,6 +42,7 @@
 		        	</div>
         		</form>
 			{{/tHotel}}	
+			</div>
         {{/ content }}
 		{{$ scripts }}
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
