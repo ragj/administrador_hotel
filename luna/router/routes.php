@@ -62,6 +62,7 @@ $ROUTES = [
 		'es' => "/travelAgent/{uid}",
 		'en' => "/travelAgent/{uid}",
 		'path' => '/transfer/{uid}',
+		
 		'get' => array('Plain', 'hotelTransfer'),
 	],
 	"/contact-us" => [

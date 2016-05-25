@@ -749,7 +749,7 @@ class Plain extends Luna\Controller {
         }
         echo $this->renderWiew($this->header("register",$lang), $res);
     }
-    /*public function hotelTransfer($req , $res){
+    public function hotelTransfer($req , $res){
         $uid=$req->params["uid"];
         switch($uid){
             case "four-seasons-resort-bali-at-sayan":
@@ -787,7 +787,8 @@ class Plain extends Luna\Controller {
         }
         $lang=$req->lang;
         echo $this->renderWiew( $this->header("transfer",$lang), $res);
-    }*/
+    }
+    /*
      public function hotelTransfer($req , $res){
         $uid=$req->params["uid"];
         $hotelTransferMapper=$this->spot->mapper("Entity\hotelTransfer");
@@ -816,7 +817,7 @@ class Plain extends Luna\Controller {
         else{
             header('Location:'.Luna\Translate::url("/travelAgent"));
         }
-    }        
+    }  */      
 }
 
 ?>
