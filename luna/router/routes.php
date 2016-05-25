@@ -377,6 +377,22 @@ $router->addRoute(array(
 	'path' => '/panel/vehicles/delete/{car}',
 	'get' => array('Vehicle', 'delete')
 ));
+$router->addRoute(array(
+	'path' => '/panel/vehicles/addImages',
+	'get' => array('Vehicle', 'addImages'),
+	'post' => array('Vehicle', 'addImages')
+));
+$router->addRoute(array(
+	'path' => '/panel/vehicles/deleteImages/{car}',
+	'get' => array('Vehicle', 'deleteImages')
+));
+$router->addRoute(array(
+	'path' => '/panel/vehicles/editImages/{car}',
+	'get' => array('Vehicle', 'editImages'),
+	'post' => array('Vehicle', 'editImages')
+));
+
+
 
 
 ?>

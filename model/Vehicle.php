@@ -14,6 +14,14 @@
             return [
                 'idVehicle' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
                 'name' => ['type' => 'string', 'required' => true],
+                'description'=>['type'=>'text'],
+                'description_esp'=>['type'=>'text'],     
+            ];
+        }
+        public static function relations(Mapper $mapper, Entity $entity)
+        {
+            return [
+                'images' => $mapper->hasMany($entity, 'Entity\VehicleImage', 'vehicle_idVehicle'),
             ];
         }
     }

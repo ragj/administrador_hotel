@@ -25,16 +25,60 @@
 		                      				<input type="text" name="car" class="form-control" placeholder="Write the car name." value="{{#car}}{{name}}{{/car}}" required/>
 		                    			</div>
 		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Description: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="description" class="form-control" placeholder="Write the car name." value="{{#car}}{{description}}{{/car}}"required/>
+		                    			</div>
+		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Spanish Description:<span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="spanish" class="form-control" placeholder="Write the car name." value="{{#car}}{{description_esp}}{{/car}}"required/>
+		                    			</div>
+		                  			</div>
 		                  			<hr>
 		                  			<div class="row">
 	                    				<div class="col-sm-9 col-sm-offset-8">
 					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
 	                    				</div>
 	                  				</div>
+	                  				<hr>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">New Image:</label>
+		                    			<div class="col-sm-6">
+		                    				<a href="/bali/panel/vehicles/addImages" target="_blank"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">New Image</button></a>	
+		                   				</div>
+		                  			</div>
 		        				</form>
 		        			</div>
 	        			</div>
         			</div>
+    			</div>
+    			<div class="row">
+    				{{# car}}
+	    				{{# images }}
+							<div class="col-md-3">
+	          					<div class="panel">
+	            					<div class="panel-heading">
+	              						<h4 class="panel-title">Image </h4>
+	            					</div>
+	            					<div class="panel-body">
+	              						<img src="/bali/assets/img/car/{{vehicle_idVehicle}}/{{path}}" class="img-rounded " width="270" height="150" >
+						                <a href="/bali/panel/vehicles/editImages/{{idvehicleImages}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
+						                <a onclick=myFunction({{idvehicleImages}})><button type="button" class="btn btn-danger btn-quirk"><i class="fa fa-times"></i></button></a>
+	            					</div>
+	          					</div>
+	  						</div>
+	        			{{/ images }}
+	        		{{/car}}
+	        		<script>
+						function myFunction(id) {
+                            if (confirm("Estas Seguro de Eliminar?") == true) {
+                                self.location = "/bali/panel/vehicles/deleteImages/"+id; 
+                            } 
+                        }
+                    </script>
     			</div>	
     		</div>
         {{/ content }}
