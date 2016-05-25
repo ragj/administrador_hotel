@@ -1,0 +1,43 @@
+{{% BLOCKS }}
+	{{< quirk }}
+		{{$ title}}
+            Edit Vehicle
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><i class="fa fa-home mr5"></i>Vehicles</li>
+			        <li class="active">Edit Vehicle</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-10 col-md-offset-1">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Vehicle Form</h4>
+	          					<p>Please fill the next form. Thanks.</p>
+	        				</div>
+		        			<div class="panel-body">
+		        				<hr>			
+		        				<form class="form-horizontal" action="/bali/panel/vehicles/edit/{{#car}}{{idVehicle}}{{/car}}" method="post" name="newUser" class="form-horizontal">
+		        					<div class="form-group">
+		                    			<label class="col-sm-3 control-label">First Name: <span class="text-danger">*</span></label>
+		                    			<div class="col-sm-6">
+		                      				<input type="text" name="car" class="form-control" placeholder="Write the car name." value="{{#car}}{{name}}{{/car}}" required/>
+		                    			</div>
+		                  			</div>
+		                  			<hr>
+		                  			<div class="row">
+	                    				<div class="col-sm-9 col-sm-offset-8">
+					                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
+	                    				</div>
+	                  				</div>
+		        				</form>
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+		{{/ scripts }}
+	{{/ quirk }}
