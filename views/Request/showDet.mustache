@@ -57,6 +57,7 @@
 	        			</div>
         			</div>
     			</div>
+    			{{# request.rhotels}}
     			<div class="row">
     				<div class="col-md-10 col-md-offset-1">
 	        			<div class="panel">
@@ -82,7 +83,7 @@
 							                </tr>
 							            </tfoot>
 							            <tbody>
-							            	{{# request}}
+							            	{{#request}}
 							            		{{#rhotels}}
 								            		<tr>
 								            			<td>
@@ -96,7 +97,7 @@
 	                                                    </td>
 								            		</tr>
 							            		{{/rhotels}}
-							            	{{/ request}}
+						            		{{/request}}
 							            </tbody>
 		        					 </table>
 		        				</div>		
@@ -104,6 +105,8 @@
 	        			</div>
         			</div>
     			</div>
+    			{{/ request.rhotels}}
+    			{{# request.rexperience}}
     			<div class="row">
     				<div class="col-md-10 col-md-offset-1">
 	        			<div class="panel">
@@ -151,6 +154,8 @@
 	        			</div>
         			</div>
     			</div>
+    			{{/ request.rexperience}}
+    			{{# request.rtransfer}}
     			<div class="row">
     				<div class="col-md-10 col-md-offset-1">
 	        			<div class="panel">
@@ -202,7 +207,8 @@
 		        			</div>
 	        			</div>
         			</div>
-    			</div>		
+    			</div>
+    			{{/request.rtransfer}}		
     		</div>
         {{/ content }}
 		{{$ scripts }}
