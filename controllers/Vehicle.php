@@ -1,12 +1,12 @@
 <?php
 	class Vehicle extends Luna\Controller {
 		/**
-    	*	Funcion que obtiene todos los registros de la tabla contacto.
+    	*	Funcion que obtiene todos los registros de la tabla vehicle.
     	**/
     	public function show($req,$res){
-	    	$contactMapper=$this->spot->mapper("Entity\Contact");
-	    	$contacto=$contactMapper->select()->with("zona");
-	    	echo $this->renderWiew(array_merge(["contact" => $contacto]),$res);
+	    	$vehicleMapper=$this->spot->mapper("Entity\Vehicle");
+	    	$vehicle=$vehicleMapper->select();
+	    	echo $this->renderWiew(array_merge(["vehicle" => $vehicle]),$res);
 	    }
 	}
 ?>
