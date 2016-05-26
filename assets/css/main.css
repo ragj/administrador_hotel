@@ -1,6 +1,10 @@
 /*
 	GOLD:color: #C39323;
 */
+p {
+    text-align: justify;
+    text-justify: inter-word;
+}
 .current-create{
 	position: relative;
 }
@@ -471,7 +475,7 @@ footer{
 	font-size: 15px;
 	color: #AAA;
 	padding: 15px 0px;
-	text-align: center;
+	text-align: justify;
 	margin-bottom: 20px;
 }
 	.detail:last-child{
