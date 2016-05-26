@@ -95,6 +95,8 @@ class Plain extends Luna\Controller {
     }
     public function transfers($req , $res){
         $lang=$req->lang;
+        $vehicleMapper=$this->spot->mapper("Entity\Vehicle");
+        $vehicles=$vehicleMapper->select()->with("images");
         switch($lang){
             case "es":
                 $res->m = $res->mustache->loadTemplate("Plain/tranfers_esp.mustache");
@@ -106,7 +108,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/tranfers.mustache");
             break;
         }
-        echo $this->renderWiew( $this->header("transfers",$lang), $res);
+        echo $this->renderWiew( array_merge(["cars"=>$vehicles],$this->header("transfers",$lang)), $res);
     }
     public function aviso($req , $res){
         $lang=$req->lang;
