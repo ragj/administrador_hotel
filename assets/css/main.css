@@ -663,6 +663,15 @@ table tr.main{
 	font-weight: normal;
 	font-size: 12px;
 }
+.himage1{
+	padding: 2px;
+	height: 70px;
+	width: 110px;
+}
+.himage1 img{
+	height: 70px;
+	width: 110px;
+}
 .himage{
 	padding: 2px;
 	height: 104px;
