@@ -1,0 +1,71 @@
+{{% BLOCKS }}
+{{< panel_esp}}
+	{{$content}}
+	<div class="holder transfer tabs">
+		<script>
+			var path = "";
+			var href = window.location.pathname
+			var s = href.split("/");
+			for (var i=3;i<(s.length-1);i++) {
+				path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+			}
+			i=s.length-1;
+			path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+			var url = "<p id=bread>" + path+"</p>";
+			document.writeln(url);
+	 	</script>
+		 	<div class="trasfer-travel ttrl">
+		 			<h1>Perfil</h1>
+				<div class="aux">
+				 	{{#user}}
+					 		<table style="width:50%; margin: 0 auto;">
+					 			<tr>
+									<td><b>Usuario</b></td>
+									<td>{{usuario}}</td>
+								</tr>
+								<tr>
+									<td><b>Nombre</b></td>
+									<td>{{nombre}}</td>
+								</tr>
+								<tr>
+									<td><b>Apellido Paterno</b></td>
+									<td>{{papellido}}</td>
+								</tr>
+								<tr>
+									<td><b>Apellido Materno</b></td>
+									<td>{{mapellido}}</td>
+								</tr>
+								<tr>
+			            			<td><b>Telefono:</b></td>
+			            			<td>{{telefono}}</td>
+					            </tr>
+					            <tr>
+			            			<td><b>Iata:</b></td>
+			            			<td>{{iata}}</td>
+					            </tr>
+					            <tr>
+			            			<td><b>Miembro:</b></td>
+			            			<td>{{miembros}}</td>
+					            </tr>
+					            <tr>
+			            			<td><b>Años en el Negocio:</b></td>
+			            			<td>{{years}}</td>
+					            </tr>
+					            <tr>
+			            			<td><b>Activo desde</b></td>
+			            			<td>{{create_at.getTimeStamp | date.format}}</td>
+					            </tr>
+							</table>
+							<br>
+							<center>
+					 			<button type="button" onclick="window.location.href='/bali/es/editProfile'">EDITAR</button>
+					 		</center>
+					{{/user}}
+				</div>
+				<div class="clear"></div>
+			</div>
+	</div>
+	{{/content}}
+	{{$ scripts}}
+	{{/ scripts}}
+{{/ panel_esp}}

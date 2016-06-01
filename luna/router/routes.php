@@ -130,6 +130,22 @@ $ROUTES = [
 		'get' => array('Plain', 'transfers'),
 		'post' => array('Plain', 'transfers'),
 	],
+	"/profile" => [
+		'es' => '/perfil',
+		'en' => '/profile',
+		'rol'=>'common',
+		'path' => '/profile',
+		'get' => array('Plain', 'profile'),
+		'post' => array('Plain', 'profile'),
+	],
+	"/editProfile" => [
+		'es' => '/editarPerfil',
+		'en' => '/editProfile',
+		'rol'=>'common',
+		'path' => '/editProfile',
+		'get' => array('Plain', 'editProfile'),
+		'post' => array('Plain', 'editProfile'),
+	],
 	"/404" => [
 		'es' => '/404',
 		'en' => '/404',

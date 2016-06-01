@@ -840,7 +840,22 @@ class Plain extends Luna\Controller {
         else{
             header('Location:'.Luna\Translate::url("/travelAgent"));
         }
-    }        
+    }
+    public function profile($req,$res){
+            $lang=$req->lang;
+            switch($lang){
+                case "es":
+                    $res->m = $res->mustache->loadTemplate("Plain/profile_esp.mustache");
+                break;
+                case "en":
+                    $res->m = $res->mustache->loadTemplate("Plain/profile.mustache");
+                break;
+                default:
+                    $res->m = $res->mustache->loadTemplate("Plain/profile.mustache");
+                break;
+            }
+            echo $this->renderWiew($this->header("profile",$lang),$res); 
+        }        
 }
 
 ?>

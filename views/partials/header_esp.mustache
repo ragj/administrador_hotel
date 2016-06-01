@@ -38,6 +38,11 @@
 			</li>
 			<li>
 				{{#user.nombre}}
+					<a href="{{#url}}/profile{{/url}}" {{#profile}}class="active"{{/profile}} style="color:black">Perfil</a>
+				{{/user.nombre}}
+			</li>
+			<li>
+				{{#user.nombre}}
 					<a href="/bali/logout" style="color:black">Cerrar Sesión</a>
 				{{/user.nombre}}
 			</li>
