@@ -224,6 +224,7 @@ class Usuario extends Luna\Controller {
             }else{
                 $active = false;#default value
             }
+
             //validacion de datos
             if($usr!=$user->usuario){
                 $user2 = $userMapper->where(["usuario" => $usr]);
