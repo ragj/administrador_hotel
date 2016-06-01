@@ -8,6 +8,22 @@
 
 
 class Plain extends Luna\Controller {
+    public function notFound($req,$res){
+        $lang=$req->lang;
+        switch($lang){
+            case "es":
+                $res->m = $res->mustache->loadTemplate("Plain/404_esp.mustache");
+            break;
+            case "en":
+                $res->m = $res->mustache->loadTemplate("Plain/404.mustache");
+            break;
+            default:
+                $res->m = $res->mustache->loadTemplate("Plain/404.mustache");
+            break;
+        }
+        
+        echo $this->renderWiew($this->header("notFound",$lang), $res);
+    }
     
      public function header( $menu,$lang ){
         $wmpr = $this->spot->mapper("Entity\Weather");

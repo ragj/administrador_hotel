@@ -376,6 +376,12 @@ footer{
 	margin: auto;
 	padding: 20px;
 }
+.holder-4{
+	max-width: 1000px;
+	min-height: 530px;
+	margin: auto;
+	padding: 20px;
+}
 .reg row{
 	padding: 0px;
 	margin-top: -65px;

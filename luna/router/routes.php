@@ -129,6 +129,14 @@ $ROUTES = [
 		'path' => '/transfers',
 		'get' => array('Plain', 'transfers'),
 		'post' => array('Plain', 'transfers'),
+	],
+	"/404" => [
+		'es' => '/404',
+		'en' => '/404',
+		'allow' => true,
+		'path' => '/404',
+		'get' => array('Plain', 'notFound'),
+		'post' => array('Plain', 'notFound'),
 	]
 ];
 

@@ -43,9 +43,10 @@
 
       
 	} catch ( \Zaphpa\Exceptions\InvalidPathException $ex) {
-	  header("Content-Type: application/json;", TRUE, 404);
-	  $out = array("error" => "not found");
-	  die(json_encode($out));
+	  $router->route(\Luna\Translate :: uri("/404"));
+	  // header("Content-Type: application/json;", TRUE, 404);
+	  // $out = array("error" => "not found");
+	  // die(json_encode($out));
 	}     
 
 
