@@ -69,9 +69,16 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                 header("Location: http://" . $_SERVER["SERVER_NAME"] . "/bali/login?redirect=/bali" . self::$context["request_uri"]);
                 die();
             } else {
+                // obtenemos su rol
+                $id=$session->get("user")["id"];
+                $visitMapper=$spot->mapper("Entity\Visits");
+                $visit=$visitMapper->build([
+                    'userid' => $id,
+                    'slug' => self::$context["pattern"],
+                ]);
+                $visitMapper->insert($visit);
                 //  si el usuario esta logueado, obtenemos el usuario actual.
                 $req->user = $session->get("user");
-                // obtenemos su rol
                 $rol=$session->get("user")["rols_idrols"];
                 //obtenemos las zonas que tiene disponibles
                 $aux=$usersMapper->where(["usuario"=>"admin"])->with("zonas")->first()->toArray();
@@ -107,6 +114,10 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                                     $session->set("user", $req->user);
                                     header("Location: http://" . $_SERVER["SERVER_NAME"] . $redirect_after_login);
                                 }
+                            break;
+                            default:
+                                $session->set("user", $req->user);
+                                header("Location: http://" . $_SERVER["SERVER_NAME"] . $redirect_after_login);
                             break;
                         }
                     }else{

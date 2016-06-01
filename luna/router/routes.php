@@ -275,7 +275,15 @@ $router->addRoute(array(
 	'get' => array('Usuario', 'deleteZone'),
 	'post'=>array('Usuario','deleteZone')
 ));
-
+$router->addRoute(array(
+	'path' => '/panel/profile',
+	'get' => array('Usuario', 'profile'),
+));
+$router->addRoute(array(
+	'path' => '/panel/profile/edit',
+	'get' => array('Usuario', 'editProfile'),
+	'post' => array('Usuario', 'editProfile'),
+));
 //contact routes
 $router->addRoute(array(
 	'path' => '/panel/contact/show',

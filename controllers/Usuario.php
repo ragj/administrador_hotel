@@ -9,15 +9,32 @@
 class Usuario extends Luna\Controller {
 
     public function login($req, $res) {
+        $aux=$this->session->getFlash("alert");
         $lang=$req->lang;
         switch($lang){
             case 'es':
+                if($aux){
+                    echo "<script>
+                        alert(".$aux["message"].");
+                    </script>";
+                }
                 $res->m = $res->mustache->loadTemplate("Usuario/login_esp.mustache");
+
             break;
             case 'en':
+                if($aux){
+                    echo "<script>
+                        alert('The username and password do not match');
+                    </script>";
+                }
                 $res->m = $res->mustache->loadTemplate("Usuario/login.mustache");
             break;
             default:
+                if($aux){
+                    echo "<script>
+                        alert('The username and password do not match');
+                    </script>";
+                }
                 $res->m = $res->mustache->loadTemplate("Usuario/longin.mustache");
             break;
         }
@@ -360,6 +377,51 @@ class Usuario extends Luna\Controller {
         $users=$userMapper->select();
         $res->m = $res->mustache->loadTemplate("Usuario/show.mustache");
         echo $this->renderWiew(array_merge(["user"=>$users]),$res);  
+    }
+    public function profile($req,$res){
+        echo $this->renderWiew([],$res); 
+    }
+    public function editProfile($req,$res){
+        if(isset($req->data["name"])){
+            global $session_handle;
+            $mensaje="";
+            $ses=$session_handle->getSegment('Luna\Session');
+            $userMapper=$this->spot->mapper("Entity\Users");
+            $user=$userMapper->select()->where(["id"=>$ses->get("user",false)["id"]])->first();
+            $name = $req->data["name"]!=null? filter_var($req->data["name"], FILTER_SANITIZE_STRING) : $user->nombre;
+            $app = $req->data["app"]!=null? filter_var($req->data["app"], FILTER_SANITIZE_STRING) : $user->papellido;
+            $apm = $req->data["apm"]!=null? filter_var($req->data["apm"], FILTER_SANITIZE_STRING) : $user->mapellido;
+            $usr = $req->data["email"]!=null? filter_var($req->data["email"], FILTER_SANITIZE_EMAIL) : $user->usuario;
+            $tel = $req->data["tel"]!=null? filter_var($req->data["tel"], FILTER_SANITIZE_STRING) : $user->telefono;
+            $iata = $req->data["iata"]!=null? filter_var($req->data["iata"], FILTER_SANITIZE_STRING) : $user->iata;
+            $member = $req->data["member"]!=null? filter_var($req->data["member"], FILTER_SANITIZE_STRING) : $user->miembros;
+            $years = $req->data["years"]!=null? filter_var($req->data["years"], FILTER_SANITIZE_STRING) : $user->years;
+            if($req->data["pass"]!=null && $req->data["pass2"]!=null){
+                if($req->data["pass"]==$req->data["pass2"]&&strlen($req->data["pass"])>6){
+                    $user->password=$req->data["pass"];
+                }
+                else{
+                    $mensaje+="The password was not updated./n The passwords do not match or is less than 6 characters./n";
+                }
+            }
+            if($mensaje!=""){
+                    echo "<script>alert(".$mensaje.");</script>";
+            }
+            else{
+                echo "<script>alert(User Updated!);</script>";
+            }
+            $user->nombre=$name;
+            $user->papellido=$app;
+            $user->mapellido=$apm;
+            $user->telefono=$tel;
+            $user->iata=$iata;
+            $user->miembros=$member;
+            $user->years=$years;
+            $userMapper->update($user);
+            $ses->set("user", $user->toArray());
+
+        }
+        echo $this->renderWiew([],$res); 
     }
 }
 
