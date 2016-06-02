@@ -423,6 +423,78 @@ class Usuario extends Luna\Controller {
         }
         echo $this->renderWiew([],$res); 
     }
+    public function detail($req,$res){
+        if(isset($req->params["exper"])){
+            $userMapper=$this->spot->mapper("Entity\Users");
+            $user1=$userMapper->select()->where(["id"=>$req->params["exper"]])->with("zonas")->first();
+        }
+        echo $this->renderWiew(array_merge(["user1"=>$user1]),$res);
+    }
+    public function detailp($req,$res){
+        if(isset($req->params["exper"])){
+            $logMapper=$this->spot->mapper("Entity\Visits");
+            $value=false;
+            //Construccion dinamicas de queries
+            $pre_query="select id,userid,slug, count(*) as amount from visits where userid=:id";
+            $params_query=array("id"=>$req->params["exper"]);
+            $suf_query="GROUP BY slug ORDER BY amount DESC";
+            $param="";
+            if(isset($req->data["pattern"])&&$req->data["pattern"]!=''){
+                $pre_query=$pre_query." and slug LIKE :param";
+                $params_query=array_merge($params_query,["param"=>'/'.$req->data["pattern"]."/%"]);
+                $param=$req->data["pattern"];
+
+            }
+            if(isset($req->data["start"],$req->data["end"])&&$req->data["start"]!=''&&$req->data["end"]!=''){
+                $pre_query=$pre_query." AND created BETWEEN :start AND :end";
+                $timestamp1 = strtotime($req->data["start"]);
+                $timestamp2 = strtotime($req->data["end"]);
+                $aux1=date("Y-m-d H:i:s", $timestamp1);
+                $aux2=date("Y-m-d H:i:s", $timestamp2);
+                $params_query=array_merge($params_query,["start"=>$aux1]);
+                $params_query=array_merge($params_query,["end"=>$aux2]);
+            }
+            $logs1=$logMapper->query($pre_query.' '.$suf_query,$params_query);
+            if($logs1->toArray()){
+                $value=true;
+            }
+            switch ($param) {
+                case 'hotel-collection':
+                    if($value==true){
+                        $slugs=array();
+                        $hotelMapper=$this->spot->mapper("Entity\Hotel");
+                        foreach ($logs1->toArray() as $log) {
+                            $aux=explode("/",$log["slug"]);
+                            $hotel=$hotelMapper->select()->where(["uri"=>$aux[2]])->first()->toArray();
+                            $a=array('name' => $hotel["name"],'amount'=>$log["amount"]);
+                            array_push($slugs,$a);
+                        }
+                    }
+                    $res->m = $res->mustache->loadTemplate("partials/detail_h.mustache");
+                    echo $this->renderWiew(array_merge(["logs"=>$slugs,"value"=>$value]),$res);
+                break;
+                case 'experience':
+                    if($value==true){
+                        $slugs=array();
+                        $experienceMapper=$this->spot->mapper("Entity\Experience");
+                        foreach ($logs1->toArray() as $log) {
+                            $aux=explode("/",$log["slug"]);
+                            $experience=$experienceMapper->select()->where(["uri"=>$aux])->first()->toArray();
+                            $a=array('title' =>$experience["title"],'amount'=>$log["amount"]);
+                            array_push($slugs,$a);
+                        }
+                    }
+                    $res->m = $res->mustache->loadTemplate("partials/detail_e.mustache");
+                    echo $this->renderWiew(array_merge(["logs"=>$slugs,"value"=>$value]),$res);
+                break;
+                
+                default:
+                    $res->m = $res->mustache->loadTemplate("partials/detail_t.mustache");
+                    echo $this->renderWiew(array_merge(["logs"=>$logs1,"value"=>$value]),$res);
+                break;
+            }  
+        }
+    }
 }
 
 ?>

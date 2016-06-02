@@ -842,20 +842,83 @@ class Plain extends Luna\Controller {
         }
     }
     public function profile($req,$res){
-            $lang=$req->lang;
-            switch($lang){
-                case "es":
-                    $res->m = $res->mustache->loadTemplate("Plain/profile_esp.mustache");
-                break;
-                case "en":
-                    $res->m = $res->mustache->loadTemplate("Plain/profile.mustache");
-                break;
-                default:
-                    $res->m = $res->mustache->loadTemplate("Plain/profile.mustache");
-                break;
+        $lang=$req->lang;
+        switch($lang){
+            case "es":
+                $res->m = $res->mustache->loadTemplate("Plain/profile_esp.mustache");
+            break;
+            case "en":
+                $res->m = $res->mustache->loadTemplate("Plain/profile.mustache");
+            break;
+            default:
+                $res->m = $res->mustache->loadTemplate("Plain/profile.mustache");
+            break;
+        }
+        echo $this->renderWiew($this->header("profile",$lang),$res); 
+    }
+    public function editProfile($req,$res){
+        $lang=$req->lang;
+        switch($lang){
+            case "es":
+                $res->m = $res->mustache->loadTemplate("Plain/eprofile_esp.mustache");
+            break;
+            case "en":
+                $res->m = $res->mustache->loadTemplate("Plain/eprofile.mustache");
+            break;
+            default:
+                $res->m = $res->mustache->loadTemplate("Plain/eprofile.mustache");
+            break;
+        }
+        if(isset($req->data["name"])){
+            global $session_handle;
+            $mensaje="";
+            $ses=$session_handle->getSegment('Luna\Session');
+            $userMapper=$this->spot->mapper("Entity\Users");
+            $user=$userMapper->select()->where(["id"=>$ses->get("user",false)["id"]])->first();
+            $name = $req->data["name"]!=null? filter_var($req->data["name"], FILTER_SANITIZE_STRING) : $user->nombre;
+            $app = $req->data["app"]!=null? filter_var($req->data["app"], FILTER_SANITIZE_STRING) : $user->papellido;
+            $apm = $req->data["apm"]!=null? filter_var($req->data["apm"], FILTER_SANITIZE_STRING) : $user->mapellido;
+            $tel = $req->data["tel"]!=null? filter_var($req->data["tel"], FILTER_SANITIZE_STRING) : $user->telefono;
+            $iata = $req->data["iata"]!=null? filter_var($req->data["iata"], FILTER_SANITIZE_STRING) : $user->iata;
+            $member = $req->data["member"]!=null? filter_var($req->data["member"], FILTER_SANITIZE_STRING) : $user->miembros;
+            $years = $req->data["years"]!=null? filter_var($req->data["years"], FILTER_SANITIZE_STRING) : $user->years;
+            if($req->data["pass"]!=null && $req->data["pass1"]!=null){
+                if($req->data["pass"]==$req->data["pass1"]&&strlen($req->data["pass"])>6){
+                    $user->password=$req->data["pass"];
+                }
+                else{
+                    if($lang=="en"){
+                        $mensaje+="The password was not updated./n The passwords do not match or is less than 6 characters./n";  
+                    }
+                    else{
+                        $mensaje+="La contraseña no fue actualizado./n Las contraseñas no coinciden o es menor a 6 caracteres./n"; 
+                    }
+                    
+                }
             }
-            echo $this->renderWiew($this->header("profile",$lang),$res); 
-        }        
+            if($mensaje!=""){
+                    echo "<script>alert(".$mensaje.");</script>";
+            }
+            else{
+                if($lang=="en"){
+                   echo "<script>alert(User Updated!);</script>"; 
+                }
+                else{
+                    echo "<script>alert(Usuario Actualizado!);</script>"; 
+                }     
+            }
+            $user->nombre=$name;
+            $user->papellido=$app;
+            $user->mapellido=$apm;
+            $user->telefono=$tel;
+            $user->iata=$iata;
+            $user->miembros=$member;
+            $user->years=$years;
+            $userMapper->update($user);
+            $ses->set("user", $user->toArray());
+        }
+        echo $this->renderWiew($this->header("profile",$lang),$res); 
+    }         
 }
 
 ?>

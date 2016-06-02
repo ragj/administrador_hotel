@@ -274,6 +274,14 @@ $router->addRoute(array(
 	'post' => array('Usuario', 'edit'),
 ));
 $router->addRoute(array(
+	'path' => '/panel/user/detail/{exper}',
+	'get' => array('Usuario', 'detail'),
+));
+$router->addRoute(array(
+	'path' => '/panel/user/detailp/{exper}',
+	'get' => array('Usuario', 'detailp')
+));
+$router->addRoute(array(
 	'path' => '/panel/user/active/{exper}',
 	'get' => array('Usuario', 'active'),
 ));

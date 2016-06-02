@@ -1,0 +1,79 @@
+{{% BLOCKS }}
+{{< panel_esp}}
+	{{$content}}
+	<div class="holder transfer tabs">
+		<script>
+			var path = "";
+			var href = window.location.pathname
+			var s = href.split("/");
+			for (var i=3;i<(s.length-1);i++) {
+				path+="<A HREF=\""+href.substring(0,href.indexOf("/"+s[i])+s[i].length+1)+"/\">"+s[i]+"</A> / ";
+			}
+			i=s.length-1;
+			path+="<A HREF=\""+href.substring(0,href.indexOf(s[i])+s[i].length)+"\">"+s[i]+"</A>";
+			var url = "<p id=bread>" + path+"</p>";
+			document.writeln(url);
+	 	</script>
+		 	<div class="trasfer-travel ttrl">
+		 			<h1>Perfil</h1>
+				<div class="element contact">
+				 	{{#user}}
+				 		<form action="/bali/es/editProfile" method="post">
+					 		<table style="width:50%; margin: 0 auto;">
+					 			<tr>
+									<td><b>Usuario</b></td>
+									<td>{{usuario}}</td>
+								</tr>
+								<tr>
+									<td><b>Nombre</b></td>
+									<td><input type="text" name="name" value="{{nombre}}"></td>
+								</tr>
+								<tr>
+									<td><b>Apellido Paterno</b></td>
+									<td><input type="text" name="app" value="{{papellido}}"></td>
+								</tr>
+								<tr>
+									<td><b>Apellido Materno</b></td>
+									<td><input type="text" name="apm" value="{{mapellido}}"></td>
+								</tr>
+								<tr>
+			            			<td><b>Telefono:</b></td>
+			            			<td><input type="text" name="tel" value="{{telefono}}"></td>
+					            </tr>
+					            <tr>
+			            			<td><b>Iata:</b></td>
+			            			<td><input type="text" name="iata" value="{{iata}}"></td>
+					            </tr>
+					            <tr>
+			            			<td><b>Miembro:</b></td>
+			            			<td><input type="text" name="member" value="{{miembros}}"></td>
+					            </tr>
+					            <tr>
+			            			<td><b>Años en el Negocio:</b></td>
+			            			<td><input type="text" name="years" value="{{years}}"></td>
+					            </tr>
+					            <tr>
+			            			<td><b>Password:</b></td>
+			            			<td><input type="password" name="pass"></td>
+					            </tr>
+					            <tr>
+			            			<td><b>Confirm Password:</b></td>
+			            			<td><input type="password" name="pass1"></td>
+					            </tr>
+							</table>
+							<br>
+							<center>
+							<section>
+								<button type="primary">Send</button> 
+							</section>
+					 		</center>
+					 	</form>
+					{{/user}}
+				</div>
+				<div class="clear"></div>
+			</div>
+	</div>
+	{{/content}}
+	{{$ scripts}}
+	{{/ scripts}}
+{{/ panel_esp}}

@@ -62,6 +62,50 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
         $session = $session_handle->getSegment('Luna\Session');
         //base
         global $BASE;
+
+        if($session->get("user",false)){
+            $id=$session->get("user")["id"];
+            //buscamos el pattern en los routes
+            $aux="";
+            foreach ($ROUTES as $key => $route) {
+                if(isset($route["es"])){
+                    if(self::$context["pattern"]==$route["es"]){
+                        $aux=explode("/",$route["path"]);
+                    }
+                }
+                if(isset($route["en"])){
+                    if(self::$context["pattern"]==$route["en"]){
+                        $aux=explode("/",$route["path"]);
+                    }
+                }
+            }
+            //obtenemos path con uri y los combinamos
+            $slug="";
+            if($aux==""){
+                $slug=self::$context["request_uri"];
+                if($slug=="/"){
+                    $slug="/home";
+                }
+            }
+            else{
+                $aux2=explode("/",self::$context["request_uri"]);
+                if(sizeof($aux)==3){
+                    $slug="/".$aux[1]."/".$aux2[2]."/";
+                }
+                else if(sizeof($aux)==2){
+                    $slug="/".$aux[1];
+                }
+            } 
+            //registramos
+            if($slug!="/404"){
+                $visitMapper=$spot->mapper("Entity\Visits");
+                $visit=$visitMapper->build([
+                    'userid' => $id,
+                    'slug' => $slug,
+                ]);
+                $visitMapper->insert($visit);
+            } 
+        }
         //si pattern no esta en las url permitidas, verificamos el usuario este logueado y tenga permisos para acceder al lugar
         if (!in_array(self::$context["pattern"], $this->urlPermitidas)) {
             //si el usuario no esta logueado, lo mandamos a loguear
@@ -69,15 +113,6 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                 header("Location: http://" . $_SERVER["SERVER_NAME"] . "/bali/login?redirect=/bali" . self::$context["request_uri"]);
                 die();
             } else {
-                // obtenemos su rol
-                $id=$session->get("user")["id"];
-                $visitMapper=$spot->mapper("Entity\Visits");
-                $visit=$visitMapper->build([
-                    'userid' => $id,
-                    'slug' => self::$context["pattern"],
-                ]);
-                $visitMapper->insert($visit);
-                //  si el usuario esta logueado, obtenemos el usuario actual.
                 $req->user = $session->get("user");
                 $rol=$session->get("user")["rols_idrols"];
                 //obtenemos las zonas que tiene disponibles
@@ -148,6 +183,13 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                         /// LOGIN SUCCESS
                         $user = $user->toArray();
                         $session->set("user", $user);
+                        $id=$session->get("user")["id"];
+                        $visitMapper=$spot->mapper("Entity\Visits");
+                        $visit=$visitMapper->build([
+                            'userid' => $id,
+                            'slug' => self::$context["request_uri"],
+                        ]);
+                        $visitMapper->insert($visit);
                         if (isset($req->data["redirect"])) {
                             header("Location: http://" . $_SERVER["SERVER_NAME"] . $req->data["redirect"]);
                         } else {

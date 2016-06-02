@@ -1,0 +1,28 @@
+{{% BLOCKS }}
+{{#value}}
+  	<div class="table-responsive">
+		<table id="dataTable1" class="table table-bordered table-striped-col">
+			<thead>
+		        <tr>
+		          <th>Hotel</th>
+		          <th>Amount</th>
+		        </tr>
+			</thead>
+			<tfoot>
+		        <tr>
+		          <th>Hotel</th>
+		          <th>Amount</th>
+		        </tr>
+			</tfoot>
+			{{#logs}}
+				<tr>
+					<td>{{slug}}</td>
+					<td>{{amount}}</td>
+				</tr>
+			{{/logs}}
+		</table>
+	</div>
+{{/value}}
+{{^value}}
+  No visits in this days!
+{{/value}}

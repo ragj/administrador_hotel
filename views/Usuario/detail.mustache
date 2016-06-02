@@ -1,0 +1,167 @@
+{{% BLOCKS }}
+	{{< quirk }}
+		{{$ title}}
+            User Detail
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Detail</a></li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-6 col-md-offset-3">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">User Detail</h4>
+	        				</div>
+		        			<div class="panel-body">
+		        				<div class="tabs">
+							 		<a href="javascript:void(0);" class="actve" onclick="changeTab( this , '.detail' )">
+							 			<button type="button" class="btn btn-primary">
+                                        	<span class="glyphicon" aria-hidden="true"></span> DETAILS
+                                    	</button>
+							 		</a>
+							 		<a href="javascript:void(0);"  id="visits" onclick="changeTab( this , '.visits' )">
+							 			<button type="button" class="btn btn-primary">
+                                        	<span class="glyphicon" aria-hidden="true"></span> VISITS
+                                    	</button>
+							 		</a>
+							 	</div>
+		        				<hr>
+		        				{{#user1}}	 	
+								 	<div class="detail ttrl">
+				        				<div class="table-responsive">
+				        					 <table id="dataTable1" class="table table-bordered table-striped-col">
+				        					 	<tr>
+							            			<td><b>User:</b></td>
+							            			<td>{{usuario}}</td>
+									            </tr>
+									            <tr>
+							            			<td><b>Name:</b></td>
+							            			<td>{{nombre}}</td>
+									            </tr>
+									            <tr>
+							            			<td><b>Last Name:</b></td>
+							            			<td>{{papellido}}</td>
+									            </tr>
+									            <tr>
+							            			<td><b>Mother´s Last Name:</b></td>
+							            			<td>{{mapellido}}</td>
+									            </tr>
+									            <tr>
+							            			<td><b>Phone:</b></td>
+							            			<td>{{telefono}}</td>
+									            </tr>
+									            <tr>
+							            			<td><b>Iata:</b></td>
+							            			<td>{{iata}}</td>
+									            </tr>
+									            <tr>
+							            			<td><b>Member:</b></td>
+							            			<td>{{miembros}}</td>
+									            </tr>
+									            <tr>
+							            			<td><b>Years in bussiness:</b></td>
+							            			<td>{{years}}</td>
+									            </tr>
+									            <tr>
+							            			<td><b>Active since:</b></td>
+							            			<td>{{create_at.getTimeStamp | date.format}}</td>
+									            </tr>
+									            <tr>
+							            			<td><b>Zones:</b></td>
+							            			<td>{{#zonas}}{{zona}} {{/zonas}}</td>
+									            </tr>
+				        					 </table>
+				        				</div>
+			        				</div>
+			        				<div class="visits ttrl">
+			        					<div class="aux">
+				        					<div class="row">
+	    										<div class="col-md-6">
+	    											
+	    											<label>From</label>
+				        							<div class="input-group">
+										                <input type="date" id="date_start" name="date_start" class="form-control">
+										            	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+										            </div>
+										        </div>
+										        <div class="col-md-6">
+	    											<label>To</label>
+				        							<div class="input-group">
+										                <input type="date" id="date_end" name="date_end" class="form-control">
+										            	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+										            </div>
+	    										<div>
+				        					</div>
+			        					</div>
+			        					<div class="espacio" style="height:70px;">
+			        					</div>
+			        					<div class="aux">
+			        						<div class="row">
+	    										<div class="col-md-12">
+	    											<button type="button" onclick="send('')" class="btn btn-primary" style="float:right">
+                                        				<span class="glyphicon" aria-hidden="true"></span> SHOW
+                                    				</button>
+                                    				<div class="espacio" style="height:45px;">
+			        								</div>
+			        								<div class="tabs">
+												 		<button type="button" class="btn btn-primary" onclick="send('hotel-collection')">
+					                                        <span class="glyphicon" aria-hidden="true"></span> HOTEL COLLECTION
+					                                    </button>
+					                                    <button type="button" class="btn btn-primary" onclick="send('experience')">
+					                                        <span class="glyphicon" aria-hidden="true"></span> EXPERIENCE
+					                                    </button>
+												 	</div>
+	    											<div id="data">
+			        								</div>
+	    										</div>
+	    									</div>
+			        					</div>
+			        					
+			        				</div>
+								{{/user1}}			
+		        				<hr>
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+			<script>
+				function changeTab( e , classe ){
+					jQuery(".tabs a.actve").removeClass("actve");
+					jQuery(e).addClass("actve");
+					jQuery(".ttrl").fadeOut(100,function(){
+						setTimeout(function(){jQuery(classe).fadeIn();} , 100);
+					});
+				}
+				jQuery(window).load(function(){
+
+					try{
+						if( window.location.hash === "#visits" ){
+							jQuery("#visits").trigger("click")
+						}
+
+						$.get("/bali/panel/user/detailp/{{#user1}}{{id}}{{/user1}}",function(data){ $("#data").html(data) },"html");
+					}catch(e){
+
+					}
+
+				});
+				
+				function send(like){
+					if($("#date_start").val()=="dd/mm/yyyy"||$("#date_end").val()=="dd/mm/yyyy"){
+						reload('','',like);
+					}
+					else{
+						reload($("#date_start").val(),$("#date_end").val(),like);	
+					}			
+				}
+				function reload(date_start , date_end,like ){
+					$.get("/bali/panel/user/detailp/{{#user1}}{{id}}{{/user1}}", {start:date_start , end:date_end,pattern:like } ,function(data){ $("#data").html(data) },"html");
+				}
+	 		</script>
+		{{/ scripts }}
+	{{/ quirk }}

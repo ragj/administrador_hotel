@@ -34,7 +34,7 @@
         {
             return [
                 'rols' => $mapper->belongsTo($entity, 'Entity\Rols', 'rols_idrols'),
-                'zonas' =>$mapper->hasManyThrough($entity, 'Entity\Zona', 'Entity\UsersZona', 'zona_idzona', 'users_id')
+                'zonas' =>$mapper->hasManyThrough($entity, 'Entity\Zona', 'Entity\UsersZona', 'zona_idzona', 'users_id'),
             ];
         }
 
