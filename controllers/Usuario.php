@@ -234,7 +234,7 @@ class Usuario extends Luna\Controller {
             $member = $req->data["member"]!=null? filter_var($req->data["member"], FILTER_SANITIZE_STRING) : $user->miembros;
             $years = $req->data["years"]!=null? filter_var($req->data["years"], FILTER_SANITIZE_STRING) : $user->years;
             if(isset($req->data["rol"])){
-                $user->rols_idrols=$req->data["rol"];
+                $user->rols_idrols=$req->data["rol"]==0?$user->rols_idrols:$req->data["rol"];
             }
             if(isset($req->data["esActivo"])){
                 $active = true;
