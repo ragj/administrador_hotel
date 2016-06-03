@@ -70,12 +70,12 @@
 			                  			<div class="form-group">
 		                  				<label class="col-sm-3 control-label">Zone:<span class="text-danger"> Actual:{{zona.zona}}</span></label>
 			                  				<div class="col-sm-6">
-			                  					<select name="zone" class="form-control">
-			                  						<option value=""></option>
+			                  					<select name="zone" class="form-control zona">
 			                  						{{# zones}}
 			                  							<option value="{{idzona}}">{{zona}}</option>
 			                  						{{/ zones}}
 			                  					</select>
+			                  					
 			                  				</div>
 		                  				</div>
 			                  			<div class="form-group">
@@ -144,6 +144,7 @@
           						</div>
         					{{/ videos }}
         					<script>
+        						$("#zona").val({{#hotel}}{{zona_idzona}}{{/hotel}});
         						function myFunction(id) {
                                     if (confirm("Estas Seguro de Eliminar?") == true) {
                                         self.location = "/bali/panel/hotel/deleteImages/"+id; 
