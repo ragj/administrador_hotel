@@ -80,7 +80,7 @@ class Plain extends Luna\Controller {
     public function home($req , $res){
         $lang=$req->lang;
         $tourMapper=$this->spot->mapper("Entity\Experience");
-        $tour=$tourMapper->select()->where(["home"=>true])->where(["oculto"=>false])->with("type")->order(['type_idtype' => 'DESC']);;
+        $tour=$tourMapper->select()->where(["home"=>true])->where(["oculto"=>false])->with("type")->order(['type_idtype' => 'DESC']);
         switch($lang){
             case "es":
                 $res->m = $res->mustache->loadTemplate("Plain/home_esp.mustache");
