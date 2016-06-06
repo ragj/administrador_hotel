@@ -14,9 +14,9 @@
             return [
                 'id' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
                 'title' => ['type' => 'text'],
-                'title_es' => ['type' => 'text'],
+                'title_esp' => ['type' => 'text'],
                 'content' => ['type' => 'text'],
-                'content_es' => ['type' => 'text']
+                'content_esp' => ['type' => 'text']
             ];
         }
     }

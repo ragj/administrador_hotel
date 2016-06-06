@@ -1,0 +1,110 @@
+{{% BLOCKS }}
+	{{< quirk }}
+		{{$ title}}
+            Show Experience Rate's
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Transfers</a></li>
+			        <li class="active">Show Included Rates</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-8 col-md-offset-2">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Show Included Rates</h4>
+	        				</div>
+		        			<div class="panel-body">
+		        				<div class="tabs">
+							 		<a href="javascript:void(0);" class="actve" onclick="changeTab( this , '.english' )">
+							 			<button type="button" class="btn btn-primary">
+                                        	<span class="glyphicon" aria-hidden="true"></span> English
+                                    	</button>
+							 		</a>
+							 		<a href="javascript:void(0);"  id="spanish" onclick="changeTab( this , '.spanish' )">
+							 			<button type="button" class="btn btn-primary">
+                                        	<span class="glyphicon" aria-hidden="true"></span> Spanish
+                                    	</button>
+							 		</a>
+							 	</div>
+							 	<hr>
+							 	<div class="english ttrl">
+							 		<h2>English Content</h2>
+							 		{{#rate}}
+							 			<form class="form-horizontal" id="1" action="/bali/panel/transfer/expInclude" method="post" enctype="multipart/form-data">
+				                    		<label class="control-label">Title: <span class="text-danger">*</span></label>
+				                    		<input type="text" name="title" class="form-control" value="{{title}}" required />	
+							 				<textarea name="content1" style="visibility:hidden; height:0px; width:0px;"  placeholder="content" id="contn" required/></textarea>
+											<div id="summernote">
+						                    	{{{content}}}
+						                    </div>
+						                    <br>
+							 				<button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
+
+						                </form>					
+		        					{{/rate}}
+							 	</div>
+							 	<div class="spanish ttrl">
+							 		<h2>Spanish Content</h2>
+							 		{{#rate}}
+							 			<form class="form-horizontal" action="/bali/panel/transfer/expInclude" method="post" enctype="multipart/form-data">
+							 				<label class="control-label">Title: <span class="text-danger">*</span></label>
+				                    		<input type="text" name="title_es" class="form-control" value="{{title_esp}}" required />
+							 				<textarea name="content2" style="visibility:hidden; height:0px; width:0px;"  placeholder="content" id="contn2" required/></textarea>
+											<div id="summernote2">
+						                    	{{{content_esp}}}
+						                    </div>	
+						                    <br>
+							 				<button class="btn btn-success btn-quirk btn-wide mr5">Save</button>								
+							 			</form>		
+		        					{{/rate}}
+							 	</div>	
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+			<script>
+				function changeTab( e , classe ){
+					jQuery(".tabs a.actve").removeClass("actve");
+					jQuery(e).addClass("actve");
+					jQuery(".ttrl").fadeOut(100,function(){
+						setTimeout(function(){jQuery(classe).fadeIn();} , 100);
+					});
+				}
+			</script>
+			<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+			<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function() {
+				  $('#summernote').summernote({
+				  	airMode: true,
+				  	airPopover: [
+					    // [groupName, [list of button]]
+					    ['style', ['bold', 'italic', 'underline' , 'link']]
+					  ],
+					callbacks: {
+					    onChange: function (contents, $editable) {
+			                $("#contn").val(contents);
+			            }
+					  }
+				  });
+				  $('#summernote2').summernote({
+				  	airMode: true,
+				  	airPopover: [
+					    // [groupName, [list of button]]
+					    ['style', ['bold', 'italic', 'underline' , 'link']]
+					  ],
+					callbacks: {
+					    onChange: function (contents, $editable) {
+			                $("#contn2").val(contents);
+			            }
+					  }
+				  });
+				});
+			</script>
+		{{/ scripts }}
+	{{/ quirk }}

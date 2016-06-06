@@ -436,6 +436,12 @@ $router->addRoute(array(
 	'get' => array('Footer', 'edit'),
 	'post' => array('Footer', 'edit')
 ));
+$router->addRoute(array(
+	'path' => '/panel/transfer/expInclude',
+	'get' => array('Rates', 'exp'),
+	'post' => array('Rates', 'exp')
+));
+
 
 
 
