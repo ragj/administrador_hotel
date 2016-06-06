@@ -1,6 +1,6 @@
 # **Lozano Bali**
 
-Created whit:
+Created with:
 
 	/****************************************/
 	//		   __ 							//
