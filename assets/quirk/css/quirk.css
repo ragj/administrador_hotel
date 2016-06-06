@@ -50,6 +50,9 @@ audio:not([controls]) {
 .visits{
   display: none;
 }
+.spanish{
+  display: none;
+}
 [hidden],
 template {
   display: none;

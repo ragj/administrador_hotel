@@ -431,6 +431,11 @@ $router->addRoute(array(
 	'get' => array('Vehicle', 'editImages'),
 	'post' => array('Vehicle', 'editImages')
 ));
+$router->addRoute(array(
+	'path' => '/panel/footer',
+	'get' => array('Footer', 'edit'),
+	'post' => array('Footer', 'edit')
+));
 
 
 

@@ -320,6 +320,10 @@ footer{
 			color: #666;
 			font-weight: bold;
 		}
+		footer div.contact a{
+			color:white;
+			text-decoration:none;
+		}
 
 
 /* HOME */
