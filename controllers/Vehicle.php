@@ -31,7 +31,8 @@
 	    public function edit($req,$res){
 	    	$vehicleMapper=$this->spot->mapper("Entity\Vehicle");
 	    	if(isset($req->params["car"])){
-	    		$vehicle=$vehicleMapper->select()->where(["idVehicle"=>$req->params["car"]])->with("images")->first();
+	    		$vehicle=$vehicleMapper->select()->where(["idVehicle"=>$req->params["car"]])->with("images")->with("passengers")->first();
+
 	    		if(isset($req->data["car"],$req->data["description"],$req->data["spanish"])){
 	    			$vehicle->name=$req->data["car"];
 	    			$vehicle->description=$req->data["description"];
@@ -173,6 +174,60 @@
 	        exit;
 	    }
 
+	    /***
+	    *	Metodo que sirve para agregar detalle de numero de pasajeros a coche
+	    *
+	    **/
+	    public function addPass($req,$res){
+	    	if(isset($req->params["car"],$req->data["min"])){
+	    		$passengerMapper=$this->spot->mapper("Entity\VehiclePassengers");
+	    		if(isset($req->data["max"]))
+	    		{
+	    			$passenger=$passengerMapper->build([
+		    			"np_initial"=>$req->data["min"],
+		    			"np_final"=>$req->data["max"],
+		    			"vehicle_idVehicle"=>$req->params["car"]
+	    			]);
+	    		}
+	    		else{
+	    			$passenger=$passengerMapper->build([
+		    			"np_initial"=>$req->data["min"],
+		    			"np_final"=>0,
+		    			"vehicle_idVehicle"=>$req->params["car"]
+	    			]);
+	    		}
+	    		$passengerMapper->insert($passenger);
+	    		header("Location: /bali/panel/vehicles/edit/".$req->params["car"]);
+	    	}
+	    }
+	    /**
+	    *	Metodo que sirve para editar un detalle de numero de pasajero
+	    **/
+	    public function editPass($req,$res){
+	    	if(isset($req->params["car"])){
+	    		$passengerMapper=$this->spot->mapper("Entity\VehiclePassengers");	
+	    		if(isset($req->data["min"],$req->data["max"])){
+	    			$passenger=$passengerMapper->select()->where(["id"=>$req->params["car"]])->with("vehicle")->first();
+	    			$passenger->np_initial=$req->data["min"];
+	    			$passenger->np_final=$req->data["max"];
+	    			$passengerMapper->update($passenger);
+	    		}
+	    		$passenger=$passengerMapper->select()->where(["id"=>$req->params["car"]])->with("vehicle")->first();
+	    		echo $this->renderWiew(array_merge(["passenger"=>$passenger]),$res);
+	    	}
+	    }
+	    /**
+	    *	Metodo que elimina un detalle de un numero de pasajero
+	    **/
+	    public function deletePass($req,$res){
+	    	if(isset($req->params["car"])){
+	    		$passengerMapper=$this->spot->mapper("Entity\VehiclePassengers");
+	    		$passenger=$passengerMapper->select()->where(["id"=>$req->params["car"]])->first();
+	    		$aux=$passenger->vehicle_idVehicle;
+	    		$passenger = $passengerMapper->delete(['id'=>$req->params["car"]]);
+	    		header("Location: /bali/panel/vehicles/edit/".$aux);
+	    	}
+	    }
 	    /**
 	    *   Metodo que elimina todos los archivos del directorio y el directorio
 	    *   @param $carpeta

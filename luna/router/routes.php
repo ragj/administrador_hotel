@@ -431,11 +431,30 @@ $router->addRoute(array(
 	'get' => array('Vehicle', 'editImages'),
 	'post' => array('Vehicle', 'editImages')
 ));
+//Routes for passengers
+$router->addRoute(array(
+	'path' => '/panel/vehicles/addPass/{car}',
+	'get' => array('Vehicle', 'addPass'),
+	'post' => array('Vehicle', 'addPass')
+));
+$router->addRoute(array(
+	'path' => '/panel/vehicles/editPass/{car}',
+	'get' => array('Vehicle', 'editPass'),
+	'post' => array('Vehicle', 'editPass')
+));
+$router->addRoute(array(
+	'path' => '/panel/vehicles/deletePass/{car}',
+	'get' => array('Vehicle', 'deletePass')
+));
+
+//routes footer
 $router->addRoute(array(
 	'path' => '/panel/footer',
 	'get' => array('Footer', 'edit'),
 	'post' => array('Footer', 'edit')
 ));
+
+//routes for rates
 $router->addRoute(array(
 	'path' => '/panel/transfer/expInclude',
 	'get' => array('Rates', 'exp'),

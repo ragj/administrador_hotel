@@ -53,6 +53,9 @@ audio:not([controls]) {
 .spanish{
   display: none;
 }
+.formPass{
+  display: none;
+}
 [hidden],
 template {
   display: none;

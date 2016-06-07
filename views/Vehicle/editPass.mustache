@@ -1,0 +1,56 @@
+{{% BLOCKS }}
+	{{< quirk }}
+		{{$ title}}
+            Edit Passenger
+        {{/ title}}
+        {{$ content }}
+    		<div class="contentpanel">
+    			<ol class="breadcrumb breadcrumb-quirk">
+			        <li><a href=""><i class="fa fa-home mr5"></i>Vehicle</a></li>
+			        <li class="active">Edit Passenger</li>
+      			</ol>
+    			<div class="row">
+    				<div class="col-md-8 col-md-offset-2">
+	        			<div class="panel">
+	        				<div class="panel-heading">
+	        					<h4 class="panel-title">Edit Passenger</h4>
+	        				</div>
+		        			<div class="panel-body">
+		        				<hr>
+		        				{{#passenger}}			
+			        				<form class="form-horizontal" action="/bali/panel/vehicles/editPass/{{id}}" method="post" name="newUser" class="form-horizontal">
+			        					<div class="form-group">
+			        						<label class="col-sm-3 control-label">Vehicle: <span class="text-danger">*</span></label>
+			        						<div class="col-sm-6">
+			                      				<input type="text" name="min" value="{{vehicle.name}}"  disabled/>
+			                    			</div>
+			                  			</div>
+			                  			<div class="form-group">
+			                    			<label class="col-sm-3 control-label">Min: <span class="text-danger">*</span></label>
+			                    			<div class="col-sm-6">
+			                      				<input type="text" name="min" value="{{np_initial}}"/>
+			                    			</div>
+			                  			</div>
+			                  			<div class="form-group">
+			                    			<label class="col-sm-3 control-label">Max:<span class="text-danger">*</span></label>
+			                    			<div class="col-sm-6">
+			                      				<input type="text" name="max" value="{{np_final}}"/>
+			                    			</div>
+			                  			</div>
+			                  			<hr>
+			                  			<div class="row">
+		                    				<div class="col-sm-9 col-sm-offset-8">
+						                      <button class="btn btn-success btn-quirk btn-wide mr5">Save</button>
+		                    				</div>
+		                  				</div>
+			        				</form>
+		        				{{/passenger}}
+		        			</div>
+	        			</div>
+        			</div>
+    			</div>	
+    		</div>
+        {{/ content }}
+		{{$ scripts }}
+		{{/ scripts }}
+	{{/ quirk }}

@@ -22,6 +22,7 @@
         {
             return [
                 'images' => $mapper->hasMany($entity, 'Entity\VehicleImage', 'vehicle_idVehicle'),
+                'passengers' => $mapper->hasMany($entity, 'Entity\VehiclePassengers', 'vehicle_idVehicle'),
             ];
         }
     }
