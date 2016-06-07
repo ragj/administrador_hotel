@@ -53,15 +53,18 @@
 	    public function addValue($req,$res){
 	    	$transferDetailMapper=$this->spot->mapper("Entity\TransferDetail");
 	    	$details=$transferDetailMapper->select();
-	    	if(isset($req->data["tb"],$req->data["desc"])){
+	    	$passengerMapper=$this->spot->mapper("Entity\VehiclePassengers");
+	    	$passenger=$passengerMapper->select()->with("vehicle");
+	    	if(isset($req->data["tb"],$req->data["desc"],$req->data["vp"])){
 	    		$transferValuesMapper=$this->spot->mapper("Entity\TransferValue");
 	    		$entity=$transferValuesMapper->build([
 	    			'val' => $req->data["desc"],
-                	'transferDetail_idtransferDetail'=> $req->data["tb"]
+                	'transferDetail_idtransferDetail'=> $req->data["tb"],
+                	'vp_id'=>$req->data["vp"]
 	    		]);
 	    		$result=$transferValuesMapper->insert($entity);
 	    	}
-	    	echo $this->renderWiew(array_merge(["details"=>$details]),$res);
+	    	echo $this->renderWiew(array_merge(["details"=>$details,"passenger"=>$passenger]),$res);
 	    }
 
 	    /**
@@ -143,14 +146,18 @@
 	    		$transferDetailMapper=$this->spot->mapper("Entity\TransferDetail");
 	    		$details=$transferDetailMapper->select();
 	    		$values=$transferValuesMapper->select()->with("transferDetail")->where(["idtransferValues"=>$req->params["value"]])->first();
-	    		if(isset($req->data["tb"])||isset($req->data["desc"])){
+	    		$passengerMapper=$this->spot->mapper("Entity\VehiclePassengers");
+	    		$passenger=$passengerMapper->select()->with("vehicle");
+	    		if(isset($req->data["tb"])||isset($req->data["desc"])||isset($req->data["vp"])){
 	    			$tb=$req->data["tb"]!=null?$req->data["tb"]: $values->transferDetail_idtransferDetail;
 	            	$val=$req->data["desc"]!=null? $req->data["desc"]: $values->val;
+	            	$vp=$req->data["vp"]!=null? $req->data["vp"]: $values->vp_id;
 	            	$values->transferDetail_idtransferDetail=$tb;
 	            	$values->val=$val;
+	            	$values->vp_id=$vp;
 	            	$transferValuesMapper->update($values);
 	    		}
-	    		echo $this->renderWiew(array_merge(["value"=>$values,"details"=>$details]),$res);
+	    		echo $this->renderWiew(array_merge(["value"=>$values,"details"=>$details,"passenger"=>$passenger]),$res);
 	    	}
 	    }
 

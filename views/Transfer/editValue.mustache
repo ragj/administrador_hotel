@@ -30,6 +30,17 @@
 			                            	</select>
 		                   				</div>
 		                  			</div>
+		                  			<div class="form-group">
+		                    			<label class="col-sm-3 control-label">Vehicle Passengers:</label>
+		                    			<div class="col-sm-6">
+		                      				<select class="form-control" name="vp">
+			                            		<option value=""></option>
+			                            		{{# passenger }}
+			                            			<option value="{{id}}">{{vehicle.name}} {{np_initial}}-{{np_final}}</option>
+			                            		{{/ passenger }}
+			                            	</select>
+		                   				</div>
+		                  			</div>
 		        					<div class="form-group">
 		                    			<label class="col-sm-3 control-label">Value: <span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">

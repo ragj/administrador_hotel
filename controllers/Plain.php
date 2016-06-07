@@ -260,16 +260,51 @@ class Plain extends Luna\Controller {
         //obtencion de hoteles
         $hotelMapper=$this->spot->mapper("Entity\hotelTransfer");
         $hotelTransfer=$hotelMapper->select()->with("hotel");
-        //obtencion de transfers
-        $transferBlockMapper=$this->spot->mapper("Entity\TransferBlock");
-        $transfer=$transferBlockMapper->select()->with(["detail"])->where(["zona_idzona"=>1]);
-        $aux=$transfer->toArray();
-        //obtencion de ids que aplican
-        $ids=array();
-        foreach ($aux as $value) {
-            array_push($ids,$value["idtransferBlock"]);
+        //obtencion de vehiculos
+        $carMapper=$this->spot->mapper("Entity\Vehicle");
+        $car=$carMapper->select()->with("passengers");
+        $aux=$car->toArray();
+        $cars=array();
+        foreach ($aux as $c) {
+            $aux2=array('size' => sizeof($c["passengers"]));
+            $aux2=array_merge($c,$aux2);
+            array_push($cars,$aux2);
         }
-        //obtencion de detalles con valores de los ids de los transfers blocks
+        //obtencion de transfers de traslados
+        $transferBlockMapper=$this->spot->mapper("Entity\TransferBlock");
+        $transfer=$transferBlockMapper->select()->with(["detail"])->where(["zona_idzona"=>1])->where(["tipo"=>"T"]);
+        $aux=$transfer->toArray();
+        //obtencion de valores de Transfers Transfers
+        $Tdetails=array();
+        foreach ($aux as $value) {
+            foreach ($value["detail"] as $val) {
+                $id=$val["idtransferDetail"];
+                $den=$val["description"];
+                $des=$val["description_esp"];
+                $valuesMapper=$this->spot->mapper("Entity\TransferValue");
+                $values=$valuesMapper->select()->where(["transferDetail_idtransferDetail"=>$id])->order(['vp_id'=>'ASC'])->toArray();
+                $aux2 = array('den' =>$den ,'des'=>$des,'values'=>$values);
+                array_push($Tdetails,$aux2);
+            }
+        }
+        $transfer=$transferBlockMapper->select()->with(["detail"])->where(["zona_idzona"=>1])->where(["tipo"=>"E"]);
+        $aux=$transfer->toArray();
+        //obtencion de valores de transfers Experiencias
+        $Edetails=array();
+        foreach ($aux as $value) {
+            foreach ($value["detail"] as $val) {
+                $id=$val["idtransferDetail"];
+                $den=$val["description"];
+                $des=$val["description_esp"];
+                $valuesMapper=$this->spot->mapper("Entity\TransferValue");
+                $values=$valuesMapper->select()->where(["transferDetail_idtransferDetail"=>$id])->order(['vp_id'=>'ASC'])->toArray();
+                $aux2 = array('den' =>$den ,'des'=>$des,'values'=>$values);
+                array_push($Edetails,$aux2);
+            }
+        }
+        
+        
+        /*//obtencion de detalles con valores de los ids de los transfers blocks
         $detailMapper=$this->spot->mapper("Entity\TransferDetail");
         $detailValues=$detailMapper->select()->with(["transferValue"])->where(["transferBlock_idtransferBlock"=>$ids[0]])->where(["oculto"=>false])->order(['description' => 'DESC'])->toArray();
         //construccion array perzonalizado para la vista necesaria
@@ -303,6 +338,7 @@ class Plain extends Luna\Controller {
             }    
         }
         array_push($exps,$title);
+        */
         $texperienceMapper=$this->spot->mapper("Entity\Texperience");
         $rate=$texperienceMapper->select()->first();
         $tMapper=$this->spot->mapper("Entity\Ratetransfer");
@@ -319,7 +355,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/transfer.mustache");
             break;
         }
-    	echo $this->renderWiew( array_merge(["transferBlock" => $pers,"experBlock"=>$exps,"experRate"=>$rate,"tRate"=>$trate,"hotelBlock"=>$hotelTransfer], $this->header("transfer",$lang) ), $res);
+    	echo $this->renderWiew( array_merge(["car"=>$cars,"ttransfer"=>$Tdetails,"texperience"=>$Edetails,"experRate"=>$rate,"tRate"=>$trate,"hotelBlock"=>$hotelTransfer], $this->header("transfer",$lang) ), $res);
     }
 
     public function contact($req , $res){

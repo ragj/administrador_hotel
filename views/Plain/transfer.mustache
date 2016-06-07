@@ -49,47 +49,44 @@
 		 	</div>
 		 	<div class="trasfer-travel ttrl">
 				<div class="aux">
-				 	{{#transferBlock}}
-				 		<div class="{{tipo}}">
-					 		<h1>
-					 			{{en}}
-					 			<span>Prices are NETT per person in USD and non commisionable</span>
-					 		</h1>
-					 		<center>
-					 			<button type="button" onclick="window.location.href='/bali/en/request'">REQUEST / INQUIRE</button>
-					 		</center>
-					 		<br>
-					 		<table>
-								<tr class="main">
-									<td>Description</td>
-									<td colspan="2" class="data">INNOVA SUV</td>
-									<td colspan="2" class="data">HIACE VAN</td>
-									<td colspan="2" class="data">ALPHARD/MERCY E 200</td>
-								</tr>
+			 		<div class="{{tipo}}">
+				 		<h1>
+				 			{{en}}
+				 			<span>Prices are NETT per person in USD and non commisionable</span>
+				 		</h1>
+				 		<center>
+				 			<button type="button" onclick="window.location.href='/bali/en/request'">REQUEST / INQUIRE</button>
+				 		</center>
+				 		<br>
+				 		<table>
+							<tr class="main">
+								<td>Description</td>
+								{{#car}}
+									<td colspan="{{size}}" class="data">{{name}}</td>
+								{{/car}}
+							</tr>
+							<tr>
+								<td>Passengers</td>
+								{{#car}}
+									{{#passengers}}
+										<td class="data">{{np_initial}}{{#np_final}} - {{np_final}}{{/np_final}}</td>
+									{{/passengers}}
+								{{/car}}
+							</tr>
+							{{# ttransfer}}
 								<tr>
-									<td>Passengers</td>
-									<td class="data">1</td>
-									<td class="data">2 - 4</td>
-									<td class="data">5 - 7</td>
-									<td class="data">8 - 10 
-									<td class="data"> 1 </td>
-									<td class="data"> 2 - 4 </td>
+									<td>{{den}}</td>
+									{{#values}}
+										<td class="data">{{val}}</td>
+									{{/values}}
 								</tr>
-								{{# detalle}}
-									<tr>
-										<td>{{en}}</td>
-										{{#vals}}
-											<td class="data">{{val}}</td>
-										{{/vals}}
-									</tr>
-								{{/ detalle}}
-							</table>
-							{{#tRate}}
-								<h2>{{title}}</h2>
-								{{{content}}}
-							{{/tRate}}	
-						</div>
-					{{/transferBlock}}
+							{{/ ttransfer}}
+						</table>
+						{{#tRate}}
+							<h2>{{title}}</h2>
+							{{{content}}}
+						{{/tRate}}	
+					</div>
 				</div>
 				<h1> Gallery </h1>
 				<row>
@@ -116,47 +113,44 @@
 		
 			<div class="experiences-travel ttrl">
 				<div class="aux">
-				 	{{#experBlock}}
-				 		<div class="{{tipo}}">
-					 		<h1>
-					 			{{en}}
-					 			<span>Prices are NETT per person in USD and non commisionable</span>
-					 		</h1>
-					 		<center>
-					 			<button type="button" onclick="window.location.href='/bali/en/request'">REQUEST / INQUIRE</button>
-					 		</center>
-					 		<br>
-					 		<table>
-								<tr class="main">
-									<td>Description</td>
-									<td colspan="2" class="data">INNOVA SUV</td>
-									<td colspan="2" class="data">HIACE VAN</td>
-									<td colspan="2" class="data">ALPHARD/MERCY E 200</td>
-								</tr>
+			 		<div class="{{tipo}}">
+				 		<h1>
+				 			{{en}}
+				 			<span>Prices are NETT per person in USD and non commisionable</span>
+				 		</h1>
+				 		<center>
+				 			<button type="button" onclick="window.location.href='/bali/en/request'">REQUEST / INQUIRE</button>
+				 		</center>
+				 		<br>
+				 		<table>
+							<tr class="main">
+								<td>Description</td>
+								{{#car}}
+									<td colspan="{{size}}" class="data">{{name}}</td>
+								{{/car}}
+							</tr>
+							<tr>
+								<td>Passengers</td>
+								{{#car}}
+									{{#passengers}}
+										<td class="data">{{np_initial}}{{#np_final}} - {{np_final}}{{/np_final}}</td>
+									{{/passengers}}
+								{{/car}}
+							</tr>
+							{{# texperience}}
 								<tr>
-									<td>Passengers</td>
-									<td class="data">1</td>
-									<td class="data">2 - 4</td>
-									<td class="data">5 - 7</td>
-									<td class="data">8 - 10 
-									<td class="data"> 1 </td>
-									<td class="data"> 2 - 4 </td>
+									<td>{{den}}</td>
+									{{#values}}
+										<td class="data">{{val}}</td>
+									{{/values}}
 								</tr>
-								{{# detalle}}
-									<tr>
-										<td>{{en}}</td>
-										{{#vals}}
-											<td class="data">{{val}}</td>
-										{{/vals}}
-									</tr>
-								{{/ detalle}}
-							</table>
-							{{#experRate}}
-								<h2>{{title}}</h2>
-								{{{content}}}
-							{{/experRate}}							
-						</div>
-					{{/experBlock}}
+							{{/texperience}}
+						</table>
+						{{#experRate}}
+							<h2>{{title}}</h2>
+							{{{content}}}
+						{{/experRate}}							
+					</div>
 				</div>
 				<h1> Gallery </h1>
 				<row>
