@@ -441,6 +441,11 @@ $router->addRoute(array(
 	'get' => array('Rates', 'exp'),
 	'post' => array('Rates', 'exp')
 ));
+$router->addRoute(array(
+	'path' => '/panel/transfer/traInclude',
+	'get' => array('Rates', 'tra'),
+	'post' => array('Rates', 'tra')
+));
 
 
 

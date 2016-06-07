@@ -55,17 +55,12 @@
 						
 					</row>
 
-					
-					<h2>Experience rate includes :</h2>
-					<p class="smaller">
-						Driver, Gasoline, Parking.
-						<br>Spanish / English speaking guide
-						<br>Soft Drinks
-						<br>Insurance
-						<br>Refreshing towel
-						<br>Wi-fi connection in the car
-						<br>Donations, Entrance fee based on itinerary except Bali as You Pleased
-					</p>
+					{{#rate}}
+						<h2>{{title}}</h2>
+						<p class="smaller">
+							{{{content}}}
+						</p>
+					{{/rate}}
 				</div>
 			</column>
 			<column cols="4">

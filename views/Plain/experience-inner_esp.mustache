@@ -55,16 +55,13 @@
 						</column>
 						
 					</row>
-					<h2>Las experiencias incluyen :</h2>
-					<p class="smaller">
-						Conductor, gasolina, Estacionamiento.
-						<br>Guia que habla hispana / inglesa	
-						<br>Seguro
-						<br>Agua Embotellada, Refrescos y Cerveza
-						<br>Toalla refrescante
-						<br>Conexión Wi-Fi en el carro
-						<br>Propinas, pago de entradas según itinerario, excepto “Bali as you pleased”
-					</p>
+					{{#rate}}
+						<h2>{{title_esp}}</h2>
+						<p class="smaller">
+							{{{content_esp}}}
+						</p>
+					{{/rate}}
+					
 				</div>
 			</column>
 			<column cols="4">

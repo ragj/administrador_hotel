@@ -218,6 +218,8 @@ class Plain extends Luna\Controller {
                     $res->m = $res->mustache->loadTemplate("Plain/experience-inner.mustache");
                 break;
             }
+            $texperienceMapper=$this->spot->mapper("Entity\Texperience");
+            $rate=$texperienceMapper->select()->first();
             $tourMapper = $this->spot->mapper("Entity\Experience");
             $params = [($req->lang=="es"?"uri_es":"uri") => $req->params["exper"]];
             $tour = $tourMapper->select()->with("images")->where($params)->first();
@@ -226,10 +228,10 @@ class Plain extends Luna\Controller {
                 $this->tour = $tour;
                 $translate = new stdClass();
                 $translate->call = function( $lang ){
-                    $uri = $lang=="es"?$this->tour->uri_es:$this->tour->uri;
+                    $uri = $lang=="es"?$this->tour->uri_es:$this->tour->uri; 
                     return Luna\Translate::to( $lang , ["uri"=> $uri, "mapper"=>"{exper}"]);
                 };
-                echo $this->renderWiew( array_merge(["translate"=>$translate,"tour" => $tour] , $this->header("experience",$lang) ), $res);    
+                echo $this->renderWiew( array_merge(["translate"=>$translate,"tour" => $tour,"rate"=>$rate] , $this->header("experience",$lang) ), $res);    
             }
             else{
                 header('Location:'.Luna\Translate::url("/experience"));
@@ -301,6 +303,10 @@ class Plain extends Luna\Controller {
             }    
         }
         array_push($exps,$title);
+        $texperienceMapper=$this->spot->mapper("Entity\Texperience");
+        $rate=$texperienceMapper->select()->first();
+        $tMapper=$this->spot->mapper("Entity\Ratetransfer");
+        $trate=$texperienceMapper->select()->first();
     
         switch($lang){
             case "es":
@@ -313,7 +319,7 @@ class Plain extends Luna\Controller {
                 $res->m = $res->mustache->loadTemplate("Plain/transfer.mustache");
             break;
         }
-    	echo $this->renderWiew( array_merge(["transferBlock" => $pers,"experBlock"=>$exps,"hotelBlock"=>$hotelTransfer], $this->header("transfer",$lang) ), $res);
+    	echo $this->renderWiew( array_merge(["transferBlock" => $pers,"experBlock"=>$exps,"experRate"=>$rate,"tRate"=>$trate,"hotelBlock"=>$hotelTransfer], $this->header("transfer",$lang) ), $res);
     }
 
     public function contact($req , $res){

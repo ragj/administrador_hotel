@@ -84,14 +84,10 @@
 									</tr>
 								{{/ detalle}}
 							</table>
-							<h2>Las tasas transfer incluye :</h2>
-							Conductor, hasolina, estacionamiento
-							<br>Agua Embotellada, Refrescos y Cerveza
-							<br>Guia de habla hispana / inglesa 
-							<br>Seguro
-							<br>Toalla Refrescante
-							<br>Conexión Wi-Fi en el carro	
-							<br>Propinas
+							{{#tRate}}
+								<h2>{{title_esp}}</h2>
+								{{{content_esp}}}
+							{{/tRate}}
 						</div>
 					{{/transferBlock}}
 				</div>
@@ -155,14 +151,10 @@
 									</tr>
 								{{/ detalle}}
 							</table>
-							<h2>Las tasas transfer incluye :</h2>
-							Conductor, hasolina, estacionamiento
-							<br>Agua Embotellada, Refrescos y Cerveza
-							<br>Guia de habla hispana / inglesa 
-							<br>Seguro
-							<br>Toalla Refrescante
-							<br>Conexión Wi-Fi en el carro	
-							<br>Propinas, Excepto "Bali as you please"
+							{{#experRate}}
+								<h2>{{title_esp}}</h2>
+								{{{content_esp}}}
+							{{/experRate}}	
 						</div>
 					{{/experBlock}}
 				</div>

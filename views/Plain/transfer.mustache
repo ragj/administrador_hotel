@@ -84,14 +84,10 @@
 									</tr>
 								{{/ detalle}}
 							</table>
-							<h2>Transfer rates includes :</h2>
-							Driver, Gasoline, Parking.
-							<br>Soft Drinks
-							<br>Spanish / English speaking guide
-							<br>Insurance
-							<br>Refreshing towel
-							<br>Wi-fi connection in the car		
-							<br>Tips
+							{{#tRate}}
+								<h2>{{title}}</h2>
+								{{{content}}}
+							{{/tRate}}	
 						</div>
 					{{/transferBlock}}
 				</div>
@@ -155,16 +151,10 @@
 									</tr>
 								{{/ detalle}}
 							</table>
-							<h2>Transfer rates includes :</h2>
-							Driver, Gasoline, Parking.
-							<br>Soft Drinks
-							<br>Spanish / English speaking guide
-							<br>Insurance
-							<br>Refreshing towel
-							<br>Wi-fi connection in the car		
-							<br>Tips
-							<br>Donations, Entrance fee based on itinerary except Bali as You Please
-							
+							{{#experRate}}
+								<h2>{{title}}</h2>
+								{{{content}}}
+							{{/experRate}}							
 						</div>
 					{{/experBlock}}
 				</div>
