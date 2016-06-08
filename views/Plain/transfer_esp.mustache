@@ -49,8 +49,7 @@
 		 	</div>
 		 	<div class="trasfer-travel ttrl">
 				<div class="aux">
-				 	{{#transferBlock}}
-				 		<div class="{{tipo}}">
+				 	<div class="{{tipo}}">
 					 		<h1>
 					 			{{en}}
 					 			<span>Precios de traslados por persona en Dolares Americanos</span>
@@ -59,37 +58,36 @@
 					 			<button type="button" onclick="window.location.href='/bali/es/request'">SOLICITUD</button>
 					 		</center>
 					 		<br>
-					 		<table>
-								<tr class="main">
-									<td>Descripción</td>
-									<td colspan="2" class="data">INNOVA SUV</td>
-									<td colspan="2" class="data">HIACE VAN</td>
-									<td colspan="2" class="data">ALPHARD/MERCY E 200</td>
-								</tr>
+					 		<br>
+				 		<table>
+							<tr class="main">
+								<td>Descripción</td>
+								{{#car}}
+									<td colspan="{{size}}" class="data">{{name}}</td>
+								{{/car}}
+							</tr>
+							<tr>
+								<td>Pasajeros</td>
+								{{#car}}
+									{{#passengers}}
+										<td class="data">{{np_initial}}{{#np_final}} - {{np_final}}{{/np_final}}</td>
+									{{/passengers}}
+								{{/car}}
+							</tr>
+							{{# ttransfer}}
 								<tr>
-									<td>Pasajeros</td>
-									<td class="data">1</td>
-									<td class="data">2 - 4</td>
-									<td class="data">5 - 7</td>
-									<td class="data">8 - 10 
-									<td class="data"> 1 </td>
-									<td class="data"> 2 - 4 </td>
+									<td>{{des}}</td>
+									{{#values}}
+										<td class="data">{{val}}</td>
+									{{/values}}
 								</tr>
-								{{# detalle}}
-									<tr>
-										<td>{{es}}</td>
-										{{#vals}}
-											<td class="data">{{val}}</td>
-										{{/vals}}
-									</tr>
-								{{/ detalle}}
-							</table>
-							{{#tRate}}
-								<h2>{{title_esp}}</h2>
-								{{{content_esp}}}
-							{{/tRate}}
-						</div>
-					{{/transferBlock}}
+							{{/ ttransfer}}
+						</table>
+						{{#tRate}}
+							<h2>{{title_esp}}</h2>
+							{{{content_esp}}}
+						{{/tRate}}
+					</div>
 				</div>
 				<h1>  Galería </h1>
 				<row>
@@ -116,7 +114,6 @@
 		
 			<div class="experiences-travel ttrl">
 				<div class="aux">
-				 	{{#experBlock}}
 				 		<div class="{{tipo}}">
 					 		<h1>
 					 			{{en}}
@@ -127,36 +124,34 @@
 					 		</center>
 					 		<br>
 					 		<table>
-								<tr class="main">
-									<td>Descripción</td>
-									<td colspan="2" class="data">INNOVA SUV</td>
-									<td colspan="2" class="data">HIACE VAN</td>
-									<td colspan="2" class="data">ALPHARD/MERCY E 200</td>
-								</tr>
+							<tr class="main">
+								<td>Descripción</td>
+								{{#car}}
+									<td colspan="{{size}}" class="data">{{name}}</td>
+								{{/car}}
+							</tr>
+							<tr>
+								<td>Pasajeros</td>
+								{{#car}}
+									{{#passengers}}
+										<td class="data">{{np_initial}}{{#np_final}} - {{np_final}}{{/np_final}}</td>
+									{{/passengers}}
+								{{/car}}
+							</tr>
+							{{# texperience}}
 								<tr>
-									<td>Pasajeros</td>
-									<td class="data">1</td>
-									<td class="data">2 - 4</td>
-									<td class="data">5 - 7</td>
-									<td class="data">8 - 10 
-									<td class="data"> 1 </td>
-									<td class="data"> 2 - 4 </td>
+									<td>{{des}}</td>
+									{{#values}}
+										<td class="data">{{val}}</td>
+									{{/values}}
 								</tr>
-								{{# detalle}}
-									<tr>
-										<td>{{es}}</td>
-										{{#vals}}
-											<td class="data">{{val}}</td>
-										{{/vals}}
-									</tr>
-								{{/ detalle}}
+							{{/texperience}}
 							</table>
 							{{#experRate}}
 								<h2>{{title_esp}}</h2>
 								{{{content_esp}}}
 							{{/experRate}}	
 						</div>
-					{{/experBlock}}
 				</div>
 				<h1> Galería </h1>
 				<row>
