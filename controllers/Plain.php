@@ -342,7 +342,7 @@ class Plain extends Luna\Controller {
         $texperienceMapper=$this->spot->mapper("Entity\Texperience");
         $rate=$texperienceMapper->select()->first();
         $tMapper=$this->spot->mapper("Entity\Ratetransfer");
-        $trate=$texperienceMapper->select()->first();
+        $trate=$tMapper->select()->first();
     
         switch($lang){
             case "es":
