@@ -94,7 +94,7 @@
 					{{/images}}
 				{{/cars}}
         		actual=actual==0?image.length-1:actual-1;
-        		$(".th").attr("src","/assets/img/car/"+image[actual]);
+        		$(".th").attr("src","/bali/assets/img/car/"+image[actual]);
 			}
 			function siguiente(){
 				var image=new Array();
@@ -104,7 +104,7 @@
 					{{/images}}
 				{{/cars}}
         		actual=actual==image.length-1?0:actual+1;	
-        		$(".th").attr("src","/assets/img/car/"+image[actual]);
+        		$(".th").attr("src","/bali/assets/img/car/"+image[actual]);
         	}
         	$(document).keydown(function(tecla){
         		if($(".th").length!=0){
