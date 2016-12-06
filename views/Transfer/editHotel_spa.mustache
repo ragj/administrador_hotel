@@ -30,7 +30,7 @@
 							<row>
 								<column cols="1"></column>
 								<column cols="10">
-									<textarea name="content" style="visibility:hidden; height:0px; width:0px;"  placeholder="content" id="contn" required/></textarea>
+									<textarea name="content" style="visibility:hidden; height:0px; width:0px;"  placeholder="content" id="contn"/></textarea>
 									<div id="summernote">
 				                    	{{{content_spa}}}
 				                    </div>								
@@ -54,7 +54,6 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 			  $('#summernote').summernote({
-			  	airMode: true,
 			  	airPopover: [
 				    // [groupName, [list of button]]
 				    ['style', ['bold', 'italic', 'underline' , 'link']]
