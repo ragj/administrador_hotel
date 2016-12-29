@@ -26,7 +26,8 @@
                 'uri_es' => ['type' => 'text' ],
                 'oculto'=>['type'=>'boolean','value' => false],
                 'created' => ['type' => 'datetime', 'required' => true , "value" => new \DateTime() ],
-                'zona_idzona'=> ['type' => 'integer', 'required' => true]
+                'zona_idzona'=> ['type' => 'integer', 'required' => true],
+                'orden' =>['type'=>'integer','required'=>false]
             ];
         }
 

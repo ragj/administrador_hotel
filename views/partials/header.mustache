@@ -1,11 +1,11 @@
 <header>
-	<a href="/bali/">
+	<a href="/admin_lozano/panel/profile">
 		<section class="logo"></section>
 	</a>
-	<section class="lang">
+	<!--<section class="lang">
 		<a href="{{#translate.call}}es{{/translate.call}}{{^translate.call}}{{#lan}}es{{/lan}}{{/translate.call}}" ><img src="http://lozano.travel/wp-content/uploads/flags/mx.png"></a>
 		<a href="{{#translate.call}}en{{/translate.call}}{{^translate.call}}{{#lan}}en{{/lan}}{{/translate.call}}" class="active" ><img src="http://lozano.travel/wp-content/uploads/flags/us.png"></a>
-	</section>
+	</section>-->
 
 	<section class="weather"> 
 		{{current_time}} {{weather.temp}}ºC 
@@ -15,7 +15,7 @@
 	<nav >
 		<a href="#"  class="close-menu" onclick="hideMenu(event)"><i class="fa fa-times"></i></a>
 		<ul>
-			<li>
+			<!--<li>
 				<a href="{{#url}}/{{/url}}" {{#home }}class="active"{{/home}} >Home</a>
 			</li>
 			<li>
@@ -36,7 +36,7 @@
 			
 			<li>
 				<a href="{{#url}}/transfer{{/url}}" {{#transfer}}class="active"{{/transfer}}>Travel Agent</a>
-			</li>
+			</li>-->
 			<li>
 				{{#user.nombre}}
 					<a href="{{#url}}/profile{{/url}}" {{#profile}}class="active"{{/profile}} style="color:black">Profile</a>
@@ -44,7 +44,7 @@
 			</li>
 			<li>
 				{{#user.nombre}}
-					<a href="/bali/logout" style="color:black">Logout</a>
+					<a href="/admin_lozano/logout" style="color:black">Logout</a>
 				{{/user.nombre}}
 			</li>
 		</ul>

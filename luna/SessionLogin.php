@@ -1,6 +1,8 @@
 <?php
 
+
 namespace Luna;
+
 
 
 
@@ -30,7 +32,9 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
 
         /*Searching for the context pattern in the global ROUTS and adding that route to the router if exists and it has the allow value else do nothing*/
         global $ROUTES;
-        foreach ($ROUTES as $key => $route) {
+       foreach ($ROUTES as $key => $route) {
+
+
             if(isset($route["es"])){
                 $route["allow"]=isset($route["allow"])?$route["allow"]:false;
                 if(self::$context["pattern"]==$route["es"]&&$route["allow"]==true){
@@ -52,8 +56,9 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                 }
             }
         }
+      
         //path succes
-        $redirect_after_login = "/bali/";
+        $redirect_after_login = "/admin_lozano/";
         //spot users
         global $spot;
         $usersMapper = $spot->mapper("Entity\Users");
@@ -68,6 +73,7 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
             //buscamos el pattern en los routes
             $aux="";
             foreach ($ROUTES as $key => $route) {
+            //    print_r("entro");
                 if(isset($route["es"])){
                     if(self::$context["pattern"]==$route["es"]){
                         $aux=explode("/",$route["path"]);
@@ -79,6 +85,7 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                     }
                 }
             }
+          
             //obtenemos path con uri y los combinamos
             $slug="";
             if($aux==""){
@@ -110,9 +117,10 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
         if (!in_array(self::$context["pattern"], $this->urlPermitidas)) {
             //si el usuario no esta logueado, lo mandamos a loguear
             if (!$session->get("user", false)) {
-                header("Location: http://" . $_SERVER["SERVER_NAME"] . "/bali/login?redirect=/bali" . self::$context["request_uri"]);
+                header("Location: http://" . $_SERVER["SERVER_NAME"] . ":8888/admin_lozano/login?redirect=:8888/admin_lozano" . self::$context["request_uri"]);
                 die();
             } else {
+               
                 $req->user = $session->get("user");
                 $rol=$session->get("user")["rols_idrols"];
                 //obtenemos las zonas que tiene disponibles
@@ -125,10 +133,11 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                     $permisoZone=array();
                     //verificamos que tenga permiso en la zona actual, es decir el $BASE
                     foreach ($zonas as $zona) {
+
                         //generamos un array con los id's de las zona
                         array_push($permisoZone,$zona['idzona']);
                         //si el valor de base es igual a lo que esta en zona, damos permiso
-                        if(strcmp($BASE,strtolower("/".$zona["zona"]))==0){
+                        if(strcmp($BASE,strtolower("/".$zona["zona"]))!=0){
                             $permiso=true;
                         }
                     } 
@@ -158,13 +167,13 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
                     }else{
                         //no tiene permiso a esta zona pero si es un usuario
                         $session_handle->destroy();
-                        header("Location: /bali/login");
+                      header("Location: /admin_lozano/login?redirect=:8888/admin_lozano/panel/profile");
                         exit;
                     } 
                 }else{
                     //el usuario no esta activo por lo tanto no lo dejamos loguear
                     $session_handle->destroy();
-                    header("Location: /bali/login");
+                header("Location: /admin_lozano/login?redirect=:8888/admin_lozano/panel/profile");
                     exit;
                 }
             }
@@ -208,7 +217,7 @@ class SessionLogin extends \Zaphpa\BaseMiddleware {
         }
         if (self::$context["request_uri"] == '/logout') {
             $session_handle->destroy();
-            header("Location: /bali/login");
+            header("Location: /admin_lozano/login?redirect=:8888/admin_lozano/panel/profile");
             exit;
         }
     }

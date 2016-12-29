@@ -144,7 +144,7 @@
 							jQuery("#visits").trigger("click")
 						}
 
-						$.get("/bali/panel/user/detailp/{{#user1}}{{id}}{{/user1}}",function(data){ $("#data").html(data) },"html");
+						$.get("/admin_lozano/panel/user/detailp/{{#user1}}{{id}}{{/user1}}",function(data){ $("#data").html(data) },"html");
 					}catch(e){
 
 					}
@@ -160,7 +160,7 @@
 					}			
 				}
 				function reload(date_start , date_end,like ){
-					$.get("/bali/panel/user/detailp/{{#user1}}{{id}}{{/user1}}", {start:date_start , end:date_end,pattern:like } ,function(data){ $("#data").html(data) },"html");
+					$.get("/admin_lozano/panel/user/detailp/{{#user1}}{{id}}{{/user1}}", {start:date_start , end:date_end,pattern:like } ,function(data){ $("#data").html(data) },"html");
 				}
 	 		</script>
 		{{/ scripts }}

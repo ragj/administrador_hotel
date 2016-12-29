@@ -20,7 +20,7 @@
 	    			'description_esp'=>$req->data["spanish"]
 	    		]);
 	    		$vehicleMapper->insert($vehicle);
-	    		header("Location:/bali/panel/vehicles/edit/".$vehicle->idVehicle);
+	    		header("Location:/admin_lozano/panel/vehicles/edit/".$vehicle->idVehicle);
 	    		exit;
 	    	}
 	    	echo $this->renderWiew([],$res);
@@ -50,7 +50,7 @@
 	    		$vehicleMapper=$this->spot->mapper("Entity\Vehicle");
 	    		//Eliminamos el vehiculo que este registrado para ese id
         		$vehicle = $vehicleMapper->delete(['idVehicle ='=>(integer)$req->params["car"]]); 
-        		header("Location: /bali/panel/vehicles/show");
+        		header("Location: /admin_lozano/panel/vehicles/show");
         		exit;
 	    	}
 	    }
@@ -103,7 +103,7 @@
             //obtener imagen mediante el id
             $vehicleImageMapper=$this->spot->mapper("Entity\VehicleImage");
             $vehicleImage= $vehicleImageMapper->select()->where(["idvehicleImages" => $req->params["car"]])->first(); 
-            $imagene="/bali/assets/img/car/".$vehicleImage->vehicle_idVehicle."/";
+            $imagene="/admin_lozano/assets/img/car/".$vehicleImage->vehicle_idVehicle."/";
         }
         if(isset($_FILES['imagen']['name'])){
             $imagen="";
@@ -170,7 +170,7 @@
 	        $vehicleImage = $vehicleImageMapper->delete(['idvehicleImages'=>(integer)$var]);
 	        //Establecemos a spot con que entity class vamos a trabajar
 	        @unlink($ruta);
-	        header("Location:/bali/panel/vehicles/edit/".$id);
+	        header("Location:/admin_lozano/panel/vehicles/edit/".$id);
 	        exit;
 	    }
 
@@ -197,7 +197,7 @@
 	    			]);
 	    		}
 	    		$passengerMapper->insert($passenger);
-	    		header("Location: /bali/panel/vehicles/edit/".$req->params["car"]);
+	    		header("Location: /admin_lozano/panel/vehicles/edit/".$req->params["car"]);
 	    	}
 	    }
 	    /**
@@ -225,7 +225,7 @@
 	    		$passenger=$passengerMapper->select()->where(["id"=>$req->params["car"]])->first();
 	    		$aux=$passenger->vehicle_idVehicle;
 	    		$passenger = $passengerMapper->delete(['id'=>$req->params["car"]]);
-	    		header("Location: /bali/panel/vehicles/edit/".$aux);
+	    		header("Location: /admin_lozano/panel/vehicles/edit/".$aux);
 	    	}
 	    }
 	    /**

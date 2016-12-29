@@ -18,7 +18,7 @@
 	        				</div>
 		        			<div class="panel-body">
 		        				<hr>			
-		        				<form class="form-horizontal" action="/bali/panel/user/edit/{{#user1}}{{id}}{{/user1}}" method="post" name="newUser" class="form-horizontal">
+		        				<form class="form-horizontal" action="/admin_lozano/panel/user/edit/{{#user1}}{{id}}{{/user1}}" method="post" name="newUser" class="form-horizontal">
 		        					<div class="form-group">
 		                    			<label class="col-sm-3 control-label">First Name: <span class="text-danger">*</span></label>
 		                    			<div class="col-sm-6">
@@ -111,7 +111,7 @@
 	                  				</div>
 		        				</form>
 		        				<hr>
-		        				<form class="form-horizontal" action="/bali/panel/user/zone" method="post" name="newUser" class="form-horizontal">
+		        				<form class="form-horizontal" action="/admin_lozano/panel/user/zone" method="post" name="newUser" class="form-horizontal">
 		        					<h4 class="panel-title">Nuevas Zonas</h4>
 		        					<input type="hidden" name="userid" value="{{#user1}}{{id}}{{/user1}}">
 		        					<div class="form-group">
@@ -168,7 +168,7 @@
 				        			
 		                            function myFunction(id,ids) {
 		                                if (confirm("Estas Seguro de Eliminar?") == true) {
-		                                    self.location = "/bali/panel/user/deleteZona/"+id+"/"+ids; 
+		                                    self.location = "/admin_lozano/panel/user/deleteZona/"+id+"/"+ids; 
 		                                } 
 		                            }
 		                        </script>
@@ -221,9 +221,9 @@
 					if (todoCorrecto ==true) {formulario.submit();}
 				}
 			</script>
-			<script src="/bali/assets/quirk/lib/datatables/jquery.dataTables.js"></script>
-			<script src="/bali/assets/quirk/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-			<script src="/bali/assets/quirk/lib/select2/select2.js"></script>
+			<script src="/admin_lozano/assets/quirk/lib/datatables/jquery.dataTables.js"></script>
+			<script src="/admin_lozano/assets/quirk/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+			<script src="/admin_lozano/assets/quirk/lib/select2/select2.js"></script>
 			<script>
 				$(document).ready(function() {
   					'use strict';

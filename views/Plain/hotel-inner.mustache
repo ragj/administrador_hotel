@@ -18,7 +18,7 @@
 	 			</script>
 		</row>
 		<row>
-			<a href="/bali/en/hotel-collection"  id="back" ><i class="fa fa-reply"></i> Back</a>
+			<a href="/admin_lozano/en/hotel-collection"  id="back" ><i class="fa fa-reply"></i> Back</a>
 		</row>
 		<row>
 			<column cols="8">
@@ -72,7 +72,7 @@
 					<blocks cols="3">
 						{{#images}}
 							<div class="himage1">
-								<img onclick=" showImage(this) " src="/bali/assets/img/hotel/{{hotel_idhotel}}/{{path}}">
+								<img onclick=" showImage(this) " src="/admin_lozano/assets/img/hotel/{{hotel_idhotel}}/{{path}}">
 							</div>
 						{{/images}}
 					</blocks>
@@ -113,12 +113,12 @@
 				$(".expose").append("<img src='' class='th'>");
 				$(".expose").find("img").attr("src" , $(e).attr("src") );
 				$(".expose .hr").center();
-				$(".expose").append("<div class='previo' onclick='previo()'><img src='/bali/assets/img/izq.png'></div>");
-				$(".expose").append("<div class='siguiente' onclick='siguiente()'><img src='/bali/assets/img/der.png'></div>");
+				$(".expose").append("<div class='previo' onclick='previo()'><img src='/admin_lozano/assets/img/izq.png'></div>");
+				$(".expose").append("<div class='siguiente' onclick='siguiente()'><img src='/admin_lozano/assets/img/der.png'></div>");
 				$(".expose").fadeIn();
 				var image=new Array();
 				{{#images}}
-        			image.push("/bali/assets/img/hotel/{{hotel_idhotel}}/{{path}}");
+        			image.push("/admin_lozano/assets/img/hotel/{{hotel_idhotel}}/{{path}}");
         		{{/images}}
 				actual=image.indexOf($(e).attr("src"));
 			}
@@ -127,8 +127,8 @@
 				$(".expose").append("<div class='cerrar' onclick='quitar(this)'></div>");
 				$(".expose").append(e);
 				$(".expose iframe").center();
-				$(".expose").append("<div class='previo' onclick='previov()'><img src='/bali/assets/img/izq.png'></div>");
-				$(".expose").append("<div class='siguiente' onclick='siguientev()'><img src='/bali/assets/img/der.png'></div>");
+				$(".expose").append("<div class='previo' onclick='previov()'><img src='/admin_lozano/assets/img/izq.png'></div>");
+				$(".expose").append("<div class='siguiente' onclick='siguientev()'><img src='/admin_lozano/assets/img/der.png'></div>");
 				$(".expose").fadeIn();
 				var video=new Array();
 				{{#videos}}
@@ -144,7 +144,7 @@
 			function previo(){
 				var image=new Array();
 				{{#images}}
-        			image.push("/bali/assets/img/hotel/{{hotel_idhotel}}/{{path}}");
+        			image.push("/admin_lozano/assets/img/hotel/{{hotel_idhotel}}/{{path}}");
         		{{/images}}
         		actual=actual==0?image.length-1:actual-1;
         		$(".th").attr("src",image[actual]);
@@ -152,7 +152,7 @@
 			function siguiente(){
 				var image=new Array();
 				{{#images}}
-        			image.push("/bali/assets/img/hotel/{{hotel_idhotel}}/{{path}}");
+        			image.push("/admin_lozano/assets/img/hotel/{{hotel_idhotel}}/{{path}}");
         		{{/images}}
         		actual=actual==image.length-1?0:actual+1;
         		$(".th").attr("src",image[actual]);

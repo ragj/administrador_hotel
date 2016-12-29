@@ -32,12 +32,15 @@
 
 	//  ROUTES
 	global $BASE;
-	$BASE = "/bali";
+	$BASE = "/admin_lozano";
 
 	require_once( __LUNA__.'/luna/router/routes.php' );
 	try {
 
-	  $tokens = parse_url('http://lozano.travel' . str_replace($BASE , "" , $_SERVER["REQUEST_URI"] ));
+	 // $tokens = parse_url('http://lozano.travel' . str_replace($BASE , "" , $_SERVER["REQUEST_URI"] ));
+		 $tokens = parse_url('http://localhost:8888' . str_replace($BASE , "" , $_SERVER["REQUEST_URI"]
+		 	));
+
       $uri = rawurldecode( isset($tokens['path'])?$tokens['path']:"/");
       $router->route( \Luna\Translate :: uri( $uri ) );
 

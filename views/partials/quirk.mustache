@@ -14,18 +14,18 @@
   		{{$ meta}}
         {{/ meta}}
         <!-- Estilos requeridos -->
-        <link rel="stylesheet" href="/bali/assets/quirk/lib/Hover/hover.css">
-  		<link rel="stylesheet" href="/bali/assets/quirk/lib/fontawesome/css/font-awesome.css">
-  		<link rel="stylesheet" href="/bali/assets/quirk/lib/weather-icons/css/weather-icons.css">
-  		<link rel="stylesheet" href="/bali/assets/quirk/lib/ionicons/css/ionicons.css">
-  		<link rel="stylesheet" href="/bali/assets/quirk/lib/jquery-toggles/toggles-full.css">
-      <link rel="stylesheet" href="/bali/assets/quirk/lib/jquery-toggles/toggles-full.css">
-      <link rel="stylesheet" href="/bali/assets/quirk/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css">
-      <link rel="stylesheet" href="/bali/assets/quirk/lib/select2/select2.css">
+        <link rel="stylesheet" href="/admin_lozano/assets/quirk/lib/Hover/hover.css">
+  		<link rel="stylesheet" href="/admin_lozano/assets/quirk/lib/fontawesome/css/font-awesome.css">
+  		<link rel="stylesheet" href="/admin_lozano/assets/quirk/lib/weather-icons/css/weather-icons.css">
+  		<link rel="stylesheet" href="/admin_lozano/assets/quirk/lib/ionicons/css/ionicons.css">
+  		<link rel="stylesheet" href="/admin_lozano/assets/quirk/lib/jquery-toggles/toggles-full.css">
+      <link rel="stylesheet" href="/admin_lozano/assets/quirk/lib/jquery-toggles/toggles-full.css">
+      <link rel="stylesheet" href="/admin_lozano/assets/quirk/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css">
+      <link rel="stylesheet" href="/admin_lozano/assets/quirk/lib/select2/select2.css">
   		<!-- Estilos personalizados -->
-  		<link rel="stylesheet" href="/bali/assets/quirk/css/quirk.css">
+  		<link rel="stylesheet" href="/admin_lozano/assets/quirk/css/quirk.css">
   		<!-- Api Modernizr -->
-  		<script src="/bali/assets/quirk/lib/modernizr/modernizr.js"></script>
+  		<script src="/admin_lozano/assets/quirk/lib/modernizr/modernizr.js"></script>
   		 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   		<!--[if lt IE 9]>
   			<script src="/assets/quirk/lib/html5shiv/html5shiv.js"></script>
@@ -45,13 +45,13 @@
           					<li>
 					            <div class="btn-group">
 					              <button type="button" class="btn btn-logged" data-toggle="dropdown">
-					                <img src="/bali/assets/quirk/images/photos/loggeduser.png" alt="" />
+					                <img src="/admin_lozano/assets/quirk/images/photos/loggeduser.png" alt="" />
                           {{user.nombre}}
 					                <span class="caret"></span>
 					              </button>
 					              <ul class="dropdown-menu pull-right">
-                          <li><a href="/bali/panel/profile"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
-					                <li><a href="/bali/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+                          <li><a href="/admin_lozano/panel/profile"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
+					                <li><a href="/admin_lozano/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
 					              </ul>
 					            </div>
           					</li>
@@ -73,66 +73,66 @@
                       <li class="nav-parent ">
                           <a href=""><i class="fa fa-check-square"></i> <span></span></a>
                           <ul class="children">
-                            <li><a href="/bali/panel/profile"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
-                            <li><a href="/bali/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+                            <li><a href="/admin_lozano/panel/profile"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
+                            <li><a href="/admin_lozano/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
                           </ul>
                       </li>
           						<!-- Item Menu -->
             					<li class="nav-parent ">
               						<a href=""><i class="fa fa-check-square"></i> <span>Experiences</span></a>
               						<ul class="children">
-                						<li><a href="/bali/panel/tour/add">Add Expierence</a></li>
-                						<li><a href="/bali/panel/tour/show">List Experiences</a></li>
+                						<li><a href="/admin_lozano/panel/tour/add">Add Expierence</a></li>
+                						<li><a href="/admin_lozano/panel/tour/show">List Experiences</a></li>
               						</ul>
             					</li>
             					<!-- Item Menu -->
             					<li class="nav-parent "><a href=""><i class="fa fa-suitcase"></i> <span>Hotels</span></a>
               						<ul class="children">
-                						<li><a href="/bali/panel/hotel/add">Add Hotel</a></li>
-                						<li><a href="/bali/panel/hotel/show">List Hotels</a></li>
+                						<li><a href="/admin_lozano/panel/hotel/add">Add Hotel</a></li>
+                						<li><a href="/admin_lozano/panel/hotel/show">List Hotels</a></li>
               						</ul>
             					</li>
                       <!-- Item Menu -->
                       <li class="nav-parent "><a href=""><i class="fa fa-suitcase"></i> <span>Transfers</span></a>
                           <ul class="children">
-                            <li><a href="/bali/panel/vehicles/add">Add Vehicle</a></li>
-                            <li><a href="/bali/panel/vehicles/show">List Vehicles</a></li>
+                            <li><a href="/admin_lozano/panel/vehicles/add">Add Vehicle</a></li>
+                            <li><a href="/admin_lozano/panel/vehicles/show">List Vehicles</a></li>
                           </ul>
                       </li>
                       <!-- Item Menu -->
                       <li class="nav-parent "><a href=""><i class="fa fa-suitcase"></i> <span>Travel Agent Prices</span></a>
                           <ul class="children">
-                            <li><a href="/bali/panel/transfer/editBlock/1">Edit Transfers Blocks</a></li>
-                            <li><a href="/bali/panel/transfer/editBlock/2 ">Edit Experiences Blocks</a></li>
-                            <li><a href="/bali/panel/transfer/addHotel">Add Hotel's Transfer</a></li>
-                            <li><a href="/bali/panel/transfer/showHotel">List Hotel's Transfer</a></li>
-                            <li><a href="/bali/panel/transfer/expInclude">Experience Rate Includes</a></li>
-                            <li><a href="/bali/panel/transfer/traInclude">Transfer Rate Includes</a></li>
+                            <li><a href="/admin_lozano/panel/transfer/editBlock/1">Edit Transfers Blocks</a></li>
+                            <li><a href="/admin_lozano/panel/transfer/editBlock/2 ">Edit Experiences Blocks</a></li>
+                            <li><a href="/admin_lozano/panel/transfer/addHotel">Add Hotel's Transfer</a></li>
+                            <li><a href="/admin_lozano/panel/transfer/showHotel">List Hotel's Transfer</a></li>
+                            <li><a href="/admin_lozano/panel/transfer/expInclude">Experience Rate Includes</a></li>
+                            <li><a href="/admin_lozano/panel/transfer/traInclude">Transfer Rate Includes</a></li>
                           </ul>
                       </li>
                       <!-- Item Menu -->
                       <li class="nav-parent "><a href=""><i class="fa fa-suitcase"></i> <span>Users</span></a>
                           <ul class="children">
-                            <li><a href="/bali/panel/user/add">Add User</a></li>
-                            <li><a href="/bali/panel/user/show">List Users</a></li>
+                            <li><a href="/admin_lozano/panel/user/add">Add User</a></li>
+                            <li><a href="/admin_lozano/panel/user/show">List Users</a></li>
                           </ul>
                       </li>
                       <!-- Item Menu -->
                       <li class="nav-parent "><a href=""><i class="fa fa-suitcase"></i> <span>Contacts</span></a>
                           <ul class="children">
-                            <li><a href="/bali/panel/contact/show">List Contacts</a></li>
+                            <li><a href="/admin_lozano/panel/contact/show">List Contacts</a></li>
                           </ul>
                       </li>
                        <!-- Item Menu -->
                       <li class="nav-parent "><a href=""><i class="fa fa-suitcase"></i> <span>Request /Inquire</span></a>
                           <ul class="children">
-                            <li><a href="/bali/panel/request/show">List Requests</a></li>
+                            <li><a href="/admin_lozano/panel/request/show">List Requests</a></li>
                           </ul>
                       </li>
                        <!-- Item Menu -->
                       <li class="nav-parent "><a href=""><i class="fa fa-suitcase"></i> <span>Footer</span></a>
                           <ul class="children">
-                            <li><a href="/bali/panel/footer">Edit</a></li>
+                            <li><a href="/admin_lozano/panel/footer">Edit</a></li>
                           </ul>
                       </li>
                       
@@ -148,11 +148,11 @@
   			</div><!-- mainpanel -->
     	</section>
     	<!-- ################# SCRIPTS ################### -->
-    	<script src="/bali/assets/quirk/lib/jquery/jquery.js"></script>
-		  <script src="/bali/assets/quirk/lib/jquery-ui/jquery-ui.js"></script>
-		  <script src="/bali/assets/quirk/lib/bootstrap/js/bootstrap.js"></script>
-		  <script src="/bali/assets/quirk/lib/jquery-toggles/toggles.js"></script>
-		  <script src="/bali/assets/quirk/js/quirk.js"></script>
+    	<script src="/admin_lozano/assets/quirk/lib/jquery/jquery.js"></script>
+		  <script src="/admin_lozano/assets/quirk/lib/jquery-ui/jquery-ui.js"></script>
+		  <script src="/admin_lozano/assets/quirk/lib/bootstrap/js/bootstrap.js"></script>
+		  <script src="/admin_lozano/assets/quirk/lib/jquery-toggles/toggles.js"></script>
+		  <script src="/admin_lozano/assets/quirk/js/quirk.js"></script>
 		{{$ scripts }}{{/ scripts }}
     </body>
 </html>

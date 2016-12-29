@@ -6,9 +6,10 @@
  *     code by zebadua
  */
 
-
+;
 class Plain extends Luna\Controller {
     public function notFound($req,$res){
+     
         $lang=$req->lang;
         switch($lang){
             case "es":
@@ -26,6 +27,7 @@ class Plain extends Luna\Controller {
     }
     
      public function header( $menu,$lang ){
+
         $wmpr = $this->spot->mapper("Entity\Weather");
         $current_data = $wmpr->select()->order( ["updated"=>"DESC"] )->first();
         $duration = null;
@@ -500,17 +502,17 @@ class Plain extends Luna\Controller {
                     case "es":
                         $req->data["subject"] = 'Contacto Travel Agent';
                         $template="Mail/tagent_esp.mustache";
-                        $des="Location:".$_SERVER['HTTP_HOST']."/bali/es/travelAgent";
+                        $des="Location:/bali/es/travelAgent";
                     break;
                     case "en":
                         $req->data["subject"] = 'Contact Travel Agent';
                         $template="Mail/tagent.mustache";
-                        $des="Location:".$_SERVER['HTTP_HOST']."/bali/en/travelAgent";
+                        $des="Location:/bali/en/travelAgent";
                     break;
                     default:
                         $req->data["subject"] = 'Contact Travel Agent';
                         $template="Mail/tagent.mustache"; 
-                        $des="Location:".$_SERVER['HTTP_HOST']."/bali/en/travelAgent";              
+                        $des="Location:/bali/en/travelAgent";              
                     break;
             }
             
@@ -636,7 +638,7 @@ class Plain extends Luna\Controller {
                         $forgotMapper->update($forgot);
                         $userMapper->update($user);
                         //logueamos
-                        header('Location: http://bali/login?usuario='.$user->usuario.'&password='.$req->data["pass1"]);
+                        header('Location: http://admin_lozano/login?usuario='.$user->usuario.'&password='.$req->data["pass1"]);
                         exit;
 
                     }

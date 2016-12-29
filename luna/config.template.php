@@ -26,10 +26,10 @@
 
      global $cmail;
     //$cmail="bali@lozano.com";
-    $cmail="gescalona@denumeris.com";
+    $cmail="rgarza@denumeris.com";
     global $ccmail;
     //$ccmail="alex.mendiola@lozano.com";
-    $ccmail="geoshada@gmail.com";
+    $ccmail="garzajaimesalberto@gmail.com";
 
     include __DIR__."/mail.config.php";
 

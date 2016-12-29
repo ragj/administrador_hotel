@@ -190,6 +190,7 @@ $router->addRoute(array(
 	'get' => array('Hotel', 'addImages'),
 	'post' => array('Hotel', 'addImages'),
 ));
+
 $router->addRoute(array(
 	'path' => '/panel/hotel/addVideo',
 	'get' => array('Hotel', 'addVideo'),

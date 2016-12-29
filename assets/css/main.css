@@ -230,7 +230,7 @@ header{
 	background-color: #FFF;
 }
 	header .logo{
-		background-image: url("/bali/assets/img/logo/logo-lozano-bali.png");
+		background-image: url("/admin_lozano/assets/img/logo/logo-lozano-bali.png");
 		background-size: 100%;
 		margin-top: 20px;
 		margin-left: 20px;
@@ -508,7 +508,7 @@ footer{
 	}
 
 .fit{
-	background-image: url("/bali/assets/img/login/Background_login.jpg");
+	background-image: url("/admin_lozano/assets/img/login/Background_login.jpg");
 	background-size: cover;
 	background-position: center;
 	min-height: 500px;
@@ -528,7 +528,7 @@ footer{
 		}
 		
 .fit.contact{
-	background-image: url("/bali/assets/img/bg-contacto-us.jpg");
+	background-image: url("/admin_lozano/assets/img/bg-contacto-us.jpg");
 }
 button{
 	padding: 0 32px;			
@@ -710,7 +710,7 @@ table tr.main{
 		right: -95%;
 		min-height: 40px;
 		width: 50px;
-		background-image: url("/bali/assets/img/xIcon.png");
+		background-image: url("/admin_lozano/assets/img/xIcon.png");
 		background-repeat: no-repeat;
 	}
 	.expose .previo{

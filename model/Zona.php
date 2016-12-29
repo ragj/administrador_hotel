@@ -13,7 +13,8 @@
         public static function fields() {
             return [
                 'idzona' => ['type' => 'integer', 'primary' => true,'autoincrement' => true],
-                'zona' => ['type' => 'string', 'required' => true]
+                'zona' => ['type' => 'string', 'required' => true],
+                'dir' =>['type' => 'string', 'required' =>true]
             ];
         }
         public static function relations(Mapper $mapper, Entity $entity)

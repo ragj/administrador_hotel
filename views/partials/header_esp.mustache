@@ -1,5 +1,5 @@
 <header>
-	<a href="/bali/">
+	<a href="/admin_lozano/">
 		<section class="logo"></section>
 	</a>
 	<section class="lang">
@@ -14,7 +14,7 @@
 	<nav>
 	<a href="#"  class="close-menu" onclick="hideMenu(event)"><i class="fa fa-times"></i></a>
 		<ul>
-			<li>
+			<!--<li>
 				<a href="{{#url}}/{{/url}}" {{#home}}class="active"{{/home}} >Inicio</a>
 			</li>
 			<li>
@@ -35,7 +35,7 @@
 			
 			<li>
 				<a href="{{#url}}/transfer{{/url}}" {{#transfer}}class="active"{{/transfer}}>Agente de Viajes</a>
-			</li>
+			</li>-->
 			<li>
 				{{#user.nombre}}
 					<a href="{{#url}}/profile{{/url}}" {{#profile}}class="active"{{/profile}} style="color:black">Perfil</a>
@@ -43,7 +43,7 @@
 			</li>
 			<li>
 				{{#user.nombre}}
-					<a href="/bali/logout" style="color:black">Cerrar Sesión</a>
+					<a href="/admin_lozano/logout" style="color:black">Cerrar Sesión</a>
 				{{/user.nombre}}
 			</li>
 		</ul>

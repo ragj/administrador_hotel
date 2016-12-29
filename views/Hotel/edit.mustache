@@ -18,7 +18,7 @@
 		        				</div>
 			        			<div class="panel-body">
 			        				<hr>			
-			        				<form class="form-horizontal" action="/bali/panel/hotel/edit/{{idhotel}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
+			        				<form class="form-horizontal" action="/admin_lozano/panel/hotel/edit/{{idhotel}}" method="post" name="newHotel" enctype="multipart/form-data" class="form-horizontal">
 			        					<div class="form-group">
 			                    			<label class="col-sm-3 control-label">Name: <span class="text-danger">*</span></label>
 			                    			<div class="col-sm-6">
@@ -95,13 +95,13 @@
 			                  			<div class="form-group">
 			                    			<label class="col-sm-3 control-label">New Image:</label>
 			                    			<div class="col-sm-6">
-			                    				<a href="/bali/panel/hotel/addImages"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">New Image</button></a>	
+			                    				<a href="/admin_lozano/panel/hotel/addImages"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">New Image</button></a>	
 			                   				</div>
 			                  			</div>
 			                  			<div class="form-group">
 			                    			<label class="col-sm-3 control-label">New Video:</label>
 			                    			<div class="col-sm-6">
-			                    				<a href="/bali/panel/hotel/addVideo"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">New Video</button></a>	
+			                    				<a href="/admin_lozano/panel/hotel/addVideo"><button type="button" class="btn btn-success btn-quirk btn-wide mr5">New Video</button></a>	
 			                   				</div>
 			                  			</div>
 			                  			<hr>
@@ -121,7 +121,7 @@
 		            					</div>
 		            					<div class="panel-body">
 		              						<img src="{{thumb}}hotel/{{hotel_idhotel}}/{{path}}" class="img-rounded " width="250" height="150" >
-							                 <a href="/bali/panel/hotel/editImages/{{idhotelImages}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
+							                 <a href="/admin_lozano/panel/hotel/editImages/{{idhotelImages}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
 							                 <a onclick=myFunction({{idhotelImages}})><button type="button" class="btn btn-danger btn-quirk"><i class="fa fa-times"></i></button></a>
 		            					</div>
 		          					</div>
@@ -137,7 +137,7 @@
 		            						<div width="250" height="150" class="img-rounded">
 		              							{{&path}}
 		              						</div>
-							                <a href="/bali/panel/hotel/editVideo/{{idhotelImages}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
+							                <a href="/admin_lozano/panel/hotel/editVideo/{{idhotelImages}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
 							                <a onclick=myFunction1({{idhotelImages}})><button type="button" class="btn btn-danger btn-quirk"><i class="fa fa-times"></i></button></a>
 		            					</div>
 		          					</div>
@@ -147,12 +147,12 @@
         						$("#zona").val({{#hotel}}{{zona_idzona}}{{/hotel}});
         						function myFunction(id) {
                                     if (confirm("Estas Seguro de Eliminar?") == true) {
-                                        self.location = "/bali/panel/hotel/deleteImages/"+id; 
+                                        self.location = "/admin_lozano/panel/hotel/deleteImages/"+id; 
                                     } 
                                 }
                                 function myFunction1(id) {
                                     if (confirm("Estas Seguro de Eliminar?") == true) {
-                                        self.location = "/bali/panel/hotel/deleteVideo/"+id; 
+                                        self.location = "/admin_lozano/panel/hotel/deleteVideo/"+id; 
                                     } 
                                 }
                             </script>
