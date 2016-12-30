@@ -345,7 +345,6 @@ class Hotel extends Luna\Controller {
     **/
     public function edit($req,$res){
        
-        
         if($req->params["hotel"]!=null){
             $hotelMapper=$this->spot->mapper("Entity\Hotel");
             $hotel = $hotelMapper->select()->with("zona")->where(["idhotel" => $req->params["hotel"]])->toArray();
@@ -354,32 +353,52 @@ class Hotel extends Luna\Controller {
             $videos=$hotelImageMapper->select()->where(["hotel_idhotel"=>$req->params["hotel"],"tipo"=>"V"]);
             $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
             $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
-         //   $aux=array();
-            foreach ($hotel as $zone) {
-              print_r($zone);
-               $aux= $zone['zona_idzona'];
+           $aux=array();
+            foreach ($zones as $zone) {
+                array_push($aux,$zone['zona_idzona']);
             }
-           // print_r($aux);
-            die();
+            $zoneMapper=$this->spot->mapper("Entity\Zona");
+            $zona=$zoneMapper->select()->where(["idzona"=>$aux]);  
+
+            $datzon=array();
+          
+            foreach ($hotel as $zone) 
+            {
+          // print_r($hotel);
+               $datzon['idzona']= $zone['zona_idzona'];
+               $aux_1['zona'] = $zone['zona'];
+               foreach ($aux_1 as $zonas) 
+               {
+                $datzon['dir']=$zonas['dir'];
+                $datzon['dir_img']=$zonas['dir_img'];
+               }
+            }
+           // die();
+          /*
             $zoneMapper=$this->spot->mapper("Entity\Zona");
             $zona=$zoneMapper->select()->where(["idzona"=>$aux])->toArray();  
-            foreach ($zona as $zonas)
+            foreach ($zona as $zonas=>$valor)
             {
+                
                 $zon = $zonas["dir_img"];
                 $dir = $zonas["dir"];
             }
-           $imagen = "http://".$_SERVER['HTTP_HOST'].$zon;
+           $imagen = "http://".$_SERVER['HTTP_HOST'].$zon;*/
+           $imagen = "http://".$_SERVER['HTTP_HOST'].$datzon['dir_img'];
             //if($hotel->zona_idzona!=1){
               //  $imagen="http://".$_SERVER['HTTP_HOST']."/maldivas/assets/img/";
             //}
             //else{
                 //$imagen="/assets/img/";
             //}  
+
         }
         if(isset($req->data["name"])){
 
             //definimos donde se almacenara el thumbnail
-            
+         /*   echo "hotel? ";
+            print_r($hotel[0]['thumbnail']);
+            die();*/
             //array de tipos de archivos permitidos
             $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
             //obtenemos el id de la experiencia
@@ -393,17 +412,16 @@ class Hotel extends Luna\Controller {
             $tel=$req->data["tel"]!=null?filter_var($req->data["tel"],FILTER_SANITIZE_STRING):$hotel->tel;
             $descripcion=$req->data["descripcion"]!=null?filter_var($req->data["descripcion"],FILTER_SANITIZE_STRING):$hotel->description;
             $description_es=$req->data["descripcion_spa"]!=null?filter_var($req->data["descripcion_spa"],FILTER_SANITIZE_STRING):$hotel->description_esp;
-            print_r($req->data["zone"]);
-            print_r("<br>");
-            print_r($hotel->zona_idzona);
-            die();
-            $zona=$req->data["zone"]!=null?$req->data["zone"]:$hotel->zona_idzona;
-            print_r($zona);
-            die();
+        
+            $zona=$datzon['idzona']!=null?$datzon['idzona']:$hotel->zona_idzona;
+            //$zona=$req->data["zone"]!=null?$req->data["zone"]:$hotel->zona_idzona;
             $thumb="";
             $img="";
             $error=0;
-            if(strcmp($_FILES['thumbnail']['name'],$hotel->thumbnail)!=0 && $_FILES['thumbnail']['name']!=null){
+
+          
+            if(strcmp($_FILES['thumbnail']['name'],$hotel[0]['thumbnail'])!=0 && $_FILES['thumbnail']['name']!=null){
+               
            
                 if(!($_FILES['thumbnail']['error']>0)){
 
@@ -413,25 +431,33 @@ class Hotel extends Luna\Controller {
                         $aux=explode('.',$_FILES['thumbnail']['name']);
                        // if($zona==1){
                            // $dir="./assets/img/hotel-thumb/";
-                        $dir = $dir;
+                        
                         //}
                         //else{
                             //$dir="../maldivas/assets/img/hotel-thumb";
                        // }
-                        $file=$aux[0].substr(uniqid(),0,-3).".".$aux[1];
-                        $ruta=$dir."/".$file;
+                        $dir = $datzon['dir'];
+                        $file=str_replace(" ","_",$aux[0].substr(uniqid(),0,-3).".".$aux[1]);
+                        $ruta="..".$dir."/".$file;
+                       
+                       // $ruta =str_replace(" ","_",$ruta);
+                       
                         //verificamos si el archivo existe
                         if(!file_exists($ruta)){
-                            $resultado=@move_uploaded_file($_FILES['thumbnail']["tmp_name"],$ruta);
+                            $resultado=move_uploaded_file($_FILES['thumbnail']["tmp_name"],$ruta);
                             //si la imagen se sube exitosamente asignamos a thumb el nombre del archivo
                             if($resultado){
-                                if($hotel->thumbnail!=null){
-                                    @unlink($dir."/".$hotel->thumbnail);
-                                }
+/*
+                                if($hotel[0]['thumbnail']!=null){
+                                    unlink("..".$dir."/".$hotel[0]['thumbnail']);
+                                   
+                                }*/
                                 $thumb=$file;
+                               
                             }
                         }
                         else{
+                           
                             $error=1;
                             echo "<div class=error><p>An image already exits with that name.</p></div>";
                         }
@@ -447,27 +473,45 @@ class Hotel extends Luna\Controller {
                 }
             }
             else{
-                die("nada");
+                
                 $thumb=$hotel->thumbnail;
             }
             if($error==0){
                 //actualizamos los valores del registro y actualizamos en base de datos
-                $hotel->name=$name;
-                $hotel->thumbnail=$thumb;
-                $hotel->description=$descripcion;
-                $hotel->description_esp=$description_es;
-                $hotel->address=$address;
-                $hotel->website=$web;
-                $hotel->map=$map;
-                $hotel->tel=$tel;
-                $hotel->email=$email;
-                $hotelMapper->update($hotel);
+             //  $update = sprintf("update hotel set name='%s',thumbnail='%s',description='%s',description_esp='%s',address='%s',website='%s',map='%s',tel='%s',email='%s' where idhotel='%s'",$name,$thumb,$description,$description_esp,$address,$web,$map,$tel,$email,$req->params["hotel"]);
+
+                $entity = $hotelMapper->build([
+                'name' => $name,
+                'thumbnail' => $thumb,
+                'description' =>$descripcion,
+                'description_esp'=>$description_es,
+                'address' =>$address,
+                'website' => $web,
+                'map' => $map,
+                'tel' => $tel,
+                'email' =>$email
+              //  'zona_idzona'=>$zona,
+                //'orden'=>$orden
+            ]);
+              /* print_r($update);die();
+                $hotelU->name=$name;
+                $hotelU->thumbnail=$thumb;
+                $hotelU->description=$descripcion;
+                $hotelU->description_esp=$description_es;
+                $hotelU->address=$address;
+                $hotelU->website=$web;
+                $hotelU->map=$map;
+                $hotelU->tel=$tel;
+                $hotelU->email=$email;
+                print_r($hotelU);exit('estoy aqui');*/
+              //$hotelMapper->query( $entity );
+               // $hotelMapper->update($entity);
                 echo "<div class=exito><p>Hotel updated</p></div>";
 
             }
         }
-        
-    	echo $this->renderWiew( array_merge(["hotel" => $hotel,"zones"=>$zona,"images"=>$images,"thumb"=>$imagen,"videos"=>$videos]), $res);
+       // die("salio");
+        echo $this->renderWiew( array_merge(["hotel" => $hotel,"zones"=>$zona,"images"=>$images,"thumb"=>$imagen,"videos"=>$videos]), $res);
     }
     
     /**
