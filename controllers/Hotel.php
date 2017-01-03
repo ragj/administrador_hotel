@@ -364,7 +364,6 @@ class Hotel extends Luna\Controller {
           
             foreach ($hotel as $zone) 
             {
-          // print_r($hotel);
                $datzon['idzona']= $zone['zona_idzona'];
                $aux_1['zona'] = $zone['zona'];
                foreach ($aux_1 as $zonas) 
@@ -373,32 +372,11 @@ class Hotel extends Luna\Controller {
                 $datzon['dir_img']=$zonas['dir_img'];
                }
             }
-           // die();
-          /*
-            $zoneMapper=$this->spot->mapper("Entity\Zona");
-            $zona=$zoneMapper->select()->where(["idzona"=>$aux])->toArray();  
-            foreach ($zona as $zonas=>$valor)
-            {
-                
-                $zon = $zonas["dir_img"];
-                $dir = $zonas["dir"];
-            }
-           $imagen = "http://".$_SERVER['HTTP_HOST'].$zon;*/
            $imagen = "http://".$_SERVER['HTTP_HOST'].$datzon['dir_img'];
-            //if($hotel->zona_idzona!=1){
-              //  $imagen="http://".$_SERVER['HTTP_HOST']."/maldivas/assets/img/";
-            //}
-            //else{
-                //$imagen="/assets/img/";
-            //}  
-
         }
         if(isset($req->data["name"])){
 
             //definimos donde se almacenara el thumbnail
-         /*   echo "hotel? ";
-            print_r($hotel[0]['thumbnail']);
-            die();*/
             //array de tipos de archivos permitidos
             $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
             //obtenemos el id de la experiencia
@@ -414,7 +392,7 @@ class Hotel extends Luna\Controller {
             $description_es=$req->data["descripcion_spa"]!=null?filter_var($req->data["descripcion_spa"],FILTER_SANITIZE_STRING):$hotel->description_esp;
         
             $zona=$datzon['idzona']!=null?$datzon['idzona']:$hotel->zona_idzona;
-            //$zona=$req->data["zone"]!=null?$req->data["zone"]:$hotel->zona_idzona;
+          
             $thumb="";
             $img="";
             $error=0;
@@ -429,19 +407,9 @@ class Hotel extends Luna\Controller {
 
                         //definimos la ruta de la imagen a subir
                         $aux=explode('.',$_FILES['thumbnail']['name']);
-                       // if($zona==1){
-                           // $dir="./assets/img/hotel-thumb/";
-                        
-                        //}
-                        //else{
-                            //$dir="../maldivas/assets/img/hotel-thumb";
-                       // }
                         $dir = $datzon['dir'];
                         $file=str_replace(" ","_",$aux[0].substr(uniqid(),0,-3).".".$aux[1]);
-                        $ruta="..".$dir."/".$file;
-                       
-                       // $ruta =str_replace(" ","_",$ruta);
-                       
+                        $ruta="..".$dir."/".$file;                       
                         //verificamos si el archivo existe
                         if(!file_exists($ruta)){
                             $resultado=move_uploaded_file($_FILES['thumbnail']["tmp_name"],$ruta);
@@ -478,7 +446,7 @@ class Hotel extends Luna\Controller {
             }
             if($error==0){
                 //actualizamos los valores del registro y actualizamos en base de datos
-             //  $update = sprintf("update hotel set name='%s',thumbnail='%s',description='%s',description_esp='%s',address='%s',website='%s',map='%s',tel='%s',email='%s' where idhotel='%s'",$name,$thumb,$description,$description_esp,$address,$web,$map,$tel,$email,$req->params["hotel"]);
+
 
                 $entity = $hotelMapper->build([
                 'name' => $name,
@@ -493,8 +461,8 @@ class Hotel extends Luna\Controller {
               //  'zona_idzona'=>$zona,
                 //'orden'=>$orden
             ]);
-              /* print_r($update);die();
-                $hotelU->name=$name;
+              
+               /* $hotelU->name=$name;
                 $hotelU->thumbnail=$thumb;
                 $hotelU->description=$descripcion;
                 $hotelU->description_esp=$description_es;
@@ -505,7 +473,7 @@ class Hotel extends Luna\Controller {
                 $hotelU->email=$email;
                 print_r($hotelU);exit('estoy aqui');*/
               //$hotelMapper->query( $entity );
-               // $hotelMapper->update($entity);
+                $hotelMapper->update($entity);
                 echo "<div class=exito><p>Hotel updated</p></div>";
 
             }
