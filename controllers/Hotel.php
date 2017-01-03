@@ -32,6 +32,7 @@ class Hotel extends Luna\Controller {
     **/
     public function addImages($req,$res){
         $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+        $zoneMapper=$this->spot->mapper("Entity\Zona");
         $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
         $aux=array();
         foreach ($zones as $zone) {
@@ -41,28 +42,31 @@ class Hotel extends Luna\Controller {
         $hotel=$hotelMapper->select()->where(['zona_idzona'=>$aux]);
         if(isset($req->data["hotel"],$_FILES['imagen']['name'])){
             $hAux=$hotelMapper->select()->where(["idhotel"=>$req->data["hotel"]])->first();
-           //if($hAux->zona_idzona==1){
-                $dir="./assets/img/hotel/";    
-            //}
-            //else{
-              //  $dir="../maldivas/assets/img/hotel/";
-           // }
-            if (file_exists($dir.$req->data["hotel"])==false) {
+            $rutaZona = $zoneMapper->select()->where(["idzona"=>$hAux->zona_idzona])->first();
+           
+                $dir="..".$rutaZona->dir_img."hotel/";    
+            if (file_exists($dir.$req->data["hotel"])==false) 
+            {
+                
                      mkdir($dir.$req->data["hotel"]);
             }
+           
             //definimos un array de tipos de datos permitidos
             $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
-             if(!($_FILES['imagen']['error']>0)){
+             if(!($_FILES['imagen']['error']>0))
+             {
                     //validamos que la imagen sea de los tipos establecidos
                     if(in_array($_FILES['imagen']['type'], $permitidos)){
                         $aux=explode('.',$_FILES['imagen']['name']);
-                        $file=$aux[0].substr(uniqid(),0,-3).".".$aux[1];
+                        $file=str_replace(" ","_",$aux[0].substr(uniqid(),0,-3).".".$aux[1]);
                         $ruta=$dir.$req->data["hotel"]."/".$file;
                         //verificamos que no exista una imagen que se llame igual
-                        if(!file_exists($ruta)){
+                        if(!file_exists($ruta))
+                        {
                             //subimos la imagen al servidor
                             $resultado=@move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
                             if($resultado){
+                               
                                 //Guardamos la experiencia en la base de datos
                                 $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
                                 $entity = $hotelImageMapper->build([
@@ -96,18 +100,19 @@ class Hotel extends Luna\Controller {
     **/
     public function editImages($req,$res){
         if($req->params["hotel"]!=null){
+             $zoneMapper=$this->spot->mapper("Entity\Zona");
             //obtener imagen mediante el id
             $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
             $hotelImage= $hotelImageMapper->select()->where(["idhotelImages" => $req->params["hotel"]])->first(); 
             //obtener el tour mediante el id que obtenemos de la imagen
             $hotelMapper=$this->spot->mapper("Entity\Hotel");
             $hotel=$hotelMapper->select()->where(["idhotel" => $hotelImage->hotel_idhotel])->first();
-      /*      if($hotel->zona_idzona!=1){
-                $imagene="http://".$_SERVER['HTTP_HOST']."/maldivas/assets/img/";
-            }
-            else{*/
-                $imagene="/bali/assets/img/";
-            //}
+            $rutaZona = $zoneMapper->select()->where(["idzona"=>$hotel->zona_idzona])->first();
+
+                
+                $imagene ="..".$rutaZona->dir_img;
+                print_r($imagene);
+                die();
         }
         if(isset($_FILES['imagen']['name'])){
             $imagen="";
@@ -446,8 +451,6 @@ class Hotel extends Luna\Controller {
             }
             if($error==0){
                 //actualizamos los valores del registro y actualizamos en base de datos
-
-
                 $entity = $hotelMapper->build([
                 'name' => $name,
                 'thumbnail' => $thumb,
@@ -470,15 +473,13 @@ class Hotel extends Luna\Controller {
                 $hotelU->website=$web;
                 $hotelU->map=$map;
                 $hotelU->tel=$tel;
-                $hotelU->email=$email;
-                print_r($hotelU);exit('estoy aqui');*/
+                $hotelU->email=$email;*/
               //$hotelMapper->query( $entity );
                 $hotelMapper->update($entity);
                 echo "<div class=exito><p>Hotel updated</p></div>";
 
             }
         }
-       // die("salio");
         echo $this->renderWiew( array_merge(["hotel" => $hotel,"zones"=>$zona,"images"=>$images,"thumb"=>$imagen,"videos"=>$videos]), $res);
     }
     
