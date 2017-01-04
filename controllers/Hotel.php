@@ -372,6 +372,7 @@ class Hotel extends Luna\Controller {
                 $datzon['dir_img']=$zonas['dir_img'];
                }
             }
+            //esto hay que modificar en hoteles
            $imagen = "http://".$_SERVER['HTTP_HOST'].$datzon['dir_img'];
         }
         if(isset($req->data["name"])){
