@@ -175,14 +175,17 @@ class Tour extends Luna\Controller {
     **/
     public function add($req, $res) 
     {
+
         $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
         $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
         $aux=array();
         foreach ($zones as $zone) {
             array_push($aux,$zone['zona_idzona']);
         }
+
         $zoneMapper=$this->spot->mapper("Entity\Zona");
-        $zona=$zoneMapper->select()->where(["idzona"=>$aux]);
+        $zona=$zoneMapper->select()->where(["idzona"=>$aux])->toArray();
+       
         $typeMapper=$this->spot->mapper("Entity\Type");
         $type=$typeMapper->select();
         if(isset($req->data["titulo"],$req->data["tipo"],$req->data["duracion"],$req->data["horas"],$req->data["descripcion"],$_FILES['thumbnail']['name']))
@@ -205,12 +208,10 @@ class Tour extends Luna\Controller {
                 }
                 $tipo = $req->data["tipo"];
                 $zona = $req->data["zone"];
-               // if($zona==1){
-                    $dir="./assets/img/experience/indo/";
-                //}
-                //else{
-                 //   $dir="../maldivas/assets/img/experience/indo/";
-                //}
+                 $rutaZonas = $zoneMapper->select()->where(["idzona"=> $req->data["zone"]])->first();
+                
+                    $dir="..".$rutaZonas->dir_img."experience/indo/";
+                   
                 $horas = filter_var($req->data["horas"], FILTER_SANITIZE_NUMBER_INT);
                 $descripcion = filter_var($req->data["descripcion"], FILTER_SANITIZE_STRING);
                 $descripcion_spa=filter_var($req->data["descripcion_spa"], FILTER_SANITIZE_STRING);
@@ -226,15 +227,18 @@ class Tour extends Luna\Controller {
                 {
                     //validamos que la imagen sea de los tipos establecidos
                     if(in_array($_FILES['thumbnail']['type'], $permitidos)){
-                        $aux2=explode('.',$_FILES['thumbnail']['name']);
-                        $ruta=$dir."/".$aux2[0].substr(uniqid(),0,-3).".".$aux2[1];
+                        $aux2=str_replace(" ","_",explode('.',$_FILES['thumbnail']['name']));
+                        $ruta=$dir.$aux2[0].substr(uniqid(),0,-3).".".$aux2[1];
+                       
                         //verificamos que no exista una imagen que se llame igual
                         if(!file_exists($ruta)){
+
                             //subimos la imagen al servidor
-                            $resultado=@move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $ruta);
+                            $resultado=move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $ruta);
                             if($resultado){
+
                                 //Guardamos la experiencia en la base de datos
-                                $file=$aux2[0].substr(uniqid(),0,-3).".".$aux2[1];
+                                $file=str_replace(" ","_",$aux2[0].substr(uniqid(),0,-3).".".$aux2[1]);
                                 $tourMapper=$this->spot->mapper("Entity\Experience");
                                 $entity = $tourMapper->build([
                                     'title' => $titulo,
@@ -249,6 +253,8 @@ class Tour extends Luna\Controller {
                                     'zona_idzona'=>$zona,
                                     'type_idtype'=>$tipo
                                 ]);
+                                /*print_r($entity);
+                                die();*/
                                 $result = $tourMapper->insert($entity);
                                // header("Location: /panel/hotel/edit/".$entity->id);
                                // exit;
@@ -275,7 +281,7 @@ class Tour extends Luna\Controller {
             array_push($aux,$zone['zona_idzona']);
         }
     	$tourMapper=$this->spot->mapper("Entity\Experience");
-    	$tour=$tourMapper->select()->with("zona")->where(["zona_idzona"=>$aux]);
+    	$tour=$tourMapper->select()->with("zona")->where(["zona_idzona"=>$aux])->toArray();
     	echo $this->renderWiew(array_merge(["tour" => $tour]),$res);
     }
     /**
@@ -296,12 +302,10 @@ class Tour extends Luna\Controller {
             }
             $zoneMapper=$this->spot->mapper("Entity\Zona");
             $zones=$zoneMapper->select()->where(["idzona"=>$aux]);
-         //   if($tour->zona_idzona!=1){
-           //     $imagen="http://".$_SERVER['HTTP_HOST']."/maldivas/assets/img/experience/";
-            //}
-            //else{
-                $imagen="/assets/img/experience/";
-           // }
+           
+            $rutaZonas = $zoneMapper->select()->where(["idzona"=> $req->data["zona"]])->first();
+            
+                $imagen="..".$rutaZonas->dir_img."experience/";
             $home="";   
         }
         if(isset($req->data["name"])){

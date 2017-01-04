@@ -99,7 +99,8 @@ class Hotel extends Luna\Controller {
     *   Metodo que sirve para editar una imagen de un hotel
     **/
     public function editImages($req,$res){
-        if($req->params["hotel"]!=null){
+        if($req->params["hotel"]!=null)
+        {
              $zoneMapper=$this->spot->mapper("Entity\Zona");
             //obtener imagen mediante el id
             $hotelImageMapper=$this->spot->mapper("Entity\HotelImage");
@@ -109,10 +110,9 @@ class Hotel extends Luna\Controller {
             $hotel=$hotelMapper->select()->where(["idhotel" => $hotelImage->hotel_idhotel])->first();
             $rutaZona = $zoneMapper->select()->where(["idzona"=>$hotel->zona_idzona])->first();
 
-                
+                //se agrega ruta de donde se coloca la imagen
                 $imagene ="..".$rutaZona->dir_img;
-                print_r($imagene);
-                die();
+              
         }
         if(isset($_FILES['imagen']['name'])){
             $imagen="";
@@ -120,16 +120,10 @@ class Hotel extends Luna\Controller {
              if(strcmp($_FILES['imagen']['name'], $hotelImage->path)!==0 && $_FILES['imagen']['name']!=null)
             {
                 //establecemos el directorio con el cual trabajaremos
-                $dir="./assets/img/hotel/";
+                $dir=$imagene."hotel/";
                 $aux=explode('.',$_FILES['imagen']['name']);
-                $file=$aux[0].substr(uniqid(),0,-3).".".$aux[1];
-           //     if($hotel->zona_idzona==1){
+                $file=str_replace(" ","_",$aux[0].substr(uniqid(),0,-3).".".$aux[1]);
                     $ruta=$dir.$hotel->idhotel."/".$file;
-             //   }
-               // else{
-                 //   $ruta="../maldivas/assets/img/hotel/".$hotel->idhotel."/".$file;
-                   // $dir="../maldivas/assets/img/hotel/";
-                //}
                 //array con tipos de archivos 
                 $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
                 //Obtenemos y sanitizamos los parametros obtenidos por el metodo  post.
@@ -147,6 +141,7 @@ class Hotel extends Luna\Controller {
                                 @unlink($dir.$hotelImage->hotel_idhotel."/".$hotelImage->path);
                                 //obtenemos la ruta del archivo
                                 $imagen=$file;                  
+                               //$imagen=$dir.$hotelImage->hotel_idhotel."/".$hotelImage->path;
                             }
                             else{ echo "<div class=error><p>There was a problem uploading the image.</p></div>";}
                         }
@@ -160,11 +155,12 @@ class Hotel extends Luna\Controller {
                 $imagen=$hotelImage->path;
             }
             //actualizamos atributo de la entidad
+          
             $hotelImage->path = $imagen;
+           
             //actualizamos la entidad
             $hotelImageMapper->update($hotelImage);
         }
-        echo $this->renderWiew(array_merge(["hotel" => $hotel,"image"=>$hotelImage,"thumb"=>$imagene]),$res);
     }
     /**
     *   Metodo que sirve para editar un video relacionado a un hotel
@@ -185,6 +181,8 @@ class Hotel extends Luna\Controller {
     **/
     public function deleteImages($req,$res)
     {
+        $zoneMapper=$this->spot->mapper("Entity\Zona");
+        
         //Obtenemos el id, de la experiencia a eleminar
         $var=$req->params["hotel"];
         //Establecemos a spot con que entity class vamos a trabajar
@@ -193,17 +191,14 @@ class Hotel extends Luna\Controller {
         //Seleccionamos la experiencia que este registrado para ese ide
         $hotelImage = $hotelImageMapper->select()->where(["idhotelImages" => $req->params["hotel"]])->first();
         $hotel=$hotelMapper->select()->where(["idhotel"=> $hotelImage->hotel_idhotel])->first();
-        //if($hotel->zona_idzona==1){
-            $ruta="./assets/img/hotel/".$hotelImage->hotel_idhotel."/".$hotelImage->path;
-        /*}
-        else{
-            $ruta="../maldivas/assets/img/hotel/".$hotelImage->hotel_idhotel."/".$hotelImage->path;
-        }*/
+         $rutaZona = $zoneMapper->select()->where(["idzona"=>$hotel->zona_idzona])->first();
+            //se asigna ruta de la imagen que se va a eliminar
+            $ruta="..".$rutaZona->dir_img."hotel/".$hotelImage->hotel_idhotel."/".$hotelImage->path;
         //Eliminamos el registro del id seleccionado
         $hotelImage=null;
         $hotelImage = $hotelImageMapper->delete(['idhotelImages'=>(integer)$var]);
         //Establecemos a spot con que entity class vamos a trabajar
-        @unlink($ruta);
+        unlink($ruta);
         echo $this->renderWiew(array_merge(["hotel" => $hotel]),$res);
     }
     /**
