@@ -88,17 +88,13 @@ class Tour extends Luna\Controller {
             //obtener el tour mediante el id que obtenemos de la imagen
             $tourMapper=$this->spot->mapper("Entity\Experience");
             $tour=$tourMapper->select()->where(["idexperience" => $tourImage->experience_idexperience])->first();
-          //  if($tour->zona_idzona!=1){
-            //    $imagene="http://".$_SERVER['HTTP_HOST']."/maldivas/assets/img/experience/";
-            //}
+        
              $zoneMapper=$this->spot->mapper("Entity\Zona");
             $zones=$zoneMapper->select()->where(["idzona"=>$aux]);
             $rutaZonas = $zoneMapper->select()->where(["idzona"=> $tour->zona_idzona])->first();
           
             $imagene="http://".$_SERVER['HTTP_HOST'].$rutaZonas->dir_img."experience/";
-            //else{
-             //   $imagene="/assets/img/experience/";
-            //}
+        
         }
         if(isset($_FILES['imagen']['name'])){
             $imagen="";
@@ -108,13 +104,8 @@ class Tour extends Luna\Controller {
              if(strcmp($aux, $tourImage->path)!==0 && $_FILES['imagen']['name']!=null)
             {
                 //establecemos el directorio con el cual trabajaremos
-              //  if($tour->zona_idzona==1){
+           
                     $dir="..".$rutaZonas->dir_img."experience/";
-
-                //}
-                //else{
-               //     $dir="../maldivas/assets/img/experience/";
-                //}
                 //obtenemos la ruta de almacenamiento de la imagen
                 $ruta=$dir.$aux;
                 //array con tipos de archivos 
@@ -158,6 +149,8 @@ class Tour extends Luna\Controller {
     **/
     public function deleteImages($req,$res)
     {
+         $zoneMapper=$this->spot->mapper("Entity\Zona");
+           
         //Obtenemos el id, de la experiencia a eleminar
         $var=$req->params["exper"];
         //Establecemos a spot con que entity class vamos a trabajar
@@ -166,12 +159,8 @@ class Tour extends Luna\Controller {
         //Seleccionamos la experiencia que este registrado para ese ide
         $tour = $tourMapper->select()->where(["idexperienceImages" => $req->params["exper"]])->first();
         $tou=$tMapper->select()->where(["idexperience"=>$tour->experience_idexperience])->first();
-        //if($tou->zona_idzona==1){
-            $ruta="./assets/img/experience/".$tour->path;
-        //}
-        //else{
-         //   $ruta="../maldivas/assets/img/experience/".$tour->path;
-       // }
+         $rutaZonas = $zoneMapper->select()->where(["idzona"=> $tour->zona_idzona])->first();
+            $ruta="..".$rutaZonas->dir_img."experience/".$tour->path;
         //Eliminamos el registro del id seleccionado
         $tour=null;
         $tour = $tourMapper->delete(['idexperienceImages ='=>(integer)$var]);
@@ -262,11 +251,9 @@ class Tour extends Luna\Controller {
                                     'zona_idzona'=>$zona,
                                     'type_idtype'=>$tipo
                                 ]);
-                                /*print_r($entity);
-                                die();*/
+                                
                                 $result = $tourMapper->insert($entity);
-                               // header("Location: /panel/hotel/edit/".$entity->id);
-                               // exit;
+
                                 echo "<div class=exito><p>Tour Registered.</p></div>";
                             }
                             else{ echo "<div class=error><p>There was a problem uploading the image.</p></div>";}
@@ -355,14 +342,9 @@ class Tour extends Luna\Controller {
             //comparamos el nombre de la imagen a subir y la imagen en la base de datos, en caso de ser diferentes subimos el archivo y borramos el archivo anterior
             if(strcmp($_FILES['thumbnail']['name'], $tour->thumbnail)!==0 && $_FILES['thumbnail']['name']!=null)
             {
-               // if($zona==1){
+               
                     $dir="..".$rutaZonas->dir_img."experience/indo";
                   
-                   
-                //}
-                //else{
-                  //  $dir="../maldivas/assets/img/experience/indo";
-                //}
                 $aux2=str_replace(" ","_",explode('.',$_FILES['thumbnail']['name']));
                 $ruta=$dir."/".$aux2[0].substr(uniqid(),0,-3).".".$aux2[1];
                
@@ -428,12 +410,10 @@ class Tour extends Luna\Controller {
 	    	//Seleccionamos la experiencia que este registrado para ese ide
 	    	$tour = $tourMapper->select()->where(["idexperience" => $req->params["exper"]])->first();
             $zona=$tour->zona_idzona;
-          //  if($tour->zona_idzona==1){
-            //    $ruta="./assets/img/experience/indo/".$tour->thumbnail;    
-            //}
-            //else{
-             //   $ruta="../maldivas/assets/img/experience/indo/".$tour->thumbnail;   
-            //}
+             $zoneMapper=$this->spot->mapper("Entity\Zona");
+           
+            $rutaZonas = $zoneMapper->select()->where(["idzona"=> $tour->zona_idzona])->first();
+            $ruta="..".$rutaZonas->dir_img."/experience/indo".$tour->thumbnail;
 	    	
 			//Eliminamos el registro del id seleccionado
 			$tour=null;
@@ -445,15 +425,9 @@ class Tour extends Luna\Controller {
 			//Obtenemos la ruta del thumbnail
 		    
 			@unlink($ruta);
-         //   if($zona==1){
-                $this->eliminarFiles("./assets/img/experience/".$var);
-                $this->deleteDirectory("./assets/img/experience/".$var);
-           // }
-            //else{
-              //   $this->eliminarFiles("../maldivas/assets/img/experience/".$var);
-               // $this->deleteDirectory("../maldivas/assets/img/experience/".$var);
-            //}
-			
+                $this->eliminarFiles("..".$rutaZonas->dir_img."experience/".$var);
+                $this->deleteDirectory("..".$rutaZonas->dir_img."experience/".$var);
+          
 			//obtenemos la ruta de cada imagen asociada y eliminamos el ficher
 			$tour=null;
 			$tour = $tourMapper->delete(['experience_idexperience =' => (integer)$var]);
