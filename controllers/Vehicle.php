@@ -4,8 +4,15 @@
     	*	Metodo que obtiene todos los registros de la tabla vehicle.
     	**/
     	public function show($req,$res){
+    		$userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+        $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+        $aux=array();
+        foreach ($zones as $zone) {
+            array_push($aux,$zone['zona_idzona']);
+        }
 	    	$vehicleMapper=$this->spot->mapper("Entity\Vehicle");
-	    	$vehicle=$vehicleMapper->select();
+	    	$vehicle=$vehicleMapper->select()->with("zona")->where(["zona_idzona"=>$aux])->toArray();
+
 	    	echo $this->renderWiew(array_merge(["vehicle" => $vehicle]),$res);
 	    }
 	    /**
@@ -13,17 +20,31 @@
 	    **/
 	    public function add($req,$res){
 	    	$vehicleMapper=$this->spot->mapper("Entity\Vehicle");
-	    	if(isset($req->data["car"],$req->data["description"],$req->data["spanish"])){
+	    $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+        $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+        $aux=array();
+        foreach ($zones as $zone) {
+            array_push($aux,$zone['zona_idzona']);
+        }
+        $zoneMapper=$this->spot->mapper("Entity\Zona");
+        $zona=$zoneMapper->select()->where(["idzona"=>$aux]);
+
+	    	if(isset($req->data["car"],$req->data["description"],$req->data["spanish"],$req->data["zone"]))
+	    	{
+	    		
 	    		$vehicle=$vehicleMapper->build([
 	    			'name'=>$req->data["car"],
 	    			'description'=>$req->data["description"],
-	    			'description_esp'=>$req->data["spanish"]
+	    			'description_esp'=>$req->data["spanish"],
+	    			'zona_idzona'=>$req->data["zone"]
 	    		]);
+
 	    		$vehicleMapper->insert($vehicle);
 	    		header("Location:/admin_lozano/panel/vehicles/edit/".$vehicle->idVehicle);
 	    		exit;
 	    	}
-	    	echo $this->renderWiew([],$res);
+	    	//echo $this->renderWiew([],$res);
+	    	 echo $this->renderWiew(array_merge(["zones"=>$zona]), $res);
 	    }
 	    /**
 	    *	Metodo que edita un automovil
@@ -58,11 +79,26 @@
 	    *	Metodo que sirve para agregar una imagen
 	    **/
 	    public function addImages($req,$res){
-	    	$vehicleMapper=$this->spot->mapper("Entity\Vehicle");
-	    	$vehicle=$vehicleMapper->select();
-	    	if(isset($req->data["car"],$_FILES['imagen']['name'])){
+	    
+	    $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+        $zoneMapper=$this->spot->mapper("Entity\Zona");
+        $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+        $aux=array();
+        foreach ($zones as $zone) {
+            array_push($aux,$zone['zona_idzona']);
+        }
 
+	    	$vehicleMapper=$this->spot->mapper("Entity\Vehicle");
+	    	$zoneMapper=$this->spot->mapper("Entity\Zona");
+	    	$vehicle=$vehicleMapper->select()->where(['zona_idzona'=>$aux]);
+	    	if(isset($req->data["car"],$_FILES['imagen']['name'])){
+	    		
+	
+	    		$zonaVehicle = $vehicleMapper->select()->where(['idVehicle'=>$req->data["car"]])->first();
+	    		$rutaVehicle = $zoneMapper->select()->where(['idzona'=>$zonaVehicle->zona_idzona])->first();
+	    		print_r($rutaVehicle);die();
 	    		$permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
+	    		
 	    		$dir="./assets/img/car/"; 
 	    		if (file_exists($dir.$req->data["car"])==false) {
                      mkdir($dir.$req->data["car"]);
@@ -179,6 +215,7 @@
 	    *
 	    **/
 	    public function addPass($req,$res){
+
 	    	if(isset($req->params["car"],$req->data["min"])){
 	    		$passengerMapper=$this->spot->mapper("Entity\VehiclePassengers");
 	    		if(isset($req->data["max"]))

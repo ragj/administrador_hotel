@@ -15,7 +15,8 @@
                 'idVehicle' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
                 'name' => ['type' => 'string', 'required' => true],
                 'description'=>['type'=>'text'],
-                'description_esp'=>['type'=>'text'],     
+                'description_esp'=>['type'=>'text'],   
+                'zona_idzona'  => ['type' => 'integer'],
             ];
         }
         public static function relations(Mapper $mapper, Entity $entity)
@@ -23,6 +24,7 @@
             return [
                 'images' => $mapper->hasMany($entity, 'Entity\VehicleImage', 'vehicle_idVehicle'),
                 'passengers' => $mapper->hasMany($entity, 'Entity\VehiclePassengers', 'vehicle_idVehicle'),
+                'zona' => $mapper->belongsTo($entity, 'Entity\Zona', 'zona_idzona')
             ];
         }
     }
