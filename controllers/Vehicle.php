@@ -50,18 +50,26 @@
 	    *	Metodo que edita un automovil
 	    **/
 	    public function edit($req,$res){
+
 	    	$vehicleMapper=$this->spot->mapper("Entity\Vehicle");
-	    	if(isset($req->params["car"])){
+	    	 //$hotel = $hotelMapper->select()->with("zona")->where(["idhotel" => $req->params["hotel"]])->toArray();
+	    	 $vehi = $vehicleMapper->query("select idzona,dir,dir_img from vehicle as vehi join zona on (zona.idzona = vehi.zona_idzona)where vehi.idVehicle=".$req->params['car'])->first();
+	    	
+	    	if(isset($req->params["car"]))
+	    	{
 	    		$vehicle=$vehicleMapper->select()->where(["idVehicle"=>$req->params["car"]])->with("images")->with("passengers")->first();
 
-	    		if(isset($req->data["car"],$req->data["description"],$req->data["spanish"])){
+	    		if(isset($req->data["car"],$req->data["description"],$req->data["spanish"]))
+	    		{
 	    			$vehicle->name=$req->data["car"];
 	    			$vehicle->description=$req->data["description"];
 	    			$vehicle->description_esp=$req->data["spanish"];
 	    			$vehicleMapper->update($vehicle);
 	    		}
+	    		$imagen = "http://".$_SERVER['HTTP_HOST'].$vehi->dir_img;
+	    		
 	    	}
-	    	echo $this->renderWiew(array_merge(["car" => $vehicle]),$res);
+	    	echo $this->renderWiew(array_merge(["car" => $vehicle, "thumb" =>$imagen]),$res);
 	    }
 	    /**
 	    *	Metodo que elimina un carro
@@ -96,24 +104,26 @@
 	
 	    		$zonaVehicle = $vehicleMapper->select()->where(['idVehicle'=>$req->data["car"]])->first();
 	    		$rutaVehicle = $zoneMapper->select()->where(['idzona'=>$zonaVehicle->zona_idzona])->first();
-	    		print_r($rutaVehicle);die();
 	    		$permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
 	    		
-	    		$dir="./assets/img/car/"; 
+	    		//$dir="./assets/img/car/"; 
+	    		$dir ="..".$rutaVehicle->dir_img."car/";
+	    		
 	    		if (file_exists($dir.$req->data["car"])==false) {
                      mkdir($dir.$req->data["car"]);
+
             	}
 	    		if(!($_FILES['imagen']['error']>0)){
                     //validamos que la imagen sea de los tipos establecidos
                     if(in_array($_FILES['imagen']['type'], $permitidos)){
                         $aux2=explode('/',$_FILES['imagen']['type']);
                         $aux=basename($_FILES['imagen']['name'],".".$aux2[1]);
-                        $file=$aux.substr(uniqid(),0,-3).".".$aux2[1];
+                        $file=str_replace(" ","_",$aux.substr(uniqid(),0,-3).".".$aux2[1]);
                         $ruta=$dir.$req->data["car"]."/".$file;
                         //verificamos que no exista una imagen que se llame igual
                         if(!file_exists($ruta)){
                             //subimos la imagen al servidor
-                            $resultado=@move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
+                            $resultado=move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
                             if($resultado){
                                 //Guardamos la experiencia en la base de datos
                                 $hotelImageMapper=$this->spot->mapper("Entity\VehicleImage");
@@ -129,6 +139,7 @@
                 }
 	    	}
 
+	    	
 	    	echo $this->renderWiew(array_merge(["car" => $vehicle]),$res);
 	    }
 	    /**
@@ -146,6 +157,7 @@
             //establecemos el formato en que se almacena la url en la base de datos
              if(strcmp($_FILES['imagen']['name'], $vehicleImage->path)!==0 && $_FILES['imagen']['name']!=null)
             {
+            	print_r($req);die();
                 //establecemos el directorio con el cual trabajaremos
                 $dir="./assets/img/car/";
                 $aux2=explode('/',$_FILES['imagen']['type']);

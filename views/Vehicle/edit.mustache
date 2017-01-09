@@ -161,8 +161,8 @@
 	              						<h4 class="panel-title">Image </h4>
 	            					</div>
 	            					<div class="panel-body">
-	              						<img src="/bali/assets/img/car/{{vehicle_idVehicle}}/{{path}}" class="img-rounded " width="270" height="150" >
-						                <a href="/bali/panel/vehicles/editImages/{{idvehicleImages}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
+	              						<img src={{thumb}}car/{{vehicle_idVehicle}}/{{path}} class="img-rounded " width="270" height="150" >
+						                <a href="/admin_lozano/panel/vehicles/editImages/{{idvehicleImages}}"><button type="button" class="btn btn-success btn-quirk"><i class="fa fa-pencil"></i></button></a>
 						                <a onclick=myFunction({{idvehicleImages}})><button type="button" class="btn btn-danger btn-quirk"><i class="fa fa-times"></i></button></a>
 	            					</div>
 	          					</div>
@@ -172,7 +172,7 @@
 	        		<script>
 						function myFunction(id) {
                             if (confirm("Estas Seguro de Eliminar?") == true) {
-                                self.location = "/bali/panel/vehicles/deleteImages/"+id; 
+                                self.location = "/admin/panel/vehicles/deleteImages/"+id; 
                             } 
                         }
                         function myFunction1(id) {

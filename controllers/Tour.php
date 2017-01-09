@@ -173,6 +173,8 @@ class Tour extends Luna\Controller {
     **/
     public function add($req, $res) 
     {
+       /* var_dump($_FILES);
+        die();*/
 
         $userZonaMapper=$this->spot->mapper("Entity\UsersZona");
         $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
@@ -232,11 +234,25 @@ class Tour extends Luna\Controller {
                         if(!file_exists($ruta)){
 
                             //subimos la imagen al servidor
-                            $resultado=move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $ruta);
-                            if($resultado){
+                           
+                          //  $resultado=move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $ruta);
+                              //$resultado=$ruta.basename($_FILES["thumbnail"]["name"]);
+                           
+                            if(move_uploaded_file($_FILES["thumbnail"]["tmp_name"],$ruta))
+                            {
+                                print_r("se subio");
+                                echo "<br>";
+                                
+                                $imageNameUpload = explode('/', $ruta);
+                                $file2Name = end( $imageNameUpload );
+                               // print_r($file2Name); die();
 
+
+                               //die();
                                 //Guardamos la experiencia en la base de datos
-                                $file=str_replace(" ","_",$aux2[0].substr(uniqid(),0,-3).".".$aux2[1]);
+                                // $file=str_replace(" ","_",$_FILES["thumbnail"]["name"]);
+                                $file=$file2Name;
+                              
                                 $tourMapper=$this->spot->mapper("Entity\Experience");
                                 $entity = $tourMapper->build([
                                     'title' => $titulo,
