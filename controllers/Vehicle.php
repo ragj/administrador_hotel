@@ -43,7 +43,6 @@
 	    		header("Location:/admin_lozano/panel/vehicles/edit/".$vehicle->idVehicle);
 	    		exit;
 	    	}
-	    	//echo $this->renderWiew([],$res);
 	    	 echo $this->renderWiew(array_merge(["zones"=>$zona]), $res);
 	    }
 	    /**
@@ -52,7 +51,6 @@
 	    public function edit($req,$res){
 
 	    	$vehicleMapper=$this->spot->mapper("Entity\Vehicle");
-	    	 //$hotel = $hotelMapper->select()->with("zona")->where(["idhotel" => $req->params["hotel"]])->toArray();
 	    	 $vehi = $vehicleMapper->query("select idzona,dir,dir_img from vehicle as vehi join zona on (zona.idzona = vehi.zona_idzona)where vehi.idVehicle=".$req->params['car'])->first();
 	    	
 	    	if(isset($req->params["car"]))
@@ -105,8 +103,6 @@
 	    		$zonaVehicle = $vehicleMapper->select()->where(['idVehicle'=>$req->data["car"]])->first();
 	    		$rutaVehicle = $zoneMapper->select()->where(['idzona'=>$zonaVehicle->zona_idzona])->first();
 	    		$permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
-	    		
-	    		//$dir="./assets/img/car/"; 
 	    		$dir ="..".$rutaVehicle->dir_img."car/";
 	    		
 	    		if (file_exists($dir.$req->data["car"])==false) {
