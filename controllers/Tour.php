@@ -40,16 +40,23 @@ class Tour extends Luna\Controller {
                 if(in_array($_FILES['imagen']['type'], $permitidos)){
                     $aux=str_replace(" ","_",explode('.',$_FILES['imagen']['name']));
                     $ruta=$dir."/".$req->data["exper"]."/".$aux[0].substr(uniqid(),0,-3).".".$aux[1];
-                 
+
                     //verificamos que no exista una imagen que se llame igual
                     if(!file_exists($ruta)){
                         //subimos la imagen al servidor
-                        $resultado=@move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
-                        if($resultado){
+                       // $resultado=@move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
+                      //  if($resultado){
+                         if(move_uploaded_file($_FILES["imagen"]["tmp_name"],$ruta))
+                            {   
+                                $imageNameUpload = explode('/', $ruta);
+                                $file2Name = end( $imageNameUpload );
                             //Guardamos la experiencia en la base de datos
-                            $file=$_FILES['imagen']['name'];
+                            $file=$file2Name;
+
                             $tourMapper=$this->spot->mapper("Entity\ExperienceImage");
-                            $img=(string)$req->data["exper"]."/".str_replace(" ","_",$aux[0].substr(uniqid(),0,-3).".".$aux[1]);
+                          // $img=(string)$req->data["exper"]."/".str_replace(" ","_",$aux[0].substr(uniqid(),0,-3).".".$aux[1]);
+                          
+                            $img=(string)$req->data["exper"]."/".$file;
 
                             $entity = $tourMapper->build([
                                 'experience_idexperience' =>$req->data["exper"],
@@ -240,8 +247,7 @@ class Tour extends Luna\Controller {
                            
                             if(move_uploaded_file($_FILES["thumbnail"]["tmp_name"],$ruta))
                             {
-                                print_r("se subio");
-                                echo "<br>";
+                                
                                 
                                 $imageNameUpload = explode('/', $ruta);
                                 $file2Name = end( $imageNameUpload );

@@ -146,20 +146,26 @@
     *   Metodo que sirve para editar una imagen de un hotel
     **/
     public function editImages($req,$res){
+    	
         if($req->params["car"]!=null){
             //obtener imagen mediante el id
+            $zoneMapper=$this->spot->mapper("Entity\Zona");
             $vehicleImageMapper=$this->spot->mapper("Entity\VehicleImage");
             $vehicleImage= $vehicleImageMapper->select()->where(["idvehicleImages" => $req->params["car"]])->first(); 
-            $imagene="/admin_lozano/assets/img/car/".$vehicleImage->vehicle_idVehicle."/";
+           
+            $zonaRuta = $zoneMapper->query("select * from vehicleimages as vima join vehicle on (vehicle.idVehicle = vima.vehicle_idVehicle) join zona on (zona.idzona = vehicle.zona_idzona) where vima.idvehicleImages=".$req->params["car"])->first();
+
+            $imagene=$zonaRuta->dir_img."car/".$vehicleImage->vehicle_idVehicle."/";
+
         }
         if(isset($_FILES['imagen']['name'])){
             $imagen="";
             //establecemos el formato en que se almacena la url en la base de datos
              if(strcmp($_FILES['imagen']['name'], $vehicleImage->path)!==0 && $_FILES['imagen']['name']!=null)
             {
-            	print_r($req);die();
+            	
                 //establecemos el directorio con el cual trabajaremos
-                $dir="./assets/img/car/";
+                $dir="..".$zonaRuta->dir_img."car/";
                 $aux2=explode('/',$_FILES['imagen']['type']);
                 $aux=basename($_FILES['imagen']['name'],".".$aux2[1]);
                 $file=$aux.substr(uniqid(),0,-3).".".$aux2[1];
@@ -175,8 +181,12 @@
                         //verificamos que no exista una imagen que se llame igual
                         if(!file_exists($ruta)){
                             //subimos la imagen al servidor
-                            $resultado=@move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
-                            if($resultado){
+                        	if(move_uploaded_file($_FILES["imagen"]["tmp_name"],$ruta))
+                            {   
+                                $imageNameUpload = explode('/', $ruta);
+                                $file2Name = end( $imageNameUpload );
+                            //Guardamos la experiencia en la base de datos
+                            $file=$file2Name;
                                 //eliminamos fichero anterior
                                 @unlink($dir.$vehicleImage->vehicle_idVehicle."/".$vehicleImage->path);
                                 //obtenemos la ruta del archivo

@@ -38,6 +38,8 @@ class Hotel extends Luna\Controller {
         foreach ($zones as $zone) {
             array_push($aux,$zone['zona_idzona']);
         }
+
+        
         $hotelMapper=$this->spot->mapper("Entity\Hotel");
         $hotel=$hotelMapper->select()->where(['zona_idzona'=>$aux]);
         if(isset($req->data["hotel"],$_FILES['imagen']['name'])){
