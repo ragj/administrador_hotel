@@ -1,4 +1,4 @@
-# **Lozano Bali**
+# **Administrador**
 
 Created with:
 
@@ -14,4 +14,4 @@ Created with:
 
 	V 0.1
 
-###Team Denumeris BackEnd
+###
