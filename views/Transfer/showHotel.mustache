@@ -43,14 +43,14 @@
 							            				{{hotel.name}}
 							            			</td>
 							            			<td>
-							            				<a href="/bali/panel/transfer/editHotel/{{idhotelTransfer}}">
+							            				<a href="/admin_lozano/panel/transfer/editHotel/{{idhotelTransfer}}">
                                                             <button type="button" class="btn btn-primary">
                                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> English
                                                             </button>
                                                         </a>
                                                     </td>
                                                     <td>
-							            				<a href="/bali/panel/transfer/editHotel_spa/{{idhotelTransfer}}">
+							            				<a href="/admin_lozano/panel/transfer/editHotel_spa/{{idhotelTransfer}}">
                                                             <button type="button" class="btn btn-primary">
                                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Spanish
                                                             </button>
@@ -71,7 +71,7 @@
 		        				<script>
                                     function myFunction(id) {
                                     	if (confirm("Estas Seguro de Eliminar?") == true) {
-											self.location = "/bali/panel/transfer/hotelDelete/"+id;                            
+											self.location = "/admin_lozano/panel/transfer/hotelDelete/"+id;                            
 										} 
 									}
                                 </script>		
@@ -82,9 +82,9 @@
     		</div>
         {{/ content }}
 		{{$ scripts }}
-			<script src="/bali/assets/quirk/lib/datatables/jquery.dataTables.js"></script>
-			<script src="/bali/assets/quirk/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-			<script src="/bali/assets/quirk/lib/select2/select2.js"></script>
+			<script src="/admin_lozano/assets/quirk/lib/datatables/jquery.dataTables.js"></script>
+			<script src="/admin_lozano/assets/quirk/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+			<script src="/admin_lozano/assets/quirk/lib/select2/select2.js"></script>
 			<script>
 				$(document).ready(function() {
   					'use strict';

@@ -245,8 +245,16 @@
 	    *	Metodo que agrega un transfer de hotel
 	    **/
 	    public function addHotel($req,$res){
+	    	
+	   	$userZonaMapper=$this->spot->mapper("Entity\UsersZona");
+        $zones=$userZonaMapper->select()->where(["users_id"=>$req->user["id"]])->toArray();
+        $aux=array();
+        foreach ($zones as $zone) {
+            array_push($aux,$zone['zona_idzona']);
+        }
+       
 	    	$hotelMapper=$this->spot->mapper("Entity\Hotel");
-	    	$hotels=$hotelMapper->select()->where(["zona_idzona"=>1]);
+	    	$hotels=$hotelMapper->select()->where(["zona_idzona"=>$aux]);
 	    	if(isset($req->data["hotel"],$req->data["content"])){
 
 	    		//insertamos este nuevo elemento
@@ -299,7 +307,7 @@
 	    		$hotelTransferMapper=$this->spot->mapper("Entity\HotelTransfer");
             	$t = $hotelTransferMapper->delete(['idhotelTransfer'=>$req->params["hTrans"]]);
 	    	}
-	    	header("Location:/panel/transfer/showHotel");
+	    	header("Location:/admin_lozano/panel/transfer/showHotel");
 	    	exit;   
 	    }
 

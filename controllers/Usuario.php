@@ -99,11 +99,16 @@ class Usuario extends Luna\Controller {
     *   Metodo que sirve para añadir un usuario
     **/
     public function add($req,$res){
+
         $rolMapper=$this->spot->mapper("Entity\Rols");
         $rols=$rolMapper->select();
         $zoneMapper=$this->spot->mapper("Entity\Zona");
         $zones=$zoneMapper->select();
-        if(isset($req->data["name"],$req->data["app"],$req->data["user"],$req->data["pass"],$req->data["pass2"],$req->data["apm"],$req->data["tel"],$req->data["iata"],$req->data["member"],$req->data["years"],$req->data["rol"],$req->data["zone"])){
+
+        //if(isset($req->data))
+       if(isset($req->data["name"],$req->data["app"],$req->data["user"],$req->data["pass"],$req->data["pass2"],$req->data["apm"],$req->data["tel"],$req->data["iata"],$req->data["member"],$req->data["years"],$req->data["rol"]))
+        {
+          
             $exito=true;
             //obtencion y sanitizacion de los datos
             $name=filter_var($req->data["name"], FILTER_SANITIZE_STRING);
@@ -151,6 +156,7 @@ class Usuario extends Luna\Controller {
             }
             //insertamos la entidad
             else{
+
                 //creamos la entidad
                 $entity = $usersMapper->build([
                     'nombre' => $name,
@@ -168,12 +174,18 @@ class Usuario extends Luna\Controller {
                 //insertamos la entidad
                 $result=$usersMapper->insert($entity);
                 $userZonesMapper=$this->spot->mapper("Entity\UsersZona");
+
+                for($i=1;$i <= 2;$i++)
+                {
+                    
                 $entity1=$userZonesMapper->build([
                         'users_id'=>$entity->id,
-                        'zona_idzona'=>$zone
+                        'zona_idzona'=>$i
                     ]);
                 $result=$userZonesMapper->insert($entity1);
-               echo "
+              
+                }
+                 echo "
                         <script>
                             alert('user registered');
                         </script>
@@ -197,6 +209,7 @@ class Usuario extends Luna\Controller {
             
         }
         else{
+           // print_r($req->data);die();
             echo $this->renderWiew(array_merge(["rols"=>$rols,"zones"=>$zones]),$res);
         }
 
